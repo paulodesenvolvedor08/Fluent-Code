@@ -10,55 +10,53 @@
 
         /* ===== MENU LATERAL FLUENTCODE ===== */
 
-.menu-fluent{
+.fluent-menu{
     position:fixed;
     top:0;
     left:0;
 
-    width:220px;
+    width:200px;
     height:100vh;
 
     background:#0f172a;
     border-right:1px solid #1f2937;
 
-    padding:20px;
+    padding:15px;
 
     display:flex;
     flex-direction:column;
     gap:10px;
 
-    z-index:1000;
+    z-index:9999;
 }
 
-.menu-btn{
+.fluent-btn{
     background:#1e293b;
     border:1px solid #334155;
 
-    padding:12px;
-    border-radius:12px;
+    padding:10px;
+    border-radius:10px;
 
     font-weight:bold;
     color:white;
 
-    text-align:left;
-
     transition:.2s;
 }
 
-.menu-btn:hover{
+.fluent-btn:hover{
     background:#334155;
-    transform:translateX(5px);
+    transform:translateX(4px);
 }
 
-/* empurra o conteúdo pra não ficar atrás do menu */
-.main-fluent{
-    margin-left:220px;
+/* empurra SEU conteúdo atual */
+body{
+    margin-left:200px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-    .menu-fluent{
+    .fluent-menu{
         position:relative;
         width:100%;
         height:auto;
@@ -67,13 +65,13 @@
         overflow-x:auto;
     }
 
-    .menu-btn{
-        min-width:140px;
-        text-align:center;
+    body{
+        margin-left:0;
     }
 
-    .main-fluent{
-        margin-left:0;
+    .fluent-btn{
+        min-width:130px;
+        text-align:center;
     }
 }
         body { background-color: #0d1b2a; color: #ffffff; }
@@ -101,7 +99,20 @@
 </head>
 <body class="font-sans antialiased" onload="inicializarSistema()">
 
-    
+    <div class="fluent-menu">
+
+<h2 class="text-white font-bold mb-2">⚡ FluentCode</h2>
+
+<button class="fluent-btn" onclick="location.href='index.html'">🏠 Início</button>
+<button class="fluent-btn" onclick="location.href='atividades.html'">📚 Atividades</button>
+<button class="fluent-btn" onclick="location.href='ranking.html'">🏆 Ranking</button>
+<button class="fluent-btn" onclick="location.href='quiz.html'">⚡ Quiz</button>
+<button class="fluent-btn" onclick="location.href='montar.html'">🧩 Código</button>
+<button class="fluent-btn" onclick="location.href='erros.html'">🐞 Erros</button>
+<button class="fluent-btn" onclick="location.href='logica.html'">💡 Lógica</button>
+<button class="fluent-btn" onclick="location.href='sintaxe.html'">🔤 Sintaxe</button>
+
+</div>
 
     <div class="flex flex-col md:flex-row min-h-screen">
         
