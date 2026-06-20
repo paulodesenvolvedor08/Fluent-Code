@@ -63,7 +63,7 @@ body{
 
 <script>
 
-/* 🔥 DESAFIOS AVANÇADOS */
+/* 🔥 DESAFIOS */
 const fases = [
 {
 p:"Qual será a saída?\n\nint x = 1;\nwhile(x < 4){ x++; }\nSystem.out.println(x);",
@@ -117,27 +117,34 @@ xp:250
 }
 ];
 
-let i=0;
+let i = 0;
+let bloqueado = false;
 
 /* 🔁 CARREGAR */
 function load(){
 
-let f=fases[i];
+let f = fases[i];
 
-document.getElementById("pergunta").innerText=f.p;
+document.getElementById("pergunta").innerText = f.p;
 
-let op=document.getElementById("opcoes");
-op.innerHTML="";
+let op = document.getElementById("opcoes");
+op.innerHTML = "";
 
-f.o.forEach(x=>{
-let b=document.createElement("button");
+document.getElementById("msg").innerText = "";
 
-b.innerText=x.t;
-b.className="btn bg-slate-800 hover:bg-slate-700";
+bloqueado = false;
 
-b.onclick=()=>check(x.ok);
+f.o.forEach(x => {
+
+let b = document.createElement("button");
+
+b.innerText = x.t;
+b.className = "btn bg-slate-800 hover:bg-slate-700";
+
+b.onclick = () => check(x.ok);
 
 op.appendChild(b);
+
 });
 
 }
@@ -145,25 +152,42 @@ op.appendChild(b);
 /* 🎮 VERIFICAR */
 function check(ok){
 
-let user=JSON.parse(localStorage.getItem("fluentcode_user"))||{xp:0};
+if(bloqueado) return;
+bloqueado = true;
+
+let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0};
 
 if(ok){
-user.xp+=fases[i].xp;
 
-document.getElementById("msg").innerText="✔ Correto!";
+user.xp += fases[i].xp;
+
+document.getElementById("msg").innerText = "✔ Correto!";
+
 i++;
 
-if(i<fases.length){
-setTimeout(load,1000);
+setTimeout(() => {
+
+if(i < fases.length){
+load();
 }else{
-document.getElementById("msg").innerText="🏆 Você concluiu o Desafio Final!";
+document.getElementById("msg").innerText =
+"🏆 Você concluiu o Desafio Final!";
+document.getElementById("opcoes").innerHTML = "";
 }
 
+}, 900);
+
 }else{
-document.getElementById("msg").innerText="❌ Errado!";
+
+document.getElementById("msg").innerText = "❌ Errado!";
+
+setTimeout(() => {
+bloqueado = false;
+}, 700);
+
 }
 
-localStorage.setItem("fluentcode_user",JSON.stringify(user));
+localStorage.setItem("fluentcode_user", JSON.stringify(user));
 }
 
 load();
