@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Lógica Java - FluentCode</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+    background:#0d1b2a;
+    color:white;
+}
+
+.card{
+    background:#0f172a;
+    border:1px solid #1f2937;
+    border-radius:18px;
+
+    padding:20px;
+    max-width:900px;
+    margin:auto;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body class="p-4 sm:p-6">
+
+<div class="card">
+
+<h1 class="text-xl font-bold text-center mb-4">
+💡 Lógica Java
+</h1>
+
+<p id="pergunta" class="text-center text-lg mb-4">
+...
+</p>
+
+<div id="opcoes" class="grid gap-3"></div>
+
+<p id="msg" class="text-center mt-4 font-bold"></p>
+
+</div>
+
+<script>
+
+/* 🔥 QUESTÕES DE LÓGICA */
+const fases = [
+{
+p:"O que será impresso?\n\nint x = 5;\nif(x > 3){ System.out.println('A'); }",
+o:[
+{t:"A",ok:true},
+{t:"Nada",ok:false},
+{t:"Erro",ok:false},
+{t:"B",ok:false}
+],
+xp:120
+},
+{
+p:"Qual o resultado?\n\nfor(int i=0;i<3;i++) { } System.out.println(i);",
+o:[
+{t:"Erro (i não existe fora do for)",ok:true},
+{t:"3",ok:false},
+{t:"0",ok:false},
+{t:"1",ok:false}
+],
+xp:140
+},
+{
+p:"Qual é o valor final?\n\nint x = 2;\nx = x + 3 * 2;",
+o:[
+{t:"8",ok:true},
+{t:"10",ok:false},
+{t:"7",ok:false},
+{t:"6",ok:false}
+],
+xp:130
+},
+{
+p:"O que acontece?\n\nif(true && false){ System.out.println('X'); }",
+o:[
+{t:"Nada é impresso",ok:true},
+{t:"X",ok:false},
+{t:"Erro",ok:false},
+{t:"true",ok:false}
+],
+xp:110
+}
+];
+
+let i=0;
+
+/* 🔁 CARREGAR */
+function load(){
+
+let f=fases[i];
+
+document.getElementById("pergunta").innerText=f.p;
+
+let op=document.getElementById("opcoes");
+op.innerHTML="";
+
+f.o.forEach(x=>{
+let b=document.createElement("button");
+
+b.innerText=x.t;
+b.className="btn bg-slate-800 hover:bg-slate-700";
+
+b.onclick=()=>check(x.ok);
+
+op.appendChild(b);
+});
+
+}
+
+/* 🎮 VERIFICAR */
+function check(ok){
+
+let user=JSON.parse(localStorage.getItem("fluentcode_user"))||{xp:0};
+
+if(ok){
+user.xp+=fases[i].xp;
+
+document.getElementById("msg").innerText="✔ Correto!";
+i++;
+
+if(i<fases.length){
+setTimeout(load,1000);
+}else{
+document.getElementById("msg").innerText="🏆 Concluído!";
+}
+
+}else{
+document.getElementById("msg").innerText="❌ Errado!";
+}
+
+localStorage.setItem("fluentcode_user",JSON.stringify(user));
+}
+
+load();
+
+</script>
+
+</body>
+</html>

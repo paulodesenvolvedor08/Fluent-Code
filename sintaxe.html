@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Sintaxe Java - FluentCode</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+    background:#0d1b2a;
+    color:white;
+}
+
+.card{
+    background:#0f172a;
+    border:1px solid #1f2937;
+    border-radius:18px;
+
+    padding:20px;
+    max-width:900px;
+    margin:auto;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body class="p-4 sm:p-6">
+
+<div class="card">
+
+<h1 class="text-xl font-bold text-center mb-4">
+🔤 Sintaxe Java
+</h1>
+
+<p id="pergunta" class="text-center text-lg mb-4">
+...
+</p>
+
+<div id="opcoes" class="grid gap-3"></div>
+
+<p id="msg" class="text-center mt-4 font-bold"></p>
+
+</div>
+
+<script>
+
+/* 🔥 QUESTÕES DE SINTAXE */
+const fases = [
+{
+p:"Como declara uma variável inteira?",
+o:[
+{t:"int x = 10;",ok:true},
+{t:"x int = 10;",ok:false},
+{t:"integer x = 10;",ok:false},
+{t:"var int x = 10;",ok:false}
+],
+xp:110
+},
+{
+p:"Como começa um método principal?",
+o:[
+{t:"public static void main(String[] args)",ok:true},
+{t:"main public void static()",ok:false},
+{t:"void main static public()",ok:false},
+{t:"start main()",ok:false}
+],
+xp:120
+},
+{
+p:"Qual símbolo finaliza uma instrução Java?",
+o:[
+{t:";",ok:true},
+{t:".",ok:false},
+{t:":",ok:false},
+{t:"/",ok:false}
+],
+xp:90
+},
+{
+p:"Como se imprime no console?",
+o:[
+{t:"System.out.println()",ok:true},
+{t:"print()",ok:false},
+{t:"console.log()",ok:false},
+{t:"echo()",ok:false}
+],
+xp:100
+}
+];
+
+let i=0;
+
+/* 🔁 CARREGAR */
+function load(){
+
+let f=fases[i];
+
+document.getElementById("pergunta").innerText=f.p;
+
+let op=document.getElementById("opcoes");
+op.innerHTML="";
+
+f.o.forEach(x=>{
+let b=document.createElement("button");
+
+b.innerText=x.t;
+b.className="btn bg-slate-800 hover:bg-slate-700";
+
+b.onclick=()=>check(x.ok);
+
+op.appendChild(b);
+});
+
+}
+
+/* 🎮 VERIFICAR */
+function check(ok){
+
+let user=JSON.parse(localStorage.getItem("fluentcode_user"))||{xp:0};
+
+if(ok){
+user.xp+=fases[i].xp;
+
+document.getElementById("msg").innerText="✔ Correto!";
+i++;
+
+if(i<fases.length){
+setTimeout(load,1000);
+}else{
+document.getElementById("msg").innerText="🏆 Concluído!";
+}
+
+}else{
+document.getElementById("msg").innerText="❌ Errado!";
+}
+
+localStorage.setItem("fluentcode_user",JSON.stringify(user));
+}
+
+load();
+
+</script>
+
+</body>
+</html>
