@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluentCode - Perfil</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+        }
+
+        .glass {
+            background: rgba(19, 64, 116, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+    </style>
+</head>
+
+<body onload="carregarPerfil()">
+
+    <div class="max-w-6xl mx-auto p-6">
+
+        <!-- TOPO -->
+        <div class="flex items-center justify-between mb-8">
+
+            <button onclick="history.back()"
+            class="fixed bottom-6 left-4 
+            bg-gradient-to-r from-blue-600 to-indigo-600 
+            hover:from-blue-700 hover:to-indigo-700 
+            text-white font-bold px-5 py-3 rounded-2xl 
+            shadow-lg flex items-center gap-2 z-50 transition">
+
+           <i class="fa-solid fa-arrow-left"></i>
+           Voltar
+           </button>
+
+            <h1 class="text-3xl font-black">
+                Meu Perfil
+            </h1>
+
+            <div></div>
+
+        </div>
+
+        <!-- CARD PRINCIPAL -->
+        <div
+            class="glass rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
+
+            <div
+                class="w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-6xl border-4 border-white/10">
+
+                👨‍💻
+
+            </div>
+
+            <h2 class="text-2xl font-bold mt-5">
+                Dev FluentCode
+            </h2>
+
+            <p class="text-gray-400 text-sm">
+                Continue aprendendo Java e Inglês Técnico
+            </p>
+
+            <div
+                class="mt-4 bg-amber-400 text-slate-900 px-4 py-2 rounded-full font-bold text-sm">
+
+                ⭐ Nível <span id="nivel">0</span>
+
+            </div>
+
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-bolt text-yellow-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    XP Total
+                </h3>
+
+                <p id="xp-total"
+                    class="text-4xl font-black mt-2">
+                    0
+                </p>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-book text-green-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    Missões
+                </h3>
+
+                <p id="missoes"
+                    class="text-4xl font-black mt-2">
+                    0
+                </p>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-trophy text-orange-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    Conquistas
+                </h3>
+
+                <p class="text-4xl font-black mt-2">
+                    3
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- BARRA XP -->
+        <div class="glass rounded-2xl p-6 mt-8">
+
+            <div class="flex justify-between mb-3">
+
+                <span>Progresso do Nível</span>
+
+                <span id="xp-texto">
+                    0 XP
+                </span>
+
+            </div>
+
+            <div
+                class="w-full bg-slate-800 h-5 rounded-full overflow-hidden">
+
+                <div id="barra-xp"
+                    class="h-full bg-gradient-to-r from-amber-400 to-orange-500 w-0 transition-all duration-1000">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CONQUISTAS -->
+        <div class="mt-8">
+
+            <h2 class="text-2xl font-bold mb-5">
+                🏆 Conquistas
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-5">
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        🚀
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Primeiro Código
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Completou a primeira atividade.
+                    </p>
+
+                </div>
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        📚
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Estudioso
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Finalizou missões teóricas.
+                    </p>
+
+                </div>
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        🔥
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Persistente
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Manteve a sequência de estudos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function voltarPagina() {
+            window.location.href = "index.html";
+        }
+
+        function calcularXPNecessario(nivel) {
+            return (nivel + 1) * (nivel + 1) * 80;
+        }
+
+        function carregarPerfil() {
+
+            let dados = JSON.parse(
+                localStorage.getItem("fluentcode_user")
+            ) || {
+                xp: 0,
+                nivel: 0
+            };
+
+            let progresso = JSON.parse(
+                localStorage.getItem("fluentcode_progresso_dia")
+            ) || {};
+
+            document.getElementById("nivel").textContent =
+                dados.nivel;
+
+            document.getElementById("xp-total").textContent =
+                dados.xp;
+
+            let missoes = 0;
+
+            if (progresso.java) missoes++;
+            if (progresso.ingles) missoes++;
+            if (progresso.desafio) missoes++;
+
+            document.getElementById("missoes").textContent =
+                missoes;
+
+            let limiteAtual =
+                calcularXPNecessario(dados.nivel);
+
+            let limiteAnterior =
+                dados.nivel === 0 ? 0 :
+                calcularXPNecessario(dados.nivel - 1);
+
+            let xpNivel =
+                dados.xp - limiteAnterior;
+
+            let necessario =
+                limiteAtual - limiteAnterior;
+
+            let porcentagem =
+                (xpNivel / necessario) * 100;
+
+            document.getElementById("barra-xp")
+                .style.width = porcentagem + "%";
+
+            document.getElementById("xp-texto")
+                .textContent =
+                dados.xp + " / " + limiteAtual + " XP";
+        }
+
+    </script>
+
+</body>
+
+</html>

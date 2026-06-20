@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurações - FluentCode</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body { background:#0d1b2a; color:white; }
+.card { background:#0b2545; border:1px solid #1f3b5c; }
+.toggle {
+  width:50px; height:26px; border-radius:999px;
+  background:#334155; position:relative; cursor:pointer;
+}
+.toggle::after{
+  content:"";
+  width:22px; height:22px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  top:2px; left:2px;
+  transition:0.2s;
+}
+.toggle.active{
+  background:#2563eb;
+}
+.toggle.active::after{
+  left:26px;
+}
+</style>
+</head>
+
+<body onload="loadSettings()">
+
+  
+
+<!-- BOTÃO VOLTAR -->
+<button onclick="history.back()"
+class="fixed bottom-6 left-4 
+bg-gradient-to-r from-blue-600 to-indigo-600 
+hover:from-blue-700 hover:to-indigo-700 
+text-white font-bold px-5 py-3 rounded-2xl 
+shadow-lg flex items-center gap-2 z-50 transition">
+
+<i class="fa-solid fa-arrow-left"></i>
+Voltar
+</button>
+
+<div class="min-h-screen p-6 flex justify-center">
+
+<div class="max-w-2xl w-full space-y-6">
+
+<!-- HEADER -->
+<div class="text-center">
+<div class="text-5xl">⚙️</div>
+<h1 class="text-3xl font-bold mt-3">Configurações</h1>
+<p class="text-gray-400 text-sm">Personalize sua experiência no FluentCode</p>
+</div>
+
+<!-- PERFIL -->
+<div class="card p-5 rounded-2xl space-y-3">
+<h2 class="font-bold text-lg">👤 Perfil</h2>
+
+<input id="nome" placeholder="Seu nome"
+class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none">
+
+<button onclick="salvarNome()"
+class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-xl font-bold">
+Salvar Nome
+</button>
+</div>
+
+<!-- SOM -->
+<div class="card p-5 rounded-2xl flex justify-between items-center">
+<div>
+<h2 class="font-bold">🔊 Som do Jogo</h2>
+<p class="text-gray-400 text-sm">Ativar efeitos sonoros</p>
+</div>
+<div class="toggle" id="soundToggle" onclick="toggleSound()"></div>
+</div>
+
+<!-- MODO ESCURO -->
+<div class="flex items-center justify-between bg-slate-800 p-4 rounded-xl">
+  <div>
+    <h2 class="font-bold">🌗 Modo Claro/Escuro</h2>
+    <p class="text-sm text-gray-400">Altere o tema do sistema</p>
+  </div>
+
+  <button onclick="toggleTheme()"
+  class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold">
+    Alternar
+  </button>
+</div>
+
+<!-- RESET -->
+<div class="card p-5 rounded-2xl space-y-3">
+<h2 class="font-bold text-red-400">⚠️ Resetar Progresso</h2>
+<p class="text-gray-400 text-sm">Isso apagará XP, nível e atividades</p>
+
+<button onclick="resetAll()"
+class="w-full bg-red-600 hover:bg-red-700 py-2 rounded-xl font-bold">
+Resetar Tudo
+</button>
+</div>
+
+<!-- INFO -->
+<div class="text-center text-xs text-gray-500">
+FluentCode v1.0 - Sistema de aprendizado gamificado
+</div>
+
+</div>
+</div>
+
+<div class="bg-slate-900 border border-red-500/30 rounded-2xl p-6 mt-6">
+    <h3 class="text-red-400 text-lg font-bold mb-2">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Zona de Perigo
+    </h3>
+
+    <p class="text-gray-400 text-sm mb-4">
+        Ao excluir sua conta, todo o progresso, XP, nível, jogos desbloqueados e histórico serão removidos permanentemente.
+    </p>
+
+    <button onclick="deletarConta()"
+        class="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl transition">
+        Excluir Conta
+    </button>
+</div>
+
+<script>
+// ---------------- STORAGE ----------------
+function loadSettings(){
+
+let nome = localStorage.getItem("fc_nome") || "";
+document.getElementById("nome").value = nome;
+
+let sound = localStorage.getItem("fc_sound");
+if(sound === "off"){
+document.getElementById("soundToggle").classList.remove("active");
+}
+
+let dark = localStorage.getItem("fc_dark");
+if(dark === "off"){
+document.getElementById("darkToggle").classList.remove("active");
+}
+}
+
+// ---------------- NOME ----------------
+function salvarNome(){
+let nome = document.getElementById("nome").value;
+localStorage.setItem("fc_nome", nome);
+alert("Nome salvo!");
+}
+
+// ---------------- SOM ----------------
+function toggleSound(){
+let t = document.getElementById("soundToggle");
+t.classList.toggle("active");
+
+if(t.classList.contains("active")){
+localStorage.setItem("fc_sound","on");
+} else {
+localStorage.setItem("fc_sound","off");
+}
+}
+
+// ---------------- DARK ----------------
+function toggleDark(){
+let t = document.getElementById("darkToggle");
+t.classList.toggle("active");
+
+if(t.classList.contains("active")){
+localStorage.setItem("fc_dark","on");
+} else {
+localStorage.setItem("fc_dark","off");
+}
+}
+
+// ---------------- RESET ----------------
+function resetAll(){
+if(confirm("Tem certeza que quer apagar todo o progresso?")){
+localStorage.clear();
+alert("Progresso resetado!");
+location.reload();
+}
+}
+
+function applyTheme() {
+  const theme = localStorage.getItem("theme");
+
+  if (theme === "light") {
+    document.body.classList.add("light");
+  } else {
+    document.body.classList.remove("light");
+  }
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.contains("light");
+
+  if (isLight) {
+    document.body.classList.remove("light");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.add("light");
+    localStorage.setItem("theme", "light");
+  }
+}
+
+function deletarConta() {
+
+    const confirmar = confirm(
+        "ATENÇÃO!\n\n" +
+        "Todos os seus dados serão apagados permanentemente.\n" +
+        "Deseja realmente excluir sua conta?"
+    );
+
+    if (!confirmar) return;
+
+    // Remove todos os dados do usuário
+    localStorage.removeItem("fluentcode_user");
+    localStorage.removeItem("fluentcode_progresso_dia");
+    localStorage.removeItem("fluentcode_jogos");
+    localStorage.removeItem("fluentcode_precisao");
+
+    alert("Sua conta foi excluída com sucesso.");
+
+    // Redireciona para login
+    window.location.href = "login.html";
+}
+
+applyTheme();
+</script>
+
+</body>
+</html>

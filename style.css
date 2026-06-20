@@ -1,0 +1,23 @@
+.hidden {
+    display: none;
+  }
+  
+  .opcao {
+    display: block;
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    background: #1e293b;
+    border-radius: 10px;
+    color: white;
+    text-align: left;
+    transition: 0.2s;
+  }
+  
+  .opcao:hover {
+    background: #334155;
+  }
+
+  #efeito-acerto {
+    display: none;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Monte o Código - FluentCode</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body{
+    background:#0d1b2a;
+    color:white;
+}
+
+#area{
+    word-break:break-word;
+}
+
+@media(max-width:640px){
+
+    #fase{
+        font-size:12px;
+    }
+
+    h1{
+        font-size:18px;
+        text-align:center;
+    }
+
+}
+
+.bloco{
+    width:100%;
+    min-height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#1e293b;
+
+    border:1px solid #334155;
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-family:monospace;
+    font-size:15px;
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.bloco:hover{
+    background:#334155;
+}
+
+.bloco:active{
+    transform:scale(.97);
+}
+</style>
+</head>
+
+<body class="bg-[#0d1b2a] text-white min-h-screen p-3 sm:p-6">
+
+<!-- TOPO -->
+<div class="flex justify-between items-center mb-6">
+
+<button onclick="window.location.href='jogos.html'"
+class="bg-slate-800 px-4 py-2 rounded-xl">
+<i class="fa-solid fa-arrow-left"></i> Voltar
+</button>
+
+<h1 class="text-xl font-bold">🧩 Monte o Código</h1>
+
+<span id="fase" class="bg-blue-600 px-3 py-1 rounded-xl text-sm">
+Fase 1
+</span>
+
+</div>
+
+<!-- ÁREA DO CÓDIGO -->
+<div
+id="area"
+class="bg-slate-950 border border-cyan-500 rounded-2xl p-4 sm:p-6 min-h-[140px] sm:min-h-[180px] mb-4 overflow-auto text-green-400 font-mono text-base sm:text-lg">
+</div>
+<!-- BANCO -->
+<div id="banco" class="mb-4"></div>
+
+<!-- BOTÃO -->
+<button onclick="verificar()"
+class="bg-green-600 px-4 py-2 rounded-xl font-bold">
+Verificar
+</button>
+
+<p id="msg" class="mt-4 font-bold"></p>
+
+<script>
+
+/* 🔥 FASES DO JOGO */
+const fases = [
+{
+titulo: "Hello World",
+codigo: ["System", ".", "out", ".", "println", "(", "'Hello World'", ")", ";"],
+xp: 100
+},
+{
+titulo: "Variável Java",
+codigo: ["int", "x", "=", "10", ";"],
+xp: 120
+},
+{
+titulo: "If simples",
+codigo: ["if", "(", "x", ">", "5", ")", "{", "System", ".", "out", ".", "println", "(", "'Maior'", ")", ";", "}"],
+xp: 150
+}
+];
+
+let faseAtual = 0;
+let selecionado = [];
+
+/* 🔁 CARREGAR FASE */
+function carregarFase(){
+
+document.getElementById("area").innerHTML = "";
+document.getElementById("banco").innerHTML = "";
+document.getElementById("msg").innerHTML = "";
+selecionado = [];
+
+let fase = fases[faseAtual];
+
+document.getElementById("fase").innerText = "Fase " + (faseAtual + 1);
+
+let banco = [...fase.codigo].sort(() => Math.random() - 0.5);
+
+banco.forEach(item => {
+
+let b = document.createElement("span");
+b.innerText = item;
+b.className = "bloco";
+
+b.onclick = () => {
+selecionado.push(item);
+document.getElementById("area").innerHTML += item;
+};
+
+document.getElementById("banco").appendChild(b);
+
+});
+
+}
+
+/* ✅ VERIFICAR */
+function verificar(){
+
+let fase = fases[faseAtual];
+
+let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0,nivel:0};
+
+if(selecionado.join("") === fase.codigo.join("")){
+
+user.xp += fase.xp;
+
+document.getElementById("msg").innerHTML =
+"✔ Correto! +" + fase.xp + " XP";
+
+faseAtual++;
+
+if(faseAtual < fases.length){
+
+setTimeout(()=>carregarFase(), 1200);
+
+}else{
+
+document.getElementById("msg").innerHTML =
+"🏆 Parabéns! Você completou todas as fases!";
+}
+
+}else{
+
+document.getElementById("msg").innerHTML =
+"❌ Ordem incorreta. Tente novamente!";
+}
+
+localStorage.setItem("fluentcode_user", JSON.stringify(user));
+}
+
+carregarFase();
+
+</script>
+
+</body>
+</html>

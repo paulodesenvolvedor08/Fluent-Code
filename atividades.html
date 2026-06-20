@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividades</title>
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#0f172a;
+    color:white;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 0;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.header p{
+    color:#94a3b8;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.card{
+    flex:1;
+    min-width:200px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+}
+
+.card h2{
+    margin:10px 0 0;
+}
+
+.atividade{
+    background:white;
+    color:#111827;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.status{
+    padding:8px 15px;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.andamento{
+    background:#3b82f6;
+}
+
+.concluido{
+    background:#22c55e;
+}
+
+.pendente{
+    background:#f59e0b;
+}
+
+.barra{
+    width:100%;
+    height:10px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progresso{
+    height:100%;
+    background:#3b82f6;
+}
+
+.botoes{
+    margin-top:15px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.abrir{
+    background:#2563eb;
+    color:white;
+}
+
+.detalhes{
+    background:#e5e7eb;
+}
+/* RESPONSIVIDADE MOBILE */
+@media (max-width:768px){
+
+    .container{
+        width:95%;
+        padding:20px 0;
+    }
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .header p{
+        font-size:14px;
+    }
+
+    .cards
+        .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+    .card{
+        min-width:auto;
+        width:100%;
+        padding:16px;
+    }
+
+    .atividade{
+        padding:16px;
+    }
+
+    .topo{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .topo h3{
+        margin:0;
+        font-size:18px;
+    }
+
+    .status{
+        font-size:11px;
+        padding:6px 12px;
+    }
+
+    .botoes{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .botoes button{
+    padding:12px 18px;
+    min-height:44px;
+}
+    
+
+    strong{
+        display:block;
+        margin-top:10px;
+    }
+}
+
+
+</style>
+
+</head>
+<body>
+
+   
+
+<button onclick="history.back()"
+class="fixed bottom-6 left-4 
+bg-gradient-to-r from-blue-600 to-indigo-600 
+hover:from-blue-700 hover:to-indigo-700 
+text-white font-bold px-5 py-3 rounded-2xl 
+shadow-lg flex items-center gap-2 z-50 transition">
+
+  <i class="fa-solid fa-arrow-left"></i>
+  Voltar
+</button>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="container">
+
+    <div class="header">
+        <h1>📋 Atividades</h1>
+        <p>Acompanhe todas as suas atividades.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <small>Total de Atividades</small>
+            <h2>24</h2>
+        </div>
+
+        <div class="card">
+            <small>Concluídas</small>
+            <h2>18</h2>
+        </div>
+
+        <div class="card">
+            <small>Pendentes</small>
+            <h2>6</h2>
+        </div>
+    </div>
+
+    <div class="atividade">
+
+        <div class="topo">
+            <h3>Desafio JavaScript</h3>
+            <span class="status andamento">Em andamento</span>
+        </div>
+
+        <p>Complete os exercícios de JavaScript avançado.</p>
+
+        <strong>65%</strong>
+
+        <div class="barra">
+            <div class="progresso" style="width:65%;"></div>
+        </div>
+
+        <div class="botoes">
+            <button class="abrir">Abrir</button>
+            <button class="detalhes">Detalhes</button>
+        </div>
+
+    </div>
+
+    <div class="atividade">
+
+        <div class="topo">
+            <h3>Projeto React</h3>
+            <span class="status concluido">Concluído</span>
+        </div>
+
+        <p>Crie um dashboard moderno utilizando React.</p>
+
+        <strong>100%</strong>
+
+        <div class="barra">
+            <div class="progresso" style="width:100%;"></div>
+        </div>
+
+        <div class="botoes">
+            <button class="abrir">Abrir</button>
+            <button class="detalhes">Detalhes</button>
+        </div>
+
+    </div>
+
+    <div class="atividade">
+
+        <div class="topo">
+            <h3>Banco de Dados SQL</h3>
+            <span class="status pendente">Pendente</span>
+        </div>
+
+        <p>Aprenda modelagem e consultas SQL avançadas.</p>
+
+        <strong>15%</strong>
+
+        <div class="barra">
+            <div class="progresso" style="width:15%;"></div>
+        </div>
+
+        <div class="botoes">
+            <button class="abrir">Abrir</button>
+            <button class="detalhes">Detalhes</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

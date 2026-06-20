@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - FluentCode</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body {
+  background: #0d1b2a;
+  color: white;
+}
+
+.glass {
+  background: rgba(11, 37, 69, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid #1f3b5c;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-full max-w-md p-6 space-y-6">
+
+<!-- LOGO -->
+<div class="text-center space-y-2">
+  <div class="text-5xl">⚡</div>
+  <h1 class="text-4xl logo">FluentCode</h1>
+  <p class="text-gray-400 text-sm">Aprenda programação de forma divertida</p>
+</div>
+
+<!-- CARD LOGIN -->
+<div class="glass p-6 rounded-2xl space-y-4 shadow-xl">
+
+<h2 class="text-xl font-bold text-center">Entrar na sua conta</h2>
+
+<!-- USUÁRIO -->
+<div>
+  <label class="text-sm text-gray-400">Usuário</label>
+  <input id="user"
+  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
+  placeholder="Digite seu nome">
+</div>
+
+<!-- SENHA -->
+<div>
+  <label class="text-sm text-gray-400">Senha</label>
+  <input type="password"
+  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
+  placeholder="Digite sua senha">
+</div>
+
+<!-- BOTÃO LOGIN -->
+<button onclick="login()"
+class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold transition">
+  Entrar
+</button>
+
+<!-- LINK CADASTRO -->
+<div class="text-center mt-4">
+  <p class="text-xs text-gray-500">
+    Não tem uma conta?
+  </p>
+
+  <a href="cadastro.html"
+  class="inline-block mt-1 text-blue-400 font-bold hover:text-blue-300 transition">
+    ➕ Criar conta
+  </a>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function login(){
+
+const user = document.getElementById("user").value;
+
+let users = JSON.parse(localStorage.getItem("fc_users")) || [];
+
+let found = users.find(u => u.user === user);
+
+if(!found){
+  alert("Usuário não encontrado!");
+  return;
+}
+
+ localStorage.setItem("usuarioLogado", "true");
+
+ window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

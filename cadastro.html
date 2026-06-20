@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro - FluentCode</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body {
+  background:#0d1b2a;
+  color:white;
+}
+
+.glass {
+  background: rgba(11, 37, 69, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid #1f3b5c;
+}
+
+.logo {
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="w-full max-w-md p-6 space-y-6">
+
+<!-- LOGO -->
+<div class="text-center space-y-2">
+  <div class="text-5xl">⚡</div>
+  <h1 class="text-4xl logo">FluentCode</h1>
+  <p class="text-gray-400 text-sm">Crie sua conta e comece a aprender</p>
+</div>
+
+<!-- CARD -->
+<div class="glass p-6 rounded-2xl space-y-4 shadow-xl">
+
+<h2 class="text-xl font-bold text-center">Criar conta</h2>
+
+<!-- USUÁRIO -->
+<div>
+  <label class="text-sm text-gray-400">Nome de usuário</label>
+  <input id="user"
+  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
+  placeholder="Ex: DevLucas">
+</div>
+
+<!-- SENHA -->
+<div>
+  <label class="text-sm text-gray-400">Senha</label>
+  <input id="pass" type="password"
+  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
+  placeholder="Crie uma senha">
+</div>
+
+<!-- CONFIRMAR SENHA -->
+<div>
+  <label class="text-sm text-gray-400">Confirmar senha</label>
+  <input id="confirm" type="password"
+  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
+  placeholder="Repita a senha">
+</div>
+
+<button onclick="register()"
+class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition">
+  Criar conta
+</button>
+
+<p class="text-xs text-gray-500 text-center">
+Já tem conta?
+<a href="login.html" class="text-blue-400 hover:underline">Entrar</a>
+</p>
+
+</div>
+
+</div>
+
+<script>
+function register(){
+
+const user = document.getElementById("user").value;
+const pass = document.getElementById("pass").value;
+const confirm = document.getElementById("confirm").value;
+
+if(!user || !pass || !confirm){
+  alert("Preencha todos os campos!");
+  return;
+}
+
+if(pass !== confirm){
+  alert("As senhas não coincidem!");
+  return;
+}
+
+// pega lista de usuários
+let users = JSON.parse(localStorage.getItem("fc_users")) || [];
+
+// verifica se já existe
+let exists = users.find(u => u.user === user);
+
+if(exists){
+  alert("Usuário já existe!");
+  return;
+}
+
+// salva usuário
+users.push({
+  user: user,
+  pass: pass,
+  xp: 0,
+  nivel: 0
+});
+
+localStorage.setItem("fc_users", JSON.stringify(users));
+
+alert("Conta criada com sucesso!");
+
+window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
