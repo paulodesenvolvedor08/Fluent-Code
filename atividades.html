@@ -1,303 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atividades</title>
+<title>FluentCode - Atividades</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#0f172a;
+    background:#0d1b2a;
     color:white;
 }
 
+/* CONTAINER */
 .container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding:30px 0;
-}
-
-.header{
-    margin-bottom:30px;
-}
-
-.header h1{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-.header p{
-    color:#94a3b8;
-}
-
-.cards{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    margin-bottom:30px;
-}
-
-.card{
-    flex:1;
-    min-width:200px;
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-}
-
-.card h2{
-    margin:10px 0 0;
-}
-
-.atividade{
-    background:white;
-    color:#111827;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
-.topo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.status{
-    padding:8px 15px;
-    border-radius:20px;
-    color:white;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.andamento{
-    background:#3b82f6;
-}
-
-.concluido{
-    background:#22c55e;
-}
-
-.pendente{
-    background:#f59e0b;
-}
-
-.barra{
     width:100%;
-    height:10px;
-    background:#ddd;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:10px;
+    max-width:1100px;
+    margin:auto;
 }
 
-.progresso{
-    height:100%;
-    background:#3b82f6;
+/* CARD ATIVIDADE */
+.card{
+    background:#0f172a;
+    border:1px solid #1f2937;
+    border-radius:18px;
+
+    padding:18px;
+
+    transition:.2s;
 }
 
-.botoes{
-    margin-top:15px;
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#3b82f6;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
-button{
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    margin-right:10px;
+/* BOTÃO */
+.btn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    font-weight:bold;
+    text-align:center;
 }
 
-.abrir{
-    background:#2563eb;
-    color:white;
+/* TAG XP */
+.xp{
+    background:#1e293b;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
 }
 
-.detalhes{
-    background:#e5e7eb;
-}
-/* RESPONSIVIDADE MOBILE */
-@media (max-width:768px){
+/* RESPONSIVO */
+@media(max-width:640px){
 
-    .container{
-        width:95%;
-        padding:20px 0;
+    body{
+        padding:12px;
     }
 
-    .header h1{
-        font-size:28px;
-    }
-
-    .header p{
-        font-size:14px;
-    }
-
-    .cards
-        .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-    .card{
-        min-width:auto;
-        width:100%;
-        padding:16px;
-    }
-
-    .atividade{
-        padding:16px;
-    }
-
-    .topo{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
-
-    .topo h3{
-        margin:0;
-        font-size:18px;
-    }
-
-    .status{
-        font-size:11px;
-        padding:6px 12px;
-    }
-
-    .botoes{
-        display:flex;
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .botoes button{
-    padding:12px 18px;
-    min-height:44px;
-}
-    
-
-    strong{
-        display:block;
-        margin-top:10px;
+    h1{
+        font-size:22px;
+        text-align:center;
     }
 }
-
-
 </style>
-
 </head>
-<body>
 
-   
-
-<button onclick="history.back()"
-class="fixed bottom-6 left-4 
-bg-gradient-to-r from-blue-600 to-indigo-600 
-hover:from-blue-700 hover:to-indigo-700 
-text-white font-bold px-5 py-3 rounded-2xl 
-shadow-lg flex items-center gap-2 z-50 transition">
-
-  <i class="fa-solid fa-arrow-left"></i>
-  Voltar
-</button>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<body class="p-4 sm:p-6">
 
 <div class="container">
 
-    <div class="header">
-        <h1>📋 Atividades</h1>
-        <p>Acompanhe todas as suas atividades.</p>
-    </div>
+<!-- TOPO -->
+<div class="text-center mb-8">
 
-    <div class="cards">
-        <div class="card">
-            <small>Total de Atividades</small>
-            <h2>24</h2>
-        </div>
+<h1 class="text-3xl font-bold">📚 Atividades FluentCode</h1>
 
-        <div class="card">
-            <small>Concluídas</small>
-            <h2>18</h2>
-        </div>
+<p class="text-gray-400 mt-2">
+Pratique programação e ganhe XP
+</p>
 
-        <div class="card">
-            <small>Pendentes</small>
-            <h2>6</h2>
-        </div>
-    </div>
+</div>
 
-    <div class="atividade">
+<!-- GRID -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-        <div class="topo">
-            <h3>Desafio JavaScript</h3>
-            <span class="status andamento">Em andamento</span>
-        </div>
+<!-- ATIVIDADE 1 -->
+<div class="card">
 
-        <p>Complete os exercícios de JavaScript avançado.</p>
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">⚡ Quiz Rápido</h2>
+<span class="xp">+100 XP</span>
+</div>
 
-        <strong>65%</strong>
+<p class="text-gray-400 mb-4">
+Responda perguntas básicas de Java.
+</p>
 
-        <div class="barra">
-            <div class="progresso" style="width:65%;"></div>
-        </div>
+<button onclick="location.href='quiz.html'"
+class="btn bg-orange-600 hover:bg-orange-500">
+Começar
+</button>
 
-        <div class="botoes">
-            <button class="abrir">Abrir</button>
-            <button class="detalhes">Detalhes</button>
-        </div>
+</div>
 
-    </div>
+<!-- ATIVIDADE 2 -->
+<div class="card">
 
-    <div class="atividade">
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">🧩 Monte o Código</h2>
+<span class="xp">+120 XP</span>
+</div>
 
-        <div class="topo">
-            <h3>Projeto React</h3>
-            <span class="status concluido">Concluído</span>
-        </div>
+<p class="text-gray-400 mb-4">
+Organize os blocos na ordem correta.
+</p>
 
-        <p>Crie um dashboard moderno utilizando React.</p>
+<button onclick="location.href='montar.html'"
+class="btn bg-blue-600 hover:bg-blue-500">
+Começar
+</button>
 
-        <strong>100%</strong>
+</div>
 
-        <div class="barra">
-            <div class="progresso" style="width:100%;"></div>
-        </div>
+<!-- ATIVIDADE 3 -->
+<div class="card">
 
-        <div class="botoes">
-            <button class="abrir">Abrir</button>
-            <button class="detalhes">Detalhes</button>
-        </div>
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">🐞 Caça Erros</h2>
+<span class="xp">+150 XP</span>
+</div>
 
-    </div>
+<p class="text-gray-400 mb-4">
+Encontre os erros no código Java.
+</p>
 
-    <div class="atividade">
+<button onclick="location.href='erros.html'"
+class="btn bg-red-600 hover:bg-red-500">
+Começar
+</button>
 
-        <div class="topo">
-            <h3>Banco de Dados SQL</h3>
-            <span class="status pendente">Pendente</span>
-        </div>
+</div>
 
-        <p>Aprenda modelagem e consultas SQL avançadas.</p>
+<!-- ATIVIDADE 4 -->
+<div class="card">
 
-        <strong>15%</strong>
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">💡 Lógica Java</h2>
+<span class="xp">+130 XP</span>
+</div>
 
-        <div class="barra">
-            <div class="progresso" style="width:15%;"></div>
-        </div>
+<p class="text-gray-400 mb-4">
+Exercícios de lógica e pensamento.
+</p>
 
-        <div class="botoes">
-            <button class="abrir">Abrir</button>
-            <button class="detalhes">Detalhes</button>
-        </div>
+<button onclick="location.href='logica.html'"
+class="btn bg-green-600 hover:bg-green-500">
+Começar
+</button>
 
-    </div>
+</div>
+
+<!-- ATIVIDADE 5 -->
+<div class="card">
+
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">🔤 Sintaxe Java</h2>
+<span class="xp">+110 XP</span>
+</div>
+
+<p class="text-gray-400 mb-4">
+Aprenda a estrutura correta do Java.
+</p>
+
+<button onclick="location.href='sintaxe.html'"
+class="btn bg-purple-600 hover:bg-purple-500">
+Começar
+</button>
+
+</div>
+
+<!-- ATIVIDADE 6 -->
+<div class="card">
+
+<div class="flex justify-between items-center mb-3">
+<h2 class="text-xl font-bold">🚀 Desafio Final</h2>
+<span class="xp">+200 XP</span>
+</div>
+
+<p class="text-gray-400 mb-4">
+Desafio avançado de programação.
+</p>
+
+<button onclick="location.href='desafio.html'"
+class="btn bg-yellow-600 hover:bg-yellow-500 text-black">
+Começar
+</button>
+
+</div>
+
+</div>
+
+<!-- VOLTAR -->
+<div class="mt-10 text-center">
+
+<button onclick="location.href='index.html'"
+class="bg-slate-800 px-6 py-3 rounded-xl font-bold hover:bg-slate-700">
+<i class="fa-solid fa-arrow-left"></i> Voltar ao Menu
+</button>
+
+</div>
 
 </div>
 
