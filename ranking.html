@@ -117,10 +117,17 @@ body{
 <!-- TOPO -->
 <div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-5">
 
-<button onclick="window.location.href='index.html'"
-class="bg-slate-800 px-4 py-2 rounded-xl w-full sm:w-auto">
-<i class="fa-solid fa-arrow-left"></i> Voltar
-</button>
+<button onclick="history.back()"
+            class="fixed bottom-6 left-4 
+            bg-gradient-to-r from-blue-600 to-indigo-600 
+            hover:from-blue-700 hover:to-indigo-700 
+            text-white font-bold px-5 py-3 rounded-2xl 
+            shadow-lg flex items-center gap-2 z-50 transition">
+
+           <i class="fa-solid fa-arrow-left"></i>
+           Voltar
+           </button>
+
 
 <h1 class="text-2xl font-bold">🏆 Ranking FluentCode</h1>
 
