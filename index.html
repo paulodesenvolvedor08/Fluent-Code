@@ -7,7 +7,75 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-       
+
+        /* ===== MENU LATERAL FLUENTCODE ===== */
+
+.menu-fluent{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:220px;
+    height:100vh;
+
+    background:#0f172a;
+    border-right:1px solid #1f2937;
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    z-index:1000;
+}
+
+.menu-btn{
+    background:#1e293b;
+    border:1px solid #334155;
+
+    padding:12px;
+    border-radius:12px;
+
+    font-weight:bold;
+    color:white;
+
+    text-align:left;
+
+    transition:.2s;
+}
+
+.menu-btn:hover{
+    background:#334155;
+    transform:translateX(5px);
+}
+
+/* empurra o conteúdo pra não ficar atrás do menu */
+.main-fluent{
+    margin-left:220px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .menu-fluent{
+        position:relative;
+        width:100%;
+        height:auto;
+
+        flex-direction:row;
+        overflow-x:auto;
+    }
+
+    .menu-btn{
+        min-width:140px;
+        text-align:center;
+    }
+
+    .main-fluent{
+        margin-left:0;
+    }
+}
         body { background-color: #0d1b2a; color: #ffffff; }
         .bg-dark-blue { background-color: #0b2545; }
         .bg-card-blue { background-color: #134074; }
