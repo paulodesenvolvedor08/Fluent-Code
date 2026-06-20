@@ -4,938 +4,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FluentCode - Painel Principal</title>
+    <title>FluentCode - Perfil</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         body {
-            background-color: #0d1b2a;
-            color: #ffffff;
-        }
-
-        .bg-dark-blue {
-            background-color: #0b2545;
-        }
-
-        .bg-card-blue {
-            background-color: #134074;
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .btn-opcao {
-            width: 100%;
-            text-align: left;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            background-color: #1e293b;
-            border: 2px solid #334155;
-            transition: all 0.2s;
-        }
-
-        .btn-opcao:hover:not(:disabled) {
-            background-color: #334155;
-            border-color: #3b82f6;
-        }
-
-        .btn-opcao.selecionada {
-            background-color: #1d4ed8;
-            border-color: #60a5fa;
+            background: #0d1b2a;
             color: white;
         }
 
-        .btn-opcao.correta {
-            background-color: #065f46;
-            border-color: #34d399;
-            color: white;
-        }
-
-        .btn-opcao.errada {
-            background-color: #991b1b;
-            border-color: #f87171;
-            color: white;
-        }
-
-        .bloco-codigo {
-            background-color: #1e293b;
-            border: 1px solid #475569;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            user-select: none;
-        }
-
-        .bloco-codigo:hover:not(.usado) {
-            background-color: #334155;
-            border-color: #3b82f6;
-        }
-
-        .bloco-codigo.usado {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-         .conteiner {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 280px;
-            flex-shrink: 0;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
+        .glass {
+            background: rgba(19, 64, 116, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.08);
         }
     </style>
 </head>
 
-<body class="font-sans antialiased" onload="inicializarSistema()">
+<body onload="carregarPerfil()">
 
+    <div class="max-w-6xl mx-auto p-6">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- TOPO -->
+        <div class="flex items-center justify-between mb-8">
 
-        <aside class="bg-dark-blue p-4 flex flex-col md:w-64 md:p-6">
-            <div>
-                <div class="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-                    <i class="fa-solid fa-code text-blue-400"></i> FluentCode
-                </div>
-                <nav class="space-y-4">
-                    <button onclick="alternarAba('inicio')" id="btn-menu-inicio"
-                        class="w-full flex items-center gap-3 bg-blue-600 px-4 py-2.5 rounded-xl text-white font-medium transition">
-                        <i class="fa-solid fa-house"></i> Início
-                    </button>
-                    <button onclick="alternarAba('progresso')" id="btn-menu-progresso"
-                        class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium">
-                        <i class="fa-solid fa-chart-line"></i> Progresso
-                    </button>
-                    <button onclick="window.location.href='trilhas.html'"
-                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                        <i class="fa-solid fa-user"></i> Trilhas
-                    </button>
-                  
-                    <button onclick="window.location.href='ranking.html'"
-                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                        <i class="fa-solid fa-user"></i> Ranking
-                    </button>
+            <button onclick="history.back()"
+            class="fixed bottom-6 left-4 
+            bg-gradient-to-r from-blue-600 to-indigo-600 
+            hover:from-blue-700 hover:to-indigo-700 
+            text-white font-bold px-5 py-3 rounded-2xl 
+            shadow-lg flex items-center gap-2 z-50 transition">
 
-                    <button onclick="window.location.href='jogos.html'"
-                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                        <i class="fa-solid fa-gamepad"></i> Jogos
-                    </button>
+           <i class="fa-solid fa-arrow-left"></i>
+           Voltar
+           </button>
 
-                    <button onclick="window.location.href='perfil.html'"
-                        class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                        <i class="fa-solid fa-user"></i> Perfil
-                    </button>
+            <h1 class="text-3xl font-black">
+                Meu Perfil
+            </h1>
 
-                    <button onclick="window.location.href='config.html'" class="flex items-center gap-3 px-4 py-2.5 rounded-xl 
-                     text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
+            <div></div>
 
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="fa-solid fa-gear text-blue-400"></i>
-                        </div>
-                        Configurações
-                    </button>
+        </div>
 
-                    <button onclick="deslogar()" class="flex items-center gap-3 px-4 py-2.5 rounded-xl 
-                      text-red-400 hover:bg-red-500/10 hover:text-red-300 transition font-medium">
-
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        Sair
-                    </button>
-                </nav>
-            </div>
-
-            <div id="modal-feedback" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                <div id="modal-feedback-box"
-                    class="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-md text-center shadow-2xl">
-
-                    <div id="modal-emoji" class="text-5xl mb-3">🎉</div>
-
-                    <h2 id="modal-titulo" class="text-2xl font-bold text-green-400">
-                        Correto!
-                    </h2>
-
-                    <p id="modal-texto" class="text-gray-300 mt-3 text-sm leading-relaxed">
-                        ...
-                    </p>
-
-                    <button onclick="fecharModalFeedback()"
-                        class="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-bold">
-                        Continuar
-                    </button>
-                </div>
-            </div>
-
-
-            <div id="feedback-resposta"></div>
+        <!-- CARD PRINCIPAL -->
+        <div
+            class="glass rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
 
             <div
-                class="bg-gradient-to-tr from-blue-700 to-indigo-900 p-4 rounded-2xl text-center relative overflow-hidden">
-                <p class="text-sm font-semibold mb-2">Aprenda Java e Inglês Técnico de um jeito divertido!</p>
-                <div class="text-4xl">🤖</div>
-            </div>
-        </aside>
+                class="w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-6xl border-4 border-white/10">
 
-        <main class="flex-1 grid grid-cols-1 xl:grid-cols-3 gap-6 p-3 md:p-6 overflow-y-auto">
+                👨‍💻
 
-            <div class="xl:col-span-3 space-y-8">
-
-                <div id="aba-inicio" class="space-y-8">
-                    <div
-                        class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-8 flex flex-col md:flex-row justify-between items-center relative overflow-hidden shadow-lg">
-                        <div class="space-y-4 z-10">
-                            <span
-                                class="bg-amber-400 text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Primeiro
-                                Acesso 🎉</span>
-                            <h1 class="text-2xl md:text-4xl font-extrabold">Seja bem-vindo, Dev!</h1>
-                            <p class="text-blue-100 max-w-md">Conclua sua primeira missão do dia abaixo para ativar sua
-                                sequência e turbinar seus multiplicadores de XP!</p>
-                        </div>
-                        <div class="text-5xl md:text-8xl mt-4 md:mt-0 z-10">🚀</div>
-                    </div>
-
-                    <div>
-                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-map-signs text-blue-400"></i> Seu Caminho em Java
-                        </h2>
-                        <div class="flex gap-5 overflow-x-auto pb-4 pt-2 no-scrollbar">
-                            <div
-                                class="min-w-[280px] max-w-[280px] min-h-[220px] bg-white border-2 border-blue-500 text-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between relative transform hover:-translate-y-1 transition duration-200">
-                                <div id="tag-status-java"
-                                    class="absolute -top-3 -right-2 bg-blue-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow">
-                                    DISPONÍVEL</div>
-                                <div class="flex justify-between items-start">
-                                    <span class="bg-blue-100 text-blue-600 text-xs font-bold px-2.5 py-1 rounded">Módulo
-                                        1</span>
-                                    <i class="fa-solid fa-mug-hot text-blue-600 text-2xl"></i>
-                                </div>
-                                <div class="my-4">
-                                    <h3 class="font-bold text-lg text-slate-900 leading-snug">1. Olá, Mundo!</h3>
-                                    <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">Escreva e entenda a
-                                        estrutura da sua primeira linha de código.</p>
-                                </div>
-                                <button id="btn-praticar-java" onclick="iniciarQuiz('java')"
-                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-                                    Praticar Java
-                                </button>
-                            </div>
-
-                            <div
-                                class="min-w-[280px] max-w-[280px] min-h-[220px] bg-slate-900/40 border border-slate-800 text-slate-400 p-6 rounded-2xl flex flex-col justify-between opacity-50">
-                                <div class="flex justify-between items-start">
-                                    <span
-                                        class="bg-slate-800 text-gray-400 text-xs font-bold px-2.5 py-1 rounded">Módulo
-                                        2</span>
-                                    <i class="fa-solid fa-lock text-gray-600 text-sm"></i>
-                                </div>
-                                <div class="my-4">
-                                    <h3 class="font-bold text-lg text-gray-400 leading-snug">2. Variáveis e Tipos</h3>
-                                    <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">Como armazenar dados na
-                                        memória do PC de forma correta.</p>
-                                </div>
-                                <div class="w-full bg-slate-800/50 h-2.5 rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-language text-emerald-400"></i> Desafios Diários de Inglês para Java
-                        </h2>
-                        <div class="flex gap-5 overflow-x-auto pb-4 pt-2 no-scrollbar">
-                            <div
-                                class="min-w-[280px] max-w-[280px] min-h-[220px] bg-white border-2 border-emerald-500 text-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between relative transform hover:-translate-y-1 transition duration-200">
-                                <div id="tag-status-ingles"
-                                    class="absolute -top-3 -right-2 bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow">
-                                    LIBERADO</div>
-                                <div class="flex justify-between items-start">
-                                    <span
-                                        class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded">Dia
-                                        1</span>
-                                    <span class="text-emerald-600 font-extrabold text-xl tracking-wider">EN</span>
-                                </div>
-                                <div class="my-4">
-                                    <h3 class="font-bold text-lg text-slate-900 leading-snug">1. Termos de Sintaxe</h3>
-                                    <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">Entenda palavras estruturais
-                                        fundamentais como Statement e Semicolon.</p>
-                                </div>
-                                <button id="btn-praticar-ingles" onclick="iniciarQuiz('ingles')"
-                                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-                                    Praticar Inglês
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="aba-progresso" class="space-y-6 hidden">
-                    <div>
-                        <h1 class="text-3xl font-extrabold mb-2">Seu Histórico de Progresso</h1>
-                        <p class="text-gray-400 text-sm">Aqui ficam registradas as missões diárias consolidadas.
-                            Atividades concluídas não podem ser refeitas.</p>
-                    </div>
-
-                    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div
-                            class="flex items-center justify-between p-4 bg-dark-blue rounded-xl border border-slate-700/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-2xl bg-blue-500/10 text-blue-400 p-3 rounded-lg"><i
-                                        class="fa-solid fa-mug-hot"></i></div>
-                                <div>
-                                    <h3 class="font-bold">Módulo 1: Olá, Mundo! (Java)</h3>
-                                    <p class="text-xs text-gray-400">Status: <span id="hist-status-java"
-                                            class="text-red-400 font-semibold">Pendente</span></p>
-                                </div>
-                            </div>
-                            <span id="badge-xp-java"
-                                class="bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg">0 XP</span>
-                        </div>
-
-                        <div
-                            class="flex items-center justify-between p-4 bg-dark-blue rounded-xl border border-slate-700/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-2xl bg-emerald-500/10 text-emerald-400 p-3 rounded-lg"><i
-                                        class="fa-solid fa-language"></i></div>
-                                <div>
-                                    <h3 class="font-bold">Dia 1: Termos de Sintaxe (Inglês)</h3>
-                                    <p class="text-xs text-gray-400">Status: <span id="hist-status-ingles"
-                                            class="text-red-400 font-semibold">Pendente</span></p>
-                                </div>
-                            </div>
-                            <span id="badge-xp-ingles"
-                                class="bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg">0 XP</span>
-                        </div>
-
-                        <div
-                            class="flex items-center justify-between p-4 bg-dark-blue rounded-xl border border-slate-700/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-2xl bg-amber-500/10 text-amber-400 p-3 rounded-lg"><i
-                                        class="fa-solid fa-code"></i></div>
-                                <div>
-                                    <h3 class="font-bold">Desafio do Dia: Montagem de Código</h3>
-                                    <p class="text-xs text-gray-400">Status: <span id="hist-status-desafio"
-                                            class="text-red-400 font-semibold">Pendente</span></p>
-                                </div>
-                            </div>
-                            <span id="badge-xp-desafio"
-                                class="bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg">0 XP</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="container-quiz"
-                    class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 hidden shadow-2xl">
-                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                        <div id="quiz-barra-progresso" class="bg-blue-500 h-full w-0 transition-all duration-300"></div>
-                    </div>
-
-                    <div id="quiz-tela-pergunta" class="space-y-6">
-                        <div
-                            class="flex justify-between items-center text-xs font-bold tracking-wider uppercase text-blue-400">
-                            <span id="quiz-num-questao">Questão 1 de 5</span>
-                            <span class="bg-amber-400/10 text-amber-400 px-2 py-0.5 rounded"
-                                id="quiz-alerta-primeira">Primeira do dia! 🔥</span>
-                        </div>
-                        <h2 id="quiz-texto-pergunta" class="text-lg md:text-2xl font-bold leading-tight">...</h2>
-                        <div id="quiz-container-opcoes" class="space-y-3 pt-2"></div>
-                        <button id="quiz-btn-acao" onclick="processarCliqueBotao()"
-                            class="mt-6 w-full bg-blue-600 text-white font-bold py-3 rounded-xl transition cursor-pointer">Verificar
-                            Resposta</button>
-                    </div>
-
-                    <div id="quiz-tela-resultado" class="text-center py-8 space-y-6 hidden">
-                        <div class="text-6xl">🏆</div>
-                        <h2 class="text-3xl font-extrabold">Atividade Concluída!</h2>
-                        <div class="flex justify-center gap-6 my-4">
-                            <div class="bg-slate-800 px-6 py-3 rounded-xl">
-                                <p class="text-xs text-gray-400">Precisão</p>
-                                <p id="quiz-res-porcentagem" class="text-2xl font-black text-blue-400">0%</p>
-                            </div>
-                            <div class="bg-slate-800 px-6 py-3 rounded-xl">
-                                <p class="text-xs text-gray-400">Bônus</p>
-                                <p id="quiz-res-xp" class="text-2xl font-black text-amber-400">+0 XP</p>
-                            </div>
-                        </div>
-                        <button onclick="finalizarRetornoFluxo()"
-                            class="w-full max-w-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">Avançar
-                            Jornada</button>
-                    </div>
-                </div>
-
-                <div id="container-desafio"
-                    class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 hidden shadow-2xl">
-                    <div class="border-b border-slate-800 pb-4">
-                        <span
-                            class="text-xs font-extrabold bg-amber-400 text-slate-900 px-2.5 py-1 rounded-full uppercase">Etapa
-                            Final Única 🎯</span>
-                        <h2 class="text-2xl font-extrabold mt-2">Desafio Prático Combinado</h2>
-                    </div>
-
-                    <p class="text-sm text-gray-300">Ordene os blocos lógicos estruturais abaixo para formar a saída
-                        correta no terminal.</p>
-
-                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 min-h-[60px] flex flex-wrap gap-2 items-center"
-                        id="desafio-codigo-montado"></div>
-
-                    <div class="flex justify-between items-center text-xs text-gray-400">
-                        <span>Seu Banco de Elementos:</span>
-                        <button onclick="limparCodigoDesafio()" class="text-red-400 hover:underline">Limpar
-                            Tudo</button>
-                    </div>
-                    <div class="flex flex-wrap gap-2 p-4 bg-slate-800/40 rounded-xl border border-slate-800"
-                        id="desafio-banco-palavras"></div>
-
-                    <button onclick="verificarDesafio()"
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">Submeter
-                        Estrutura do Código</button>
-                </div>
-
-                <div id="card-bloqueio"
-                    class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 text-center space-y-6 hidden">
-                    <div class="text-5xl">🧠⏳</div>
-                    <h2 class="text-2xl font-bold text-amber-400">Meta Diária Atingida!</h2>
-                    <p class="text-gray-400 text-sm max-w-md mx-auto">Seu cérebro precisa de descanso para consolidar os
-                        novos conceitos aprendidos hoje. Volte amanhã!</p>
-                    <div class="text-4xl font-mono font-black text-white tracking-widest bg-slate-900 inline-block px-6 py-3 rounded-xl border border-slate-700"
-                        id="cronometro">00:00:00</div>
-                </div>
             </div>
 
-            <div class="w-[340px] shrink-0 space-y-6">
-                <div class="bg-card-blue p-6 rounded-2xl shadow-xl w-full">
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-2xl border-2 border-white/20 flex-shrink-0">
-                            🧑‍💻</div>
-                        <div>
-                            <h3 class="font-bold text-white">RecrutaDev</h3>
-                            <p class="text-xs text-amber-300 font-bold">Nível <span id="home-nivel">0</span></p>
-                        </div>
-                    </div>
-                    <div class="space-y-1">
-                        <div class="flex justify-between text-xs text-gray-300 w-full">
-                            <span>Progresso do Nível</span>
-                            <span class="font-bold" id="home-xp-texto">0 / 80 XP</span>
-                        </div>
-                        <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden">
-                            <div id="home-barra-progresso"
-                                class="bg-gradient-to-r from-amber-400 to-orange-500 h-full w-0 transition-all duration-300">
-                            </div>
-                        </div>
-                        <div class="flex justify-between text-[10px] text-blue-200 mt-1">
-                            <span>Faltam <span id="xp-restante" class="font-bold text-white">0</span> XP</span>
-                            <span>Total: <span id="home-xp-total">0</span> XP</span>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="text-2xl font-bold mt-5">
+                Dev FluentCode
+            </h2>
 
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-                    <h4 class="text-xs uppercase font-extrabold tracking-wider text-blue-400 flex items-center gap-1">
-                        <i class="fa-solid fa-circle-info"></i> <span id="titulo-ajuda">Painel de Ajuda</span>
-                    </h4>
-                    <p id="texto-ajuda" class="text-xs text-gray-400 leading-relaxed">Selecione uma das missões livres
-                        no mapa ao lado para iniciar seus estudos práticos acelerados.</p>
-                </div>
+            <p class="text-gray-400 text-sm">
+                Continue aprendendo Java e Inglês Técnico
+            </p>
+
+            <div
+                class="mt-4 bg-amber-400 text-slate-900 px-4 py-2 rounded-full font-bold text-sm">
+
+                ⭐ Nível <span id="nivel">0</span>
+
             </div>
 
-        </main>
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-bolt text-yellow-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    XP Total
+                </h3>
+
+                <p id="xp-total"
+                    class="text-4xl font-black mt-2">
+                    0
+                </p>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-book text-green-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    Missões
+                </h3>
+
+                <p id="missoes"
+                    class="text-4xl font-black mt-2">
+                    0
+                </p>
+
+            </div>
+
+            <div class="glass rounded-2xl p-6 text-center">
+
+                <i class="fa-solid fa-trophy text-orange-400 text-3xl"></i>
+
+                <h3 class="text-gray-400 mt-3">
+                    Conquistas
+                </h3>
+
+                <p class="text-4xl font-black mt-2">
+                    3
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- BARRA XP -->
+        <div class="glass rounded-2xl p-6 mt-8">
+
+            <div class="flex justify-between mb-3">
+
+                <span>Progresso do Nível</span>
+
+                <span id="xp-texto">
+                    0 XP
+                </span>
+
+            </div>
+
+            <div
+                class="w-full bg-slate-800 h-5 rounded-full overflow-hidden">
+
+                <div id="barra-xp"
+                    class="h-full bg-gradient-to-r from-amber-400 to-orange-500 w-0 transition-all duration-1000">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CONQUISTAS -->
+        <div class="mt-8">
+
+            <h2 class="text-2xl font-bold mb-5">
+                🏆 Conquistas
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-5">
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        🚀
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Primeiro Código
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Completou a primeira atividade.
+                    </p>
+
+                </div>
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        📚
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Estudioso
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Finalizou missões teóricas.
+                    </p>
+
+                </div>
+
+                <div
+                    class="glass rounded-2xl p-5 hover:scale-105 transition">
+
+                    <div class="text-5xl">
+                        🔥
+                    </div>
+
+                    <h3 class="font-bold mt-3">
+                        Persistente
+                    </h3>
+
+                    <p class="text-gray-400 text-sm mt-1">
+                        Manteve a sequência de estudos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
     <script>
-        const bancoQuizzes = {
-            java: [
-                {
-                    pergunta: "Em programação, o que é uma variável?",
-                    opcoes: ["A) Um erro inevitável do computador.", "B) Uma caixa na memória para guardar dados.", "C) Um comando para fechar o sistema.", "D) O nome do criador do Java."],
-                    correta: 1,
-                    ajuda: "Pense na memória como gavetas etiquetadas de um armário.",
-                    explicacao: "Variáveis são apelidos para espaços na memória RAM. Guardamos dados nelas para usá-los mais tarde."
-                },
-                {
-                    pergunta: "Qual classe principal do Java gerencia saídas e interações com o sistema operacional?",
-                    opcoes: ["A) Printer", "B) Console", "C) System", "D) Output"],
-                    correta: 2,
-                    ajuda: "Faz referência direta ao ecossistema do computador.",
-                    explicacao: "Usamos o 'System' porque o Java solicita ao sistema operacional a autorização para enviar dados para a tela."
-                },
-                {
-                    pergunta: "Qual tipo de dado é usado para preços ou valores com centavos?",
-                    opcoes: ["A) int", "B) String", "C) double", "D) boolean"],
-                    correta: 2,
-                    ajuda: "Precisamos de um tipo que lide com pontos flutuantes.",
-                    explicacao: "O tipo 'double' armazena valores decimais complexos de dupla precisão, ideal para moedas."
-                },
-                {
-                    pergunta: "Se quisermos armazenar o nome de um usuário, qual tipo usamos?",
-                    opcoes: ["A) String", "B) char", "C) double", "D) int"],
-                    correta: 0,
-                    ajuda: "Nomes são conjuntos ou sequências de várias letras juntas.",
-                    explicacao: "O tipo estrutural 'String' lida com cadeias completas de texto comum alfanumérico."
-                },
-                {
-                    pergunta: "Para que servem os caracteres de chaves { } no código Java?",
-                    opcoes: ["A) Terminar comandos comuns.", "B) Delimitar e agrupar blocos de código.", "C) Criar variáveis do tipo texto.", "D) Realizar divisões aritméticas."],
-                    correta: 1,
-                    ajuda: "As chaves mostram onde começa e termina o corpo de um bloco estruturado.",
-                    explicacao: "As chaves servem para agrupar códigos em blocos lógicos estruturados como escopos de métodos e classes."
-                }
-            ],
-            ingles: [
-                {
-                    pergunta: "Em inglês, o que significa o termo literal 'String'?",
-                    opcoes: ["A) Número inteiro", "B) Corda ou cadeia de caracteres", "C) Vazio ou sem retorno", "D) Verdadeiro"],
-                    correta: 1,
-                    ajuda: "Imagine letras amarradas de forma sequencial em um varal.",
-                    explicacao: "Em inglês, 'String' significa corda. Na computação, representa uma cadeia ordenada de letras e caracteres."
-                },
-                {
-                    pergunta: "A palavra reservada 'void' é muito usada em métodos. Qual a tradução direta dela?",
-                    opcoes: ["A) Principal", "B) Imprimir", "C) Vazio / Sem Retorno", "D) Inteiro"],
-                    correta: 2,
-                    ajuda: "Pense em um espaço sideral ou um local onde não há matéria nenhuma.",
-                    explicacao: "'Void' significa vácuo ou vazio. No Java, indica que um método executa sua lógica interna, mas não devolve nenhum resultado."
-                },
-                {
-                    pergunta: "O método principal do Java chama-se 'main'. O que significa essa palavra?",
-                    opcoes: ["A) Principal / Central", "B) Mensagem na tela", "C) Saída de dados", "D) Iniciar sistema"],
-                    correta: 0,
-                    ajuda: "É a avenida ou rua mais importante de uma cidade americana (Main Street).",
-                    explicacao: "'Main' significa principal. O método main é a porta de entrada obrigatória onde todo programa Java começa."
-                },
-                {
-                    pergunta: "A palavra 'double' representa números quebrados. O que significa 'double' no dicionário comum?",
-                    opcoes: ["A) Metade", "B) Duplo / Dobro", "C) Letra maiúscula", "D) Ponto decimal"],
-                    correta: 1,
-                    ajuda: "Tem a ver com possuir o dobro de tamanho ou precisão de bits em relação ao tipo float.",
-                    explicacao: "'Double' significa duplo. Ele tem esse nome porque possui o dobro de precisão de bits (64 bits) se comparado ao float."
-                },
-                {
-                    pergunta: "As palavras booleanas 'true' e 'false' significam respectivamente:",
-                    opcoes: ["A) Abrir e Fechar", "B) Ativar e Cancelar", "C) Verdadeiro e Falso", "D) Adicionar e Subtrair"],
-                    correta: 2,
-                    ajuda: "São os pilares da lógica binária clássica.",
-                    explicacao: "'True' traduz-se como verdadeiro e 'false' como falso. São os dois únicos estados lógicos aceitos."
-                }
 
-            ]
-        };
-
-        let quizAtual = "";
-        let indiceAtual = 0;
-        let acertosTeoria = 0;
-        let opcaoSelecionadaIdx = null;
-        let respondido = false;
-
-        const palavrasDesafio = ["System", ".", "out", ".", "println", "(", "'Hello, World!'", ")", ";"];
-        let palavrasEmbaralhadas = ["out", "(", "System", "println", ";", ".", ")", "'Hello, World!'", "."];
-        let respostaUsuarioDesafio = [];
-
-        function mostrarModalFeedback(titulo, texto, emoji) {
-            const modal = document.getElementById("modal-feedback");
-
-            document.getElementById("modal-titulo").textContent = titulo;
-            document.getElementById("modal-texto").textContent = texto;
-            document.getElementById("modal-emoji").textContent = emoji;
-            modal.classList.remove("hidden");
-        }
-
-        function fecharModalFeedback() {
-            document.getElementById("modal-feedback").classList.add("hidden");
+        function voltarPagina() {
+            window.location.href = "index.html";
         }
 
         function calcularXPNecessario(nivel) {
             return (nivel + 1) * (nivel + 1) * 80;
         }
 
-        function gerenciarNivelamento(xpGanhos) {
-            let dados = JSON.parse(localStorage.getItem("fluentcode_user")) || { xp: 0, nivel: 0 };
-            dados.xp += xpGanhos;
-            while (dados.xp >= calcularXPNecessario(dados.nivel)) {
-                dados.nivel++;
-            }
-            localStorage.setItem("fluentcode_user", JSON.stringify(dados));
-            sincronizarPerfilEProgresso();
-        }
+        function carregarPerfil() {
 
-        function inicializarSistema() {
-
-             const usuarioLogado = localStorage.getItem("usuarioLogado");
-
-    if (!usuarioLogado) {
-        window.location.href = "login.html";
-        return;
-    }
-
-    if (!localStorage.getItem("fluentcode_user")) {
-        localStorage.setItem("fluentcode_user", JSON.stringify({
-            xp: 0,
-            nivel: 0
-        }));
-    }
-
-    if (!localStorage.getItem("fluentcode_progresso_dia")) {
-        localStorage.setItem("fluentcode_progresso_dia", JSON.stringify({
-            java: false,
-            ingles: false,
-            desafio: false,
-            xpJava: 0,
-            xpIngles: 0,
-            xpDesafio: 0,
-            timestampBloqueio: null
-        }));
-    }
-
-    sincronizarPerfilEProgresso();
-    verificarFluxoTelas();
-        }
-
-        function sincronizarPerfilEProgresso() {
-            let dados = JSON.parse(localStorage.getItem("fluentcode_user"));
-            let progresso = JSON.parse(localStorage.getItem("fluentcode_progresso_dia"));
-
-            let limiteAtual = calcularXPNecessario(dados.nivel);
-            let limiteAnterior = dados.nivel === 0 ? 0 : calcularXPNecessario(dados.nivel - 1);
-            let xpNoNivelAtual = dados.xp - limiteAnterior;
-            let totalNecessarioNoNivel = limiteAtual - limiteAnterior;
-            let porcentagemBarra = (xpNoNivelAtual / totalNecessarioNoNivel) * 100;
-
-            document.getElementById("home-nivel").textContent = dados.nivel;
-            document.getElementById("home-xp-texto").textContent = dados.xp + " / " + limiteAtual + " XP";
-            document.getElementById("home-xp-total").textContent = dados.xp;
-            document.getElementById("home-barra-progresso").style.width = porcentagemBarra + "%";
-            document.getElementById("xp-restante").textContent = limiteAtual - dados.xp;
-
-            if (progresso.java) {
-                document.getElementById("btn-praticar-java").disabled = true;
-                document.getElementById("btn-praticar-java").textContent = "Concluído";
-                document.getElementById("tag-status-java").textContent = "CONCLUÍDO";
-                document.getElementById("tag-status-java").className = "absolute -top-3 -right-2 bg-slate-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow";
-            }
-            if (progresso.ingles) {
-                document.getElementById("btn-praticar-ingles").disabled = true;
-                document.getElementById("btn-praticar-ingles").textContent = "Concluído";
-                document.getElementById("tag-status-ingles").textContent = "CONCLUÍDO";
-                document.getElementById("tag-status-ingles").className = "absolute -top-3 -right-2 bg-slate-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow";
-            }
-
-            document.getElementById("hist-status-java").textContent = progresso.java ? "Concluído ✓" : "Pendente";
-            document.getElementById("hist-status-java").className = progresso.java ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold";
-            document.getElementById("badge-xp-java").textContent = "+" + progresso.xpJava + " XP";
-            document.getElementById("badge-xp-java").className = progresso.java ? "bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg" : "bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg";
-
-            document.getElementById("hist-status-ingles").textContent = progresso.ingles ? "Concluído ✓" : "Pendente";
-            document.getElementById("hist-status-ingles").className = progresso.ingles ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold";
-            document.getElementById("badge-xp-ingles").textContent = "+" + progresso.xpIngles + " XP";
-            document.getElementById("badge-xp-ingles").className = progresso.ingles ? "bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg" : "bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg";
-
-            document.getElementById("hist-status-desafio").textContent = progresso.desafio ? "Concluído ✓" : "Pendente";
-            document.getElementById("hist-status-desafio").className = progresso.desafio ? "text-emerald-400 font-semibold" : "text-red-400 font-semibold";
-            document.getElementById("badge-xp-desafio").textContent = "+" + progresso.xpDesafio + " XP";
-            document.getElementById("badge-xp-desafio").className = progresso.desafio ? "bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-lg" : "bg-slate-800 text-gray-400 text-xs font-bold px-3 py-1.5 rounded-lg";
-        }
-
-        function alternarAba(aba) {
-            if (aba === 'inicio') {
-                document.getElementById("aba-inicio").classList.remove("hidden");
-                document.getElementById("aba-progresso").classList.add("hidden");
-                document.getElementById("btn-menu-inicio").className = "w-full flex items-center gap-3 bg-blue-600 px-4 py-2.5 rounded-xl text-white font-medium transition";
-                document.getElementById("btn-menu-progresso").className = "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium";
-                verificarFluxoTelas();
-            } else if (aba === 'progresso') {
-                document.getElementById("aba-inicio").classList.add("hidden");
-                document.getElementById("aba-progresso").classList.remove("hidden");
-                document.getElementById("container-quiz").classList.add("hidden");
-                document.getElementById("container-desafio").classList.add("hidden");
-                document.getElementById("card-bloqueio").classList.add("hidden");
-                document.getElementById("btn-menu-inicio").className = "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium";
-                document.getElementById("btn-menu-progresso").className = "w-full flex items-center gap-3 bg-blue-600 px-4 py-2.5 rounded-xl text-white font-medium transition";
-            }
-        }
-
-        function verificarFluxoTelas() {
-            let progresso = JSON.parse(localStorage.getItem("fluentcode_progresso_dia"));
-            let agora = new Date().getTime();
-
-            if (progresso.timestampBloqueio && progresso.timestampBloqueio - agora <= 0) {
-                progresso = { java: false, ingles: false, desafio: false, xpJava: 0, xpIngles: 0, xpDesafio: 0, timestampBloqueio: null };
-                localStorage.setItem("fluentcode_progresso_dia", JSON.stringify(progresso));
-                sincronizarPerfilEProgresso();
-            }
-
-            document.getElementById("container-quiz").classList.add("hidden");
-            document.getElementById("container-desafio").classList.add("hidden");
-            document.getElementById("card-bloqueio").classList.add("hidden");
-
-            if (progresso.timestampBloqueio && progresso.timestampBloqueio - agora > 0) {
-                document.getElementById("aba-inicio").classList.add("hidden");
-                document.getElementById("card-bloqueio").classList.remove("hidden");
-                rodarCronometro(progresso.timestampBloqueio - agora);
-            } else if (progresso.java && progresso.ingles && !progresso.desafio) {
-                document.getElementById("aba-inicio").classList.add("hidden");
-                liberarDesafioPratico();
-            }
-        }
-
-        function rodarCronometro(distancia) {
-            let x = setInterval(function () {
-                let agora = new Date().getTime();
-                let progresso = JSON.parse(localStorage.getItem("fluentcode_progresso_dia")) || {};
-                let diferenca = progresso.timestampBloqueio - agora;
-
-                let horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                let minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-                let segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-                document.getElementById("cronometro").textContent =
-                    (horas < 10 ? "0" + horas : horas) + ":" +
-                    (minutos < 10 ? "0" + minutos : minutes) + ":" +
-                    (segundos < 10 ? "0" + segundos : segundos);
-
-                if (diferenca < 0) {
-                    clearInterval(x);
-                    inicializarSistema();
-                    alternarAba('inicio');
-                }
-            }, 1000);
-        }
-
-        function iniciarQuiz(tipo) {
-            quizAtual = tipo;
-            indiceAtual = 0;
-            acertosTeoria = 0;
-
-
-            document.getElementById("aba-inicio").classList.add("hidden");
-            document.getElementById("aba-progresso").classList.add("hidden");
-            document.getElementById("container-desafio").classList.add("hidden");
-            document.getElementById("card-bloqueio").classList.add("hidden");
-
-            // mostra quiz
-            document.getElementById("container-quiz").classList.remove("hidden");
-            document.getElementById("quiz-tela-pergunta").classList.remove("hidden");
-            document.getElementById("quiz-tela-resultado").classList.add("hidden");
-            carregarQuestao();
-        }
-
-        function carregarQuestao() {
-            respondido = false;
-            opcaoSelecionadaIdx = null;
-            const q = bancoQuizzes[quizAtual][indiceAtual];
-            const totalQuestoes = bancoQuizzes[quizAtual].length;
-
-            document.getElementById("quiz-alerta-primeira").classList.toggle("hidden", indiceAtual !== 0);
-            document.getElementById("quiz-num-questao").textContent = "Questão " + (indiceAtual + 1) + " de " + totalQuestoes;
-            document.getElementById("quiz-texto-pergunta").textContent = q.pergunta;
-
-            document.getElementById("titulo-ajuda").textContent = "Dica da Questão " + (indiceAtual + 1);
-            document.getElementById("texto-ajuda").textContent = q.ajuda;
-
-            let progressoBarra = (indiceAtual / totalQuestoes) * 100;
-            document.getElementById("quiz-barra-progresso").style.width = progressoBarra + "%";
-
-            const btnAcao = document.getElementById("quiz-btn-acao");
-            btnAcao.textContent = "Verificar Resposta";
-            btnAcao.className = "mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition cursor-pointer";
-
-            const containerOpcoes = document.getElementById("quiz-container-opcoes");
-            containerOpcoes.innerHTML = "";
-
-            q.opcoes.forEach((opcao, idx) => {
-                const btn = document.createElement("button");
-                btn.className = "btn-opcao text-slate-300 font-medium";
-                btn.textContent = opcao;
-                btn.onclick = function () { if (!respondido) { opcaoSelecionadaIdx = idx; selecionarOpcaoVisual(idx); } };
-                containerOpcoes.appendChild(btn);
-            });
-        }
-
-        function selecionarOpcaoVisual(idx) {
-            document.querySelectorAll(".btn-opcao").forEach((btn, i) => {
-                btn.classList.toggle("selecionada", i === idx);
-            });
-        }
-
-        function processarCliqueBotao() {
-            const totalQuestoes = bancoQuizzes[quizAtual].length;
-            if (respondido) {
-                indiceAtual++;
-                if (indiceAtual < totalQuestoes) { carregarQuestao(); }
-                else { finalizarQuizTeorico(); }
-                return;
-            }
-
-            if (opcaoSelecionadaIdx === null) { alert("Escolha uma opção!"); return; }
-
-            respondido = true;
-            const q = bancoQuizzes[quizAtual][indiceAtual];
-            const botoes = document.querySelectorAll(".btn-opcao");
-
-            document.getElementById("titulo-ajuda").textContent = "Explicação";
-            document.getElementById("texto-ajuda").textContent = q.explicacao;
-
-            if (opcaoSelecionadaIdx === q.correta) {
-                acertosTeoria++;
-
-                botoes[opcaoSelecionadaIdx].className = "btn-opcao correta";
-                mostrarModalFeedback(
-                    "Resposta Correta!",
-                    q.explicacao,
-                    "🎉"
-                );
-            } else {
-
-                botoes[opcaoSelecionadaIdx].className = "btn-opcao errada";
-                botoes[q.correta].className = "btn-opcao correta";
-
-                mostrarModalFeedback(
-                    "Resposta Incorreta",
-                    "A resposta correta era: " + q.opcoes[q.correta] + "\n\n" + q.explicacao,
-                    "❌"
-                );
-            }
-
-            const btnAcao = document.getElementById("quiz-btn-acao");
-            btnAcao.textContent = (indiceAtual === totalQuestoes - 1) ? "Ver Resultados" : "Próxima Questão ➔";
-            btnAcao.className = "mt-6 w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition cursor-pointer";
-        }
-
-        function finalizarQuizTeorico() {
-            document.getElementById("quiz-tela-pergunta").classList.add("hidden");
-            document.getElementById("quiz-tela-resultado").classList.remove("hidden");
-            document.getElementById("quiz-barra-progresso").style.width = "100%";
-
-            const totalQuestoes = bancoQuizzes[quizAtual].length;
-            let porc = (acertosTeoria / totalQuestoes) * 100;
-            let xpGanho = acertosTeoria * 100;
-
-            document.getElementById("quiz-res-porcentagem").textContent = porc + "%";
-            document.getElementById("quiz-res-xp").textContent = "+" + xpGanho + " XP";
-
-            let progresso = JSON.parse(localStorage.getItem("fluentcode_progresso_dia"));
-            progresso[quizAtual] = true;
-            if (quizAtual === 'java') progresso.xpJava = xpGanho;
-            if (quizAtual === 'ingles') progresso.xpIngles = xpGanho;
-
-            localStorage.setItem("fluentcode_progresso_dia", JSON.stringify(progresso));
-            gerenciarNivelamento(xpGanho);
-
-            let jogos = JSON.parse(localStorage.getItem("fluentcode_jogos")) || {
-                cacaErros: false,
-                ingles: false,
-                desafio: false
+            let dados = JSON.parse(
+                localStorage.getItem("fluentcode_user")
+            ) || {
+                xp: 0,
+                nivel: 0
             };
 
-            // lógica de desbloqueio progressivo
-            if (quizAtual === "java") {
-                jogos.cacaErros = true; // desbloqueia jogo 1
-            }
+            let progresso = JSON.parse(
+                localStorage.getItem("fluentcode_progresso_dia")
+            ) || {};
 
-            if (quizAtual === "ingles") {
-                jogos.ingles = true; // desbloqueia jogo 2
-            }
+            document.getElementById("nivel").textContent =
+                dados.nivel;
 
-            localStorage.setItem("fluentcode_jogos", JSON.stringify(jogos));
+            document.getElementById("xp-total").textContent =
+                dados.xp;
+
+            let missoes = 0;
+
+            if (progresso.java) missoes++;
+            if (progresso.ingles) missoes++;
+            if (progresso.desafio) missoes++;
+
+            document.getElementById("missoes").textContent =
+                missoes;
+
+            let limiteAtual =
+                calcularXPNecessario(dados.nivel);
+
+            let limiteAnterior =
+                dados.nivel === 0 ? 0 :
+                calcularXPNecessario(dados.nivel - 1);
+
+            let xpNivel =
+                dados.xp - limiteAnterior;
+
+            let necessario =
+                limiteAtual - limiteAnterior;
+
+            let porcentagem =
+                (xpNivel / necessario) * 100;
+
+            document.getElementById("barra-xp")
+                .style.width = porcentagem + "%";
+
+            document.getElementById("xp-texto")
+                .textContent =
+                dados.xp + " / " + limiteAtual + " XP";
         }
 
-        function finalizarRetornoFluxo() {
-            document.getElementById("container-quiz").classList.add("hidden");
-            document.getElementById("aba-inicio").classList.remove("hidden");
-            verificarFluxoTelas();
-        }
-
-        function liberarDesafioPratico() {
-            document.getElementById("container-desafio").classList.remove("hidden");
-            document.getElementById("titulo-ajuda").textContent = "Desafio Prático";
-            document.getElementById("texto-ajuda").textContent = "Combine e alinhe a sintaxe da sua primeira instrução de terminal Java.";
-            respostaUsuarioDesafio = [];
-            document.getElementById("desafio-codigo-montado").innerHTML = "";
-            renderizarBancoDesafio();
-        }
-
-        function renderizarBancoDesafio() {
-            const bancoEl = document.getElementById("desafio-banco-palavras");
-            bancoEl.innerHTML = "";
-            palavrasEmbaralhadas.forEach((palavra, idx) => {
-                const item = document.createElement("button");
-                item.className = "bloco-codigo font-mono text-xs text-slate-300";
-                item.textContent = palavra;
-                item.id = "bloco-" + idx;
-
-                if (respostaUsuarioDesafio.some(function (r) { return r.idOriginal === "bloco-" + idx; })) {
-                    item.classList.add("usado");
-                }
-
-                item.onclick = function () {
-                    if (respostaUsuarioDesafio.some(function (r) { return r.idOriginal === "bloco-" + idx; })) return;
-                    respostaUsuarioDesafio.push({ texto: palavra, idOriginal: "bloco-" + idx });
-
-                    const token = document.createElement("span");
-                    token.className = "bg-emerald-600/20 text-emerald-300 font-mono text-xs px-2 py-1 rounded border border-emerald-500/30 shadow-sm";
-                    token.textContent = palavra;
-                    document.getElementById("desafio-codigo-montado").appendChild(token);
-                    item.classList.add("usado");
-                };
-                bancoEl.appendChild(item);
-            });
-        }
-
-        function limparCodigoDesafio() {
-            respostaUsuarioDesafio = [];
-            document.getElementById("desafio-codigo-montado").innerHTML = "";
-            renderizarBancoDesafio();
-        }
-
-        function verificarDesafio() {
-            if (respostaUsuarioDesafio.length === 0) return;
-            const stringUsuario = respostaUsuarioDesafio.map(function (r) { return r.texto; }).join("");
-            const stringCorreta = palavrasDesafio.join("");
-
-            let progresso = JSON.parse(localStorage.getItem("fluentcode_progresso_dia"));
-
-            if (stringUsuario === stringCorreta) {
-                alert("Parabéns! Desafio concluído com sucesso. +300 XP!");
-                progresso.xpDesafio = 300;
-                gerenciarNivelamento(300);
-            } else {
-                alert("Sintaxe incorreta. Ordem correta: System.out.println('Hello, World!');");
-                progresso.xpDesafio = 0;
-            }
-
-            progresso.desafio = true;
-            progresso.timestampBloqueio = new Date().getTime() + 86400000;
-            localStorage.setItem("fluentcode_progresso_dia", JSON.stringify(progresso));
-
-            document.getElementById("container-desafio").classList.add("hidden");
-            verificarFluxoTelas();
-        }
-
-        function deslogar() {
-            const confirmar = confirm("Tem certeza que deseja sair?");
-
-            if (confirmar) {
-                localStorage.removeItem("fluentcode_user");
-                localStorage.removeItem("fluentcode_progresso_dia");
-                localStorage.removeItem("fluentcode_jogos");
-                localStorage.removeItem("fluentcode_precisao");
-
-                // redireciona para tela inicial/login
-                window.location.href = "login.html";
-            }
-        }
     </script>
-
 
 </body>
 
