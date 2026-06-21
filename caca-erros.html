@@ -3,6 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caça Erros Java - FluentCode</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -12,89 +13,83 @@
 body {
     background: #0d1b2a;
     color: white;
+    font-size: 16px;
 }
 
 /* CARD RESPONSIVO */
 .card {
     background: #0f172a;
     border: 1px solid #1f2937;
-    border-radius: 16px;
-    padding: 20px;
-
+    border-radius: 20px;
+    padding: 24px;
     width: 100%;
     max-width: 900px;
     margin: auto;
-
     box-shadow: 0 10px 30px rgba(0,0,0,.3);
 }
 
 /* CÓDIGO RESPONSIVO */
 .code {
     background: #000;
-    padding: 16px;
+    padding: 20px;
     border-radius: 12px;
-
     color: #22c55e;
-    font-family: monospace;
-
-    margin-top: 12px;
-
-    font-size: 15px;
-    line-height: 1.6;
-
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.8;
     overflow-x: auto;
-    word-break: break-word;
+    word-break: break-all;
 }
 
 /* BOTÕES RESPONSIVOS */
 .btn {
-    padding: 12px 16px;
+    padding: 16px;
     border-radius: 12px;
     font-weight: bold;
     width: 100%;
     transition: .2s;
+    font-size: 16px;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+.btn:active {
+    transform: scale(0.98);
 }
 
 /* MOBILE AJUSTES */
 @media (max-width: 640px) {
-
     body {
-        padding: 12px;
-    }
-
-    .card {
-        padding: 16px;
+        padding: 15px;
     }
 
     h1 {
-        font-size: 18px;
-        text-align: center;
+        font-size: 22px;
+    }
+
+    .card {
+        padding: 20px;
     }
 
     .code {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 </style>
 </head>
 
-<body class="p-6">
+<body class="p-4">
 
 <!-- TOPO -->
-<div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
 
 <button onclick="window.location.href='jogos.html'"
-class="bg-slate-800 px-4 py-2 rounded-xl w-full sm:w-auto">
+class="bg-slate-800 px-6 py-3 rounded-xl w-full sm:w-auto hover:bg-slate-700">
 <i class="fa-solid fa-arrow-left"></i> Voltar
 </button>
 
-<h1 class="text-xl font-bold text-center">🐞 Caça Erros Java</h1>
+<h1 class="text-2xl font-bold text-center">🐞 Caça Erros Java</h1>
 
-<span id="fase" class="bg-red-600 px-3 py-1 rounded-xl text-sm">
+<span id="fase" class="bg-red-600 px-4 py-2 rounded-xl text-sm font-bold">
 Fase 1
 </span>
 
@@ -103,14 +98,14 @@ Fase 1
 <!-- CARD CENTRAL -->
 <div class="card">
 
-<p class="text-gray-300 text-center mb-2">
+<p class="text-gray-300 text-center mb-4">
 Encontre o erro no código:
 </p>
 
 <div id="codigo" class="code"></div>
 
 <!-- BOTÕES -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
 
 <button onclick="responder(false)"
 class="btn bg-red-600 hover:bg-red-500">
@@ -124,90 +119,58 @@ Está correto
 
 </div>
 
-<p id="msg" class="mt-4 font-bold text-center text-lg"></p>
+<p id="msg" class="mt-6 font-bold text-center text-lg min-h-[30px]"></p>
 
 </div>
 
 <script>
-
 /* 🔥 FASES */
 const fases = [
-{
-codigo: "System.out.printn(\"Hello World\");",
-erro: "println",
-xp: 100
-},
-{
-codigo: "int x = \"10\";",
-erro: "tipo errado (String em int)",
-xp: 120
-},
-{
-codigo: "if x > 5 { System.out.println('OK'); }",
-erro: "faltam parênteses ()",
-xp: 150
-},
-{
-codigo: "public static void main(String args) { }",
-erro: "String[] args",
-xp: 180
-}
+    { codigo: "System.out.printn(\"Hello World\");", erro: "println", xp: 100 },
+    { codigo: "int x = \"10\";", erro: "tipo errado (String em int)", xp: 120 },
+    { codigo: "if x > 5 { System.out.println('OK'); }", erro: "faltam parênteses ()", xp: 150 },
+    { codigo: "public static void main(String args) { }", erro: "String[] args", xp: 180 }
 ];
 
 let faseAtual = 0;
 
 /* 🔁 CARREGAR */
 function carregar(){
-
-let f = fases[faseAtual];
-
-document.getElementById("fase").innerText =
-"Fase " + (faseAtual + 1);
-
-document.getElementById("codigo").innerText =
-f.codigo;
-
-document.getElementById("msg").innerText = "";
-
+    let f = fases[faseAtual];
+    document.getElementById("fase").innerText = "Fase " + (faseAtual + 1);
+    document.getElementById("codigo").innerText = f.codigo;
+    document.getElementById("msg").innerText = "";
 }
 
 carregar();
 
 /* 🎮 RESPOSTA */
 function responder(correto){
+    let f = fases[faseAtual];
+    let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0,nivel:0};
+    
+    // Na lógica de "Caça Erros", presumo que o código exibido SEMPRE tem um erro, 
+    // então o botão "Não está correto" é o certo (true para encontrar o erro).
+    // Vou ajustar para que clicar em "Não está correto" signifique acertar o desafio.
+    
+    let acertou = (correto === false);
 
-let f = fases[faseAtual];
+    if(acertou){
+        user.xp += f.xp;
+        document.getElementById("msg").innerHTML = "✔ Correto! +" + f.xp + " XP";
+        faseAtual++;
+        
+        if(faseAtual < fases.length){
+            setTimeout(() => carregar(), 1200);
+        } else {
+            document.getElementById("msg").innerHTML = "🏆 Você completou todos os níveis!";
+        }
+    } else {
+        document.getElementById("msg").innerHTML = "❌ Errado! O erro era: " + f.erro;
+    }
 
-let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0,nivel:0};
-
-if(correto){
-
-user.xp += f.xp;
-
-document.getElementById("msg").innerHTML =
-"✔ Correto! +" + f.xp + " XP";
-
-faseAtual++;
-
-if(faseAtual < fases.length){
-
-setTimeout(()=>carregar(), 1200);
-
-}else{
-
-document.getElementById("msg").innerHTML =
-"🏆 Você completou todos os níveis!";
+    localStorage.setItem("fluentcode_user", JSON.stringify(user));
 }
-
-}else{
-
-document.getElementById("msg").innerHTML =
-"❌ Errado! O erro era: " + f.erro;
-}
-
-localStorage.setItem("fluentcode_user", JSON.stringify(user));
-}
-
 </script>
 
 </body>
