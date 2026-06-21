@@ -3,67 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FluentCode - Painel Principal</title>
+    <title>FluentCode - Painel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        
         body { background-color: #0d1b2a; color: #ffffff; }
-        .bg-dark-blue { background-color: #0b2545; }
         .bg-card-blue { background-color: #134074; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .btn-opcao {
-            width: 100%; text-align: left; padding: 1rem; border-radius: 0.75rem;
-            background-color: #1e293b; border: 2px solid #334155; transition: all 0.2s;
-        }
-        .btn-opcao:hover:not(:disabled) { background-color: #334155; border-color: #3b82f6; }
-        .btn-opcao.selecionada { background-color: #1d4ed8; border-color: #60a5fa; color: white; }
-        .btn-opcao.correta { background-color: #065f46; border-color: #34d399; color: white; }
-        .btn-opcao.errada { background-color: #991b1b; border-color: #f87171; color: white; }
-        
-        .bloco-codigo {
-            background-color: #1e293b; border: 1px solid #475569; padding: 0.5rem 1rem;
-            border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; user-select: none;
-        }
-        .bloco-codigo:hover:not(.usado) { background-color: #334155; border-color: #3b82f6; }
-        .bloco-codigo.usado { opacity: 0.3; cursor: not-allowed; }
     </style>
 </head>
-<body class="font-sans antialiased" onload="inicializarSistema()">
+<body class="font-sans antialiased pb-24" onload="inicializarSistema()">
 
-
-    <div class="flex flex-col md:flex-row min-h-screen">
+    <!-- CONTEÚDO PRINCIPAL (Fica em cima) -->
+    <main class="p-4 md:p-6 max-w-4xl mx-auto">
         
-        <aside class="bg-dark-blue p-4 flex flex-col md:w-64 md:p-6">
-            <div>
-                <div class="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-                    <i class="fa-solid fa-code text-blue-400"></i> FluentCode
+        <!-- SEU CÓDIGO DA PÁGINA AQUI -->
+        <div id="aba-inicio" class="space-y-6">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-center shadow-lg">
+                <h1 class="text-2xl font-extrabold">Seja bem-vindo, Dev!</h1>
+                <p class="text-blue-100 text-sm mt-2">Pronto para aprender hoje?</p>
+            </div>
+            
+            <!-- Exemplo de conteúdo -->
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h2 class="font-bold mb-2">Missão do dia</h2>
+                    <button onclick="iniciarQuiz('java')" class="w-full bg-blue-600 py-3 rounded-xl font-bold">Praticar Java</button>
                 </div>
-               <nav class="space-y-2">
-    <button onclick="alternarAba('inicio')" id="btn-menu-inicio" class="w-full flex items-center gap-3 bg-blue-600 px-4 py-3 rounded-xl text-white font-medium transition">
-        <i class="fa-solid fa-house"></i> Início
-    </button>
-    <button onclick="alternarAba('progresso')" id="btn-menu-progresso" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium">
-        <i class="fa-solid fa-chart-line"></i> Progresso
-    </button>
-    <button onclick="window.location.href='ranking.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-        <i class="fa-solid fa-trophy"></i> Ranking
-    </button>
-    <button onclick="window.location.href='atividades.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-        <i class="fa-solid fa-book"></i> Atividades
-    </button>
-    <button onclick="window.location.href='perfil.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-        <i class="fa-solid fa-user"></i> Perfil
-    </button>
-    <button onclick="window.location.href='config.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-        <i class="fa-solid fa-gear"></i> Configurações
-    </button>
-    <button onclick="deslogar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition font-medium mt-4">
-        <i class="fa-solid fa-right-from-bracket"></i> Sair
-    </button>
-</nav>
+            </div>
+        </div>
+
+        <!-- Containers de Quiz e Desafio escondidos ficam aqui normalmente -->
+        <div id="container-quiz" class="hidden"></div>
+        <div id="container-desafio" class="hidden"></div>
+
+    </main>
+
+    <!-- BARRA DE NAVEGAÇÃO FIXA (Instagram Style) -->
+    <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+        
+        <button onclick="alternarAba('inicio')" class="flex flex-col items-center gap-1 p-2 text-white transition">
+            <i class="fa-solid fa-house text-xl"></i>
+            <span class="text-[10px] font-bold">Início</span>
+        </button>
+
+        <button onclick="window.location.href='ranking.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-trophy text-xl"></i>
+            <span class="text-[10px] font-bold">Ranking</span>
+        </button>
+
+        <button onclick="window.location.href='atividades.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-book text-xl"></i>
+            <span class="text-[10px] font-bold">Atividades</span>
+        </button>
+
+        <button onclick="window.location.href='perfil.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-user text-xl"></i>
+            <span class="text-[10px] font-bold">Perfil</span>
+        </button>
+        
+    </nav>
             </div>
 
             <div id="modal-feedback" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
