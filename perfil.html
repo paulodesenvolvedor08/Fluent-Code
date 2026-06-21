@@ -4,213 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FluentCode - Perfil</title>
-
+    <title>FluentCode - Seu Perfil</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background: #0d1b2a;
-            color: white;
-        }
+        body { background: #0d1b2a; color: white; }
+        .bg-panel { background: #112240; }
+        .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        
+        /* Efeito de brilho nas bordas */
+        .glow { border: 1px solid rgba(59, 130, 246, 0.2); }
+        .glow:hover { border: 1px solid rgba(59, 130, 246, 0.6); }
 
-        .glass {
-            background: rgba(19, 64, 116, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,.08);
-        }
+        .achievement-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .achievement-card:hover { transform: translateY(-5px); }
     </style>
 </head>
 
-<body onload="carregarPerfil()">
+<body onload="carregarPerfil()" class="font-sans antialiased pb-20">
 
-    <div class="max-w-6xl mx-auto p-6">
+    <div class="max-w-4xl mx-auto p-4 sm:p-8">
 
-        <!-- TOPO -->
-        <div class="flex items-center justify-between mb-8">
+        <!-- BOTÃO VOLTAR -->
+        <a href="index.html" class="inline-flex items-center gap-2 text-blue-400 hover:text-white transition mb-6">
+            <i class="fa-solid fa-arrow-left"></i> Voltar ao Painel
+        </a>
 
-            <button onclick="history.back()"
-            class="fixed bottom-6 left-4 
-            bg-gradient-to-r from-blue-600 to-indigo-600 
-            hover:from-blue-700 hover:to-indigo-700 
-            text-white font-bold px-5 py-3 rounded-2xl 
-            shadow-lg flex items-center gap-2 z-50 transition">
-
-           <i class="fa-solid fa-arrow-left"></i>
-           Voltar
-           </button>
-
-            <h1 class="text-3xl font-black">
-                Meu Perfil
-            </h1>
-
-            <div></div>
-
+        <!-- PERFIL HERO -->
+        <div class="bg-panel p-8 rounded-3xl glow flex flex-col md:flex-row items-center gap-8 card-shadow">
+            <div class="relative">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-5xl shadow-lg border-4 border-slate-800">
+                    👨‍💻
+                </div>
+                <div class="absolute bottom-0 right-0 bg-green-500 w-6 h-6 rounded-full border-4 border-slate-900"></div>
+            </div>
+            
+            <div class="text-center md:text-left flex-1">
+                <h1 class="text-3xl font-black text-white">Dev FluentCode</h1>
+                <p class="text-blue-300 font-medium italic">Aprendiz de Java & Inglês</p>
+                <div class="mt-4 flex flex-wrap justify-center md:justify-start gap-3">
+                    <span class="bg-blue-900/50 text-blue-200 px-4 py-1.5 rounded-full text-xs font-bold border border-blue-700/50">
+                        <i class="fa-solid fa-star mr-1 text-yellow-400"></i> Nível <span id="nivel">0</span>
+                    </span>
+                    <span class="bg-indigo-900/50 text-indigo-200 px-4 py-1.5 rounded-full text-xs font-bold border border-indigo-700/50">
+                        <i class="fa-solid fa-code mr-1"></i> Estudante Ativo
+                    </span>
+                </div>
+            </div>
         </div>
 
-        <!-- CARD PRINCIPAL -->
-        <div
-            class="glass rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl">
-
-            <div
-                class="w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-6xl border-4 border-white/10">
-
-                👨‍💻
-
+        <!-- ESTATÍSTICAS GRID -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-panel p-4 rounded-2xl glow text-center">
+                <div class="text-yellow-400 text-xl"><i class="fa-solid fa-bolt"></i></div>
+                <div id="xp-total" class="text-2xl font-black mt-1">0</div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">XP Total</div>
             </div>
-
-            <h2 class="text-2xl font-bold mt-5">
-                Dev FluentCode
-            </h2>
-
-            <p class="text-gray-400 text-sm">
-                Continue aprendendo Java e Inglês Técnico
-            </p>
-
-            <div
-                class="mt-4 bg-amber-400 text-slate-900 px-4 py-2 rounded-full font-bold text-sm">
-
-                ⭐ Nível <span id="nivel">0</span>
-
+            <div class="bg-panel p-4 rounded-2xl glow text-center">
+                <div class="text-green-400 text-xl"><i class="fa-solid fa-book"></i></div>
+                <div id="missoes" class="text-2xl font-black mt-1">0</div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Missões</div>
             </div>
-
+            <div class="bg-panel p-4 rounded-2xl glow text-center">
+                <div class="text-orange-400 text-xl"><i class="fa-solid fa-trophy"></i></div>
+                <div class="text-2xl font-black mt-1">3</div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Conquistas</div>
+            </div>
+            <div class="bg-panel p-4 rounded-2xl glow text-center">
+                <div class="text-pink-400 text-xl"><i class="fa-solid fa-fire"></i></div>
+                <div class="text-2xl font-black mt-1">1</div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Sequência</div>
+            </div>
         </div>
 
-        <!-- ESTATÍSTICAS -->
-        <div class="grid md:grid-cols-3 gap-6 mt-8">
-
-            <div class="glass rounded-2xl p-6 text-center">
-
-                <i class="fa-solid fa-bolt text-yellow-400 text-3xl"></i>
-
-                <h3 class="text-gray-400 mt-3">
-                    XP Total
-                </h3>
-
-                <p id="xp-total"
-                    class="text-4xl font-black mt-2">
-                    0
-                </p>
-
+        <!-- PROGRESSO XP -->
+        <div class="bg-panel p-6 rounded-3xl glow mt-6 card-shadow">
+            <div class="flex justify-between items-center mb-3">
+                <span class="font-bold">Progresso do Nível</span>
+                <span id="xp-texto" class="text-blue-400 font-mono font-bold">0 / 0 XP</span>
             </div>
-
-            <div class="glass rounded-2xl p-6 text-center">
-
-                <i class="fa-solid fa-book text-green-400 text-3xl"></i>
-
-                <h3 class="text-gray-400 mt-3">
-                    Missões
-                </h3>
-
-                <p id="missoes"
-                    class="text-4xl font-black mt-2">
-                    0
-                </p>
-
-            </div>
-
-            <div class="glass rounded-2xl p-6 text-center">
-
-                <i class="fa-solid fa-trophy text-orange-400 text-3xl"></i>
-
-                <h3 class="text-gray-400 mt-3">
-                    Conquistas
-                </h3>
-
-                <p class="text-4xl font-black mt-2">
-                    3
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- BARRA XP -->
-        <div class="glass rounded-2xl p-6 mt-8">
-
-            <div class="flex justify-between mb-3">
-
-                <span>Progresso do Nível</span>
-
-                <span id="xp-texto">
-                    0 XP
-                </span>
-
-            </div>
-
-            <div
-                class="w-full bg-slate-800 h-5 rounded-full overflow-hidden">
-
-                <div id="barra-xp"
-                    class="h-full bg-gradient-to-r from-amber-400 to-orange-500 w-0 transition-all duration-1000">
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- CONQUISTAS -->
-        <div class="mt-8">
-
-            <h2 class="text-2xl font-bold mb-5">
-                🏆 Conquistas
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-5">
-
-                <div
-                    class="glass rounded-2xl p-5 hover:scale-105 transition">
-
-                    <div class="text-5xl">
-                        🚀
-                    </div>
-
-                    <h3 class="font-bold mt-3">
-                        Primeiro Código
-                    </h3>
-
-                    <p class="text-gray-400 text-sm mt-1">
-                        Completou a primeira atividade.
-                    </p>
-
-                </div>
-
-                <div
-                    class="glass rounded-2xl p-5 hover:scale-105 transition">
-
-                    <div class="text-5xl">
-                        📚
-                    </div>
-
-                    <h3 class="font-bold mt-3">
-                        Estudioso
-                    </h3>
-
-                    <p class="text-gray-400 text-sm mt-1">
-                        Finalizou missões teóricas.
-                    </p>
-
-                </div>
-
-                <div
-                    class="glass rounded-2xl p-5 hover:scale-105 transition">
-
-                    <div class="text-5xl">
-                        🔥
-                    </div>
-
-                    <h3 class="font-bold mt-3">
-                        Persistente
-                    </h3>
-
-                    <p class="text-gray-400 text-sm mt-1">
-                        Manteve a sequência de estudos.
-                    </p>
-
-                </div>
+            <div class="w-full bg-slate-800 h-5 rounded-full overflow-hidden">
+                <div id="barra-xp" class="h-full bg-gradient-to-r from-amber-400 to-orange-500 w-0 transition-
 
             </div>
 
