@@ -8,23 +8,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { background-color: #0d1b2a; color: #ffffff; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="font-sans antialiased pb-24" onload="inicializarSistema()">
+<body class="font-sans antialiased">
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="p-4 md:p-6 max-w-4xl mx-auto">
-            <!-- Aqui você pode adicionar novos conteúdos livremente -->
+    <!-- LATERAL ESQUERDA (Utilitários e Perfil) -->
+    <aside class="fixed left-0 top-0 h-full w-16 bg-[#0b2545] border-r border-slate-700 flex flex-col items-center py-6 gap-8 z-50">
+        <!-- Perfil -->
+        <button onclick="window.location.href='perfil.html'" class="text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-user text-xl"></i>
+        </button>
+        <!-- Engrenagem -->
+        <button class="text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-gear text-xl"></i>
+        </button>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL (Margin-left 16 para a lateral, PB 20 para o rodapé) -->
+    <main class="ml-16 p-6 pb-24 max-w-4xl min-h-screen">
+        
+        <div id="aba-inicio">
+            <!-- Espaço livre para seus conteúdos -->
         </div>
-
-        <div id="container-quiz" class="hidden"></div>
-        <div id="container-desafio" class="hidden"></div>
 
     </main>
 
-    <!-- BARRA DE NAVEGAÇÃO FIXA (Estilo Instagram) -->
-    <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Apenas navegação principal) -->
+    <nav class="fixed bottom-0 left-16 right-0 bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
         
         <button onclick="alternarAba('inicio')" class="flex flex-col items-center gap-1 p-2 text-white transition">
             <i class="fa-solid fa-house text-xl"></i>
@@ -36,22 +46,13 @@
             <span class="text-[10px] font-bold">Ranking</span>
         </button>
 
-        <!-- COLUNA LATERAL ESQUERDA -->
-    <aside class="fixed left-0 top-0 h-full w-16 bg-[#0b2545] border-r border-slate-700 hidden md:flex flex-col items-center py-6 gap-8 z-40">
-     <button onclick="window.location.href='perfil.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
-          <i class="fa-solid fa-user text-xl"></i>
-         <span class="text-[10px] font-bold">Perfil</span>
-        </button>
-        
-       <button onclick="window.location.href='atividades.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
+        <button onclick="window.location.href='atividades.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
             <i class="fa-solid fa-book text-xl"></i>
             <span class="text-[10px] font-bold">Atividades</span>
         </button>
-    <button class="text-gray-400 hover:text-white transition">
-        <i class="fa-solid fa-gear text-xl"></i>
-    </button>
-</aside>
+        
     </nav>
+
             </div>
 
             <div id="modal-feedback" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
