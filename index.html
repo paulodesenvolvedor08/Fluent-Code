@@ -8,23 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { background-color: #0d1b2a; color: #ffffff; }
-        .bg-card-blue { background-color: #134074; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="font-sans antialiased pb-24" onload="inicializarSistema()">
 
-    <!-- CONTEÚDO PRINCIPAL (Fica em cima) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="p-4 md:p-6 max-w-4xl mx-auto">
         
-        <!-- SEU CÓDIGO DA PÁGINA AQUI -->
+        <!-- CABEÇALHO / CONTEÚDO -->
         <div id="aba-inicio" class="space-y-6">
             <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-center shadow-lg">
                 <h1 class="text-2xl font-extrabold">Seja bem-vindo, Dev!</h1>
                 <p class="text-blue-100 text-sm mt-2">Pronto para aprender hoje?</p>
             </div>
             
-            <!-- Exemplo de conteúdo -->
             <div class="grid grid-cols-1 gap-4">
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <h2 class="font-bold mb-2">Missão do dia</h2>
@@ -33,13 +31,12 @@
             </div>
         </div>
 
-        <!-- Containers de Quiz e Desafio escondidos ficam aqui normalmente -->
         <div id="container-quiz" class="hidden"></div>
         <div id="container-desafio" class="hidden"></div>
 
     </main>
 
-    <!-- BARRA DE NAVEGAÇÃO FIXA (Instagram Style) -->
+    <!-- BARRA DE NAVEGAÇÃO FIXA (Estilo Instagram) -->
     <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
         
         <button onclick="alternarAba('inicio')" class="flex flex-col items-center gap-1 p-2 text-white transition">
