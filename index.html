@@ -41,45 +41,29 @@
                 <div class="text-2xl font-bold text-white mb-8 flex items-center gap-2">
                     <i class="fa-solid fa-code text-blue-400"></i> FluentCode
                 </div>
-                <nav class="space-y-4">
-                    <button onclick="alternarAba('inicio')" id="btn-menu-inicio" class="w-full flex items-center gap-3 bg-blue-600 px-4 py-2.5 rounded-xl text-white font-medium transition">
-                        <i class="fa-solid fa-house"></i> Início
-                    </button>
-                    <button onclick="alternarAba('progresso')" id="btn-menu-progresso" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium">
-                        <i class="fa-solid fa-chart-line"></i> Progresso
-                    </button>
-                   
-                   <button onclick="window.location.href='ranking.html'" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                      <i class="fa-solid fa-user"></i> Ranking
-                    </button>
-
-                   <button onclick="window.location.href='atividades.html'" class="flex items-center gap-3 py-2.5 rounded-x1 text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Atividades</span>
-                    </button>
-
-                    <button onclick="window.location.href='perfil.html'" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-                      <i class="fa-solid fa-user"></i> Perfil
-                    </button>
-
-                    <button onclick="window.location.href='config.html'"
-                     class="flex items-center gap-3 px-4 py-2.5 rounded-xl 
-                     text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
-
-                      <div class="w-6 h-6 flex items-center justify-center">
-                     <i class="fa-solid fa-gear text-blue-400"></i>
-                       </div>
-                     Configurações
-                     </button>
-
-                     <button onclick="deslogar()"
-                     class="flex items-center gap-3 px-4 py-2.5 rounded-xl 
-                      text-red-400 hover:bg-red-500/10 hover:text-red-300 transition font-medium">
-
-                      <i class="fa-solid fa-right-from-bracket"></i>
-                       Sair
-                     </button>
-                </nav>
+               <nav class="space-y-2">
+    <button onclick="alternarAba('inicio')" id="btn-menu-inicio" class="w-full flex items-center gap-3 bg-blue-600 px-4 py-3 rounded-xl text-white font-medium transition">
+        <i class="fa-solid fa-house"></i> Início
+    </button>
+    <button onclick="alternarAba('progresso')" id="btn-menu-progresso" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition text-left font-medium">
+        <i class="fa-solid fa-chart-line"></i> Progresso
+    </button>
+    <button onclick="window.location.href='ranking.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
+        <i class="fa-solid fa-trophy"></i> Ranking
+    </button>
+    <button onclick="window.location.href='atividades.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
+        <i class="fa-solid fa-book"></i> Atividades
+    </button>
+    <button onclick="window.location.href='perfil.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
+        <i class="fa-solid fa-user"></i> Perfil
+    </button>
+    <button onclick="window.location.href='config.html'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-slate-800 hover:text-white transition font-medium">
+        <i class="fa-solid fa-gear"></i> Configurações
+    </button>
+    <button onclick="deslogar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition font-medium mt-4">
+        <i class="fa-solid fa-right-from-bracket"></i> Sair
+    </button>
+</nav>
             </div>
 
             <div id="modal-feedback" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
