@@ -23,24 +23,27 @@
         </button>
     </aside>
 
-    <!-- CONTEÚDO PRINCIPAL (Ancorado no topo e acima da barra inferior) -->
-    <main class="fixed left-16 top-0 right-0 bottom-[70px] overflow-y-auto no-scrollbar bg-[#0d1b2a]">
-        <div class="max-w-4xl mx-auto w-full p-6">
+    <!-- CONTAINER DE CONTEÚDO (Onde acontece a mágica) -->
+    <!-- Ele ocupa o espaço livre: depois da barra lateral, antes da barra inferior -->
+    <main class="fixed left-16 top-0 right-0 bottom-[70px] overflow-y-auto no-scrollbar bg-[#0d1b2a] z-10">
+        
+        <!-- Este wrapper centraliza o conteúdo horizontalmente -->
+        <div class="max-w-4xl mx-auto w-full p-6 min-h-screen">
             
             <!-- SEU CONTEÚDO AQUI -->
-            <h1 class="text-2xl font-bold mb-4">Bem-vindo, Dev!</h1>
-            <p class="text-gray-400">Este conteúdo é contido e rola apenas dentro desta área.</p>
-            
-            <!-- Exemplo de conteúdo longo -->
-            <div class="h-[1000px] mt-6 bg-slate-800 rounded-lg p-4">
-                Conteúdo longo para testar a rolagem...
+            <div class="bg-[#112240] p-6 rounded-xl border border-slate-700 shadow-xl">
+                <h1 class="text-2xl font-bold mb-2">Bem-vindo, Dev!</h1>
+                <p class="text-gray-400">Este conteúdo está agora centralizado e limitado ao espaço livre.</p>
+                <div class="h-96 mt-6 bg-slate-800 rounded-lg flex items-center justify-center">
+                    Área de Conteúdo
+                </div>
             </div>
 
         </div>
     </main>
 
-    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Ocupa largura total e força uma cor sólida) -->
-    <nav class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#0b2545] border-t border-slate-700 flex justify-around items-center z-50">
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Ocupa largura total e fica por cima) -->
+    <nav class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#0b2545] border-t border-slate-700 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
         
         <button onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 p-2 text-white transition">
             <i class="fa-solid fa-house text-xl"></i>
