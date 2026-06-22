@@ -27,17 +27,18 @@
         </button>
     </aside>
 
-  <main class="ml-16 fixed top-0 left-0 right-0 bottom-16 overflow-y-auto no-scrollbar flex items-center justify-center">
+  <main class="ml-16 pb-20 p-6 min-h-screen">
+    <!-- Container que centraliza e limita a largura -->
+    <div id="aba-inicio" class="max-w-4xl mx-auto w-full">
         
-        <div id="aba-inicio" class="w-full max-w-4xl p-6">
-            <!-- Seu conteúdo vai aqui dentro, ele ficará centralizado -->
-            <div class="text-center">
-                <h1 class="text-3xl font-bold mb-4">Bem-vindo, Dev!</h1>
-                <p class="text-gray-400">Aqui seu conteúdo está travado e centralizado.</p>
-            </div>
+        <!-- Seu conteúdo começa aqui -->
+        <div class="bg-[#112240] p-6 rounded-2xl border border-slate-700 shadow-lg">
+            <h1 class="text-2xl font-bold">Painel de Controle</h1>
+            <p class="text-gray-400 mt-2">Este conteúdo está perfeitamente contido na área útil, sem invadir as barras laterais ou inferiores.</p>
         </div>
 
-    </main>
+    </div>
+</main>
 
     <!-- BARRA DE NAVEGAÇÃO INFERIOR (Com sombra superior para dar profundidade) -->
     <nav class="fixed bottom-0 left-16 right-0 bg-[#0b2545] border-t border-slate-800 p-2 flex justify-around items-center z-50 shadow-[0_-4px_15px_rgba(0,0,0,0.3)]">
