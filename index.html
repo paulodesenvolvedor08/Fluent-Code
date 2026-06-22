@@ -7,18 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Fundo principal */
         body { background-color: #0d1b2a; color: #ffffff; }
-        
-        /* Oculta a barra de rolagem mas mantém a função */
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="font-sans antialiased no-scrollbar">
 
-    <!-- LATERAL ESQUERDA (Com sombra para separar do conteúdo) -->
-    <aside class="fixed left-0 top-0 h-full w-16 bg-[#0b2545] border-r border-slate-800 flex flex-col items-center py-6 gap-8 z-50 shadow-xl">
+    <!-- BARRA LATERAL (Fixa, sempre à esquerda) -->
+    <aside class="fixed left-0 top-0 h-full w-16 bg-[#0b2545] border-r border-slate-700 flex flex-col items-center py-6 gap-8 z-50 shadow-xl">
         <button onclick="window.location.href='perfil.html'" class="text-gray-400 hover:text-white transition">
             <i class="fa-solid fa-user text-xl"></i>
         </button>
@@ -27,23 +23,21 @@
         </button>
     </aside>
 
-  <main class="ml-16 pb-20 p-6 min-h-screen">
-    <!-- Container que centraliza e limita a largura -->
-    <div id="aba-inicio" class="max-w-4xl mx-auto w-full">
-        
-        <!-- Seu conteúdo começa aqui -->
-        <div class="bg-[#112240] p-6 rounded-2xl border border-slate-700 shadow-lg">
-            <h1 class="text-2xl font-bold">Painel de Controle</h1>
-            <p class="text-gray-400 mt-2">Este conteúdo está perfeitamente contido na área útil, sem invadir as barras laterais ou inferiores.</p>
+    <!-- CONTEÚDO PRINCIPAL (Começa no topo, com margem lateral) -->
+    <main class="ml-16 pt-4 pb-24 min-h-screen px-4">
+        <div id="aba-inicio" class="max-w-4xl mx-auto w-full">
+            
+            <!-- SEU CONTEÚDO AQUI -->
+            <h1 class="text-2xl font-bold mb-4">Bem-vindo, Dev!</h1>
+            <p class="text-gray-400">O conteúdo agora começa aqui no topo.</p>
+            
         </div>
+    </main>
 
-    </div>
-</main>
-
-    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Com sombra superior para dar profundidade) -->
-    <nav class="fixed bottom-0 left-16 right-0 bg-[#0b2545] border-t border-slate-800 p-2 flex justify-around items-center z-50 shadow-[0_-4px_15px_rgba(0,0,0,0.3)]">
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Ocupa a largura total no celular) -->
+    <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] md:left-16 md:w-[calc(100%-4rem)]">
         
-        <button onclick="alternarAba('inicio')" class="flex flex-col items-center gap-1 p-2 text-white transition">
+        <button onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 p-2 text-white transition">
             <i class="fa-solid fa-house text-xl"></i>
             <span class="text-[10px] font-bold">Início</span>
         </button>
