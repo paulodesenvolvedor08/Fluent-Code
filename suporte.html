@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Suporte</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Ajuste para scroll suave */
+        body { scroll-behavior: smooth; }
+        /* Esconder barra de scroll, mas permitir rolagem */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#0a1628] min-h-screen text-slate-100 p-4 md:p-8">
+
+    <main class="max-w-4xl mx-auto space-y-8">
+        
+        <!-- Cabeçalho -->
+        <div class="border-l-4 border-blue-500 pl-4 mb-8">
+            <h1 class="text-3xl font-bold text-white">Central de Dúvidas</h1>
+            <p class="text-slate-400">Não trave no seu código! Descreva seu problema abaixo.</p>
+        </div>
+
+        <!-- Formulário Interativo -->
+        <div class="bg-[#112240] p-8 rounded-2xl border border-slate-700 shadow-2xl">
+            <form class="space-y-6">
+                <!-- Campo Assunto -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Assunto</label>
+                    <input type="text" placeholder="Ex: Erro no loop do exercício 05" class="w-full bg-[#0a1628] border border-slate-600 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                </div>
+
+                <!-- Campo Descrição -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Sua Dúvida</label>
+                    <textarea rows="6" placeholder="Cole seu código ou descreva o que está acontecendo..." class="w-full bg-[#0a1628] border border-slate-600 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono text-sm"></textarea>
+                </div>
+
+                <!-- Botão -->
+                <button type="button" class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] hover:shadow-blue-500/20 transition-all duration-300">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Enviar para Mentores
+                </button>
+            </form>
+        </div>
+
+        <!-- Área de Status -->
+        <div>
+            <h2 class="text-xl font-semibold text-white mb-4">Minhas Perguntas Recentes</h2>
+            <div class="space-y-3">
+                
+                <!-- Card 1 -->
+                <div class="flex items-center justify-between bg-[#112240] p-4 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-blue-500/10 p-3 rounded-lg text-blue-400">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white group-hover:text-blue-400 transition-colors">Problema com variável global</h3>
+                            <span class="text-xs text-slate-500">Enviado há 2 horas</span>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs border border-yellow-500/20">Aguardando</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flex items-center justify-between bg-[#112240] p-4 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-green-500/10 p-3 rounded-lg text-green-400">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white group-hover:text-green-400 transition-colors">Dúvida sobre List Comprehension</h3>
+                            <span class="text-xs text-slate-500">Resolvido ontem</span>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs border border-green-500/20">Resolvido</span>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>
