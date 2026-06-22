@@ -29,13 +29,13 @@
             
             <!-- SEU CONTEÚDO AQUI -->
             <h1 class="text-2xl font-bold mb-4">Bem-vindo, Dev!</h1>
-            <p class="text-gray-400">O conteúdo agora começa aqui no topo.</p>
+            <p class="text-gray-400">O conteúdo agora começa aqui no topo, sem sobreposições.</p>
             
         </div>
     </main>
 
-    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Ocupa a largura total no celular) -->
-    <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] md:left-16 md:w-[calc(100%-4rem)]">
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR (Corrigida: começa em 16, vai até a direita) -->
+    <nav class="fixed bottom-0 left-16 right-0 bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
         
         <button onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 p-2 text-white transition">
             <i class="fa-solid fa-house text-xl"></i>
@@ -53,7 +53,6 @@
         </button>
         
     </nav>
-
             </div>
 
             <div id="modal-feedback" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60">
