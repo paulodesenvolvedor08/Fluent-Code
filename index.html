@@ -7,58 +7,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #0d1b2a; color: #ffffff; overflow: hidden; } /* Trava o scroll do body */
+        body { background-color: #0d1b2a; color: #ffffff; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased pb-24" onload="inicializarSistema()">
 
-    !-- BARRA LATERAL (Fixa) -->
-    <aside class="fixed left-0 top-0 h-full w-16 bg-[#0b2545] border-r border-slate-700 flex flex-col items-center py-6 gap-8 z-50">
-        <!-- Seus botões originais -->
-        <button onclick="window.location.href='perfil.html'" class="text-gray-400 hover:text-white transition">
-            <i class="fa-solid fa-user text-xl"></i>
-        </button>
-        <button class="text-gray-400 hover:text-white transition">
-            <i class="fa-solid fa-gear text-xl"></i>
-        </button>
-    </aside>
-
-    <!-- ÁREA DE ROLAGEM (Aqui a proporção está travada) -->
-    <!-- Ele empurra 16px da lateral e deixa 70px para a barra inferior -->
-    <main class="fixed left-16 top-0 right-0 bottom-[70px] overflow-y-auto no-scrollbar">
+    <!-- PAINEL TOTALMENTE LIVRE -->
+    <main class="p-4 md:p-6 max-w-4xl mx-auto">
         
-        <!-- WRAPPER DE PROPORÇÃO: Centraliza e limita a largura -->
-        <div class="max-w-4xl mx-auto w-full p-6">
-            
-            <!-- COLE O SEU CONTEÚDO ORIGINAL ABAIXO DESTA LINHA -->
-            <div id="seu-conteudo-original">
-                
-                <!-- Exemplo: O conteúdo que você já tem aqui será centralizado -->
-                <h1 class="text-2xl font-bold mb-4">Bem-vindo ao FluentCode</h1>
-                <p class="text-gray-400">Seu código original funciona aqui dentro com a largura ajustada.</p>
-                
-            </div>
-            <!-- FIM DO SEU CONTEÚDO -->
-
+        <div id="aba-inicio">
+            <!-- Espaço livre para você adicionar seus elementos -->
         </div>
+
+        <div id="container-quiz" class="hidden"></div>
+        <div id="container-desafio" class="hidden"></div>
+
     </main>
 
-    <!-- BARRA INFERIOR (Ocupa o fundo da tela todo) -->
-    <nav class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#0b2545] border-t border-slate-700 flex justify-around items-center z-50">
-        <!-- Seus botões de navegação -->
-        <button onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 p-2 text-white">
+    <!-- BARRA DE NAVEGAÇÃO FIXA (Estilo Instagram) -->
+    <nav class="fixed bottom-0 left-0 w-full bg-[#0b2545] border-t border-slate-700 p-2 flex justify-around items-center z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+        
+        <button onclick="alternarAba('inicio')" class="flex flex-col items-center gap-1 p-2 text-white transition">
             <i class="fa-solid fa-house text-xl"></i>
             <span class="text-[10px] font-bold">Início</span>
         </button>
-        <button onclick="window.location.href='ranking.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400">
+
+        <button onclick="window.location.href='ranking.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
             <i class="fa-solid fa-trophy text-xl"></i>
             <span class="text-[10px] font-bold">Ranking</span>
         </button>
-        <button onclick="window.location.href='atividades.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400">
+
+        <button onclick="window.location.href='atividades.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
             <i class="fa-solid fa-book text-xl"></i>
             <span class="text-[10px] font-bold">Atividades</span>
         </button>
+
+        <button onclick="window.location.href='perfil.html'" class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-user text-xl"></i>
+            <span class="text-[10px] font-bold">Perfil</span>
+        </button>
+        
     </nav>
             </div>
 
