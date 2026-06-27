@@ -10,105 +10,95 @@
 
 <style>
 
-/* RESET */
 * {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-    min-height:100vh;
-    width:100%;
+html {
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
     background: radial-gradient(circle at top,#1e293b,#0f172a);
-    font-family: Arial;
-    color:white;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
 /* HEADER */
-.header{
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* HERO */
-.hero{
-    margin:15px;
-    padding:20px;
-    border-radius:25px;
+.hero {
+    margin: 15px;
+    padding: 20px;
+    border-radius: 25px;
     background: linear-gradient(135deg,#3b82f6,#22c55e);
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
-}
-
-.hero h1{
-    font-size:22px;
-    font-weight:bold;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
 }
 
 /* CARD */
-.card{
-    margin:15px;
-    padding:18px;
-    border-radius:18px;
-    background: rgba(31,41,55,0.85);
+.card {
+    margin: 15px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(31,41,55,0.9);
     backdrop-filter: blur(10px);
-    border:1px solid rgba(255,255,255,0.08);
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
 }
 
 /* código */
-.code{
-    background:#0b1220;
-    padding:12px;
-    border-radius:12px;
-    margin-top:10px;
+.code {
+    background: #0b1220;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 10px;
     font-family: monospace;
-    color:#22c55e;
-    font-size:13px;
+    color: #22c55e;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
-/* barra */
-.bar{
-    height:10px;
-    background:#334155;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:10px;
+/* badge */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    background: #22c55e;
+    margin-bottom: 10px;
 }
 
-.fill{
-    height:100%;
-    width:65%;
-    background:linear-gradient(90deg,#22c55e,#3b82f6);
-}
+/* BOTÃO VOLTAR */
+.back {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
 
-/* botão voltar */
-.back{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:linear-gradient(to right,#2563eb,#4f46e5);
-    padding:12px 18px;
-    border-radius:14px;
-    font-weight:bold;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);
-    cursor:pointer;
-    z-index:999;
-}
+    background: linear-gradient(to right,#2563eb,#4f46e5);
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
 
-/* destaque */
-.badge{
-    display:inline-block;
-    padding:4px 10px;
-    border-radius:12px;
-    font-size:12px;
-    background:#22c55e;
-    margin-bottom:10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.5);
+    cursor: pointer;
 }
 </style>
 </head>
@@ -127,61 +117,88 @@ html, body {
 <!-- HERO -->
 <div class="hero">
     <h1>📦 Variáveis em Java</h1>
-    <p style="font-size:13px;opacity:.9;margin-top:5px">
-        Aprenda como armazenar informações no programa
-    </p>
-
-    <div class="bar">
-        <div class="fill"></div>
+    <div style="font-size:13px;opacity:.9;margin-top:5px">
+        Aprenda como armazenar diferentes tipos de dados
     </div>
 </div>
 
-<!-- CONTEÚDO -->
+<!-- CARD 1 -->
 <div class="card">
+    <span class="badge">🔢 Números inteiros</span>
 
-<span class="badge">O que são?</span>
+    <p style="font-size:14px;color:#cbd5e1">
+        Usado para armazenar números sem casas decimais.
+    </p>
 
-<p style="font-size:14px;color:#cbd5e1">
-Variáveis são espaços na memória que guardam dados como números, textos e valores.
-</p>
-
-<div class="code">
+    <div class="code">
 int idade = 18;<br>
-String nome = "Lucas";<br>
-boolean ativo = true;
+int ano = 2026;<br>
+int pontos = 150;
+    </div>
 </div>
 
-</div>
-
-<!-- EXEMPLO 2 -->
+<!-- CARD 2 -->
 <div class="card">
+    <span class="badge">💰 Números decimais</span>
 
-<span class="badge">Exemplo prático</span>
+    <p style="font-size:14px;color:#cbd5e1">
+        Usado para valores com casas decimais.
+    </p>
 
-<p style="font-size:14px;color:#cbd5e1">
-Criando uma variável e exibindo no console:
-</p>
+    <div class="code">
+double salario = 2500.50;<br>
+double altura = 1.75;<br>
+double preco = 19.99;
+    </div>
+</div>
 
-<div class="code">
+<!-- CARD 3 -->
+<div class="card">
+    <span class="badge">🔤 Texto (String)</span>
+
+    <p style="font-size:14px;color:#cbd5e1">
+        Usado para armazenar palavras ou frases.
+    </p>
+
+    <div class="code">
+String nome = "Lucas";<br>
+String cidade = "Natal";<br>
+String curso = "Java";
+    </div>
+</div>
+
+<!-- CARD 4 -->
+<div class="card">
+    <span class="badge">✅ Boolean (verdadeiro/falso)</span>
+
+    <p style="font-size:14px;color:#cbd5e1">
+        Representa valores lógicos.
+    </p>
+
+    <div class="code">
+boolean ativo = true;<br>
+boolean logado = false;<br>
+boolean aprovado = true;
+    </div>
+</div>
+
+<!-- CARD 5 -->
+<div class="card">
+    <span class="badge">🧠 Exemplo completo</span>
+
+    <div class="code">
 public class Main {<br>
-&nbsp;&nbsp;public static void main(String[] args) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;String aluno = "Ana";<br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(aluno);<br>
+&nbsp;&nbsp;public static void main(String[] args) {<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;String nome = "Ana";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int idade = 20;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;double altura = 1.68;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;boolean estudante = true;<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(nome);<br>
 &nbsp;&nbsp;}<br>
 }
-</div>
-
-</div>
-
-<!-- DICA -->
-<div class="card">
-
-<span class="badge">Dica</span>
-
-<p style="font-size:14px;color:#cbd5e1">
-Sempre use nomes claros para suas variáveis para facilitar o entendimento do código.
-</p>
-
+    </div>
 </div>
 
 <!-- BOTÃO VOLTAR -->
