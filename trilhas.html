@@ -1,161 +1,202 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FluentCode - Trilhas</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body { background-color: #0d1b2a; color: #fff; }
-
-.bg-dark { background:#0b2545; }
-.bg-card { background:#134074; }
-
-.trilha-card{
-    background:#1e293b;
-    border:1px solid #334155;
-    transition:0.2s;
-}
-.trilha-card:hover{
-    transform:translateY(-3px);
-    border-color:#3b82f6;
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    overflow-x: hidden;
 }
 
+/* HEADER */
+header{
+    padding:20px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* TRILHA */
+.track{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    margin-top:20px;
+    padding-bottom:100px;
+}
+
+/* linha central */
+.track::before{
+    content:"";
+    position:absolute;
+    width:6px;
+    height:100%;
+    background:#334155;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:10px;
+    z-index:0;
+}
+
+/* node */
 .node{
-    width:14px;
-    height:14px;
+    width:90%;
+    max-width:420px;
+    background:#1f2937;
+    padding:15px;
+    border-radius:18px;
+    margin:18px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:1;
+    transition:.2s;
+    position:relative;
+}
+
+.node:hover{
+    transform:scale(1.03);
+    background:#2563eb;
+}
+
+/* lado esquerdo */
+.left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* círculo */
+.circle{
+    width:18px;
+    height:18px;
     border-radius:50%;
 }
-.node.done{ background:#22c55e; }
-.node.lock{ background:#6b7280; }
-.node.active{ background:#3b82f6; box-shadow:0 0 10px #3b82f6; }
+
+.done{ background:#22c55e; }
+.active{ background:#3b82f6; box-shadow:0 0 12px #3b82f6; }
+.lock{ background:#6b7280; }
+
+.locked{
+    opacity:.55;
+}
+
+/* BOTÃO VOLTAR */
+.back-btn{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:linear-gradient(to right,#2563eb,#4f46e5);
+    color:white;
+    padding:12px 18px;
+    border-radius:14px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+    transition:.2s;
+}
+
+.back-btn:hover{
+    transform:scale(1.05);
+}
 </style>
 </head>
 
-<body class="font-sans">
+<body>
 
-<!-- HEADER -->
-<header class="p-6 flex items-center justify-between border-b border-slate-800 bg-dark">
-    <div class="flex items-center gap-3 text-xl font-bold">
-        <i class="fa-solid fa-code text-blue-400"></i>
-        FluentCode <span class="text-blue-400">/ Trilhas</span>
-    </div>
-
-    <button onclick="history.back()"
-class="fixed bottom-6 left-4 
-bg-gradient-to-r from-blue-600 to-indigo-600 
-hover:from-blue-700 hover:to-indigo-700 
-text-white font-bold px-5 py-3 rounded-2xl 
-shadow-lg flex items-center gap-2 z-50 transition">
-
-  <i class="fa-solid fa-arrow-left"></i>
-  Voltar
-</button>
+<header>
+<div>🚀 FluentCode / Trilhas</div>
 </header>
 
-<!-- CONTEÚDO -->
-<main class="p-6 max-w-6xl mx-auto space-y-10">
+<div class="track">
 
-<!-- INTRO -->
-<div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 rounded-3xl">
-    <h1 class="text-3xl font-extrabold">Escolha sua Trilha de Evolução 🚀</h1>
-    <p class="text-blue-100 mt-2">Complete módulos para desbloquear novas habilidades e desafios.</p>
+<!-- 1 -->
+<div class="node">
+    <div class="left">
+        <div class="circle done"></div>
+        <div>
+            <b>Olá Mundo</b>
+            <p style="font-size:12px;color:#94a3b8">Introdução ao Java</p>
+        </div>
+    </div>
+    <span style="color:#22c55e;font-weight:bold">✔</span>
 </div>
 
-<!-- TRILHA JAVA -->
-<section>
-    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-        <i class="fa-brands fa-java text-orange-400"></i> Trilha Java
-    </h2>
-
-    <div class="space-y-4">
-
-        <!-- MÓDULO 1 -->
-        <div class="trilha-card p-5 rounded-2xl flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="node done"></div>
-                <div>
-                    <h3 class="font-bold">1. Olá, Mundo</h3>
-                    <p class="text-xs text-gray-400">Estrutura básica do Java</p>
-                </div>
-            </div>
-            <span class="text-green-400 font-bold text-sm">Concluído ✓</span>
+<!-- 2 -->
+<div class="node">
+    <div class="left">
+        <div class="circle active"></div>
+        <div>
+            <b>Variáveis</b>
+            <p style="font-size:12px;color:#94a3b8">Tipos de dados</p>
         </div>
-
-        <!-- MÓDULO 2 -->
-        <div class="trilha-card p-5 rounded-2xl flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="node active"></div>
-                <div>
-                    <h3 class="font-bold">2. Variáveis e Tipos</h3>
-                    <p class="text-xs text-gray-400">Armazenamento de dados</p>
-                </div>
-            </div>
-
-            <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl font-bold text-sm">
-                Continuar
-            </button>
-        </div>
-
-        <!-- MÓDULO 3 -->
-        <div class="trilha-card p-5 rounded-2xl flex items-center justify-between opacity-60">
-            <div class="flex items-center gap-4">
-                <div class="node lock"></div>
-                <div>
-                    <h3 class="font-bold">3. Condicionais</h3>
-                    <p class="text-xs text-gray-400">if / else na prática</p>
-                </div>
-            </div>
-
-            <span class="text-gray-400 text-sm flex items-center gap-2">
-                <i class="fa-solid fa-lock"></i> Bloqueado
-            </span>
-        </div>
-
     </div>
-</section>
+    <button style="background:#2563eb;padding:8px 12px;border-radius:10px;font-size:13px;">
+        Continuar
+    </button>
+</div>
 
-<!-- TRILHA INGLÊS -->
-<section>
-    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-        <i class="fa-solid fa-language text-emerald-400"></i> Inglês Técnico
-    </h2>
-
-    <div class="space-y-4">
-
-        <div class="trilha-card p-5 rounded-2xl flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="node done"></div>
-                <div>
-                    <h3 class="font-bold">1. Termos Básicos</h3>
-                    <p class="text-xs text-gray-400">String, Void, Main</p>
-                </div>
-            </div>
-            <span class="text-green-400 font-bold text-sm">Concluído ✓</span>
+<!-- 3 -->
+<div class="node locked">
+    <div class="left">
+        <div class="circle lock"></div>
+        <div>
+            <b>Condicionais</b>
+            <p style="font-size:12px;color:#94a3b8">if / else</p>
         </div>
-
-        <div class="trilha-card p-5 rounded-2xl flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="node active"></div>
-                <div>
-                    <h3 class="font-bold">2. Estrutura de Código</h3>
-                    <p class="text-xs text-gray-400">Syntax reading</p>
-                </div>
-            </div>
-
-            <button class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-xl font-bold text-sm">
-                Continuar
-            </button>
-        </div>
-
     </div>
-</section>
+    <span>🔒 Bloqueado</span>
+</div>
 
-</main>
+<!-- 4 -->
+<div class="node locked">
+    <div class="left">
+        <div class="circle lock"></div>
+        <div>
+            <b>Loops</b>
+            <p style="font-size:12px;color:#94a3b8">for / while</p>
+        </div>
+    </div>
+    <span>🔒 Bloqueado</span>
+</div>
+
+<!-- 5 -->
+<div class="node locked">
+    <div class="left">
+        <div class="circle lock"></div>
+        <div>
+            <b>Projetos</b>
+            <p style="font-size:12px;color:#94a3b8">Aplicação prática</p>
+        </div>
+    </div>
+    <span>🔒 Bloqueado</span>
+</div>
+
+</div>
+
+<!-- BOTÃO VOLTAR -->
+<button class="back-btn" onclick="history.back()">
+<i class="fa-solid fa-arrow-left"></i>
+Voltar
+</button>
 
 </body>
 </html>
