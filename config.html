@@ -226,6 +226,24 @@ body.light input {
 
 </div>
 
+    <div class="card p-5 rounded-2xl space-y-3 border border-red-500/30">
+
+    <h2 class="font-bold text-red-400 text-lg">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Apagar Conta
+    </h2>
+
+    <p class="text-gray-400 text-sm">
+        Isso irá excluir permanentemente sua conta, incluindo XP, nome e progresso.
+    </p>
+
+    <button onclick="deleteAccount()"
+        class="w-full bg-red-600 hover:bg-red-700 py-2 rounded-xl font-bold transition">
+        Excluir minha conta
+    </button>
+
+</div>
+
 <script>
 
 function load(){
@@ -274,6 +292,25 @@ function resetAll(){
 if(confirm("Deseja apagar tudo?")){
 localStorage.clear();
 location.reload();
+}
+    function deleteAccount() {
+
+    const confirm1 = confirm("⚠️ ATENÇÃO!\n\nIsso apagará sua conta permanentemente.\nDeseja continuar?");
+    if (!confirm1) return;
+
+    const confirm2 = confirm("Última confirmação:\nTem certeza absoluta?");
+    if (!confirm2) return;
+
+    // limpa apenas dados do app
+    localStorage.removeItem("fc_nome");
+    localStorage.removeItem("xp");
+    localStorage.removeItem("sound");
+    localStorage.removeItem("theme");
+
+    alert("Conta apagada com sucesso!");
+
+    // redireciona (se tiver login)
+    window.location.href = "index.html";
 }
 }
 
