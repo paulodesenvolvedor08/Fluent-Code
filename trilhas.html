@@ -9,12 +9,22 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+
+
 html, body {
-    margin:0;
-    padding:0;
-    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: #0f172a;
+    overflow-x: hidden;
+}
+
+/* fundo real */
+body {
     background: radial-gradient(circle at top,#1e293b,#0f172a);
-    color:white;
+    color: white;
+    font-family: Arial;
 }
 
 /* HEADER */
@@ -45,7 +55,7 @@ html, body {
     padding:30px 0 120px;
 }
 
-/* linha curva estilo jogo */
+/* linha central */
 .map::before{
     content:"";
     position:absolute;
@@ -73,9 +83,10 @@ html, body {
 
     background: rgba(31,41,55,0.85);
     backdrop-filter: blur(10px);
-    border:1px solid rgba(255,255,255,0.08);
 
+    border:1px solid rgba(255,255,255,0.08);
     transition:.25s;
+
     box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
@@ -84,7 +95,7 @@ html, body {
     background: rgba(37,99,235,0.9);
 }
 
-/* alternância esquerda/direita estilo Duolingo */
+/* alternância */
 .left{ margin-left:6%; }
 .right{ margin-left:auto; margin-right:6%; }
 
@@ -140,6 +151,7 @@ html, body {
     align-items:center;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
     cursor:pointer;
+    z-index:999;
 }
 </style>
 </head>
@@ -158,13 +170,12 @@ html, body {
 <!-- HERO -->
 <div class="hero">
     <h1>Continue sua trilha</h1>
-    <div class="small">Java • 2 módulos disponíveis</div>
+    <div class="small">Java • progresso em andamento</div>
 </div>
 
-<!-- MAPA (DUOLINGO STYLE) -->
+<!-- MAPA -->
 <div class="map">
 
-<!-- 1 -->
 <div class="node left">
     <div class="info">
         <div class="circle done"></div>
@@ -176,7 +187,6 @@ html, body {
     <span>✔</span>
 </div>
 
-<!-- 2 -->
 <div class="node right">
     <div class="info">
         <div class="circle active"></div>
@@ -188,7 +198,6 @@ html, body {
     <button class="btn">Continuar</button>
 </div>
 
-<!-- 3 -->
 <div class="node left locked">
     <div class="info">
         <div class="circle lock"></div>
@@ -200,25 +209,12 @@ html, body {
     <span>🔒</span>
 </div>
 
-<!-- 4 -->
 <div class="node right locked">
     <div class="info">
         <div class="circle lock"></div>
         <div>
             <b>Loops</b>
             <div class="small">for / while</div>
-        </div>
-    </div>
-    <span>🔒</span>
-</div>
-
-<!-- 5 -->
-<div class="node left locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Projetos</b>
-            <div class="small">Aplicação real</div>
         </div>
     </div>
     <span>🔒</span>
