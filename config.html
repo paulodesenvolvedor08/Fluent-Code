@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Configurações - FluentCode</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -10,7 +10,7 @@
 
 <style>
 
-/* RESET */
+/* 🔥 FIX DEFINITIVO MOBILE */
 * {
     margin: 0;
     padding: 0;
@@ -18,37 +18,95 @@
 }
 
 html, body {
-    min-height: 100vh;
     width: 100%;
-    font-family: Arial, sans-serif;
-    transition: .3s;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh; /* CORRIGE MOBILE */
+    overflow-x: hidden;
 }
 
-/* DARK THEME */
+/* FUNDO REAL SEM FAIXA BRANCA */
 body {
     background: radial-gradient(circle at top,#1e293b,#0f172a);
     color: white;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
 }
 
-/* LIGHT THEME */
+/* TEMA CLARO */
 body.light {
     background: #f1f5f9;
     color: #0f172a;
 }
 
-/* CARD */
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* GLASS CARD */
 .card {
     background: rgba(31,41,55,0.85);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 18px;
     padding: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
 }
 
 body.light .card {
     background: white;
     border: 1px solid #e2e8f0;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#3b82f6,#22c55e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: #0b1220;
+    border: 1px solid #334155;
+    color: white;
+    outline: none;
+}
+
+body.light input {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+/* BOTÃO */
+.btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* TOGGLE */
@@ -82,71 +140,37 @@ body.light .card {
     left: 27px;
 }
 
-/* PROFILE */
-.avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg,#3b82f6,#22c55e);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: white;
-}
-
-/* INPUT */
-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: #0b1220;
-    border: 1px solid #334155;
-    color: white;
-    outline: none;
-}
-
-body.light input {
-    background: #f8fafc;
-    color: #0f172a;
-}
-
-/* BUTTON */
-.btn {
-    width: 100%;
-    padding: 10px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* BACK */
+/* BACK BUTTON FIX MOBILE */
 .back {
     position: fixed;
-    bottom: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom));
     left: 20px;
+    z-index: 9999;
+
     background: linear-gradient(to right,#2563eb,#4f46e5);
     padding: 12px 18px;
     border-radius: 14px;
     font-weight: bold;
+
     display: flex;
     gap: 8px;
     align-items: center;
+
     box-shadow: 0 10px 25px rgba(0,0,0,.5);
     cursor: pointer;
     color: white;
-    z-index: 999;
 }
 
-/* GRID */
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+/* remove qualquer scroll bug branco */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    z-index: -1;
 }
 </style>
 </head>
@@ -161,84 +185,83 @@ body.light input {
 <div class="container">
 
 <!-- HEADER -->
-<div class="text-center">
-<div class="text-5xl">⚙️</div>
-<h1 class="text-2xl font-bold mt-2">Configurações</h1>
-<p class="text-sm opacity-70">Personalize sua experiência</p>
+<div class="header">
+    <div class="text-5xl">⚙️</div>
+    <h1 class="text-2xl font-bold mt-2">Configurações</h1>
+    <p class="text-sm opacity-70">Personalize sua experiência</p>
 </div>
 
 <!-- PERFIL -->
 <div class="card text-center">
-<div class="avatar mx-auto mb-3" id="avatar">U</div>
+    <div class="avatar mx-auto mb-3" id="avatar">U</div>
 
-<input id="nome" placeholder="Seu nome">
+    <input id="nome" placeholder="Seu nome">
 
-<button class="btn bg-blue-600 mt-3 text-white" onclick="saveName()">
-Salvar nome
-</button>
+    <button class="btn bg-blue-600 text-white mt-3" onclick="saveName()">
+        Salvar nome
+    </button>
 </div>
 
-<!-- ESTATÍSTICAS -->
+<!-- XP -->
 <div class="card">
-<h2 class="font-bold mb-2">📊 Estatísticas</h2>
-<p class="text-sm">XP: <span id="xp">0</span></p>
-<p class="text-sm">Nível: <span id="nivel">1</span></p>
+    <h3 class="font-bold">📊 Progresso</h3>
+    <p class="text-sm">XP: <span id="xp">0</span></p>
+    <p class="text-sm">Nível: <span id="nivel">1</span></p>
 </div>
 
 <!-- SOM -->
 <div class="card flex justify-between items-center">
-<div>
-<h3 class="font-bold">🔊 Som</h3>
-<p class="text-sm opacity-70">Efeitos do app</p>
-</div>
-<div class="toggle" id="sound" onclick="toggleSound()"></div>
+    <div>
+        <h3 class="font-bold">🔊 Som</h3>
+        <p class="text-sm opacity-70">Efeitos do app</p>
+    </div>
+    <div class="toggle" id="sound" onclick="toggleSound()"></div>
 </div>
 
 <!-- TEMA -->
 <div class="card flex justify-between items-center">
-<div>
-<h3 class="font-bold">🌗 Tema</h3>
-<p class="text-sm opacity-70">Claro / Escuro</p>
-</div>
-<button class="btn bg-indigo-600 text-white w-auto px-4" onclick="toggleTheme()">
-Alternar
-</button>
+    <div>
+        <h3 class="font-bold">🌗 Tema</h3>
+        <p class="text-sm opacity-70">Claro / Escuro</p>
+    </div>
+
+    <button class="btn bg-indigo-600 text-white w-auto px-4" onclick="toggleTheme()">
+        Alternar
+    </button>
 </div>
 
 <!-- RESET -->
 <div class="card">
-<h3 class="text-red-400 font-bold">⚠️ Reset</h3>
-<p class="text-sm opacity-70 mb-3">Apaga todo progresso</p>
+    <h3 class="text-red-400 font-bold">⚠️ Reset total</h3>
+    <p class="text-sm opacity-70 mb-3">Apaga todo progresso</p>
 
-<button class="btn bg-red-600 text-white" onclick="resetAll()">
-Resetar tudo
-</button>
+    <button class="btn bg-red-600 text-white" onclick="resetAll()">
+        Resetar tudo
+    </button>
 </div>
 
 </div>
 
 <script>
 
-// LOAD
 function load(){
 let nome = localStorage.getItem("fc_nome") || "Usuário";
 document.getElementById("nome").value = nome;
 document.getElementById("avatar").innerText = nome[0].toUpperCase();
 
-let sound = localStorage.getItem("fc_sound");
-if(sound === "on") document.getElementById("sound").classList.add("active");
-
-document.getElementById("xp").innerText = localStorage.getItem("xp") || 0;
-
 let xp = parseInt(localStorage.getItem("xp") || 0);
+document.getElementById("xp").innerText = xp;
 document.getElementById("nivel").innerText = Math.floor(xp / 200) + 1;
+
+if(localStorage.getItem("sound") === "on"){
+document.getElementById("sound").classList.add("active");
+}
 
 if(localStorage.getItem("theme") === "light"){
 document.body.classList.add("light");
 }
 }
 
-// NAME
 function saveName(){
 let nome = document.getElementById("nome").value;
 localStorage.setItem("fc_nome", nome);
@@ -246,27 +269,25 @@ document.getElementById("avatar").innerText = nome[0].toUpperCase();
 alert("Nome salvo!");
 }
 
-// SOUND
 function toggleSound(){
 let t = document.getElementById("sound");
 t.classList.toggle("active");
 
-localStorage.setItem("fc_sound",
+localStorage.setItem("sound",
 t.classList.contains("active") ? "on" : "off"
 );
 }
 
-// THEME
 function toggleTheme(){
 document.body.classList.toggle("light");
+
 localStorage.setItem("theme",
 document.body.classList.contains("light") ? "light" : "dark"
 );
 }
 
-// RESET
 function resetAll(){
-if(confirm("Apagar tudo?")){
+if(confirm("Deseja apagar tudo?")){
 localStorage.clear();
 location.reload();
 }
