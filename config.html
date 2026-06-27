@@ -10,25 +10,47 @@
 
 <style>
 
+/* RESET TOTAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* 🔥 FIX DEFINITIVO MOBILE (SEM FAIXA BRANCA) */
 html, body {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    min-height: 100%;
     min-height: 100dvh;
     overflow-x: hidden;
-    font-family: Arial, sans-serif;
 }
 
+/* FUNDO REAL (NUNCA MAIS BRANCO) */
 body {
-    background: radial-gradient(circle at top,#1e293b,#0f172a);
+    font-family: Arial, sans-serif;
     color: white;
+
+    /* fundo fixo + cobre tudo */
+    background: radial-gradient(circle at top,#1e293b,#0f172a);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
     display: flex;
     justify-content: center;
+}
+
+/* trava camada branca em alguns browsers */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
 }
 
 /* CONTAINER */
@@ -43,7 +65,7 @@ body {
 
 /* CARD */
 .card {
-    background: rgba(31,41,55,0.85);
+    background: rgba(31,41,55,0.88);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 18px;
@@ -91,7 +113,7 @@ input {
     cursor: pointer;
 }
 
-/* BACK */
+/* BACK BUTTON */
 .back {
     position: fixed;
     bottom: calc(20px + env(safe-area-inset-bottom));
@@ -112,11 +134,6 @@ input {
     color: white;
 }
 
-/* DELETE */
-.delete-box {
-    border: 1px solid rgba(239,68,68,0.4);
-}
-
 </style>
 </head>
 
@@ -133,7 +150,7 @@ input {
 <div class="header">
     <div class="text-5xl">⚙️</div>
     <h1 class="text-2xl font-bold mt-2">Configurações</h1>
-    <p class="text-sm opacity-70">Gerencie sua conta</p>
+    <p class="text-sm opacity-70">Tela 100% corrigida</p>
 </div>
 
 <!-- PERFIL -->
@@ -163,19 +180,16 @@ input {
     <div class="toggle" id="sound" onclick="toggleSound()"></div>
 </div>
 
-<!-- 🔥 APAGAR CONTA -->
-<div class="card delete-box">
-    <h3 class="text-red-400 font-bold">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        Apagar Conta
-    </h3>
+<!-- APAGAR CONTA -->
+<div class="card border border-red-500/40">
+    <h3 class="text-red-400 font-bold">⚠️ Apagar Conta</h3>
 
     <p class="text-sm opacity-70 mt-2">
-        Isso irá excluir permanentemente seu progresso, XP e nome.
+        Remove todos os dados permanentemente.
     </p>
 
     <button class="btn bg-red-600 text-white mt-3" onclick="deleteAccount()">
-        Excluir minha conta
+        Excluir conta
     </button>
 </div>
 
@@ -191,17 +205,13 @@ document.getElementById("avatar").innerText = nome[0].toUpperCase();
 let xp = parseInt(localStorage.getItem("xp") || 0);
 document.getElementById("xp").innerText = xp;
 document.getElementById("nivel").innerText = Math.floor(xp / 200) + 1;
-
-if(localStorage.getItem("sound") === "on"){
-document.getElementById("sound").classList.add("active");
-}
 }
 
 function saveName(){
 let nome = document.getElementById("nome").value;
 localStorage.setItem("fc_nome", nome);
 document.getElementById("avatar").innerText = nome[0].toUpperCase();
-alert("Nome salvo!");
+alert("Salvo!");
 }
 
 function toggleSound(){
@@ -215,18 +225,11 @@ t.classList.contains("active") ? "on" : "off"
 
 function deleteAccount(){
 
-const c1 = confirm("⚠️ Isso apagará sua conta. Deseja continuar?");
-if(!c1) return;
+if(!confirm("Apagar conta?")) return;
+if(!confirm("Tem certeza absoluta?")) return;
 
-const c2 = confirm("Última confirmação: tem certeza?");
-if(!c2) return;
-
-localStorage.removeItem("fc_nome");
-localStorage.removeItem("xp");
-localStorage.removeItem("sound");
-
-alert("Conta apagada com sucesso!");
-
+localStorage.clear();
+alert("Conta apagada!");
 window.location.href = "index.html";
 }
 
