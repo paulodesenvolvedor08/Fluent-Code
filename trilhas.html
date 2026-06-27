@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FluentCode - Trilha</title>
+<title>Trilhas</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,89 +12,55 @@
 html, body {
     margin:0;
     padding:0;
-    background: linear-gradient(135deg,#0f172a,#1e293b);
     font-family: Arial;
+    background: linear-gradient(180deg,#0f172a,#1e293b);
     color:white;
-    overflow-x:hidden;
 }
 
-/* HEADER */
-header{
-    padding:20px;
-    font-weight:bold;
-}
-
-/* CONTAINER */
-.map{
-    position:relative;
-    padding:40px 0 120px;
-}
-
-/* LINHA CURVA (SIMULANDO CAMINHO DUOLINGO) */
-.map::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:8px;
-    height:100%;
-    background:linear-gradient(#334155,#1e293b);
-    border-radius:20px;
-}
-
-/* NODE BASE */
-.node{
-    width:80%;
-    max-width:420px;
-    background:#1f2937;
-    padding:16px;
-    border-radius:20px;
-    margin:30px auto;
+/* topo estilo app */
+.topbar{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    position:relative;
-    z-index:1;
-    transition:.2s;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
-}
-
-.node:hover{
-    transform:scale(1.03);
-    background:#2563eb;
-}
-
-/* alternância esquerda/direita estilo Duolingo */
-.left { margin-left:5%; }
-.right { margin-left:auto; margin-right:5%; }
-
-/* círculo */
-.circle{
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    margin-right:12px;
-}
-
-/* estados */
-.done{ background:#22c55e; }
-.active{ background:#3b82f6; box-shadow:0 0 15px #3b82f6; }
-.lock{ background:#6b7280; }
-
-/* conteúdo */
-.info{
-    display:flex;
     align-items:center;
-    gap:10px;
+    padding:20px;
 }
 
-/* botão ativo */
+/* cartão principal (estilo Duolingo) */
+.card{
+    margin:15px;
+    padding:18px;
+    border-radius:20px;
+    background:#1f2937;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:scale(1.02);
+}
+
+/* progresso */
+.bar{
+    height:10px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.fill{
+    height:100%;
+    background:linear-gradient(90deg,#22c55e,#3b82f6);
+}
+
+/* botão continuar estilo Duolingo */
 .btn{
-    background:#2563eb;
-    padding:8px 14px;
-    border-radius:12px;
-    font-size:13px;
+    margin-top:10px;
+    background:#22c55e;
+    padding:10px 14px;
+    border-radius:14px;
+    font-weight:bold;
+    display:inline-block;
 }
 
 /* bloqueado */
@@ -102,98 +68,119 @@ header{
     opacity:.5;
 }
 
-/* BOTÃO VOLTAR */
+/* header grande estilo app */
+.hero{
+    margin:15px;
+    padding:20px;
+    border-radius:25px;
+    background: linear-gradient(135deg,#22c55e,#3b82f6);
+}
+
+.hero h1{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.small{
+    font-size:13px;
+    opacity:.9;
+}
+
+/* bottom nav estilo Duolingo */
+.nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    background:#0f172a;
+    padding:10px 0;
+    border-top:1px solid #1f2937;
+}
+
+.nav i{
+    font-size:20px;
+    opacity:.7;
+}
+
+.nav i.active{
+    color:#22c55e;
+    opacity:1;
+}
+
+/* botão voltar */
 .back{
     position:fixed;
-    bottom:20px;
-    left:20px;
+    bottom:70px;
+    left:15px;
     background:linear-gradient(to right,#2563eb,#4f46e5);
-    padding:12px 18px;
+    padding:12px 16px;
     border-radius:14px;
     font-weight:bold;
     display:flex;
     gap:8px;
     align-items:center;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 </style>
 </head>
 
 <body>
 
-<header>
-🚀 FluentCode / Trilha de Aprendizado
-</header>
-
-<div class="map">
-
-<!-- 1 -->
-<div class="node left">
-    <div class="info">
-        <div class="circle done"></div>
-        <div>
-            <b>Olá Mundo</b>
-            <p style="font-size:12px;color:#94a3b8">Primeiro código Java</p>
-        </div>
+<!-- TOPO -->
+<div class="topbar">
+    <div>
+        <b>Trilhas</b>
+        <div class="small">Continue sua jornada 🚀</div>
     </div>
-    <span>✔</span>
+    <i class="fa-solid fa-fire text-orange-400"></i>
 </div>
 
-<!-- 2 -->
-<div class="node right">
-    <div class="info">
-        <div class="circle active"></div>
-        <div>
-            <b>Variáveis</b>
-            <p style="font-size:12px;color:#94a3b8">Tipos de dados</p>
-        </div>
-    </div>
-    <button class="btn">Continuar</button>
+<!-- HERO (estilo Duolingo home) -->
+<div class="hero">
+    <h1>Continue de onde parou</h1>
+    <div class="small">Trilha: Java Básico</div>
 </div>
 
-<!-- 3 -->
-<div class="node left locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Condicionais</b>
-            <p style="font-size:12px;color:#94a3b8">if / else</p>
-        </div>
+<!-- AULA ATUAL -->
+<div class="card">
+    <b>🔥 Variáveis em Java</b>
+    <div class="small">Você está quase terminando esta lição</div>
+
+    <div class="bar">
+        <div class="fill" style="width:60%"></div>
     </div>
-    <span>🔒</span>
+
+    <div class="btn">Continuar</div>
 </div>
 
-<!-- 4 -->
-<div class="node right locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Loops</b>
-            <p style="font-size:12px;color:#94a3b8">for / while</p>
-        </div>
-    </div>
-    <span>🔒</span>
+<!-- OUTRAS TRILHAS -->
+<div class="card">
+    <b>🟡 Condicionais</b>
+    <div class="small">if / else e lógica</div>
 </div>
 
-<!-- 5 -->
-<div class="node left locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Projetos</b>
-            <p style="font-size:12px;color:#94a3b8">Aplicação real</p>
-        </div>
-    </div>
-    <span>🔒</span>
+<div class="card locked">
+    <b>🔒 Loops</b>
+    <div class="small">for / while</div>
 </div>
 
+<div class="card locked">
+    <b>🔒 Projetos</b>
+    <div class="small">Aplicação prática</div>
 </div>
 
 <!-- BOTÃO VOLTAR -->
 <div class="back" onclick="history.back()">
 <i class="fa-solid fa-arrow-left"></i>
 Voltar
+</div>
+
+<!-- NAV BAR -->
+<div class="nav">
+    <i class="fa-solid fa-house active"></i>
+    <i class="fa-solid fa-trophy"></i>
+    <i class="fa-solid fa-book"></i>
+    <i class="fa-solid fa-user"></i>
 </div>
 
 </body>
