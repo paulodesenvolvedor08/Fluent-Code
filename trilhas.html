@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trilhas</title>
+<title>FluentCode - Trilha</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,147 +11,157 @@
 <style>
 
 
-html, body {
+* {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    background: #0f172a;
-    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
-/* fundo real */
+/* trava real da tela */
+html, body {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #0f172a;
+}
+
+/* fundo principal (forçado nos 2 níveis) */
+html {
+    background: #0f172a;
+}
+
 body {
     background: radial-gradient(circle at top,#1e293b,#0f172a);
     color: white;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
-.header{
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* HERO */
-.hero{
-    margin:15px;
-    padding:20px;
-    border-radius:25px;
+.hero {
+    margin: 15px;
+    padding: 20px;
+    border-radius: 25px;
     background: linear-gradient(135deg,#22c55e,#3b82f6);
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
-}
-
-.hero h1{
-    font-size:22px;
-    font-weight:bold;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
 }
 
 /* MAPA */
-.map{
-    position:relative;
-    padding:30px 0 120px;
+.map {
+    position: relative;
+    padding: 30px 0 120px;
+    flex: 1;
 }
 
-/* linha central */
-.map::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:8px;
-    height:100%;
-    background:linear-gradient(#334155,#0f172a);
-    border-radius:20px;
+/* linha central estilo Duolingo */
+.map::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(#334155,#0f172a);
+    border-radius: 20px;
 }
 
 /* NODE */
-.node{
-    width:80%;
-    max-width:420px;
-    margin:25px auto;
-    padding:16px;
-    border-radius:22px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:relative;
-    z-index:1;
+.node {
+    width: 80%;
+    max-width: 420px;
+    margin: 25px auto;
+    padding: 16px;
+    border-radius: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 
     background: rgba(31,41,55,0.85);
     backdrop-filter: blur(10px);
 
-    border:1px solid rgba(255,255,255,0.08);
-    transition:.25s;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: .25s;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
 }
 
-.node:hover{
-    transform:scale(1.04);
+.node:hover {
+    transform: scale(1.04);
     background: rgba(37,99,235,0.9);
 }
 
-/* alternância */
-.left{ margin-left:6%; }
-.right{ margin-left:auto; margin-right:6%; }
+/* alternância estilo Duolingo */
+.left { margin-left: 6%; }
+.right { margin-left: auto; margin-right: 6%; }
 
 /* círculo */
-.circle{
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    margin-right:12px;
+.circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-right: 12px;
 }
 
-.done{ background:#22c55e; }
-.active{ background:#3b82f6; box-shadow:0 0 12px #3b82f6; }
-.lock{ background:#64748b; }
+.done { background: #22c55e; }
+.active { background: #3b82f6; box-shadow: 0 0 12px #3b82f6; }
+.lock { background: #64748b; }
 
 /* info */
-.info{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.small{
-    font-size:12px;
-    color:#94a3b8;
+.small {
+    font-size: 12px;
+    color: #94a3b8;
 }
 
 /* botão */
-.btn{
-    background:#22c55e;
-    padding:8px 14px;
-    border-radius:12px;
-    font-weight:bold;
-    font-size:13px;
+.btn {
+    background: #22c55e;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 13px;
 }
 
 /* bloqueado */
-.locked{
-    opacity:.45;
+.locked {
+    opacity: .45;
 }
 
-/* BOTÃO VOLTAR */
-.back{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:linear-gradient(to right,#2563eb,#4f46e5);
-    padding:12px 18px;
-    border-radius:14px;
-    font-weight:bold;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-    cursor:pointer;
-    z-index:999;
+/* BOTÃO VOLTAR (fixo e acima de tudo) */
+.back {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+
+    background: linear-gradient(to right,#2563eb,#4f46e5);
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    cursor: pointer;
 }
 </style>
 </head>
@@ -161,7 +171,7 @@ body {
 <!-- HEADER -->
 <div class="header">
     <div>
-        <b>Trilhas</b>
+        <b>FluentCode</b>
         <div class="small">Sua jornada de aprendizado 🚀</div>
     </div>
     <i class="fa-solid fa-fire text-orange-400"></i>
