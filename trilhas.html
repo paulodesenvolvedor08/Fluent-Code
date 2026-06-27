@@ -2,15 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>FluentCode - Trilhas</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
 <style>
 
-/* 🔥 RESET TOTAL (remove qualquer faixa branca do navegador) */
+/* 🔥 RESET ABSOLUTO MOBILE */
 * {
     margin: 0;
     padding: 0;
@@ -18,19 +18,24 @@
 }
 
 html {
-    width: 100%;
     height: 100%;
-    background: #0f172a; /* trava fundo no html também */
+    width: 100%;
+    background: #0f172a;
 }
 
+/* 🔥 FIX PRINCIPAL DO CELULAR (IMPORTANTE) */
 body {
-    width: 100%;
     min-height: 100vh;
+    min-height: 100dvh; /* moderno (corrige iPhone/Android) */
+    width: 100%;
     overflow-x: hidden;
 
     background: radial-gradient(circle at top,#1e293b,#0f172a);
     color: white;
     font-family: Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
@@ -46,17 +51,19 @@ body {
     margin: 15px;
     padding: 20px;
     border-radius: 25px;
+
     background: linear-gradient(135deg,#22c55e,#3b82f6);
     box-shadow: 0 20px 50px rgba(0,0,0,.4);
 }
 
-/* MAPA */
+/* MAPA OCUPA TUDO */
 .map {
     position: relative;
-    padding: 30px 0 120px;
+    flex: 1; /* 🔥 faz ocupar a tela toda */
+    padding: 20px 0 120px;
 }
 
-/* linha central estilo Duolingo */
+/* linha central */
 .map::before {
     content: "";
     position: absolute;
@@ -71,9 +78,9 @@ body {
 
 /* NODE */
 .node {
-    width: 80%;
+    width: 85%;
     max-width: 420px;
-    margin: 25px auto;
+    margin: 22px auto;
     padding: 16px;
     border-radius: 22px;
 
@@ -81,20 +88,21 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    background: rgba(31,41,55,0.9);
+    background: rgba(31,41,55,0.92);
     backdrop-filter: blur(10px);
 
     border: 1px solid rgba(255,255,255,0.08);
 
-    transition: .25s;
+    transition: .2s;
     box-shadow: 0 10px 25px rgba(0,0,0,.35);
+
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .node:hover {
-    transform: scale(1.04);
-    background: rgba(37,99,235,0.9);
+    transform: scale(1.03);
+    background: rgba(37,99,235,0.85);
 }
 
 /* posições */
@@ -141,10 +149,10 @@ body {
     opacity: .45;
 }
 
-/* BOTÃO VOLTAR */
+/* BOTÃO VOLTAR (fixo seguro) */
 .back {
     position: fixed;
-    bottom: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom));
     left: 20px;
     z-index: 9999;
 
@@ -183,7 +191,6 @@ body {
 <!-- MAPA -->
 <div class="map">
 
-<!-- 1 -->
 <div class="node left">
     <div class="info">
         <div class="circle done"></div>
@@ -195,7 +202,6 @@ body {
     <span>✔</span>
 </div>
 
-<!-- VARIÁVEIS -->
 <div class="node right">
     <div class="info">
         <div class="circle active"></div>
@@ -210,7 +216,6 @@ body {
     </button>
 </div>
 
-<!-- 3 -->
 <div class="node left locked">
     <div class="info">
         <div class="circle lock"></div>
@@ -222,7 +227,6 @@ body {
     <span>🔒</span>
 </div>
 
-<!-- 4 -->
 <div class="node right locked">
     <div class="info">
         <div class="circle lock"></div>
