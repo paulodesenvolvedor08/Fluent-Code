@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluentCode - Variáveis</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body {
+    min-height:100vh;
+    width:100%;
+    background: radial-gradient(circle at top,#1e293b,#0f172a);
+    font-family: Arial;
+    color:white;
+}
+
+/* HEADER */
+.header{
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* HERO */
+.hero{
+    margin:15px;
+    padding:20px;
+    border-radius:25px;
+    background: linear-gradient(135deg,#3b82f6,#22c55e);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.hero h1{
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* CARD */
+.card{
+    margin:15px;
+    padding:18px;
+    border-radius:18px;
+    background: rgba(31,41,55,0.85);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+/* código */
+.code{
+    background:#0b1220;
+    padding:12px;
+    border-radius:12px;
+    margin-top:10px;
+    font-family: monospace;
+    color:#22c55e;
+    font-size:13px;
+}
+
+/* barra */
+.bar{
+    height:10px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.fill{
+    height:100%;
+    width:65%;
+    background:linear-gradient(90deg,#22c55e,#3b82f6);
+}
+
+/* botão voltar */
+.back{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:linear-gradient(to right,#2563eb,#4f46e5);
+    padding:12px 18px;
+    border-radius:14px;
+    font-weight:bold;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    cursor:pointer;
+    z-index:999;
+}
+
+/* destaque */
+.badge{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:12px;
+    background:#22c55e;
+    margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div>
+        <b>FluentCode</b>
+        <div style="font-size:12px;color:#94a3b8">Aula: Variáveis</div>
+    </div>
+    <i class="fa-solid fa-code text-blue-400"></i>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>📦 Variáveis em Java</h1>
+    <p style="font-size:13px;opacity:.9;margin-top:5px">
+        Aprenda como armazenar informações no programa
+    </p>
+
+    <div class="bar">
+        <div class="fill"></div>
+    </div>
+</div>
+
+<!-- CONTEÚDO -->
+<div class="card">
+
+<span class="badge">O que são?</span>
+
+<p style="font-size:14px;color:#cbd5e1">
+Variáveis são espaços na memória que guardam dados como números, textos e valores.
+</p>
+
+<div class="code">
+int idade = 18;<br>
+String nome = "Lucas";<br>
+boolean ativo = true;
+</div>
+
+</div>
+
+<!-- EXEMPLO 2 -->
+<div class="card">
+
+<span class="badge">Exemplo prático</span>
+
+<p style="font-size:14px;color:#cbd5e1">
+Criando uma variável e exibindo no console:
+</p>
+
+<div class="code">
+public class Main {<br>
+&nbsp;&nbsp;public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String aluno = "Ana";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(aluno);<br>
+&nbsp;&nbsp;}<br>
+}
+</div>
+
+</div>
+
+<!-- DICA -->
+<div class="card">
+
+<span class="badge">Dica</span>
+
+<p style="font-size:14px;color:#cbd5e1">
+Sempre use nomes claros para suas variáveis para facilitar o entendimento do código.
+</p>
+
+</div>
+
+<!-- BOTÃO VOLTAR -->
+<div class="back" onclick="history.back()">
+<i class="fa-solid fa-arrow-left"></i>
+Voltar
+</div>
+
+</body>
+</html>
