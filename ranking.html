@@ -3,209 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ranking - Fluent-Code</title>
+<title>Ranking</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #0f172a;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    margin:0;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh;
+/* fundo bonito */
+body {
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color: white;
 }
 
-.card{
-    background:#111827;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
+/* card principal */
+.card {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid #1f2937;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-.item{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    background:#1f2937;
-    margin:12px 0;
-    padding:15px;
-    border-radius:15px;
-    transition:.3s;
+/* item ranking */
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 14px;
+    background: #1f2937;
+    transition: .25s;
 }
 
-.item:hover{
-    transform:translateY(-4px);
-    background:#2563eb;
+.item:hover {
+    transform: translateY(-3px);
+    background: #2563eb;
 }
 
-.item.me{
-    border:2px solid #3b82f6;
+.item.me {
+    border: 2px solid #3b82f6;
+    background: #1e3a8a;
 }
 
-.avatar{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#2563eb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
+/* avatar */
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.progress{
-    height:8px;
-    background:#374151;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:8px;
+/* barra XP */
+.progress {
+    height: 6px;
+    background: #374151;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 6px;
 }
 
-.fill{
-    height:100%;
-    background:linear-gradient(90deg,#22c55e,#3b82f6);
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg,#22c55e,#3b82f6);
 }
 
-.badge{
-    font-size:24px;
-    width:35px;
-    text-align:center;
+/* medalha */
+.badge {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
 }
 
-button{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:#2563eb;
-    color:#fff;
-    border:none;
-    padding:12px 20px;
-    border-radius:12px;
-    cursor:pointer;
+/* BOTÃO VOLTAR (igual ao seu original) */
+.back-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(to right, #2563eb, #4f46e5);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: .2s;
 }
 
-button:hover{
-    background:#1d4ed8;
+.back-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #1d4ed8, #4338ca);
 }
 </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-5">
 
-<div class="max-w-2xl mx-auto">
+<body>
 
-<h1 class="text-4xl font-bold text-center mb-2">
-🏆 Ranking
-</h1>
+<div class="max-w-2xl mx-auto p-4">
 
-<p class="text-center text-gray-400 mb-6">
-Os melhores desenvolvedores
-</p>
+    <h1 class="text-3xl font-bold text-center mt-4">🏆 Ranking</h1>
+    <p class="text-center text-gray-400 mb-6">Top desenvolvedores</p>
 
-<div class="card">
-
-<div class="grid grid-cols-3 text-center mb-8">
-<div>
-<h2 class="text-yellow-400 text-2xl">🏅</h2>
-<p id="posicao">--</p>
-<small>Posição</small>
-</div>
-
-<div>
-<h2 class="text-green-400 text-2xl">⭐</h2>
-<p id="xp">0</p>
-<small>XP</small>
-</div>
-
-<div>
-<h2 class="text-blue-400 text-2xl">🚀</h2>
-<p id="nivel">0</p>
-<small>Nível</small>
-</div>
-</div>
-
-<div id="lista"></div>
+    <div class="card">
+        <div id="lista"></div>
+    </div>
 
 </div>
 
-</div>
-
-<button onclick="history.back()"
-class="fixed bottom-6 left-4
-bg-gradient-to-r from-blue-600 to-indigo-600
-hover:from-blue-700 hover:to-indigo-700
-text-white font-bold px-5 py-3 rounded-2xl
-shadow-lg flex items-center gap-2 z-50 transition-all duration-300 hover:scale-105">
-
+<!-- BOTÃO VOLTAR -->
+<button class="back-btn" onclick="history.back()">
 <i class="fa-solid fa-arrow-left"></i>
 Voltar
-
 </button>
 
 <script>
 
-const user=JSON.parse(localStorage.getItem("fluentcode_user"))||{
-nome:"Você",
-xp:650
+const user = JSON.parse(localStorage.getItem("fluentcode_user")) || {
+    nome: "Você",
+    xp: 650
 };
 
-const ranking=[
-{nome:"Ana",xp:1200},
-{nome:"Lucas",xp:980},
-{nome:"Maria",xp:850},
-{nome:user.nome||"Você",xp:user.xp},
-{nome:"Pedro",xp:520},
-{nome:"João",xp:430}
+const ranking = [
+    {nome:"Ana", xp:1200},
+    {nome:"Lucas", xp:980},
+    {nome:"Maria", xp:860},
+    {nome:user.nome || "Você", xp:user.xp},
+    {nome:"Pedro", xp:500},
+    {nome:"João", xp:420}
 ];
 
-ranking.sort((a,b)=>b.xp-a.xp);
+ranking.sort((a,b) => b.xp - a.xp);
 
-let html="";
-let minhaPosicao=0;
+let html = "";
+let posicaoUser = 0;
 
-ranking.forEach((p,i)=>{
+ranking.forEach((p,i) => {
 
-if(p.nome===user.nome) minhaPosicao=i+1;
+    if(p.nome === user.nome) posicaoUser = i+1;
 
-let medalha=(i==0)?"🥇":(i==1)?"🥈":(i==2)?"🥉":i+1;
+    let medalha = i===0 ? "🥇" : i===1 ? "🥈" : i===2 ? "🥉" : i+1;
 
-html+=`
-<div class="item ${p.nome===user.nome?'me':''}">
-<div class="badge">${medalha}</div>
+    html += `
+    <div class="item ${p.nome===user.nome ? 'me' : ''}">
+        <div class="badge">${medalha}</div>
 
-<div class="avatar">
-<i class="fa-solid fa-user"></i>
-</div>
+        <div class="avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
 
-<div style="flex:1">
+        <div style="flex:1">
+            <div class="flex justify-between">
+                <b>${p.nome}</b>
+                <span>${p.xp} XP</span>
+            </div>
 
-<div class="flex justify-between">
-<b>${p.nome}</b>
-<span>${p.xp} XP</span>
-</div>
-
-<div class="progress">
-<div class="fill" style="width:${p.xp%100}%"></div>
-</div>
-
-</div>
-</div>
-`;
-
+            <div class="progress">
+                <div class="fill" style="width:${p.xp % 100}%"></div>
+            </div>
+        </div>
+    </div>
+    `;
 });
 
-lista.innerHTML=html;
-
-xp.innerHTML=user.xp;
-nivel.innerHTML=Math.floor(user.xp/200);
-posicao.innerHTML="#"+minhaPosicao;
+document.getElementById("lista").innerHTML = html;
 
 </script>
 
