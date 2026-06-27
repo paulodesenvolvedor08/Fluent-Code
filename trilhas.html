@@ -13,67 +13,25 @@ html, body {
     margin:0;
     padding:0;
     font-family: Arial;
-    background: linear-gradient(180deg,#0f172a,#1e293b);
+    background: radial-gradient(circle at top,#1e293b,#0f172a);
     color:white;
 }
 
-/* topo estilo app */
-.topbar{
+/* HEADER */
+.header{
+    padding:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px;
 }
 
-/* cartão principal (estilo Duolingo) */
-.card{
-    margin:15px;
-    padding:18px;
-    border-radius:20px;
-    background:#1f2937;
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-    transition:.2s;
-}
-
-.card:hover{
-    transform:scale(1.02);
-}
-
-/* progresso */
-.bar{
-    height:10px;
-    background:#334155;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:10px;
-}
-
-.fill{
-    height:100%;
-    background:linear-gradient(90deg,#22c55e,#3b82f6);
-}
-
-/* botão continuar estilo Duolingo */
-.btn{
-    margin-top:10px;
-    background:#22c55e;
-    padding:10px 14px;
-    border-radius:14px;
-    font-weight:bold;
-    display:inline-block;
-}
-
-/* bloqueado */
-.locked{
-    opacity:.5;
-}
-
-/* header grande estilo app */
+/* HERO */
 .hero{
     margin:15px;
     padding:20px;
     border-radius:25px;
     background: linear-gradient(135deg,#22c55e,#3b82f6);
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
 }
 
 .hero h1{
@@ -81,106 +39,197 @@ html, body {
     font-weight:bold;
 }
 
-.small{
-    font-size:13px;
-    opacity:.9;
+/* MAPA */
+.map{
+    position:relative;
+    padding:30px 0 120px;
 }
 
-/* bottom nav estilo Duolingo */
-.nav{
-    position:fixed;
-    bottom:0;
-    width:100%;
+/* linha curva estilo jogo */
+.map::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:8px;
+    height:100%;
+    background:linear-gradient(#334155,#0f172a);
+    border-radius:20px;
+}
+
+/* NODE */
+.node{
+    width:80%;
+    max-width:420px;
+    margin:25px auto;
+    padding:16px;
+    border-radius:22px;
     display:flex;
-    justify-content:space-around;
-    background:#0f172a;
-    padding:10px 0;
-    border-top:1px solid #1f2937;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    z-index:1;
+
+    background: rgba(31,41,55,0.85);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.08);
+
+    transition:.25s;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-.nav i{
-    font-size:20px;
-    opacity:.7;
+.node:hover{
+    transform:scale(1.04);
+    background: rgba(37,99,235,0.9);
 }
 
-.nav i.active{
-    color:#22c55e;
-    opacity:1;
+/* alternância esquerda/direita estilo Duolingo */
+.left{ margin-left:6%; }
+.right{ margin-left:auto; margin-right:6%; }
+
+/* círculo */
+.circle{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    margin-right:12px;
 }
 
-/* botão voltar */
+.done{ background:#22c55e; }
+.active{ background:#3b82f6; box-shadow:0 0 12px #3b82f6; }
+.lock{ background:#64748b; }
+
+/* info */
+.info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.small{
+    font-size:12px;
+    color:#94a3b8;
+}
+
+/* botão */
+.btn{
+    background:#22c55e;
+    padding:8px 14px;
+    border-radius:12px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+/* bloqueado */
+.locked{
+    opacity:.45;
+}
+
+/* BOTÃO VOLTAR */
 .back{
     position:fixed;
-    bottom:70px;
-    left:15px;
+    bottom:20px;
+    left:20px;
     background:linear-gradient(to right,#2563eb,#4f46e5);
-    padding:12px 16px;
+    padding:12px 18px;
     border-radius:14px;
     font-weight:bold;
     display:flex;
     gap:8px;
     align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOPO -->
-<div class="topbar">
+<!-- HEADER -->
+<div class="header">
     <div>
         <b>Trilhas</b>
-        <div class="small">Continue sua jornada 🚀</div>
+        <div class="small">Sua jornada de aprendizado 🚀</div>
     </div>
     <i class="fa-solid fa-fire text-orange-400"></i>
 </div>
 
-<!-- HERO (estilo Duolingo home) -->
+<!-- HERO -->
 <div class="hero">
-    <h1>Continue de onde parou</h1>
-    <div class="small">Trilha: Java Básico</div>
+    <h1>Continue sua trilha</h1>
+    <div class="small">Java • 2 módulos disponíveis</div>
 </div>
 
-<!-- AULA ATUAL -->
-<div class="card">
-    <b>🔥 Variáveis em Java</b>
-    <div class="small">Você está quase terminando esta lição</div>
+<!-- MAPA (DUOLINGO STYLE) -->
+<div class="map">
 
-    <div class="bar">
-        <div class="fill" style="width:60%"></div>
+<!-- 1 -->
+<div class="node left">
+    <div class="info">
+        <div class="circle done"></div>
+        <div>
+            <b>Olá Mundo</b>
+            <div class="small">Introdução</div>
+        </div>
     </div>
-
-    <div class="btn">Continuar</div>
+    <span>✔</span>
 </div>
 
-<!-- OUTRAS TRILHAS -->
-<div class="card">
-    <b>🟡 Condicionais</b>
-    <div class="small">if / else e lógica</div>
+<!-- 2 -->
+<div class="node right">
+    <div class="info">
+        <div class="circle active"></div>
+        <div>
+            <b>Variáveis</b>
+            <div class="small">Tipos de dados</div>
+        </div>
+    </div>
+    <button class="btn">Continuar</button>
 </div>
 
-<div class="card locked">
-    <b>🔒 Loops</b>
-    <div class="small">for / while</div>
+<!-- 3 -->
+<div class="node left locked">
+    <div class="info">
+        <div class="circle lock"></div>
+        <div>
+            <b>Condicionais</b>
+            <div class="small">if / else</div>
+        </div>
+    </div>
+    <span>🔒</span>
 </div>
 
-<div class="card locked">
-    <b>🔒 Projetos</b>
-    <div class="small">Aplicação prática</div>
+<!-- 4 -->
+<div class="node right locked">
+    <div class="info">
+        <div class="circle lock"></div>
+        <div>
+            <b>Loops</b>
+            <div class="small">for / while</div>
+        </div>
+    </div>
+    <span>🔒</span>
+</div>
+
+<!-- 5 -->
+<div class="node left locked">
+    <div class="info">
+        <div class="circle lock"></div>
+        <div>
+            <b>Projetos</b>
+            <div class="small">Aplicação real</div>
+        </div>
+    </div>
+    <span>🔒</span>
+</div>
+
 </div>
 
 <!-- BOTÃO VOLTAR -->
 <div class="back" onclick="history.back()">
 <i class="fa-solid fa-arrow-left"></i>
 Voltar
-</div>
-
-<!-- NAV BAR -->
-<div class="nav">
-    <i class="fa-solid fa-house active"></i>
-    <i class="fa-solid fa-trophy"></i>
-    <i class="fa-solid fa-book"></i>
-    <i class="fa-solid fa-user"></i>
 </div>
 
 </body>
