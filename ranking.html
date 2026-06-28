@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ranking</title>
+<title>Ranking Imperial</title>
     
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -19,22 +19,82 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* fundo bonito */
 body {
-    background: linear-gradient(135deg,#0f172a,#1e293b);
+    background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
     color: white;
 }
 
-/* card principal */
+/* Card Principal */
 .card {
-    background: rgba(15, 23, 42, 0.95);
-    border: 1px solid #1f2937;
-    border-radius: 20px;
-    padding: 20px;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 24px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* item ranking */
+/* Animação e Estilo do Pódio */
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    margin: 40px 0 20px 0;
+    height: 220px;
+}
+
+.podium-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    position: relative;
+    animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.podium-base {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* Cores temáticas para os vencedores */
+.gold { background: linear-gradient(135deg, #fbbf24, #b45309); height: 120px; color: #fef08a; }
+.silver { background: linear-gradient(135deg, #cbd5e1, #475569); height: 90px; color: #f1f5f9; }
+.bronze { background: linear-gradient(135deg, #ca8a04, #78350f); height: 70px; color: #fef9c3; }
+
+@keyframes popUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Avatar flutuante no pódio */
+.podium-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    background: #334155;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.gold .podium-avatar { border-color: #fbbf24; }
+.silver .podium-avatar { border-color: #cbd5e1; }
+.bronze .podium-avatar { border-color: #ca8a04; }
+
+/* Item da Lista (Do 4º lugar em diante) */
 .item {
     display: flex;
     align-items: center;
@@ -42,60 +102,26 @@ body {
     padding: 14px;
     margin: 10px 0;
     border-radius: 14px;
-    background: #1f2937;
+    background: rgba(31, 41, 55, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     transition: .25s;
 }
 
 .item:hover {
-    transform: translateY(-3px);
-    background: #2563eb;
+    transform: translateX(5px);
+    background: rgba(37, 99, 235, 0.4);
 }
 
 .item.me {
     border: 2px solid #3b82f6;
-    background: #1e3a8a;
+    background: rgba(30, 58, 138, 0.8);
 }
 
-/* avatar */
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #2563eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* barra XP */
-.progress {
-    height: 6px;
-    background: #374151;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 6px;
-}
-
-.fill {
-    height: 100%;
-    background: linear-gradient(90deg,#22c55e,#3b82f6);
-}
-
-/* medalha */
-.badge {
-    width: 30px;
-    text-align: center;
-    font-weight: bold;
-}
-
-/* BOTÃO VOLTAR (igual ao seu original) */
-.back-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
+/* Botões Inferiores */
+.action-btn {
     background: linear-gradient(to right, #2563eb, #4f46e5);
     color: white;
-    padding: 12px 18px;
+    padding: 12px 20px;
     border-radius: 14px;
     font-weight: bold;
     display: flex;
@@ -103,85 +129,153 @@ body {
     gap: 8px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
     transition: .2s;
 }
 
-.back-btn:hover {
+.action-btn:hover {
     transform: scale(1.05);
-    background: linear-gradient(to right, #1d4ed8, #4338ca);
+    filter: brightness(1.1);
+}
+
+.share-btn {
+    background: linear-gradient(to right, #10b981, #059669);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
 </style>
 </head>
 
 <body>
 
-<div class="max-w-2xl mx-auto p-4">
+<div class="max-w-2xl mx-auto p-4 pb-24">
 
-    <h1 class="text-3xl font-bold text-center mt-4">🏆 Ranking</h1>
-    <p class="text-center text-gray-400 mb-6">Top desenvolvedores</p>
+    <h1 class="text-4xl font-extrabold text-center mt-6 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow">🏆 Arena dos Devs</h1>
+    <p class="text-center text-indigo-200 mb-2 font-medium">Os melhores programadores da plataforma</p>
+
+    <div class="podium-container" id="podium"></div>
 
     <div class="card">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3"><i class="fa-solid fa-list-ol mr-2"></i>Classificação Geral</h3>
         <div id="lista"></div>
     </div>
 
 </div>
 
-<!-- BOTÃO VOLTAR -->
-<button class="back-btn" onclick="history.back()">
-<i class="fa-solid fa-arrow-left"></i>
-Voltar
-</button>
+<div class="fixed bottom-5 left-0 right-0 px-6 flex justify-between max-w-2xl mx-auto pointer-events-none">
+    <button class="action-btn pointer-events-auto" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i> Voltar
+    </button>
+    
+    <button class="action-btn share-btn pointer-events-auto" onclick="compartilharRanking()">
+        <i class="fa-solid fa-share-nodes"></i> Compartilhar
+    </button>
+</div>
 
 <script>
-
+// Pega os dados do usuário ou define o padrão
 const user = JSON.parse(localStorage.getItem("fluentcode_user")) || {
     nome: "Você",
     xp: 650
 };
 
+// Lista de competidores aumentada para testar a rolagem/lista
 const ranking = [
-    {nome:"Lucas", xp:980},
-    {nome:"Maria", xp:860},
-    {nome:user.nome || "Você", xp:user.xp},
-    {nome:"João", xp:420}
+    {nome: "Lucas", xp: 1250},
+    {nome: "Maria", xp: 980},
+    {nome: "João", xp: 420},
+    {nome: "Ana Clara", xp: 810},
+    {nome: "Pedro", xp: 590},
+    {nome: user.nome || "Você", xp: user.xp}
 ];
 
-ranking.sort((a,b) => b.xp - a.xp);
+// Organiza por pontuação do maior para o menor
+ranking.sort((a, b) => b.xp - a.xp);
 
-let html = "";
-let posicaoUser = 0;
+// --- CONSTRUÇÃO DO PÓDIO (Top 3) ---
+const podiumContainer = document.getElementById("podium");
+let podiumHTML = "";
 
-ranking.forEach((p,i) => {
+// Ordem visual clássica de pódio: [2º lugar, 1º lugar, 3º lugar]
+const ordemPodio = [1, 0, 2]; 
 
-    if(p.nome === user.nome) posicaoUser = i+1;
+ordemPodio.forEach((index) => {
+    const p = ranking[index];
+    if (!p) return;
 
-    let medalha = i===0 ? "🥇" : i===1 ? "🥈" : i===2 ? "🥉" : i+1;
+    let classeMedalha = index === 0 ? "gold" : index === 1 ? "silver" : "bronze";
+    let iconMedalha = index === 0 ? "👑" : index === 1 ? "🥈" : "🥉";
+    let animDelay = index === 0 ? "0.2s" : index === 1 ? "0s" : "0.4s";
+    let destaqueUser = p.nome === user.nome ? "border-blue-500 scale-105" : "";
 
-    html += `
-    <div class="item ${p.nome===user.nome ? 'me' : ''}">
-        <div class="badge">${medalha}</div>
+    podiumHTML += `
+    <div class="podium-column" style="animation-delay: ${animDelay}">
+        <div class="text-center mb-1 max-w-[90px]">
+            <p class="font-bold text-xs truncate ${p.nome === user.nome ? 'text-blue-400 font-extrabold' : 'text-gray-200'}">${p.nome}</p>
+            <p class="text-[11px] text-gray-400">${p.xp} XP</p>
+        </div>
+        <div class="podium-avatar ${destaqueUser}">
+            <i class="fa-solid fa-user text-gray-300"></i>
+        </div>
+        <div class="podium-base ${classeMedalha}">
+            <span class="drop-shadow-md">${iconMedalha}</span>
+            <span class="text-xs uppercase opacity-70">${index + 1}º</span>
+        </div>
+    </div>
+    `;
+});
+podiumContainer.innerHTML = podiumHTML;
 
-        <div class="avatar">
+
+// --- CONSTRUÇÃO DO RESTANTE DA LISTA (4º lugar em diante) ---
+const listaContainer = document.getElementById("lista");
+let listaHTML = "";
+
+ranking.forEach((p, i) => {
+    // Pula os 3 primeiros que já estão no pódio
+    if (i < 3) return;
+
+    listaHTML += `
+    <div class="item ${p.nome === user.nome ? 'me' : ''}">
+        <div class="w-8 font-bold text-center text-gray-400">#${i + 1}</div>
+
+        <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center text-sm">
             <i class="fa-solid fa-user"></i>
         </div>
 
         <div style="flex:1">
-            <div class="flex justify-between">
-                <b>${p.nome}</b>
-                <span>${p.xp} XP</span>
-            </div>
-
-            <div class="progress">
-                <div class="fill" style="width:${p.xp % 100}%"></div>
+            <div class="flex justify-between items-center">
+                <b class="${p.nome === user.nome ? 'text-blue-400' : ''}">${p.nome}</b>
+                <span class="text-sm font-medium text-indigo-300">${p.xp} XP</span>
             </div>
         </div>
     </div>
     `;
 });
 
-document.getElementById("lista").innerHTML = html;
+// Se não houver ninguém além do top 3, exibe uma mensagem amigável
+listaContainer.innerHTML = listaHTML || `<p class="text-gray-500 text-center text-sm py-4">Nenhum competidor extra no momento.</p>`;
 
+
+// --- FUNÇÃO DE COMPARTILHAR ---
+function compartilharRanking() {
+    // Descobre a posição atual do usuário para usar no texto
+    const minhaPosicao = ranking.findIndex(p => p.nome === user.nome) + 1;
+    const textoCompartilhar = `🏆 Olha o meu resultado no FluentCode! Estou na ${minhaPosicao}ª posição com ${user.xp} XP! Consegue me superar?`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Meu Ranking no FluentCode',
+            text: textoCompartilhar,
+            url: window.location.href
+        })
+        .then(() => console.log('Compartilhado com sucesso!'))
+        .catch((error) => console.log('Erro ao compartilhar:', error));
+    } else {
+        // Caso o navegador não tenha a API de compartilhamento nativo (ex: PCs mais antigos)
+        navigator.clipboard.writeText(textoCompartilhar);
+        alert("Texto de conquista copiado para a área de transferência! Cole onde quiser compartilhar. 😉");
+    }
+}
 </script>
 
 </body>
