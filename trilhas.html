@@ -9,247 +9,256 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
-/* 🔥 RESET ABSOLUTO MOBILE */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-html {
-    height: 100%;
-    width: 100%;
-    background: #0f172a;
-}
-
-/* 🔥 FIX PRINCIPAL DO CELULAR (IMPORTANTE) */
 body {
     min-height: 100vh;
-    min-height: 100dvh; /* moderno (corrige iPhone/Android) */
+    min-height: 100dvh;
     width: 100%;
-    overflow-x: hidden;
-
-    background: radial-gradient(circle at top,#1e293b,#0f172a);
+    background-color: #111827; /* Fundo Escuro Puro Moderno */
     color: white;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
+/* CONTAINER DO CAMINHO SINOOSO */
+.duo-path {
     display: flex;
     flex-direction: column;
-}
-
-/* HEADER */
-.header {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-
-/* HERO */
-.hero {
-    margin: 15px;
-    padding: 20px;
-    border-radius: 25px;
-
-    background: linear-gradient(135deg,#22c55e,#3b82f6);
-    box-shadow: 0 20px 50px rgba(0,0,0,.4);
-}
-
-/* MAPA OCUPA TUDO */
-.map {
     position: relative;
-    flex: 1; /* 🔥 faz ocupar a tela toda */
-    padding: 20px 0 120px;
+    padding: 40px 0 140px 0;
+    max-width: 480px;
+    margin: 0 auto;
 }
 
-/* linha central */
-.map::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 100%;
-    background: linear-gradient(#334155,#0f172a);
-    border-radius: 20px;
-}
-
-/* NODE */
-.node {
-    width: 85%;
-    max-width: 420px;
-    margin: 22px auto;
-    padding: 16px;
-    border-radius: 22px;
-
+/* BOTÃO DE NÍVEL ESTILO DUOLINGO (MÓDULO CIRCULAR) */
+.duo-level {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
-    background: rgba(31,41,55,0.92);
-    backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,255,255,0.08);
-
-    transition: .2s;
-    box-shadow: 0 10px 25px rgba(0,0,0,.35);
-
-    position: relative;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s;
+    margin: 35px 0;
     z-index: 2;
 }
 
-.node:hover {
-    transform: scale(1.03);
-    background: rgba(37,99,235,0.85);
-}
-
-/* posições */
-.left { margin-left: 6%; }
-.right { margin-left: auto; margin-right: 6%; }
-
-/* círculo */
-.circle {
-    width: 18px;
-    height: 18px;
+/* Efeito de clique e profundidade 3D idêntico ao Duolingo */
+.duo-level::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
-    margin-right: 12px;
+    z-index: -1;
+    transform: translateY(6px);
 }
 
-.done { background: #22c55e; }
-.active { background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
-.lock { background: #64748b; }
+.duo-level:active {
+    transform: translateY(6px) scale(0.95);
+}
+.duo-level:active::after {
+    transform: translateY(0);
+}
 
-/* info */
-.info {
+/* CORES DOS MÓDULOS (Completo, Atual, Bloqueado) */
+.lvl-done {
+    background: #22c55e; /* Verde Duolingo */
+    border: 2px solid #4ade80;
+}
+.lvl-done::after { background: #166534; }
+
+.lvl-active {
+    background: #3b82f6; /* Azul Elétrico */
+    border: 2px solid #60a5fa;
+    animation: pulseGlow 2s infinite alternate;
+}
+.lvl-active::after { background: #1d4ed8; }
+
+.lvl-locked {
+    background: #4b5563; /* Cinza Desativado */
+    border: 2px solid #9ca3af;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.lvl-locked::after { background: #1f2937; }
+
+/* LINHAS CONECTIVAS SINOOSAS SNEAKY */
+.svg-connector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* POPUP/TOOLTIP DE INFORMAÇÃO ACIMA DO NÍVEL */
+.duo-tooltip {
+    position: absolute;
+    bottom: 100px;
+    background: #1f2937;
+    border: 2px solid #374151;
+    border-radius: 16px;
+    padding: 10px 16px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+.duo-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+    background: #1f2937;
+    border-right: 2px solid #374151;
+    border-bottom: 2px solid #374151;
+}
+
+/* ANIMAÇÃO PARA O MÓDULO ATIVO */
+@keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+    100% { transform: scale(1.04); box-shadow: 0 0 15px 4px rgba(59, 130, 246, 0.3); }
+}
+
+/* POSICIONAMENTO EM ZIGUE-ZAGUE (Efeito Serpente do Duolingo) */
+.pos-center { transform: translateX(0); }
+.pos-left   { transform: translateX(-45px); }
+.pos-right  { transform: translateX(45px); }
+
+/* BOTÃO VOLTAR FIXO COMPACTO */
+.back-floating {
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: bold;
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.small {
-    font-size: 12px;
-    color: #94a3b8;
-}
-
-/* botão */
-.btn {
-    background: #22c55e;
-    padding: 8px 14px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 13px;
-    border: none;
+    box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
     cursor: pointer;
+    z-index: 100;
+    transition: 0.2s;
 }
-
-/* bloqueado */
-.locked {
-    opacity: .45;
-}
-
-/* BOTÃO VOLTAR (fixo seguro) */
-.back {
-    position: fixed;
-    bottom: calc(20px + env(safe-area-inset-bottom));
-    left: 20px;
-    z-index: 9999;
-
-    background: linear-gradient(to right,#2563eb,#4f46e5);
-    padding: 12px 18px;
-    border-radius: 14px;
-    font-weight: bold;
-
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,.5);
-    cursor: pointer;
+.back-floating:active {
+    transform: translateX(-50%) scale(0.95);
 }
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <div>
-        <b>FluentCode</b>
-        <div class="small">Trilhas de aprendizado 🚀</div>
-    </div>
-    <i class="fa-solid fa-code text-blue-400"></i>
-</div>
-
-<!-- HERO -->
-<div class="hero">
-    <h1>Escolha sua trilha</h1>
-    <div class="small">Aprenda programação passo a passo</div>
-</div>
-
-<!-- MAPA -->
-<div class="map">
-
-<div class="node left">
-    <div class="info">
-        <div class="circle done"></div>
+<div class="sticky top-0 bg-gray-900/90 backdrop-blur-md border-b border-gray-800 px-6 py-4 flex justify-between items-center z-50">
+    <div class="flex items-center gap-3">
+        <span class="text-2xl">⚡</span>
         <div>
-            <b>Olá Mundo</b>
-            <div class="small">Introdução</div>
+            <h1 class="font-black text-lg tracking-wide bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">FLUENTCODE</h1>
+            <p class="text-xs text-gray-400">Trilha Fundamentos</p>
         </div>
     </div>
-    <span>✔</span>
-</div>
-
-<div class="node right">
-    <div class="info">
-        <div class="circle active"></div>
-        <div>
-            <b>Variáveis</b>
-            <div class="small">Tipos de dados</div>
-        </div>
+    <div class="flex items-center gap-2 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
+        <i class="fa-solid fa-fire text-orange-500 animate-bounce"></i>
+        <span class="text-xs font-bold text-orange-400">5 Dias</span>
     </div>
-
-    <button class="btn" onclick="abrirVariaveis()">
-        Continuar
-    </button>
 </div>
 
-<div class="node left locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Condicionais</b>
-            <div class="small">if / else</div>
+<main class="relative min-h-screen">
+    
+    <svg class="svg-connector" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 240,80 Q 150,170 240,250 T 330,420 T 240,590 T 150,760" 
+              fill="none" stroke="#374151" stroke-width="10" stroke-linecap="round"/>
+        <path d="M 240,80 Q 150,170 240,250 T 330,420 T 240,590 T 150,760" 
+              fill="none" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+
+    <div class="duo-path">
+
+        <div class="duo-level lvl-done pos-center" onclick="alert('Módulo revisado!')">
+            <i class="fa-solid fa-check text-white"></i>
+            <div class="absolute top-[-30px] bg-green-600 text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Mundo 1</div>
         </div>
-    </div>
-    <span>🔒</span>
-</div>
+        <p class="text-sm font-bold text-green-400 mt-[-20px] mb-4">Olá Mundo</p>
 
-<div class="node right locked">
-    <div class="info">
-        <div class="circle lock"></div>
-        <div>
-            <b>Loops</b>
-            <div class="small">for / while</div>
+        <div class="relative">
+            <div class="duo-tooltip">
+                <p class="text-xs font-black uppercase text-blue-400 tracking-wider">Próxima Lição!</p>
+                <p class="text-sm font-bold text-white">Variáveis e Tipos</p>
+            </div>
+            
+            <div class="duo-level lvl-active pos-left" onclick="abrirVariaveis()">
+                <i class="fa-solid fa-star text-white"></i>
+            </div>
         </div>
+        <p class="text-sm font-bold text-blue-400 mt-[10px] mb-4 pos-left">Variáveis</p>
+
+        <div class="duo-level lvl-locked pos-right">
+            <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+        </div>
+        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4 pos-right">Condicionais</p>
+
+        <div class="duo-level lvl-locked pos-center">
+            <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+        </div>
+        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4">Loops</p>
+
+        <div class="duo-level lvl-locked pos-left">
+            <i class="fa-solid fa-trophy text-gray-500 text-lg"></i>
+        </div>
+        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4 pos-left">Desafio Final</p>
+
     </div>
-    <span>🔒</span>
-</div>
+</main>
 
-</div>
-
-<!-- BOTÃO VOLTAR -->
-<div class="back" onclick="history.back()">
-<i class="fa-solid fa-arrow-left"></i>
-Voltar
+<div class="back-floating" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i> Voltar ao Menu
 </div>
 
 <script>
 function abrirVariaveis(){
     window.location.href = "variaveis.html";
 }
+
+// Pequeno script para alinhar perfeitamente a linha SVG com o centro da tela independente do dispositivo
+window.addEventListener('resize', ajustarLinhaTrilha);
+function ajustarLinhaTrilha() {
+    const svg = document.querySelector('.svg-connector');
+    const niveis = document.querySelectorAll('.duo-level');
+    if(niveis.length < 2) return;
+    
+    let d = `M ${niveis[0].offsetLeft + 42},${niveis[0].offsetTop + 42}`;
+    for(let i=1; i<niveis.length; i++) {
+        let xAnterior = niveis[i-1].offsetLeft + 42;
+        let yAnterior = niveis[i-1].offsetTop + 42;
+        let xAtual = niveis[i].offsetLeft + 42;
+        let yAtual = niveis[i].offsetTop + 42;
+        
+        // Cria curvas suaves entre as gemas do mapa
+        let cpY = (yAnterior + yAtual) / 2;
+        d += ` C ${xAnterior},${cpY} ${xAtual},${cpY} ${xAtual},${yAtual}`;
+    }
+    
+    svg.querySelector('path').setAttribute('d', d);
+    svg.querySelectorAll('path')[1].setAttribute('d', d);
+}
+// Roda assim que carrega
+setTimeout(ajustarLinhaTrilha, 100);
 </script>
 
 </body>
