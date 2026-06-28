@@ -44,7 +44,7 @@ body {
     align-items: center;
     margin: 25px 0;
     position: relative;
-    z-index: 10; /* Garante que todo o bloco fique na frente da linha */
+    z-index: 10;
 }
 
 /* BOTÃO DE NÍVEL (MÓDULO CIRCULAR) */
@@ -108,7 +108,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1; /* Mantém a linha estritamente atrás de tudo */
+    z-index: 1;
 }
 
 /* TEXTO DOS MÓDULOS */
@@ -116,7 +116,7 @@ body {
     font-size: 0.875rem;
     font-weight: bold;
     margin-top: 12px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Sombra para destacar no fundo escuro */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     text-align: center;
 }
 
@@ -160,26 +160,25 @@ body {
 .pos-left   { transform: translateX(-45px); }
 .pos-right  { transform: translateX(45px); }
 
-/* BOTÃO VOLTAR */
-.back-floating {
+/* BOTÃO VOLTAR FIXADO NA LATERAL ESQUERDA INFERIOR */
+.back-fixed {
     position: fixed;
     bottom: calc(20px + env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    padding: 14px 28px;
-    border-radius: 30px;
+    padding: 12px 20px;
+    border-radius: 14px;
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     z-index: 100;
     transition: 0.2s;
 }
-.back-floating:active {
-    transform: translateX(-50%) scale(0.95);
+.back-fixed:active {
+    transform: scale(0.95);
 }
 </style>
 </head>
@@ -251,8 +250,8 @@ body {
     </div>
 </main>
 
-<div class="back-floating" onclick="history.back()">
-    <i class="fa-solid fa-chevron-left"></i> Voltar ao Menu
+<div class="back-fixed" onclick="history.back()">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
 </div>
 
 <script>
@@ -267,7 +266,6 @@ function ajustarLinhaTrilha() {
     const niveis = document.querySelectorAll('.duo-level');
     if(niveis.length < 2) return;
     
-    // Pega a posição real do círculo baseando-se no container pai (grupo)
     let d = `M ${grupos[0].offsetLeft + niveis[0].offsetLeft + 42},${grupos[0].offsetTop + niveis[0].offsetTop + 42}`;
     
     for(let i=1; i<niveis.length; i++) {
