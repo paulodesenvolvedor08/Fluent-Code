@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>FluentCode - Trilhas</title>
+<title>FluentCode - Trilhas Estilo Duolingo</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,13 +20,13 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     width: 100%;
-    background-color: #111827; /* Fundo Escuro Puro Moderno */
+    background-color: #111827; 
     color: white;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-/* CONTAINER DO CAMINHO SINOOSO */
+/* CONTAINER DO CAMINHO */
 .duo-path {
     display: flex;
     flex-direction: column;
@@ -37,7 +37,17 @@ body {
     margin: 0 auto;
 }
 
-/* BOTÃO DE NÍVEL ESTILO DUOLINGO (MÓDULO CIRCULAR) */
+/* GRUPO DO MÓDULO + TEXTO */
+.level-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px 0;
+    position: relative;
+    z-index: 10; /* Garante que todo o bloco fique na frente da linha */
+}
+
+/* BOTÃO DE NÍVEL (MÓDULO CIRCULAR) */
 .duo-level {
     position: relative;
     width: 84px;
@@ -49,11 +59,9 @@ body {
     font-size: 1.8rem;
     cursor: pointer;
     transition: transform 0.1s ease, filter 0.2s;
-    margin: 35px 0;
-    z-index: 2;
 }
 
-/* Efeito de clique e profundidade 3D idêntico ao Duolingo */
+/* Efeito 3D */
 .duo-level::after {
     content: '';
     position: absolute;
@@ -70,29 +78,29 @@ body {
     transform: translateY(0);
 }
 
-/* CORES DOS MÓDULOS (Completo, Atual, Bloqueado) */
+/* CORES DOS MÓDULOS */
 .lvl-done {
-    background: #22c55e; /* Verde Duolingo */
+    background: #22c55e;
     border: 2px solid #4ade80;
 }
 .lvl-done::after { background: #166534; }
 
 .lvl-active {
-    background: #3b82f6; /* Azul Elétrico */
+    background: #3b82f6;
     border: 2px solid #60a5fa;
     animation: pulseGlow 2s infinite alternate;
 }
 .lvl-active::after { background: #1d4ed8; }
 
 .lvl-locked {
-    background: #4b5563; /* Cinza Desativado */
+    background: #4b5563;
     border: 2px solid #9ca3af;
     cursor: not-allowed;
     pointer-events: none;
 }
 .lvl-locked::after { background: #1f2937; }
 
-/* LINHAS CONECTIVAS SINOOSAS SNEAKY */
+/* LINHAS CONECTIVAS NO FUNDO */
 .svg-connector {
     position: absolute;
     top: 0;
@@ -100,10 +108,23 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 1; /* Mantém a linha estritamente atrás de tudo */
 }
 
-/* POPUP/TOOLTIP DE INFORMAÇÃO ACIMA DO NÍVEL */
+/* TEXTO DOS MÓDULOS */
+.level-title {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-top: 12px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Sombra para destacar no fundo escuro */
+    text-align: center;
+}
+
+.title-done { color: #4ade80; }
+.title-active { color: #60a5fa; }
+.title-locked { color: #9ca3af; }
+
+/* TOOLTIP */
 .duo-tooltip {
     position: absolute;
     bottom: 100px;
@@ -113,8 +134,8 @@ body {
     padding: 10px 16px;
     text-align: center;
     white-space: nowrap;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    z-index: 10;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 20;
 }
 .duo-tooltip::after {
     content: '';
@@ -129,18 +150,17 @@ body {
     border-bottom: 2px solid #374151;
 }
 
-/* ANIMAÇÃO PARA O MÓDULO ATIVO */
 @keyframes pulseGlow {
     0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
     100% { transform: scale(1.04); box-shadow: 0 0 15px 4px rgba(59, 130, 246, 0.3); }
 }
 
-/* POSICIONAMENTO EM ZIGUE-ZAGUE (Efeito Serpente do Duolingo) */
+/* POSICIONAMENTO EM ZIGUE-ZAGUE */
 .pos-center { transform: translateX(0); }
 .pos-left   { transform: translateX(-45px); }
 .pos-right  { transform: translateX(45px); }
 
-/* BOTÃO VOLTAR FIXO COMPACTO */
+/* BOTÃO VOLTAR */
 .back-floating {
     position: fixed;
     bottom: calc(20px + env(safe-area-inset-bottom));
@@ -174,7 +194,7 @@ body {
         </div>
     </div>
     <div class="flex items-center gap-2 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
-        <i class="fa-solid fa-fire text-orange-500 animate-bounce"></i>
+        <i class="fa-solid fa-fire text-orange-500"></i>
         <span class="text-xs font-bold text-orange-400">5 Dias</span>
     </div>
 </div>
@@ -182,46 +202,51 @@ body {
 <main class="relative min-h-screen">
     
     <svg class="svg-connector" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 240,80 Q 150,170 240,250 T 330,420 T 240,590 T 150,760" 
-              fill="none" stroke="#374151" stroke-width="10" stroke-linecap="round"/>
-        <path d="M 240,80 Q 150,170 240,250 T 330,420 T 240,590 T 150,760" 
-              fill="none" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+        <path d="" fill="none" stroke="#374151" stroke-width="10" stroke-linecap="round"/>
+        <path d="" fill="none" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
     </svg>
 
     <div class="duo-path">
 
-        <div class="duo-level lvl-done pos-center" onclick="alert('Módulo revisado!')">
-            <i class="fa-solid fa-check text-white"></i>
-            <div class="absolute top-[-30px] bg-green-600 text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Mundo 1</div>
+        <div class="level-group pos-center">
+            <div class="duo-level lvl-done" onclick="alert('Módulo revisado!')">
+                <i class="fa-solid fa-check text-white"></i>
+                <div class="absolute top-[-30px] bg-green-600 text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Mundo 1</div>
+            </div>
+            <p class="level-title title-done">Olá Mundo</p>
         </div>
-        <p class="text-sm font-bold text-green-400 mt-[-20px] mb-4">Olá Mundo</p>
 
-        <div class="relative">
+        <div class="level-group pos-left">
             <div class="duo-tooltip">
                 <p class="text-xs font-black uppercase text-blue-400 tracking-wider">Próxima Lição!</p>
                 <p class="text-sm font-bold text-white">Variáveis e Tipos</p>
             </div>
-            
-            <div class="duo-level lvl-active pos-left" onclick="abrirVariaveis()">
+            <div class="duo-level lvl-active" onclick="abrirVariaveis()">
                 <i class="fa-solid fa-star text-white"></i>
             </div>
+            <p class="level-title title-active">Variáveis</p>
         </div>
-        <p class="text-sm font-bold text-blue-400 mt-[10px] mb-4 pos-left">Variáveis</p>
 
-        <div class="duo-level lvl-locked pos-right">
-            <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+        <div class="level-group pos-right">
+            <div class="duo-level lvl-locked">
+                <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+            </div>
+            <p class="level-title title-locked">Condicionais</p>
         </div>
-        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4 pos-right">Condicionais</p>
 
-        <div class="duo-level lvl-locked pos-center">
-            <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+        <div class="level-group pos-center">
+            <div class="duo-level lvl-locked">
+                <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
+            </div>
+            <p class="level-title title-locked">Loops</p>
         </div>
-        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4">Loops</p>
 
-        <div class="duo-level lvl-locked pos-left">
-            <i class="fa-solid fa-trophy text-gray-500 text-lg"></i>
+        <div class="level-group pos-left">
+            <div class="duo-level lvl-locked">
+                <i class="fa-solid fa-trophy text-gray-500 text-lg"></i>
+            </div>
+            <p class="level-title title-locked">Desafio Final</p>
         </div>
-        <p class="text-sm font-bold text-gray-500 mt-[-25px] mb-4 pos-left">Desafio Final</p>
 
     </div>
 </main>
@@ -235,29 +260,29 @@ function abrirVariaveis(){
     window.location.href = "variaveis.html";
 }
 
-// Pequeno script para alinhar perfeitamente a linha SVG com o centro da tela independente do dispositivo
 window.addEventListener('resize', ajustarLinhaTrilha);
 function ajustarLinhaTrilha() {
     const svg = document.querySelector('.svg-connector');
+    const grupos = document.querySelectorAll('.level-group');
     const niveis = document.querySelectorAll('.duo-level');
     if(niveis.length < 2) return;
     
-    let d = `M ${niveis[0].offsetLeft + 42},${niveis[0].offsetTop + 42}`;
+    // Pega a posição real do círculo baseando-se no container pai (grupo)
+    let d = `M ${grupos[0].offsetLeft + niveis[0].offsetLeft + 42},${grupos[0].offsetTop + niveis[0].offsetTop + 42}`;
+    
     for(let i=1; i<niveis.length; i++) {
-        let xAnterior = niveis[i-1].offsetLeft + 42;
-        let yAnterior = niveis[i-1].offsetTop + 42;
-        let xAtual = niveis[i].offsetLeft + 42;
-        let yAtual = niveis[i].offsetTop + 42;
+        let xAnterior = grupos[i-1].offsetLeft + niveis[i-1].offsetLeft + 42;
+        let yAnterior = grupos[i-1].offsetTop + niveis[i-1].offsetTop + 42;
+        let xAtual = grupos[i].offsetLeft + niveis[i].offsetLeft + 42;
+        let yAtual = grupos[i].offsetTop + niveis[i].offsetTop + 42;
         
-        // Cria curvas suaves entre as gemas do mapa
         let cpY = (yAnterior + yAtual) / 2;
         d += ` C ${xAnterior},${cpY} ${xAtual},${cpY} ${xAtual},${yAtual}`;
     }
     
-    svg.querySelector('path').setAttribute('d', d);
+    svg.querySelectorAll('path')[0].setAttribute('d', d);
     svg.querySelectorAll('path')[1].setAttribute('d', d);
 }
-// Roda assim que carrega
 setTimeout(ajustarLinhaTrilha, 100);
 </script>
 
