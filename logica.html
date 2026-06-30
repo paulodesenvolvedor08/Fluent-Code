@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lógica Java - FluentCode</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,61 +13,41 @@
         body {
             background: #0d1b2a;
             color: white;
+            /* Evita zoom estranho ao rotacionar o celular */
+            -webkit-text-size-adjust: 100%;
         }
-
-        .card {
-            background: #0f172a;
-            border: 1px solid #1f2937;
-            border-radius: 18px;
-            padding: 24px 16px;
-            width: 100%;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem; /* Tamanho ideal para toque no celular */
-            transition: all 0.2s;
-        }
-        
-        /* Formatação ideal para os blocos de código Java no mobile */
         pre {
-            white-space: pre-wrap;       /* Mantém quebras de linha */
-            word-wrap: break-word;       /* Evita que o código saia da tela */
+            white-space: pre-wrap;
+            word-wrap: break-word;
             font-family: monospace;
         }
     </style>
 </head>
 
-<body class="p-4 sm:p-6 flex flex-col justify-center min-h-screen pb-20">
+<body class="p-4 min-h-screen flex flex-col justify-between items-center pb-24">
 
-    <div class="card max-w-md mx-auto shadow-2xl">
+    <div class="w-full max-w-md bg-[#0f172a] border border-gray-800 rounded-2xl p-6 shadow-2xl my-auto">
 
         <h1 class="text-2xl font-black text-center mb-6 tracking-wide text-blue-400">
             💡 Lógica Java
         </h1>
 
-        <pre id="pergunta" class="text-left bg-slate-950/60 p-4 rounded-xl text-base mb-6 border border-slate-800 leading-relaxed font-semibold">
+        <pre id="pergunta" class="text-left bg-slate-950/80 p-5 rounded-xl text-lg mb-6 border border-slate-800 leading-relaxed font-bold text-slate-200">
             ...
         </pre>
 
-        <div id="opcoes" class="grid gap-3.5"></div>
+        <div id="opcoes" class="grid gap-4 w-full"></div>
 
-        <p id="msg" class="text-center mt-6 text-xl font-black tracking-wider min-h-[32px]"></p>
+        <p id="msg" class="text-center mt-6 text-2xl font-black tracking-wider min-h-[36px]"></p>
 
     </div>
 
-    <div class="mt-10 text-center">
-        <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl shadow-xl transition-all duration-200 z-50">
-            <i class="fa-solid fa-arrow-left text-lg"></i>
-            <span class="font-bold text-sm">Voltar</span>
-        </button>
-    </div>
+    <button onclick="window.location.href='atividades.html'" class="fixed bottom-5 left-5 right-5 sm:right-auto flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl shadow-2xl transition-all duration-200 z-50">
+        <i class="fa-solid fa-arrow-left text-xl"></i>
+        <span class="font-black text-base tracking-wide">Voltar para Atividades</span>
+    </button>
 
     <script>
-        /* 🔥 QUESTÕES DE LÓGICA */
         const fases = [
             {
                 p: "O que será impresso?\n\nint x = 5;\nif(x > 3){\n  System.out.println('A');\n}",
@@ -113,7 +93,6 @@
 
         let i = 0;
 
-        /* 🔁 CARREGAR */
         function load() {
             let f = fases[i];
             document.getElementById("pergunta").innerText = f.p;
@@ -125,33 +104,34 @@
             f.o.forEach(x => {
                 let b = document.createElement("button");
                 b.innerText = x.t;
-                b.className = "btn bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700/50 active:bg-slate-600";
+                // Botões ganharam padding alto (py-4) e texto grande (text-lg) nativo do Tailwind
+                b.className = "w-full py-4 px-5 rounded-xl font-bold text-lg bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 active:bg-slate-600 shadow-md text-left pl-6";
                 b.onclick = () => check(x.ok);
                 op.appendChild(b);
             });
         }
 
-        /* 🎮 VERIFICAR */
         function check(ok) {
             let user = JSON.parse(localStorage.getItem("fluentcode_user")) || { xp: 0 };
+            let msgElement = document.getElementById("msg");
 
             if (ok) {
                 user.xp += fases[i].xp;
-                document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-green-400";
-                document.getElementById("msg").innerText = "✔ Correto!";
+                msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-green-400";
+                msgElement.innerText = "✔ Correto!";
                 i++;
 
                 if (i < fases.length) {
                     setTimeout(load, 1000);
                 } else {
                     setTimeout(() => {
-                        document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-amber-400";
-                        document.getElementById("msg").innerText = "🏆 Concluído!";
+                        msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-amber-400";
+                        msgElement.innerText = "🏆 Concluído!";
                     }, 1000);
                 }
             } else {
-                document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-red-400";
-                document.getElementById("msg").innerText = "❌ Errado!";
+                msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-red-400";
+                msgElement.innerText = "❌ Errado!";
             }
 
             localStorage.setItem("fluentcode_user", JSON.stringify(user));
@@ -161,5 +141,4 @@
     </script>
 
 </body>
-
 </html>
