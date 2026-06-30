@@ -2,158 +2,164 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<title>Lógica Java - FluentCode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica Java - FluentCode</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-body{
-    background:#0d1b2a;
-    color:white;
-}
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+        }
 
-.card{
-   background:#0f172a;
-    border:1px solid #1f2937;
-    border-radius:18px;
+        .card {
+            background: #0f172a;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
+            padding: 24px 16px;
+            width: 100%;
+        }
 
-    padding:20px;
-
-    width:100%;
-}
-
-.btn{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    font-weight:bold;
-}
-</style>
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem; /* Tamanho ideal para toque no celular */
+            transition: all 0.2s;
+        }
+        
+        /* Formatação ideal para os blocos de código Java no mobile */
+        pre {
+            white-space: pre-wrap;       /* Mantém quebras de linha */
+            word-wrap: break-word;       /* Evita que o código saia da tela */
+            font-family: monospace;
+        }
+    </style>
 </head>
 
-<body class="p-4 sm:p-6">
+<body class="p-4 sm:p-6 flex flex-col justify-center min-h-screen pb-20">
 
-<div class="card">
+    <div class="card max-w-md mx-auto shadow-2xl">
 
-<h1 class="text-xl font-bold text-center mb-4">
-💡 Lógica Java
-</h1>
+        <h1 class="text-2xl font-black text-center mb-6 tracking-wide text-blue-400">
+            💡 Lógica Java
+        </h1>
 
-<p id="pergunta" class="text-center text-lg mb-4">
-...
-</p>
+        <pre id="pergunta" class="text-left bg-slate-950/60 p-4 rounded-xl text-base mb-6 border border-slate-800 leading-relaxed font-semibold">
+            ...
+        </pre>
 
-<div id="opcoes" class="grid gap-3"></div>
+        <div id="opcoes" class="grid gap-3.5"></div>
 
-<p id="msg" class="text-center mt-4 font-bold"></p>
+        <p id="msg" class="text-center mt-6 text-xl font-black tracking-wider min-h-[32px]"></p>
+
+    </div>
 
     <div class="mt-10 text-center">
-  <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-200 z-50">
-  <i class="fa-solid fa-arrow-left"></i>
-  <span class="font-bold">Voltar</span>
-</button>
-</div>
-</div>
+        <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl shadow-xl transition-all duration-200 z-50">
+            <i class="fa-solid fa-arrow-left text-lg"></i>
+            <span class="font-bold text-sm">Voltar</span>
+        </button>
+    </div>
 
-<script>
+    <script>
+        /* 🔥 QUESTÕES DE LÓGICA */
+        const fases = [
+            {
+                p: "O que será impresso?\n\nint x = 5;\nif(x > 3){\n  System.out.println('A');\n}",
+                o: [
+                    { t: "A", ok: true },
+                    { t: "Nada", ok: false },
+                    { t: "Erro", ok: false },
+                    { t: "B", ok: false }
+                ],
+                xp: 120
+            },
+            {
+                p: "Qual o resultado?\n\nfor(int i=0;i<3;i++) { \n  // bloco\n}\nSystem.out.println(i);",
+                o: [
+                    { t: "Erro (i não existe fora do for)", ok: true },
+                    { t: "3", ok: false },
+                    { t: "0", ok: false },
+                    { t: "1", ok: false }
+                ],
+                xp: 140
+            },
+            {
+                p: "Qual é o valor final?\n\nint x = 2;\nx = x + 3 * 2;",
+                o: [
+                    { t: "8", ok: true },
+                    { t: "10", ok: false },
+                    { t: "7", ok: false },
+                    { t: "6", ok: false }
+                ],
+                xp: 130
+            },
+            {
+                p: "O que acontece?\n\nif(true && false){\n  System.out.println('X');\n}",
+                o: [
+                    { t: "Nada é impresso", ok: true },
+                    { t: "X", ok: false },
+                    { t: "Erro", ok: false },
+                    { t: "true", ok: false }
+                ],
+                xp: 110
+            }
+        ];
 
-/* 🔥 QUESTÕES DE LÓGICA */
-const fases = [
-{
-p:"O que será impresso?\n\nint x = 5;\nif(x > 3){ System.out.println('A'); }",
-o:[
-{t:"A",ok:true},
-{t:"Nada",ok:false},
-{t:"Erro",ok:false},
-{t:"B",ok:false}
-],
-xp:120
-},
-{
-p:"Qual o resultado?\n\nfor(int i=0;i<3;i++) { } System.out.println(i);",
-o:[
-{t:"Erro (i não existe fora do for)",ok:true},
-{t:"3",ok:false},
-{t:"0",ok:false},
-{t:"1",ok:false}
-],
-xp:140
-},
-{
-p:"Qual é o valor final?\n\nint x = 2;\nx = x + 3 * 2;",
-o:[
-{t:"8",ok:true},
-{t:"10",ok:false},
-{t:"7",ok:false},
-{t:"6",ok:false}
-],
-xp:130
-},
-{
-p:"O que acontece?\n\nif(true && false){ System.out.println('X'); }",
-o:[
-{t:"Nada é impresso",ok:true},
-{t:"X",ok:false},
-{t:"Erro",ok:false},
-{t:"true",ok:false}
-],
-xp:110
-}
-];
+        let i = 0;
 
-let i=0;
+        /* 🔁 CARREGAR */
+        function load() {
+            let f = fases[i];
+            document.getElementById("pergunta").innerText = f.p;
 
-/* 🔁 CARREGAR */
-function load(){
+            let op = document.getElementById("opcoes");
+            op.innerHTML = "";
+            document.getElementById("msg").innerText = "";
 
-let f=fases[i];
+            f.o.forEach(x => {
+                let b = document.createElement("button");
+                b.innerText = x.t;
+                b.className = "btn bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700/50 active:bg-slate-600";
+                b.onclick = () => check(x.ok);
+                op.appendChild(b);
+            });
+        }
 
-document.getElementById("pergunta").innerText=f.p;
+        /* 🎮 VERIFICAR */
+        function check(ok) {
+            let user = JSON.parse(localStorage.getItem("fluentcode_user")) || { xp: 0 };
 
-let op=document.getElementById("opcoes");
-op.innerHTML="";
+            if (ok) {
+                user.xp += fases[i].xp;
+                document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-green-400";
+                document.getElementById("msg").innerText = "✔ Correto!";
+                i++;
 
-f.o.forEach(x=>{
-let b=document.createElement("button");
+                if (i < fases.length) {
+                    setTimeout(load, 1000);
+                } else {
+                    setTimeout(() => {
+                        document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-amber-400";
+                        document.getElementById("msg").innerText = "🏆 Concluído!";
+                    }, 1000);
+                }
+            } else {
+                document.getElementById("msg").className = "text-center mt-6 text-xl font-black tracking-wider min-h-[32px] text-red-400";
+                document.getElementById("msg").innerText = "❌ Errado!";
+            }
 
-b.innerText=x.t;
-b.className="btn bg-slate-800 hover:bg-slate-700";
+            localStorage.setItem("fluentcode_user", JSON.stringify(user));
+        }
 
-b.onclick=()=>check(x.ok);
-
-op.appendChild(b);
-});
-
-}
-
-/* 🎮 VERIFICAR */
-function check(ok){
-
-let user=JSON.parse(localStorage.getItem("fluentcode_user"))||{xp:0};
-
-if(ok){
-user.xp+=fases[i].xp;
-
-document.getElementById("msg").innerText="✔ Correto!";
-i++;
-
-if(i<fases.length){
-setTimeout(load,1000);
-}else{
-document.getElementById("msg").innerText="🏆 Concluído!";
-}
-
-}else{
-document.getElementById("msg").innerText="❌ Errado!";
-}
-
-localStorage.setItem("fluentcode_user",JSON.stringify(user));
-}
-
-load();
-
-</script>
+        load();
+    </script>
 
 </body>
+
 </html>
