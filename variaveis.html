@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 * {
     margin: 0;
     padding: 0;
@@ -67,46 +66,30 @@ body {
     margin-top: 10px;
     font-family: monospace;
     color: #22c55e;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
 }
 
-/* badge */
+/* badge genérico */
 .badge {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 12px;
-    font-size: 12px;
-    background: #22c55e;
+    font-size: 13px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
-/* BOTÃO VOLTAR */
-.back {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 9999;
-
-    background: linear-gradient(to right,#2563eb,#4f46e5);
-    padding: 12px 18px;
-    border-radius: 14px;
-    font-weight: bold;
-
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,.5);
-    cursor: pointer;
+/* Classes de Estado (Bloqueado vs Desbloqueado) */
+.locked-element {
+    opacity: 0.4;
+    pointer-events: none; /* Impede cliques */
+    user-select: none;
 }
 </style>
 </head>
 
-<body>
-
-<!-- HEADER -->
-<div class="header">
+<body class="pb-24"> <div class="header">
     <div>
         <b>FluentCode</b>
         <div style="font-size:12px;color:#94a3b8">Aula: Variáveis</div>
@@ -114,7 +97,6 @@ body {
     <i class="fa-solid fa-code text-blue-400"></i>
 </div>
 
-<!-- HERO -->
 <div class="hero">
     <h1>📦 Variáveis em Java</h1>
     <div style="font-size:13px;opacity:.9;margin-top:5px">
@@ -122,14 +104,11 @@ body {
     </div>
 </div>
 
-<!-- CARD 1 -->
-<div class="card">
-    <span class="badge">🔢 Números inteiros</span>
-
+<div class="card border-l-4 border-green-500">
+    <span class="badge bg-green-500 text-slate-950">🔢 Números inteiros (Desbloqueado)</span>
     <p style="font-size:14px;color:#cbd5e1">
         Usado para armazenar números sem casas decimais.
     </p>
-
     <div class="code">
 int idade = 18;<br>
 int ano = 2026;<br>
@@ -137,74 +116,59 @@ int pontos = 150;
     </div>
 </div>
 
-<!-- CARD 2 -->
-<div class="card">
-    <span class="badge">💰 Números decimais</span>
-
+<div class="card locked-element">
+    <span class="badge bg-slate-700 text-slate-400">🔒 💰 Números decimais</span>
     <p style="font-size:14px;color:#cbd5e1">
         Usado para valores com casas decimais.
     </p>
-
-    <div class="code">
+    <div class="code" style="color: #64748b;">
 double salario = 2500.50;<br>
 double altura = 1.75;<br>
 double preco = 19.99;
     </div>
 </div>
 
-<!-- CARD 3 -->
-<div class="card">
-    <span class="badge">🔤 Texto (String)</span>
-
+<div class="card locked-element">
+    <span class="badge bg-slate-700 text-slate-400">🔒 🔤 Texto (String)</span>
     <p style="font-size:14px;color:#cbd5e1">
         Usado para armazenar palavras ou frases.
     </p>
-
-    <div class="code">
+    <div class="code" style="color: #64748b;">
 String nome = "Lucas";<br>
 String cidade = "Natal";<br>
 String curso = "Java";
     </div>
 </div>
 
-<!-- CARD 4 -->
-<div class="card">
-    <span class="badge">✅ Boolean (verdadeiro/falso)</span>
-
+<div class="card locked-element">
+    <span class="badge bg-slate-700 text-slate-400">🔒 ✅ Boolean (verdadeiro/falso)</span>
     <p style="font-size:14px;color:#cbd5e1">
         Representa valores lógicos.
     </p>
-
-    <div class="code">
+    <div class="code" style="color: #64748b;">
 boolean ativo = true;<br>
 boolean logado = false;<br>
 boolean aprovado = true;
     </div>
 </div>
 
-<!-- CARD 5 -->
-<div class="card">
-    <span class="badge">🧠 Exemplo completo</span>
-
-    <div class="code">
+<div class="card locked-element">
+    <span class="badge bg-slate-700 text-slate-400">🔒 🧠 Exemplo completo</span>
+    <div class="code" style="color: #64748b;">
 public class Main {<br>
 &nbsp;&nbsp;public static void main(String[] args) {<br><br>
-
 &nbsp;&nbsp;&nbsp;&nbsp;String nome = "Ana";<br>
 &nbsp;&nbsp;&nbsp;&nbsp;int idade = 20;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;double altura = 1.68;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;boolean estudante = true;<br><br>
-
 &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(nome);<br>
-&nbsp;&nbsp;}<br>
-}
+&nbsp;&nbsp;}\n}
     </div>
 </div>
 
-<!-- BOTÃO VOLTAR -->
-<div class="back" onclick="history.back()">
-<i class="fa-solid fa-arrow-left"></i>
-Voltar
+<div class="fixed bottom-5 left-5 right-5 locked-element bg-slate-800 text-slate-500 p-4 rounded-xl font-bold flex gap-3 justify-center items-center shadow-2xl border border-slate-700">
+    <i class="fa-solid fa-lock text-sm"></i>
+    <span>Voltar (Bloqueado)</span>
 </div>
 
 </body>
