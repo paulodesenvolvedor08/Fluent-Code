@@ -3,142 +3,1316 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Lógica Java - FluentCode</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body {
-            background: #0d1b2a;
-            color: white;
-            /* Evita zoom estranho ao rotacionar o celular */
-            -webkit-text-size-adjust: 100%;
+
+        * {
+            box-sizing: border-box;
         }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.16), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(124, 58, 237, 0.14), transparent 30%),
+                #07111f;
+            color: white;
+            -webkit-text-size-adjust: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.20;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 32px 32px;
+            z-index: -1;
+        }
+
         pre {
             white-space: pre-wrap;
             word-wrap: break-word;
-            font-family: monospace;
+            font-family: "Courier New", monospace;
         }
+
+        .glass {
+            background: rgba(10, 22, 40, 0.82);
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+            backdrop-filter: blur(18px);
+        }
+
+        .logo-gradient {
+            background: linear-gradient(
+                90deg,
+                #60a5fa,
+                #818cf8,
+                #c084fc
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #172338;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #6366f1,
+                #a855f7
+            );
+            transition: width 0.5s ease;
+        }
+
+        .question-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 42, 0.96),
+                    rgba(8, 20, 36, 0.96)
+                );
+            border: 1px solid rgba(96, 165, 250, 0.12);
+        }
+
+        .code-line {
+            color: #64748b;
+            user-select: none;
+        }
+
+        .option-button {
+            position: relative;
+            width: 100%;
+            min-height: 62px;
+            padding: 16px 18px;
+            border-radius: 15px;
+            border: 1px solid #243247;
+            background: linear-gradient(
+                135deg,
+                #111e31,
+                #0d192b
+            );
+            color: #e2e8f0;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .option-button:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+            background: linear-gradient(
+                135deg,
+                #162640,
+                #101e33
+            );
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12);
+        }
+
+        .option-button:active {
+            transform: scale(0.98);
+        }
+
+        .option-letter {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #172338;
+            color: #60a5fa;
+            font-weight: 900;
+        }
+
+        .xp-badge {
+            background: rgba(234, 179, 8, 0.10);
+            border: 1px solid rgba(234, 179, 8, 0.22);
+            color: #facc15;
+        }
+
+        .difficulty-easy {
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.10);
+            border-color: rgba(34, 197, 94, 0.20);
+        }
+
+        .difficulty-medium {
+            color: #facc15;
+            background: rgba(234, 179, 8, 0.10);
+            border-color: rgba(234, 179, 8, 0.20);
+        }
+
+        .difficulty-hard {
+            color: #fb7185;
+            background: rgba(244, 63, 94, 0.10);
+            border-color: rgba(244, 63, 94, 0.20);
+        }
+
+        .success-box {
+            animation: aparecer 0.35s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-icon {
+            animation: flutuar 3s ease-in-out infinite;
+        }
+
+        @keyframes flutuar {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .option-button {
+                min-height: 58px;
+                font-size: 15px;
+            }
+
+            .question-box {
+                font-size: 15px;
+            }
+
+        }
+
     </style>
 </head>
 
-<body class="p-4 min-h-screen flex flex-col justify-between items-center pb-24">
 
-    <div class="w-full max-w-md bg-[#0f172a] border border-gray-800 rounded-2xl p-6 shadow-2xl my-auto">
+<body class="min-h-screen pb-28">
 
-        <h1 class="text-2xl font-black text-center mb-6 tracking-wide text-blue-400">
-            💡 Lógica Java
-        </h1>
+    <!-- =========================================
+         CABEÇALHO
+    ========================================== -->
 
-        <pre id="pergunta" class="text-left bg-slate-950/80 p-5 rounded-xl text-lg mb-6 border border-slate-800 leading-relaxed font-bold text-slate-200">
-            ...
-        </pre>
+    <header class="w-full border-b border-slate-800/70 bg-[#07111f]/90 backdrop-blur-xl">
 
-        <div id="opcoes" class="grid gap-4 w-full"></div>
+        <div class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
 
-        <p id="msg" class="text-center mt-6 text-2xl font-black tracking-wider min-h-[36px]"></p>
+            <div class="flex items-center gap-3">
 
-    </div>
+                <div
+                    class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center floating-icon">
 
-    <button onclick="window.location.href='atividades.html'" class="fixed bottom-5 left-5 right-5 sm:right-auto flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl shadow-2xl transition-all duration-200 z-50">
-        <i class="fa-solid fa-arrow-left text-xl"></i>
-        <span class="font-black text-base tracking-wide">Voltar para Atividades</span>
+                    <i class="fa-solid fa-code text-blue-400 text-lg"></i>
+
+                </div>
+
+                <div>
+
+                    <div class="text-xl font-black logo-gradient">
+                        FluentCode
+                    </div>
+
+                    <div class="text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                        Learning • Java • English
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20">
+
+                <i class="fa-solid fa-brain text-blue-400"></i>
+
+                <span class="text-sm font-bold text-blue-300">
+                    Lógica Java
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="w-full max-w-3xl mx-auto px-4 pt-7">
+
+        <!-- TÍTULO -->
+
+        <section class="mb-6">
+
+            <div class="flex items-center gap-3 mb-3">
+
+                <div
+                    class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-400/20 flex items-center justify-center">
+
+                    <i class="fa-solid fa-lightbulb text-blue-400 text-xl"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Desafio de Lógica
+                    </h1>
+
+                    <p class="text-sm text-slate-400 mt-1">
+                        Teste seu raciocínio e seus conhecimentos em Java.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             PROGRESSO
+        ========================================== -->
+
+        <section class="glass rounded-2xl p-5 mb-5">
+
+            <div class="flex items-center justify-between gap-4 mb-3">
+
+                <div>
+
+                    <p class="text-xs uppercase tracking-widest text-slate-500 font-bold">
+                        Progresso
+                    </p>
+
+                    <p id="contadorFase"
+                        class="text-lg font-black text-slate-100 mt-1">
+                        Fase 1 de 10
+                    </p>
+
+                </div>
+
+
+                <div id="xpBadge"
+                    class="xp-badge rounded-xl px-3 py-2 text-sm font-black whitespace-nowrap">
+
+                    +120 XP
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div id="barraProgresso"
+                    class="progress-fill"
+                    style="width: 10%;">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CARD DA QUESTÃO
+        ========================================== -->
+
+        <section class="glass rounded-3xl p-5 sm:p-7">
+
+            <!-- META -->
+
+            <div class="flex flex-wrap items-center gap-2 mb-5">
+
+                <span id="dificuldade"
+                    class="difficulty-easy border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider">
+
+                    Fácil
+
+                </span>
+
+                <span
+                    class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-400">
+
+                    <i class="fa-solid fa-code mr-1"></i>
+                    Java
+
+                </span>
+
+            </div>
+
+
+            <!-- PERGUNTA -->
+
+            <div class="question-box rounded-2xl p-5 sm:p-6 mb-6">
+
+                <div class="flex items-center gap-2 mb-4 text-xs uppercase tracking-widest text-slate-500 font-black">
+
+                    <i class="fa-solid fa-terminal text-blue-400"></i>
+
+                    Análise de código
+
+                </div>
+
+
+                <pre id="pergunta"
+                    class="text-left text-[15px] sm:text-base leading-7 font-bold text-slate-200 m-0">...</pre>
+
+            </div>
+
+
+            <!-- OPÇÕES -->
+
+            <div>
+
+                <div class="flex items-center gap-2 mb-4">
+
+                    <i class="fa-solid fa-list-check text-indigo-400"></i>
+
+                    <h2 class="text-sm uppercase tracking-widest font-black text-slate-400">
+                        Escolha uma resposta
+                    </h2>
+
+                </div>
+
+
+                <div id="opcoes"
+                    class="grid gap-3 w-full">
+                </div>
+
+            </div>
+
+
+            <!-- MENSAGEM -->
+
+            <div id="msg"
+                class="text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide">
+            </div>
+
+
+            <!-- RODAPÉ DO CARD -->
+
+            <div class="mt-5 pt-5 border-t border-slate-800/70 flex items-center gap-3 text-xs text-slate-500">
+
+                <i class="fa-solid fa-circle-info text-blue-400"></i>
+
+                <span>
+                    Responda corretamente para receber o XP desta fase.
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         BOTÃO VOLTAR
+    ========================================== -->
+
+    <button
+        onclick="window.location.href='atividades.html'"
+        class="fixed bottom-5 left-4 right-4 sm:left-5 sm:right-auto flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-2xl shadow-2xl shadow-blue-900/30 transition-all duration-200 z-50">
+
+        <i class="fa-solid fa-arrow-left text-lg"></i>
+
+        <span class="font-black text-sm tracking-wide">
+            Voltar para Atividades
+        </span>
+
     </button>
 
+
     <script>
+
+        /* =========================================================
+           FASES DA ATIVIDADE
+
+           A atividade agora possui 10 questões.
+
+           A lógica original de XP foi preservada.
+        ========================================================= */
+
         const fases = [
+
             {
-                p: "O que será impresso?\n\nint x = 5;\nif(x > 3){\n  System.out.println('A');\n}",
+                p: `O que será impresso?
+
+int x = 5;
+
+if (x > 3) {
+    System.out.println("A");
+}`,
+
                 o: [
                     { t: "A", ok: true },
                     { t: "Nada", ok: false },
                     { t: "Erro", ok: false },
                     { t: "B", ok: false }
                 ],
-                xp: 120
+
+                xp: 120,
+                dificuldade: "Fácil"
             },
+
+
             {
-                p: "Qual o resultado?\n\nfor(int i=0;i<3;i++) { \n  // bloco\n}\nSystem.out.println(i);",
+                p: `Qual será o valor de x?
+
+int x = 10;
+x = x + 5;
+
+System.out.println(x);`,
+
                 o: [
-                    { t: "Erro (i não existe fora do for)", ok: true },
-                    { t: "3", ok: false },
-                    { t: "0", ok: false },
-                    { t: "1", ok: false }
+                    { t: "15", ok: true },
+                    { t: "10", ok: false },
+                    { t: "5", ok: false },
+                    { t: "20", ok: false }
                 ],
-                xp: 140
+
+                xp: 120,
+                dificuldade: "Fácil"
             },
+
+
             {
-                p: "Qual é o valor final?\n\nint x = 2;\nx = x + 3 * 2;",
+                p: `Qual é o resultado?
+
+int x = 2;
+x = x + 3 * 2;
+
+System.out.println(x);`,
+
                 o: [
                     { t: "8", ok: true },
                     { t: "10", ok: false },
                     { t: "7", ok: false },
                     { t: "6", ok: false }
                 ],
-                xp: 130
+
+                xp: 130,
+                dificuldade: "Fácil"
             },
+
+
             {
-                p: "O que acontece?\n\nif(true && false){\n  System.out.println('X');\n}",
+                p: `O que acontece?
+
+if (true && false) {
+    System.out.println("X");
+}`,
+
                 o: [
                     { t: "Nada é impresso", ok: true },
                     { t: "X", ok: false },
                     { t: "Erro", ok: false },
                     { t: "true", ok: false }
                 ],
-                xp: 110
+
+                xp: 130,
+                dificuldade: "Fácil"
+            },
+
+
+            {
+                p: `Qual será o resultado?
+
+for (int i = 0; i < 3; i++) {
+    System.out.println(i);
+}`,
+
+                o: [
+                    { t: "0, 1 e 2", ok: true },
+                    { t: "1, 2 e 3", ok: false },
+                    { t: "0, 1, 2 e 3", ok: false },
+                    { t: "Apenas 3", ok: false }
+                ],
+
+                xp: 140,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual é o resultado?
+
+int idade = 18;
+
+if (idade >= 18) {
+    System.out.println("Maior");
+} else {
+    System.out.println("Menor");
+}`,
+
+                o: [
+                    { t: "Maior", ok: true },
+                    { t: "Menor", ok: false },
+                    { t: "Nada", ok: false },
+                    { t: "Erro", ok: false }
+                ],
+
+                xp: 140,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual será o valor final de x?
+
+int x = 5;
+
+if (x > 3) {
+    x = x + 2;
+}
+
+System.out.println(x);`,
+
+                o: [
+                    { t: "7", ok: true },
+                    { t: "5", ok: false },
+                    { t: "2", ok: false },
+                    { t: "8", ok: false }
+                ],
+
+                xp: 150,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual será o resultado?
+
+int x = 10;
+
+if (x > 5 && x < 15) {
+    System.out.println("OK");
+}`,
+
+                o: [
+                    { t: "OK", ok: true },
+                    { t: "Nada", ok: false },
+                    { t: "Erro", ok: false },
+                    { t: "10", ok: false }
+                ],
+
+                xp: 150,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual será o valor de total?
+
+int total = 0;
+
+for (int i = 1; i <= 3; i++) {
+    total = total + i;
+}
+
+System.out.println(total);`,
+
+                o: [
+                    { t: "6", ok: true },
+                    { t: "3", ok: false },
+                    { t: "4", ok: false },
+                    { t: "5", ok: false }
+                ],
+
+                xp: 170,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                p: `Qual será o resultado?
+
+int x = 4;
+
+if (x % 2 == 0) {
+    System.out.println("Par");
+} else {
+    System.out.println("Ímpar");
+}`,
+
+                o: [
+                    { t: "Par", ok: true },
+                    { t: "Ímpar", ok: false },
+                    { t: "4", ok: false },
+                    { t: "Erro", ok: false }
+                ],
+
+                xp: 180,
+                dificuldade: "Difícil"
             }
+
         ];
+
+
+        /* =========================================================
+           CONTROLE
+        ========================================================= */
 
         let i = 0;
 
-        function load() {
-            let f = fases[i];
-            document.getElementById("pergunta").innerText = f.p;
+        let salvandoXP = false;
 
-            let op = document.getElementById("opcoes");
-            op.innerHTML = "";
-            document.getElementById("msg").innerText = "";
 
-            f.o.forEach(x => {
-                let b = document.createElement("button");
-                b.innerText = x.t;
-                // Botões ganharam padding alto (py-4) e texto grande (text-lg) nativo do Tailwind
-                b.className = "w-full py-4 px-5 rounded-xl font-bold text-lg bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 active:bg-slate-600 shadow-md text-left pl-6";
-                b.onclick = () => check(x.ok);
-                op.appendChild(b);
-            });
-        }
+        /* =========================================================
+           ELEMENTOS
+        ========================================================= */
 
-        function check(ok) {
-            let user = JSON.parse(localStorage.getItem("fluentcode_user")) || { xp: 0 };
-            let msgElement = document.getElementById("msg");
+        const perguntaElement =
+            document.getElementById("pergunta");
 
-            if (ok) {
-                user.xp += fases[i].xp;
-                msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-green-400";
-                msgElement.innerText = "✔ Correto!";
-                i++;
+        const opcoesElement =
+            document.getElementById("opcoes");
 
-                if (i < fases.length) {
-                    setTimeout(load, 1000);
-                } else {
-                    setTimeout(() => {
-                        msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-amber-400";
-                        msgElement.innerText = "🏆 Concluído!";
-                    }, 1000);
-                }
-            } else {
-                msgElement.className = "text-center mt-6 text-2xl font-black tracking-wider min-h-[36px] text-red-400";
-                msgElement.innerText = "❌ Errado!";
+        const msgElement =
+            document.getElementById("msg");
+
+        const contadorFase =
+            document.getElementById("contadorFase");
+
+        const barraProgresso =
+            document.getElementById("barraProgresso");
+
+        const xpBadge =
+            document.getElementById("xpBadge");
+
+        const dificuldadeElement =
+            document.getElementById("dificuldade");
+
+
+        /* =========================================================
+           VERIFICAR LOGIN
+        ========================================================= */
+
+        function verificarLogin() {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                alert(
+                    "É necessário fazer login para realizar as atividades."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return false;
             }
 
-            localStorage.setItem("fluentcode_user", JSON.stringify(user));
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                alert(
+                    "Sua sessão é inválida. Faça login novamente."
+                );
+
+
+                localStorage.removeItem("id_usuario");
+                localStorage.removeItem("usuario");
+                localStorage.removeItem("usuarioLogado");
+                localStorage.removeItem("email");
+
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            return true;
+
         }
 
-        load();
+
+        /* =========================================================
+           CARREGAR FASE
+        ========================================================= */
+
+        function load() {
+
+            const f =
+                fases[i];
+
+
+            perguntaElement.innerText =
+                f.p;
+
+
+            opcoesElement.innerHTML =
+                "";
+
+
+            msgElement.innerText =
+                "";
+
+            msgElement.className =
+                "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide";
+
+
+            salvandoXP =
+                false;
+
+
+            /* -------------------------------
+               PROGRESSO
+            -------------------------------- */
+
+            contadorFase.innerText =
+                `Fase ${i + 1} de ${fases.length}`;
+
+
+            const porcentagem =
+                ((i + 1) / fases.length) * 100;
+
+
+            barraProgresso.style.width =
+                `${porcentagem}%`;
+
+
+            /* -------------------------------
+               XP
+            -------------------------------- */
+
+            xpBadge.innerText =
+                `+${f.xp} XP`;
+
+
+            /* -------------------------------
+               DIFICULDADE
+            -------------------------------- */
+
+            dificuldadeElement.innerText =
+                f.dificuldade;
+
+
+            dificuldadeElement.className =
+                "border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider";
+
+
+            if (f.dificuldade === "Fácil") {
+
+                dificuldadeElement.classList.add(
+                    "difficulty-easy"
+                );
+
+            } else if (f.dificuldade === "Médio") {
+
+                dificuldadeElement.classList.add(
+                    "difficulty-medium"
+                );
+
+            } else {
+
+                dificuldadeElement.classList.add(
+                    "difficulty-hard"
+                );
+
+            }
+
+
+            /* -------------------------------
+               OPÇÕES
+            -------------------------------- */
+
+            f.o.forEach((x, index) => {
+
+                const b =
+                    document.createElement("button");
+
+
+                b.className =
+                    "option-button flex items-center gap-4";
+
+
+                const letra =
+                    document.createElement("span");
+
+
+                letra.className =
+                    "option-letter";
+
+
+                letra.innerText =
+                    String.fromCharCode(65 + index);
+
+
+                const texto =
+                    document.createElement("span");
+
+
+                texto.className =
+                    "flex-1";
+
+
+                texto.innerText =
+                    x.t;
+
+
+                b.appendChild(letra);
+                b.appendChild(texto);
+
+
+                b.onclick = () => {
+
+                    check(
+                        x.ok,
+                        b
+                    );
+
+                };
+
+
+                opcoesElement.appendChild(b);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           SALVAR XP NO MYSQL
+        ========================================================= */
+
+        async function salvarXpNoBanco(xpGanho) {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                throw new Error(
+                    "Usuário não identificado. Faça login novamente."
+                );
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "ID de usuário inválido."
+                );
+
+            }
+
+
+            const xpNumerico =
+                Number(xpGanho);
+
+
+            if (
+                !Number.isFinite(xpNumerico) ||
+                xpNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "Valor de XP inválido."
+                );
+
+            }
+
+
+            const resposta =
+                await fetch(
+                    "/exercicio/concluir",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            id_usuario:
+                                idNumerico,
+
+                            xp_ganho:
+                                xpNumerico
+
+                        })
+                    }
+                );
+
+
+            let dados = {};
+
+
+            try {
+
+                dados =
+                    await resposta.json();
+
+            } catch (erro) {
+
+                throw new Error(
+                    "O servidor retornou uma resposta inválida."
+                );
+
+            }
+
+
+            if (
+                !resposta.ok ||
+                dados.sucesso === false
+            ) {
+
+                throw new Error(
+                    dados.mensagem ||
+                    dados.erro ||
+                    "Não foi possível salvar o XP."
+                );
+
+            }
+
+
+            return dados;
+
+        }
+
+
+        /* =========================================================
+           VERIFICAR RESPOSTA
+        ========================================================= */
+
+        async function check(
+            ok,
+            botaoClicado
+        ) {
+
+            if (salvandoXP) {
+                return;
+            }
+
+
+            /* =====================================================
+               RESPOSTA ERRADA
+            ===================================================== */
+
+            if (!ok) {
+
+                msgElement.className =
+                    "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-red-400";
+
+
+                msgElement.innerHTML =
+                    `<i class="fa-solid fa-circle-xmark mr-2"></i>
+                     Errado! Tente novamente.`;
+
+
+                botaoClicado.classList.add(
+                    "border-red-500/60",
+                    "bg-red-500/10"
+                );
+
+
+                setTimeout(() => {
+
+                    botaoClicado.classList.remove(
+                        "border-red-500/60",
+                        "bg-red-500/10"
+                    );
+
+                }, 700);
+
+
+                return;
+
+            }
+
+
+            /* =====================================================
+               RESPOSTA CORRETA
+            ===================================================== */
+
+            salvandoXP =
+                true;
+
+
+            const botoes =
+                document.querySelectorAll(
+                    "#opcoes button"
+                );
+
+
+            botoes.forEach(botao => {
+
+                botao.disabled =
+                    true;
+
+                botao.classList.add(
+                    "opacity-50",
+                    "cursor-not-allowed"
+                );
+
+            });
+
+
+            botaoClicado.classList.remove(
+                "opacity-50"
+            );
+
+
+            botaoClicado.classList.add(
+                "border-green-500/60",
+                "bg-green-500/10"
+            );
+
+
+            msgElement.className =
+                "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-yellow-400";
+
+
+            msgElement.innerHTML =
+                `<i class="fa-solid fa-cloud-arrow-up mr-2"></i>
+                 Salvando XP...`;
+
+
+            try {
+
+                await salvarXpNoBanco(
+                    fases[i].xp
+                );
+
+
+                /* =============================================
+                   BANCO CONFIRMOU
+                ============================================== */
+
+                msgElement.className =
+                    "success-box text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-green-400";
+
+
+                msgElement.innerHTML =
+                    `<i class="fa-solid fa-circle-check mr-2"></i>
+                     Correto! +${fases[i].xp} XP`;
+
+
+                i++;
+
+
+                /* =============================================
+                   PRÓXIMA FASE
+                ============================================== */
+
+                if (i < fases.length) {
+
+                    setTimeout(() => {
+
+                        load();
+
+                    }, 1200);
+
+
+                } else {
+
+                    /* =========================================
+                       TODAS AS FASES TERMINARAM
+                    ========================================== */
+
+                    setTimeout(() => {
+
+                        mostrarConclusao();
+
+                    }, 1000);
+
+                }
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao salvar XP:",
+                    erro
+                );
+
+
+                salvandoXP =
+                    false;
+
+
+                botoes.forEach(botao => {
+
+                    botao.disabled =
+                        false;
+
+                    botao.classList.remove(
+                        "opacity-50",
+                        "cursor-not-allowed"
+                    );
+
+                });
+
+
+                msgElement.className =
+                    "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-red-400";
+
+
+                msgElement.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                     ${erro.message}`;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           TELA FINAL
+        ========================================================= */
+
+        function mostrarConclusao() {
+
+            const xpTotal =
+                fases.reduce(
+                    (total, fase) =>
+                        total + fase.xp,
+                    0
+                );
+
+
+            contadorFase.innerText =
+                "Atividade concluída";
+
+
+            barraProgresso.style.width =
+                "100%";
+
+
+            xpBadge.innerText =
+                `+${xpTotal} XP`;
+
+
+            dificuldadeElement.innerText =
+                "Concluído";
+
+
+            dificuldadeElement.className =
+                "border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider text-green-400 bg-green-500/10 border-green-500/20";
+
+
+            perguntaElement.innerText =
+                "Parabéns! Você concluiu todas as fases do desafio de lógica Java.";
+
+
+            opcoesElement.innerHTML =
+                `
+                <div class="rounded-2xl border border-green-500/20 bg-green-500/10 p-6 text-center">
+
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-green-500/10 border border-green-400/20 flex items-center justify-center">
+
+                        <i class="fa-solid fa-trophy text-3xl text-yellow-400"></i>
+
+                    </div>
+
+                    <h2 class="text-xl font-black text-green-400 mb-2">
+                        Desafio concluído!
+                    </h2>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Você completou as ${fases.length} fases de lógica.
+                    </p>
+
+                    <div class="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-black">
+                        <i class="fa-solid fa-star"></i>
+                        ${xpTotal} XP conquistados
+                    </div>
+
+                </div>
+                `;
+
+
+            msgElement.innerHTML =
+                `<span class="text-green-400">
+                    <i class="fa-solid fa-check-double mr-2"></i>
+                    Todas as fases foram salvas no banco de dados.
+                </span>`;
+
+        }
+
+
+        /* =========================================================
+           INICIAR ATIVIDADE
+        ========================================================= */
+
+        if (verificarLogin()) {
+
+            load();
+
+        }
+
     </script>
 
 </body>
+
 </html>
