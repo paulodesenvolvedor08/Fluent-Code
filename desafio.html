@@ -2,201 +2,1358 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<title>Desafio Final - FluentCode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <title>Desafio Final - FluentCode</title>
 
-<style>
-body{
-    background:#0d1b2a;
-    color:white;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-.card{
-  background:#0f172a;
-    border:1px solid #1f2937;
-    border-radius:18px;
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    padding:20px;
+    <style>
 
-    width:100%;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.btn{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    font-weight:bold;
-    transition:.2s;
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(37, 99, 235, .16), transparent 30%),
+                radial-gradient(circle at 85% 85%, rgba(124, 58, 237, .16), transparent 32%),
+                #07111f;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+        }
 
-.btn:hover{
-    transform:scale(1.02);
-}
-</style>
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image:
+                linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 32px 32px;
+            z-index: -1;
+        }
+
+        .glass {
+            background: rgba(10, 22, 40, .84);
+            border: 1px solid rgba(148, 163, 184, .14);
+            box-shadow:
+                0 25px 60px rgba(0,0,0,.35),
+                inset 0 1px 0 rgba(255,255,255,.03);
+            backdrop-filter: blur(18px);
+        }
+
+        .logo-gradient {
+            background: linear-gradient(
+                90deg,
+                #60a5fa,
+                #818cf8,
+                #c084fc
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #172338;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #6366f1,
+                #a855f7
+            );
+            transition: width .5s ease;
+        }
+
+        .question-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15,23,42,.97),
+                    rgba(8,20,36,.97)
+                );
+            border: 1px solid rgba(96,165,250,.13);
+        }
+
+        .option-button {
+            width: 100%;
+            min-height: 62px;
+            padding: 16px 18px;
+            border-radius: 15px;
+            border: 1px solid #243247;
+            background: linear-gradient(
+                135deg,
+                #111e31,
+                #0d192b
+            );
+            color: #e2e8f0;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .option-button:hover {
+            transform: translateY(-2px);
+            border-color: #6366f1;
+            background: linear-gradient(
+                135deg,
+                #172640,
+                #101e33
+            );
+            box-shadow:
+                0 10px 25px rgba(99,102,241,.13);
+        }
+
+        .option-button:active {
+            transform: scale(.98);
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            min-width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #172338;
+            color: #818cf8;
+            font-weight: 900;
+        }
+
+        .xp-badge {
+            background: rgba(234,179,8,.10);
+            border: 1px solid rgba(234,179,8,.22);
+            color: #facc15;
+        }
+
+        .easy {
+            color: #4ade80;
+            background: rgba(34,197,94,.10);
+            border-color: rgba(34,197,94,.20);
+        }
+
+        .medium {
+            color: #facc15;
+            background: rgba(234,179,8,.10);
+            border-color: rgba(234,179,8,.20);
+        }
+
+        .hard {
+            color: #fb7185;
+            background: rgba(244,63,94,.10);
+            border-color: rgba(244,63,94,.20);
+        }
+
+        .final {
+            color: #c084fc;
+            background: rgba(168,85,247,.10);
+            border-color: rgba(168,85,247,.20);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .appear {
+            animation: appear .35s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @media (max-width: 640px) {
+
+            .option-button {
+                min-height: 58px;
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
 </head>
 
-<body class="p-4 sm:p-6">
 
-<div class="card">
+<body class="min-h-screen pb-28">
 
-<h1 class="text-xl font-bold text-center mb-4">
-🚀 Desafio Final
-</h1>
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-<p class="text-center text-gray-300 mb-4">
-Último nível — teste sua lógica em Java
-</p>
+    <header
+        class="w-full border-b border-slate-800/70 bg-[#07111f]/90 backdrop-blur-xl">
 
-<p id="pergunta" class="text-center text-lg mb-4">
-...
-</p>
+        <div
+            class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
 
-<div id="opcoes" class="grid gap-3"></div>
+            <div class="flex items-center gap-3">
 
-<p id="msg" class="text-center mt-4 font-bold"></p>
+                <div
+                    class="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-400/20 flex items-center justify-center floating">
 
-    <div class="mt-10 text-center">
-  <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-200 z-50">
-  <i class="fa-solid fa-arrow-left"></i>
-  <span class="font-bold">Voltar</span>
-</button>
-</div>
-</div>
+                    <i class="fa-solid fa-rocket text-purple-400 text-lg"></i>
 
-<script>
+                </div>
 
-/* 🔥 DESAFIOS */
-const fases = [
-{
-p:"Qual será a saída?\n\nint x = 1;\nwhile(x < 4){ x++; }\nSystem.out.println(x);",
-o:[
-{t:"4",ok:true},
-{t:"3",ok:false},
-{t:"1",ok:false},
-{t:"Erro",ok:false}
-],
-xp:200
-},
-{
-p:"O que acontece aqui?\n\nint[] v = {1,2,3};\nSystem.out.println(v[3]);",
-o:[
-{t:"Erro (IndexOutOfBounds)",ok:true},
-{t:"3",ok:false},
-{t:"0",ok:false},
-{t:"null",ok:false}
-],
-xp:220
-},
-{
-p:"Qual é o resultado?\n\nint a = 5;\nint b = 2;\nSystem.out.println(a / b);",
-o:[
-{t:"2",ok:true},
-{t:"2.5",ok:false},
-{t:"3",ok:false},
-{t:"Erro",ok:false}
-],
-xp:180
-},
-{
-p:"O que imprime?\n\nboolean x = true;\nboolean y = false;\nSystem.out.println(x || y);",
-o:[
-{t:"true",ok:true},
-{t:"false",ok:false},
-{t:"1",ok:false},
-{t:"Erro",ok:false}
-],
-xp:190
-},
-{
-p:"Qual é o valor final?\n\nint x = 10;\nx += 5;\nx *= 2;",
-o:[
-{t:"30",ok:true},
-{t:"20",ok:false},
-{t:"25",ok:false},
-{t:"15",ok:false}
-],
-xp:250
+                <div>
+
+                    <div class="text-xl font-black logo-gradient">
+                        FluentCode
+                    </div>
+
+                    <div
+                        class="text-[10px] uppercase tracking-[.22em] text-slate-500">
+                        Learning • Java • English
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-400/20">
+
+                <i class="fa-solid fa-fire text-purple-400"></i>
+
+                <span class="text-sm font-bold text-purple-300">
+                    Desafio Final
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="w-full max-w-3xl mx-auto px-4 pt-7">
+
+        <!-- HERO -->
+
+        <section class="mb-6">
+
+            <div class="flex items-center gap-3 mb-3">
+
+                <div
+                    class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-400/20 flex items-center justify-center">
+
+                    <i class="fa-solid fa-trophy text-purple-400 text-xl"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Desafio Final
+                    </h1>
+
+                    <p class="text-sm text-slate-400 mt-1">
+                        O nível mais difícil. Mostre o que aprendeu em Java.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             PROGRESSO
+        ========================================== -->
+
+        <section class="glass rounded-2xl p-5 mb-5">
+
+            <div
+                class="flex items-center justify-between gap-4 mb-3">
+
+                <div>
+
+                    <p
+                        class="text-xs uppercase tracking-widest text-slate-500 font-bold">
+                        Progresso do desafio
+                    </p>
+
+                    <p
+                        id="contadorFase"
+                        class="text-lg font-black text-slate-100 mt-1">
+                        Fase 1 de 10
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="xpBadge"
+                    class="xp-badge rounded-xl px-3 py-2 text-sm font-black whitespace-nowrap">
+                    +200 XP
+                </div>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    id="barraProgresso"
+                    class="progress-fill"
+                    style="width: 10%;">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CARD PRINCIPAL
+        ========================================== -->
+
+        <section class="glass rounded-3xl p-5 sm:p-7">
+
+            <!-- META -->
+
+            <div class="flex flex-wrap items-center gap-2 mb-5">
+
+                <span
+                    id="dificuldade"
+                    class="easy border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider">
+                    Fácil
+                </span>
+
+                <span
+                    class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-400">
+
+                    <i class="fa-solid fa-code mr-1"></i>
+                    Java
+
+                </span>
+
+                <span
+                    class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-bold text-purple-300">
+
+                    <i class="fa-solid fa-crown mr-1"></i>
+                    Final
+
+                </span>
+
+            </div>
+
+
+            <!-- PERGUNTA -->
+
+            <div
+                class="question-box rounded-2xl p-5 sm:p-6 mb-6">
+
+                <div
+                    class="flex items-center gap-2 mb-4 text-xs uppercase tracking-widest text-slate-500 font-black">
+
+                    <i class="fa-solid fa-terminal text-purple-400"></i>
+
+                    Desafio de código
+
+                </div>
+
+
+                <pre
+                    id="pergunta"
+                    class="text-left text-[15px] sm:text-base leading-7 font-bold text-slate-200 m-0">...</pre>
+
+            </div>
+
+
+            <!-- RESPOSTAS -->
+
+            <div>
+
+                <div
+                    class="flex items-center gap-2 mb-4">
+
+                    <i class="fa-solid fa-list-check text-indigo-400"></i>
+
+                    <h2
+                        class="text-sm uppercase tracking-widest font-black text-slate-400">
+                        Escolha uma resposta
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="opcoes"
+                    class="grid gap-3 w-full">
+                </div>
+
+            </div>
+
+
+            <!-- MENSAGEM -->
+
+            <div
+                id="msg"
+                class="text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide">
+            </div>
+
+
+            <div
+                class="mt-5 pt-5 border-t border-slate-800/70 flex items-center gap-3 text-xs text-slate-500">
+
+                <i class="fa-solid fa-shield-halved text-purple-400"></i>
+
+                <span>
+                    O XP só é concedido depois da confirmação do servidor.
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         BOTÃO VOLTAR
+    ========================================== -->
+
+    <button
+        onclick="window.location.href='atividades.html'"
+        class="fixed bottom-5 left-4 right-4 sm:left-5 sm:right-auto flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-2xl shadow-2xl shadow-blue-900/30 transition-all duration-200 z-50">
+
+        <i class="fa-solid fa-arrow-left text-lg"></i>
+
+        <span class="font-black text-sm tracking-wide">
+            Voltar para Atividades
+        </span>
+
+    </button>
+
+
+    <script>
+
+        /* =========================================================
+           VERIFICAR LOGIN
+        ========================================================= */
+
+        function verificarLogin() {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                alert(
+                    "É necessário fazer login para realizar as atividades."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                alert(
+                    "Sua sessão é inválida. Faça login novamente."
+                );
+
+
+                localStorage.removeItem("id_usuario");
+                localStorage.removeItem("usuario");
+                localStorage.removeItem("usuarioLogado");
+                localStorage.removeItem("email");
+
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =========================================================
+           DESAFIOS
+           
+           Agora são 10 fases.
+        ========================================================= */
+
+        const fases = [
+
+            {
+                p: `Qual será a saída?
+
+int x = 1;
+
+while (x < 4) {
+    x++;
 }
-];
 
-let i = 0;
-let bloqueado = false;
+System.out.println(x);`,
 
-/* 🔁 CARREGAR */
-function load(){
+                o: [
+                    { t: "4", ok: true },
+                    { t: "3", ok: false },
+                    { t: "1", ok: false },
+                    { t: "Erro", ok: false }
+                ],
 
-let f = fases[i];
+                xp: 200,
+                dificuldade: "Fácil"
+            },
 
-document.getElementById("pergunta").innerText = f.p;
 
-let op = document.getElementById("opcoes");
-op.innerHTML = "";
+            {
+                p: `Qual será o resultado?
 
-document.getElementById("msg").innerText = "";
+int x = 5;
 
-bloqueado = false;
-
-f.o.forEach(x => {
-
-let b = document.createElement("button");
-
-b.innerText = x.t;
-b.className = "btn bg-slate-800 hover:bg-slate-700";
-
-b.onclick = () => check(x.ok);
-
-op.appendChild(b);
-
-});
-
+if (x > 3) {
+    x += 2;
 }
 
-/* 🎮 VERIFICAR */
-function check(ok){
+System.out.println(x);`,
 
-if(bloqueado) return;
-bloqueado = true;
+                o: [
+                    { t: "7", ok: true },
+                    { t: "5", ok: false },
+                    { t: "2", ok: false },
+                    { t: "8", ok: false }
+                ],
 
-let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0};
+                xp: 200,
+                dificuldade: "Fácil"
+            },
 
-if(ok){
 
-user.xp += fases[i].xp;
+            {
+                p: `O que acontece aqui?
 
-document.getElementById("msg").innerText = "✔ Correto!";
+int[] v = {1, 2, 3};
 
-i++;
+System.out.println(v[3]);`,
 
-setTimeout(() => {
+                o: [
+                    {
+                        t: "Erro: índice fora dos limites",
+                        ok: true
+                    },
+                    { t: "3", ok: false },
+                    { t: "0", ok: false },
+                    { t: "null", ok: false }
+                ],
 
-if(i < fases.length){
-load();
-}else{
-document.getElementById("msg").innerText =
-"🏆 Você concluiu o Desafio Final!";
-document.getElementById("opcoes").innerHTML = "";
+                xp: 220,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual é o resultado?
+
+int a = 5;
+int b = 2;
+
+System.out.println(a / b);`,
+
+                o: [
+                    { t: "2", ok: true },
+                    { t: "2.5", ok: false },
+                    { t: "3", ok: false },
+                    { t: "Erro", ok: false }
+                ],
+
+                xp: 210,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `O que será impresso?
+
+boolean x = true;
+boolean y = false;
+
+System.out.println(x || y);`,
+
+                o: [
+                    { t: "true", ok: true },
+                    { t: "false", ok: false },
+                    { t: "1", ok: false },
+                    { t: "Erro", ok: false }
+                ],
+
+                xp: 220,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                p: `Qual é o valor final de x?
+
+int x = 10;
+
+x += 5;
+x *= 2;
+
+System.out.println(x);`,
+
+                o: [
+                    { t: "30", ok: true },
+                    { t: "20", ok: false },
+                    { t: "25", ok: false },
+                    { t: "15", ok: false }
+                ],
+
+                xp: 250,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                p: `Qual será a saída?
+
+int total = 0;
+
+for (int i = 1; i <= 4; i++) {
+    total += i;
 }
 
-}, 900);
+System.out.println(total);`,
 
-}else{
+                o: [
+                    { t: "10", ok: true },
+                    { t: "4", ok: false },
+                    { t: "6", ok: false },
+                    { t: "8", ok: false }
+                ],
 
-document.getElementById("msg").innerText = "❌ Errado!";
+                xp: 260,
+                dificuldade: "Difícil"
+            },
 
-setTimeout(() => {
-bloqueado = false;
-}, 700);
 
+            {
+                p: `Qual será o resultado?
+
+int x = 8;
+
+if (x % 2 == 0 && x > 5) {
+    System.out.println("A");
+} else {
+    System.out.println("B");
+}`,
+
+                o: [
+                    { t: "A", ok: true },
+                    { t: "B", ok: false },
+                    { t: "8", ok: false },
+                    { t: "Erro", ok: false }
+                ],
+
+                xp: 270,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                p: `Qual será o valor final?
+
+int x = 2;
+
+for (int i = 0; i < 3; i++) {
+    x = x * 2;
 }
 
-localStorage.setItem("fluentcode_user", JSON.stringify(user));
+System.out.println(x);`,
+
+                o: [
+                    { t: "16", ok: true },
+                    { t: "8", ok: false },
+                    { t: "6", ok: false },
+                    { t: "12", ok: false }
+                ],
+
+                xp: 300,
+                dificuldade: "Muito difícil"
+            },
+
+
+            {
+                p: `Analise o código:
+
+int x = 10;
+int y = 3;
+
+if (x > y) {
+    x = x - y;
+
+    if (x > 5) {
+        System.out.println(x);
+    } else {
+        System.out.println(y);
+    }
 }
 
-load();
+Qual será a saída?`,
 
-</script>
+                o: [
+                    { t: "7", ok: true },
+                    { t: "3", ok: false },
+                    { t: "10", ok: false },
+                    { t: "13", ok: false }
+                ],
+
+                xp: 350,
+                dificuldade: "Muito difícil"
+            }
+
+        ];
+
+
+        /* =========================================================
+           CONTROLE
+        ========================================================= */
+
+        let i = 0;
+
+        let bloqueado = false;
+
+
+        /* =========================================================
+           ELEMENTOS
+        ========================================================= */
+
+        const perguntaElement =
+            document.getElementById("pergunta");
+
+        const opcoesElement =
+            document.getElementById("opcoes");
+
+        const msgElement =
+            document.getElementById("msg");
+
+        const contadorFase =
+            document.getElementById("contadorFase");
+
+        const barraProgresso =
+            document.getElementById("barraProgresso");
+
+        const xpBadge =
+            document.getElementById("xpBadge");
+
+        const dificuldadeElement =
+            document.getElementById("dificuldade");
+
+
+        /* =========================================================
+           CARREGAR FASE
+        ========================================================= */
+
+        function load() {
+
+            if (!verificarLogin()) {
+                return;
+            }
+
+
+            const f =
+                fases[i];
+
+
+            perguntaElement.innerText =
+                f.p;
+
+
+            opcoesElement.innerHTML =
+                "";
+
+
+            msgElement.innerText =
+                "";
+
+
+            msgElement.className =
+                "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide";
+
+
+            bloqueado =
+                false;
+
+
+            /* =============================================
+               PROGRESSO
+            ============================================== */
+
+            contadorFase.innerText =
+                `Fase ${i + 1} de ${fases.length}`;
+
+
+            const porcentagem =
+                ((i + 1) / fases.length) * 100;
+
+
+            barraProgresso.style.width =
+                `${porcentagem}%`;
+
+
+            /* =============================================
+               XP
+            ============================================== */
+
+            xpBadge.innerText =
+                `+${f.xp} XP`;
+
+
+            /* =============================================
+               DIFICULDADE
+            ============================================== */
+
+            dificuldadeElement.innerText =
+                f.dificuldade;
+
+
+            dificuldadeElement.className =
+                "border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider";
+
+
+            if (f.dificuldade === "Fácil") {
+
+                dificuldadeElement.classList.add(
+                    "easy"
+                );
+
+            } else if (f.dificuldade === "Médio") {
+
+                dificuldadeElement.classList.add(
+                    "medium"
+                );
+
+            } else if (f.dificuldade === "Difícil") {
+
+                dificuldadeElement.classList.add(
+                    "hard"
+                );
+
+            } else {
+
+                dificuldadeElement.classList.add(
+                    "final"
+                );
+
+            }
+
+
+            /* =============================================
+               OPÇÕES
+            ============================================== */
+
+            f.o.forEach((x, index) => {
+
+                const b =
+                    document.createElement("button");
+
+
+                b.className =
+                    "option-button flex items-center gap-4";
+
+
+                const letra =
+                    document.createElement("span");
+
+
+                letra.className =
+                    "option-letter";
+
+
+                letra.innerText =
+                    String.fromCharCode(
+                        65 + index
+                    );
+
+
+                const texto =
+                    document.createElement("span");
+
+
+                texto.className =
+                    "flex-1";
+
+
+                texto.innerText =
+                    x.t;
+
+
+                b.appendChild(letra);
+
+                b.appendChild(texto);
+
+
+                b.onclick = () => {
+
+                    check(x.ok);
+
+                };
+
+
+                opcoesElement.appendChild(b);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           SALVAR XP NO MYSQL
+        ========================================================= */
+
+        async function salvarXpNoBanco(xpGanho) {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                throw new Error(
+                    "Usuário não identificado. Faça login novamente."
+                );
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "ID do usuário inválido. Faça login novamente."
+                );
+
+            }
+
+
+            const xpNumerico =
+                Number(xpGanho);
+
+
+            if (
+                !Number.isFinite(xpNumerico) ||
+                xpNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "Valor de XP inválido."
+                );
+
+            }
+
+
+            const resposta =
+                await fetch(
+                    "/exercicio/concluir",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            id_usuario:
+                                idNumerico,
+
+                            xp_ganho:
+                                xpNumerico
+
+                        })
+                    }
+                );
+
+
+            let dados;
+
+
+            try {
+
+                dados =
+                    await resposta.json();
+
+            } catch (erro) {
+
+                throw new Error(
+                    "O servidor retornou uma resposta inválida."
+                );
+
+            }
+
+
+            if (
+                !resposta.ok ||
+                dados.sucesso !== true
+            ) {
+
+                throw new Error(
+                    dados.mensagem ||
+                    dados.erro ||
+                    "Não foi possível salvar o XP."
+                );
+
+            }
+
+
+            return dados;
+
+        }
+
+
+        /* =========================================================
+           VERIFICAR RESPOSTA
+        ========================================================= */
+
+        async function check(ok) {
+
+            if (!verificarLogin()) {
+                return;
+            }
+
+
+            if (bloqueado) {
+                return;
+            }
+
+
+            const msg =
+                document.getElementById("msg");
+
+
+            const botoes =
+                document.querySelectorAll(
+                    "#opcoes button"
+                );
+
+
+            /* =============================================
+               ERRADO
+            ============================================== */
+
+            if (!ok) {
+
+                msg.className =
+                    "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-red-400";
+
+
+                msg.innerHTML =
+                    `<i class="fa-solid fa-circle-xmark mr-2"></i>
+                     Errado! Tente novamente.`;
+
+
+                bloqueado =
+                    true;
+
+
+                setTimeout(() => {
+
+                    bloqueado =
+                        false;
+
+                }, 700);
+
+
+                return;
+
+            }
+
+
+            /* =============================================
+               CORRETO
+            ============================================== */
+
+            bloqueado =
+                true;
+
+
+            botoes.forEach(botao => {
+
+                botao.disabled =
+                    true;
+
+                botao.classList.add(
+                    "opacity-50",
+                    "cursor-not-allowed"
+                );
+
+            });
+
+
+            msg.className =
+                "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-yellow-400";
+
+
+            msg.innerHTML =
+                `<i class="fa-solid fa-cloud-arrow-up mr-2"></i>
+                 Salvando XP...`;
+
+
+            try {
+
+                await salvarXpNoBanco(
+                    fases[i].xp
+                );
+
+
+                msg.className =
+                    "appear text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-green-400";
+
+
+                msg.innerHTML =
+                    `<i class="fa-solid fa-circle-check mr-2"></i>
+                     Correto! +${fases[i].xp} XP`;
+
+
+                i++;
+
+
+                setTimeout(() => {
+
+                    if (i < fases.length) {
+
+                        load();
+
+                        return;
+
+                    }
+
+
+                    mostrarConclusao();
+
+                }, 1100);
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao salvar XP:",
+                    erro
+                );
+
+
+                bloqueado =
+                    false;
+
+
+                botoes.forEach(botao => {
+
+                    botao.disabled =
+                        false;
+
+                    botao.classList.remove(
+                        "opacity-50",
+                        "cursor-not-allowed"
+                    );
+
+                });
+
+
+                msg.className =
+                    "text-center mt-6 min-h-[44px] flex items-center justify-center text-base font-black tracking-wide text-red-400";
+
+
+                msg.innerHTML =
+                    `<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                     ${erro.message}`;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           CONCLUSÃO
+        ========================================================= */
+
+        function mostrarConclusao() {
+
+            const xpTotal =
+                fases.reduce(
+                    (total, fase) =>
+                        total + fase.xp,
+                    0
+                );
+
+
+            contadorFase.innerText =
+                "Desafio concluído";
+
+
+            barraProgresso.style.width =
+                "100%";
+
+
+            xpBadge.innerText =
+                `+${xpTotal} XP`;
+
+
+            dificuldadeElement.innerText =
+                "Concluído";
+
+
+            dificuldadeElement.className =
+                "final border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider";
+
+
+            perguntaElement.innerText =
+                "Você chegou ao fim do Desafio Final!";
+
+
+            opcoesElement.innerHTML =
+                `
+                <div
+                    class="appear rounded-2xl border border-purple-500/20 bg-purple-500/10 p-7 text-center">
+
+                    <div
+                        class="w-20 h-20 mx-auto mb-5 rounded-3xl bg-purple-500/10 border border-purple-400/20 flex items-center justify-center">
+
+                        <i
+                            class="fa-solid fa-trophy text-4xl text-yellow-400">
+                        </i>
+
+                    </div>
+
+
+                    <h2
+                        class="text-2xl font-black text-purple-300 mb-2">
+                        Desafio Final concluído!
+                    </h2>
+
+
+                    <p
+                        class="text-slate-400 text-sm leading-relaxed">
+                        Você completou todas as
+                        ${fases.length}
+                        fases do desafio mais avançado.
+                    </p>
+
+
+                    <div
+                        class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-black">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        ${xpTotal} XP conquistados
+
+                    </div>
+
+                </div>
+                `;
+
+
+            msgElement.innerHTML =
+                `
+                <span class="text-green-400">
+
+                    <i class="fa-solid fa-check-double mr-2"></i>
+
+                    Todo o XP foi confirmado pelo servidor.
+
+                </span>
+                `;
+
+
+            bloqueado =
+                false;
+
+        }
+
+
+        /* =========================================================
+           INICIAR
+        ========================================================= */
+
+        if (verificarLogin()) {
+
+            load();
+
+        }
+
+    </script>
 
 </body>
+
 </html>
