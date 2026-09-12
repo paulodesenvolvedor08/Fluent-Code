@@ -1,108 +1,1131 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - FluentCode</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
 
-<style>
-body {
-  background: #0d1b2a;
-  color: white;
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-.glass {
-  background: rgba(11, 37, 69, 0.85);
-  backdrop-filter: blur(10px);
-  border: 1px solid #1f3b5c;
-}
+    <title>Login - FluentCode</title>
 
-.logo {
-  font-weight: 900;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa, #22c55e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-</style>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        /* =========================================================
+           BASE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(37, 99, 235, .18),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(124, 58, 237, .14),
+                    transparent 32%
+                ),
+                #07111f;
+
+            color: #fff;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           GRID DE FUNDO
+        ========================================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 42px 42px;
+
+            opacity: .35;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+            z-index: -2;
+        }
+
+
+        /* =========================================================
+           ELEMENTOS DECORATIVOS
+        ========================================================= */
+
+        .orb {
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(60px);
+
+            opacity: .12;
+
+            z-index: -1;
+        }
+
+
+        .orb-one {
+            width: 220px;
+
+            height: 220px;
+
+            top: 8%;
+
+            left: -90px;
+
+            background: #2563eb;
+        }
+
+
+        .orb-two {
+            width: 260px;
+
+            height: 260px;
+
+            right: -100px;
+
+            bottom: 4%;
+
+            background: #7c3aed;
+        }
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
+
+        .page {
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 18px;
+        }
+
+
+        .content {
+            width: 100%;
+
+            max-width: 470px;
+        }
+
+
+        /* =========================================================
+           BRAND
+        ========================================================= */
+
+        .brand {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .brand-icon {
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 14px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 0 35px rgba(59,130,246,.28);
+
+            font-size: 24px;
+
+            animation: floating 4s ease-in-out infinite;
+        }
+
+
+        @keyframes floating {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+
+        }
+
+
+        .brand-name {
+            margin: 0;
+
+            font-size: 38px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #a78bfa,
+                    #22d3ee
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+        }
+
+
+        .brand-subtitle {
+            margin-top: 10px;
+
+            color: #718096;
+
+            font-size: 13px;
+
+            letter-spacing: .2px;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .login-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 28px;
+
+            border-radius: 25px;
+
+            border:
+                1px solid rgba(148,163,184,.13);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,35,60,.91),
+                    rgba(7,18,32,.94)
+                );
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.34);
+        }
+
+
+        .login-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 12%;
+
+            right: 12%;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #3b82f6,
+                    #8b5cf6,
+                    transparent
+                );
+
+            opacity: .75;
+        }
+
+
+        .login-card::after {
+            content: "{ }";
+
+            position: absolute;
+
+            right: 5px;
+
+            bottom: -25px;
+
+            color: rgba(96,165,250,.035);
+
+            font-size: 105px;
+
+            font-weight: 900;
+
+            transform: rotate(-10deg);
+
+            pointer-events: none;
+        }
+
+
+        .card-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================================
+           CABEÇALHO
+        ========================================================= */
+
+        .card-header {
+            text-align: center;
+
+            margin-bottom: 27px;
+        }
+
+
+        .card-header-icon {
+            width: 45px;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 12px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(59,130,246,.1);
+
+            border:
+                1px solid rgba(59,130,246,.18);
+
+            color: #60a5fa;
+
+            font-size: 18px;
+        }
+
+
+        .card-header h2 {
+            margin: 0;
+
+            font-size: 23px;
+
+            font-weight: 850;
+
+            letter-spacing: -.5px;
+        }
+
+
+        .card-header p {
+            margin-top: 7px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           CAMPOS
+        ========================================================= */
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+
+        .field label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 7px;
+
+            color: #a8b4c4;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .field label i {
+            width: 13px;
+
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            text-align: center;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-wrapper > i {
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #475569;
+
+            font-size: 14px;
+
+            pointer-events: none;
+
+            transition: color .2s ease;
+        }
+
+
+        .input-wrapper input {
+            width: 100%;
+
+            height: 50px;
+
+            padding:
+                0
+                15px
+                0
+                43px;
+
+            border-radius: 13px;
+
+            border:
+                1px solid rgba(71,85,105,.65);
+
+            outline: none;
+
+            background:
+                rgba(5,15,28,.78);
+
+            color: #fff;
+
+            font-size: 14px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+
+        .input-wrapper input::placeholder {
+            color: #475569;
+        }
+
+
+        .input-wrapper input:hover {
+            border-color:
+                rgba(96,165,250,.25);
+        }
+
+
+        .input-wrapper input:focus {
+            border-color: #3b82f6;
+
+            background:
+                rgba(8,20,36,.95);
+
+            box-shadow:
+                0 0 0 3px rgba(59,130,246,.1);
+        }
+
+
+        .input-wrapper:focus-within > i {
+            color: #60a5fa;
+        }
+
+
+        /* =========================================================
+           BOTÃO LOGIN
+        ========================================================= */
+
+        .login-button {
+            width: 100%;
+
+            height: 51px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #3b82f6
+                );
+
+            color: #fff;
+
+            font-size: 14px;
+
+            font-weight: 850;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 28px rgba(37,99,235,.18);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                filter .2s ease;
+        }
+
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 15px 35px rgba(37,99,235,.25);
+        }
+
+
+        .login-button:active {
+            transform: scale(.98);
+        }
+
+
+        /* =========================================================
+           CADASTRO
+        ========================================================= */
+
+        .register-area {
+            text-align: center;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid rgba(148,163,184,.08);
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        .register-area p {
+            margin: 0;
+        }
+
+
+        .register-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 8px;
+
+            color: #60a5fa;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition:
+                color .2s ease,
+                transform .2s ease;
+        }
+
+
+        .register-link:hover {
+            color: #93c5fd;
+
+            transform: translateY(-1px);
+        }
+
+
+        .register-link i {
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           RODAPÉ
+        ========================================================= */
+
+        .footer {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 18px;
+
+            color: #334155;
+
+            font-size: 10px;
+        }
+
+
+        .footer i {
+            color: #475569;
+        }
+
+
+        /* =========================================================
+           RESPONSIVO
+        ========================================================= */
+
+        @media (max-width: 500px) {
+
+            .page {
+                padding:
+                    22px
+                    14px;
+            }
+
+
+            .brand-name {
+                font-size: 33px;
+            }
+
+
+            .brand-icon {
+                width: 52px;
+
+                height: 52px;
+
+                font-size: 21px;
+            }
+
+
+            .login-card {
+                padding: 23px 18px;
+
+                border-radius: 21px;
+            }
+
+
+            .card-header h2 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body class="flex items-center justify-center min-h-screen">
 
-<div class="w-full max-w-md p-6 space-y-6">
+<body>
 
-<!-- LOGO -->
-<div class="text-center space-y-2">
-  <div class="text-5xl">⚡</div>
-  <h1 class="text-4xl logo">FluentCode</h1>
-  <p class="text-gray-400 text-sm">Aprenda programação de forma divertida</p>
-</div>
 
-<!-- CARD LOGIN -->
-<div class="glass p-6 rounded-2xl space-y-4 shadow-xl">
+    <!-- ELEMENTOS DECORATIVOS -->
 
-<h2 class="text-xl font-bold text-center">Entrar na sua conta</h2>
+    <div class="orb orb-one"></div>
 
-<!-- USUÁRIO -->
-<div>
-  <label class="text-sm text-gray-400">Usuário</label>
-  <input id="user"
-  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
-  placeholder="Digite seu nome">
-</div>
+    <div class="orb orb-two"></div>
 
-<!-- SENHA -->
-<div>
-  <label class="text-sm text-gray-400">Senha</label>
-  <input type="password"
-  class="w-full mt-1 p-3 rounded-xl bg-slate-900 border border-slate-700 outline-none"
-  placeholder="Digite sua senha">
-</div>
 
-<!-- BOTÃO LOGIN -->
-<button onclick="login()"
-class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold transition">
-  Entrar
-</button>
 
-<!-- LINK CADASTRO -->
-<div class="text-center mt-4">
-  <p class="text-xs text-gray-500">
-    Não tem uma conta?
-  </p>
+    <main class="page">
 
-  <a href="cadastro.html"
-  class="inline-block mt-1 text-blue-400 font-bold hover:text-blue-300 transition">
-    ➕ Criar conta
-  </a>
-</div>
 
-</div>
+        <div class="content">
 
-</div>
 
-<script>
-function login(){
+            <!-- =================================================
+                 LOGO
+            ================================================== -->
 
-const user = document.getElementById("user").value;
+            <div class="brand">
 
-let users = JSON.parse(localStorage.getItem("fc_users")) || [];
+                <div class="brand-icon">
 
-let found = users.find(u => u.user === user);
+                    <i class="fa-solid fa-code"></i>
 
-if(!found){
-  alert("Usuário não encontrado!");
-  return;
-}
+                </div>
 
- localStorage.setItem("usuarioLogado", "true");
 
- window.location.href = "index.html";
-}
-</script>
+                <h1 class="brand-name">
+
+                    FluentCode
+
+                </h1>
+
+
+                <p class="brand-subtitle">
+
+                    Learning • Java • English
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CARD LOGIN
+            ================================================== -->
+
+            <section class="login-card">
+
+                <div class="card-content">
+
+
+                    <div class="card-header">
+
+                        <div class="card-header-icon">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+
+                        </div>
+
+
+                        <h2>
+
+                            Entrar na sua conta
+
+                        </h2>
+
+
+                        <p>
+
+                            Continue sua jornada de aprendizado
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         USUÁRIO
+                    ========================================== -->
+
+                    <div class="field">
+
+                        <label for="user">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Usuário
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-at"></i>
+
+
+                            <input
+                                id="user"
+                                type="text"
+                                autocomplete="username"
+                                placeholder="Digite seu nome"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         SENHA
+                    ========================================== -->
+
+                    <div class="field">
+
+                        <label for="password">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            Senha
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-key"></i>
+
+
+                            <input
+                                id="password"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Digite sua senha"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         BOTÃO LOGIN
+                    ========================================== -->
+
+                    <button
+                        onclick="login()"
+                        type="button"
+                        class="login-button">
+
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+
+                        Entrar no FluentCode
+
+                    </button>
+
+
+
+                    <!-- =========================================
+                         CADASTRO
+                    ========================================== -->
+
+                    <div class="register-area">
+
+                        <p>
+
+                            Ainda não possui uma conta?
+
+                        </p>
+
+
+                        <a
+                            href="cadastro.html"
+                            class="register-link">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            Criar minha conta
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 RODAPÉ
+            ================================================== -->
+
+            <div class="footer">
+
+                <i class="fa-solid fa-code"></i>
+
+                <span>
+                    Aprenda. Pratique. Evolua.
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        /*
+        ==========================================================
+        LOGIN
+        ==========================================================
+        */
+
+        async function login() {
+
+
+            // ================================================
+            // PEGA OS VALORES DIGITADOS
+            // ================================================
+
+            const user =
+                document
+                    .getElementById("user")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+
+            // ================================================
+            // VERIFICA OS CAMPOS
+            // ================================================
+
+            if (!user || !password) {
+
+                alert(
+                    "Preencha usuário e senha!"
+                );
+
+                return;
+            }
+
+
+
+            // ================================================
+            // ENVIA OS DADOS PARA O NODE.JS
+            // ================================================
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/login",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                usuario: user,
+
+                                senha: password
+
+                            })
+
+                        }
+                    );
+
+
+
+                // ============================================
+                // CONVERTE A RESPOSTA PARA JSON
+                // ============================================
+
+                const dados =
+                    await resposta.json();
+
+
+
+                // ============================================
+                // LOGIN APROVADO
+                // ============================================
+
+                if (dados.sucesso) {
+
+
+                    alert(
+                        dados.mensagem
+                    );
+
+
+                    /*
+                     * Guarda que o usuário está logado.
+                     */
+
+                    localStorage.setItem(
+                        "usuarioLogado",
+                        "true"
+                    );
+
+
+                    /*
+                     * IMPORTANTE:
+                     * Guarda o ID REAL do usuário
+                     * vindo do banco de dados.
+                     */
+
+                    localStorage.setItem(
+                        "id_usuario",
+                        dados.id_usuario
+                    );
+
+
+                    /*
+                     * Guarda o nome real retornado
+                     * pelo servidor.
+                     */
+
+                    localStorage.setItem(
+                        "usuario",
+                        dados.usuario || user
+                    );
+
+
+                    /*
+                     * Guarda o e-mail retornado
+                     * pelo servidor.
+                     */
+
+                    if (dados.email) {
+
+                        localStorage.setItem(
+                            "email",
+                            dados.email
+                        );
+
+                    }
+
+
+                    /*
+                     * Vai para a página principal.
+                     */
+
+                    window.location.href =
+                        "index.html";
+
+
+                } else {
+
+
+                    // ========================================
+                    // LOGIN RECUSADO
+                    // ========================================
+
+                    alert(
+                        dados.mensagem
+                    );
+
+                }
+
+
+            } catch (erro) {
+
+
+                console.error(
+                    "Erro ao fazer login:",
+                    erro
+                );
+
+
+                alert(
+                    "Não foi possível conectar ao servidor."
+                );
+
+            }
+
+        }
+
+    </script>
+
 
 </body>
+
 </html>
