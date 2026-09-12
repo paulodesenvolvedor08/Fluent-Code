@@ -2,176 +2,2119 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monte o Código - FluentCode</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-body {
-    background: #0d1b2a;
-    color: white;
-    font-size: 16px;
-    padding-bottom: 50px;
-}
+    <meta charset="UTF-8">
 
-#area {
-    word-break: break-all;
-    min-height: 120px;
-    font-family: 'Courier New', Courier, monospace;
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-/* ESTILO DOS BLOCOS DE CÓDIGO */
-.bloco {
-    padding: 12px;
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: center;
-    font-family: monospace;
-    font-size: 15px;
-    font-weight: 600;
-    transition: .2s;
-    user-select: none;
-}
+    <title>FluentCode - Monte o Código</title>
 
-.bloco:hover {
-    background: #334155;
-    border-color: #64748b;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-.bloco:active {
-    transform: scale(.95);
-}
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 
-/* BOTÃO VOLTAR */
-.btn-back {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: bold;
-    background: #2563eb;
-    transition: .2s;
-}
-.btn-back:hover { background: #1d4ed8; }
+    <style>
 
-/* AJUSTES MOBILE */
-@media(max-width:640px){
-    h1 { font-size: 20px; }
-    .bloco { font-size: 14px; padding: 10px; }
-}
-</style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            background: #07111f;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+            color: white;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 0%,
+                    rgba(37, 99, 235, 0.18),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(124, 58, 237, 0.16),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07111f 0%,
+                    #0b1728 45%,
+                    #07111f 100%
+                );
+        }
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.18;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 32px 32px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+        }
+
+
+        /* ========================================
+           CONTAINER
+        ======================================== */
+
+        .page-container {
+
+            position: relative;
+
+            z-index: 1;
+
+            width:
+                min(
+                    920px,
+                    calc(100% - 28px)
+                );
+
+            margin: 0 auto;
+
+            padding-bottom: 115px;
+        }
+
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 22px 0 18px;
+        }
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .brand-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(37,99,235,0.25);
+
+            font-size: 18px;
+        }
+
+        .brand-name {
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+
+            margin-top: 2px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+        .header-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(148,163,184,0.12);
+
+            border-radius: 13px;
+
+            background:
+                rgba(15,23,42,0.55);
+
+            color: #60a5fa;
+        }
+
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-top: 8px;
+
+            margin-bottom: 22px;
+
+            padding: 28px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37,99,235,0.94),
+                    rgba(79,70,229,0.9),
+                    rgba(124,58,237,0.9)
+                );
+
+            box-shadow:
+                0 25px 60px
+                rgba(0,0,0,0.35);
+        }
+
+        .hero::after {
+
+            content: "{ }";
+
+            position: absolute;
+
+            right: 25px;
+
+            bottom: -22px;
+
+            color:
+                rgba(255,255,255,0.08);
+
+            font-family: monospace;
+
+            font-size: 105px;
+
+            font-weight: 900;
+        }
+
+        .hero-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.1);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+        }
+
+        .hero h1 {
+
+            position: relative;
+
+            z-index: 1;
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(27px,5vw,38px);
+
+            font-weight: 900;
+
+            letter-spacing: -1.5px;
+        }
+
+        .hero p {
+
+            position: relative;
+
+            z-index: 1;
+
+            max-width: 620px;
+
+            margin-top: 7px;
+
+            color:
+                rgba(255,255,255,0.82);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ========================================
+           TÍTULO
+        ======================================== */
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin:
+                25px 4px 12px;
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+        .section-title i {
+            color: #60a5fa;
+        }
+
+
+        /* ========================================
+           CARD
+        ======================================== */
+
+        .card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 22px;
+
+            border:
+                1px solid
+                rgba(148,163,184,0.11);
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,29,49,0.96),
+                    rgba(8,20,35,0.94)
+                );
+
+            backdrop-filter: blur(14px);
+
+            box-shadow:
+                0 18px 40px
+                rgba(0,0,0,0.28);
+        }
+
+
+        /* ========================================
+           TOPO DO JOGO
+        ======================================== */
+
+        .game-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .game-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .game-icon {
+
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(59,130,246,0.12);
+
+            border:
+                1px solid
+                rgba(96,165,250,0.14);
+
+            color: #60a5fa;
+
+            font-size: 18px;
+        }
+
+        .small-label {
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .game-name {
+
+            margin-top: 3px;
+
+            color: #f8fafc;
+
+            font-size: 17px;
+
+            font-weight: 900;
+        }
+
+        .phase-badge {
+
+            padding: 7px 11px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,0.1);
+
+            border:
+                1px solid
+                rgba(59,130,246,0.16);
+
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* ========================================
+           PROGRESSO
+        ======================================== */
+
+        .progress-area {
+
+            margin-bottom: 18px;
+        }
+
+        .progress-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+        .progress-track {
+
+            width: 100%;
+
+            height: 5px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background:
+                #172235;
+        }
+
+        .progress-bar {
+
+            height: 100%;
+
+            width: 12.5%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3b82f6,
+                    #8b5cf6
+                );
+
+            transition:
+                width .3s ease;
+        }
+
+
+        /* ========================================
+           ÁREA DO CÓDIGO
+        ======================================== */
+
+        .code-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 8px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .code-title i {
+            color: #4ade80;
+        }
+
+        #area {
+
+            min-height: 135px;
+
+            padding: 20px;
+
+            overflow-x: auto;
+
+            word-break: break-all;
+
+            border:
+                1px solid
+                rgba(34,197,94,0.16);
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #040a12,
+                    #091321
+                );
+
+            color: #4ade80;
+
+            font-family:
+                "Cascadia Code",
+                "Fira Code",
+                "Courier New",
+                monospace;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            box-shadow:
+                inset 0 1px
+                rgba(255,255,255,0.025);
+        }
+
+        #area:empty::before {
+
+            content:
+                "Clique nos blocos abaixo para montar o código...";
+
+            color: #334155;
+
+            font-size: 13px;
+        }
+
+
+        /* ========================================
+           BANCO DE BLOCOS
+        ======================================== */
+
+        .blocks-title {
+
+            margin:
+                20px 0 10px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+        }
+
+        #banco {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(95px, 1fr)
+                );
+
+            gap: 9px;
+        }
+
+        .bloco {
+
+            min-height: 48px;
+
+            padding: 11px;
+
+            border:
+                1px solid
+                rgba(71,85,105,0.75);
+
+            border-radius: 12px;
+
+            background:
+                rgba(15,23,42,0.8);
+
+            color: #cbd5e1;
+
+            font-family:
+                "Cascadia Code",
+                "Fira Code",
+                monospace;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            user-select: none;
+
+            transition:
+                transform .18s ease,
+                background .18s ease,
+                border-color .18s ease,
+                color .18s ease;
+        }
+
+        .bloco:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(96,165,250,0.45);
+
+            background:
+                rgba(30,41,59,0.95);
+
+            color: white;
+        }
+
+        .bloco:active {
+
+            transform:
+                scale(.95);
+        }
+
+        .bloco:disabled {
+
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ========================================
+           BOTÃO VERIFICAR
+        ======================================== */
+
+        .verify-area {
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(148,163,184,0.08);
+        }
+
+        #btnVerificar {
+
+            width: 100%;
+
+            min-height: 54px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16a34a,
+                    #22c55e
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px
+                rgba(34,197,94,0.18);
+
+            transition:
+                transform .2s ease,
+                filter .2s ease;
+        }
+
+        #btnVerificar:hover {
+
+            transform:
+                translateY(-2px);
+
+            filter:
+                brightness(1.08);
+        }
+
+        #btnVerificar:disabled {
+
+            opacity: .55;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* ========================================
+           MENSAGEM
+        ======================================== */
+
+        #msg {
+
+            min-height: 28px;
+
+            margin-top: 14px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            text-align: center;
+        }
+
+
+        /* ========================================
+           DICA
+        ======================================== */
+
+        .tip {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(96,165,250,0.1);
+
+            border-radius: 14px;
+
+            background:
+                rgba(30,41,59,0.35);
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .tip i {
+
+            margin-top: 2px;
+
+            color: #60a5fa;
+        }
+
+        .tip strong {
+            color: #cbd5e1;
+        }
+
+
+        /* ========================================
+           BOTÃO VOLTAR
+        ======================================== */
+
+        .bottom-action {
+
+            position: fixed;
+
+            z-index: 50;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            width:
+                min(
+                    920px,
+                    calc(100% - 28px)
+                );
+
+            transform:
+                translateX(-50%);
+        }
+
+        .back-button {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(148,163,184,0.14);
+
+            border-radius: 16px;
+
+            background:
+                rgba(10,22,40,0.92);
+
+            backdrop-filter: blur(16px);
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.45);
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .back-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(18,35,57,0.96);
+
+            border-color:
+                rgba(96,165,250,0.25);
+        }
+
+        .back-button i {
+            color: #60a5fa;
+        }
+
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media(max-width:600px) {
+
+            .page-container {
+
+                width:
+                    calc(100% - 20px);
+            }
+
+            .header {
+
+                padding-top: 16px;
+            }
+
+            .brand-icon,
+            .header-icon {
+
+                width: 39px;
+                height: 39px;
+            }
+
+            .hero {
+
+                padding: 23px 20px;
+
+                border-radius: 21px;
+            }
+
+            .hero h1 {
+
+                font-size: 28px;
+            }
+
+            .hero::after {
+
+                font-size: 75px;
+
+                right: 0;
+            }
+
+            .card {
+
+                padding: 18px;
+
+                border-radius: 18px;
+            }
+
+            .game-top {
+
+                align-items:
+                    flex-start;
+            }
+
+            .game-name {
+
+                font-size: 15px;
+            }
+
+            .phase-badge {
+
+                font-size: 10px;
+            }
+
+            #area {
+
+                min-height: 120px;
+
+                padding: 15px;
+
+                font-size: 14px;
+            }
+
+            .bloco {
+
+                min-height: 46px;
+
+                padding: 9px 5px;
+
+                font-size: 11px;
+            }
+
+            .bottom-action {
+
+                width:
+                    calc(100% - 20px);
+
+                bottom: 10px;
+            }
+
+            .back-button {
+
+                padding: 14px;
+            }
+        }
+
+    </style>
+
 </head>
 
-<body class="p-4 sm:p-6">
 
-<!-- TOPO -->
-<div class="text-center mb-8">
-    <h1 class="text-2xl font-bold">🧩 Monte o Código</h1>
-    <span id="fase" class="inline-block mt-2 bg-blue-600 px-4 py-1 rounded-full text-sm font-bold">
-        Fase 1
-    </span>
-</div>
+<body>
 
-<!-- ÁREA DO CÓDIGO (ONDE MONTA) -->
-<div id="area" class="bg-slate-950 border border-cyan-500 rounded-2xl p-6 mb-6 overflow-auto text-green-400 text-lg shadow-inner">
-</div>
 
-<!-- BANCO DE BLOCOS -->
-<div id="banco" class="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-8">
-    <!-- Blocos gerados via JS -->
-</div>
+    <main class="page-container">
 
-<!-- BOTÃO VERIFICAR -->
-<div class="text-center">
-    <button onclick="verificar()"
-    class="bg-green-600 w-full sm:w-auto px-10 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition shadow-lg">
-    Verificar Código
-    </button>
-    <p id="msg" class="mt-4 font-bold text-lg min-h-[30px]"></p>
-</div>
 
-<!-- BOTÃO VOLTAR (AZUL EMBAIXO) -->
-<div class="mt-12 text-center">
-    <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-200 z-50">
-     <i class="fa-solid fa-arrow-left"></i>
-     <span class="font-bold">Voltar</span>
-   </button>
-</div>
+        <!-- ========================================
+             HEADER
+        ======================================== -->
 
-<script>
-/* 🔥 FASES DO JOGO */
-const fases = [
-    {
-        titulo: "Hello World",
-        codigo: ["System", ".", "out", ".", "println", "(", "'Hello World'", ")", ";"],
-        xp: 100
-    },
-    {
-        titulo: "Variável Java",
-        codigo: ["int", "x", "=", "10", ";"],
-        xp: 120
-    },
-    {
-        titulo: "If simples",
-        codigo: ["if", "(", "x", ">", "5", ")", "{", "System", ".", "out", ".", "println", "(", "'Maior'", ")", ";", "}"],
-        xp: 150
-    }
-];
+        <header class="header">
 
-let faseAtual = 0;
-let selecionado = [];
+            <div class="brand">
 
-/* 🔁 CARREGAR FASE */
-function carregarFase(){
-    document.getElementById("area").innerHTML = "";
-    document.getElementById("banco").innerHTML = "";
-    document.getElementById("msg").innerHTML = "";
-    selecionado = [];
+                <div class="brand-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
 
-    let fase = fases[faseAtual];
-    document.getElementById("fase").innerText = "Fase " + (faseAtual + 1);
+                <div>
 
-    let banco = [...fase.codigo].sort(() => Math.random() - 0.5);
+                    <div class="brand-name">
+                        FluentCode
+                    </div>
 
-    banco.forEach(item => {
-        let b = document.createElement("span");
-        b.innerText = item;
-        b.className = "bloco";
-        b.onclick = () => {
-            selecionado.push(item);
-            document.getElementById("area").innerHTML += item;
-        };
-        document.getElementById("banco").appendChild(b);
-    });
-}
+                    <div class="brand-subtitle">
+                        Learning • Java • English
+                    </div>
 
-/* ✅ VERIFICAR */
-function verificar(){
-    let fase = fases[faseAtual];
-    let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0,nivel:0};
+                </div>
 
-    if(selecionado.join("") === fase.codigo.join("")){
-        user.xp += fase.xp;
-        document.getElementById("msg").innerHTML = "✔ Correto! +" + fase.xp + " XP";
-        faseAtual++;
-        
-        if(faseAtual < fases.length){
-            setTimeout(() => carregarFase(), 1200);
-        } else {
-            document.getElementById("msg").innerHTML = "🏆 Parabéns! Você completou todas as fases!";
+            </div>
+
+
+            <div class="header-icon">
+                <i class="fa-solid fa-puzzle-piece"></i>
+            </div>
+
+        </header>
+
+
+        <!-- ========================================
+             HERO
+        ======================================== -->
+
+        <section class="hero">
+
+            <div class="hero-label">
+
+                <i class="fa-solid fa-gamepad"></i>
+
+                Desafio interativo
+
+            </div>
+
+
+            <h1>
+                🧩 Monte o Código
+            </h1>
+
+
+            <p>
+                Organize os blocos na ordem correta e
+                construa comandos Java funcionais.
+                Quanto mais fases você completar,
+                mais XP você conquista.
+            </p>
+
+        </section>
+
+
+        <!-- ========================================
+             TÍTULO
+        ======================================== -->
+
+        <div class="section-title">
+
+            <i class="fa-solid fa-layer-group"></i>
+
+            <span>
+                Construa o programa
+            </span>
+
+        </div>
+
+
+        <!-- ========================================
+             CARD PRINCIPAL
+        ======================================== -->
+
+        <section class="card">
+
+
+            <!-- TOPO -->
+
+            <div class="game-top">
+
+
+                <div class="game-title">
+
+                    <div class="game-icon">
+
+                        <i class="fa-solid fa-terminal"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="small-label">
+                            Atividade
+                        </div>
+
+                        <div class="game-name">
+                            Java Code Builder
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="fase"
+                    class="phase-badge"
+                >
+                    Fase 1
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESSO -->
+
+            <div class="progress-area">
+
+                <div class="progress-info">
+
+                    <span>
+                        Progresso das fases
+                    </span>
+
+                    <span id="progressoTexto">
+                        1 / 8
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="barraProgresso"
+                        class="progress-bar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÁREA DO CÓDIGO -->
+
+            <div class="code-title">
+
+                <i class="fa-solid fa-terminal"></i>
+
+                Código montado
+
+            </div>
+
+
+            <div id="area"></div>
+
+
+            <!-- BANCO -->
+
+            <div class="blocks-title">
+
+                Escolha os blocos na ordem correta
+
+            </div>
+
+
+            <div id="banco"></div>
+
+
+            <!-- VERIFICAR -->
+
+            <div class="verify-area">
+
+                <button
+                    id="btnVerificar"
+                    onclick="verificar()"
+                >
+
+                    <i class="fa-solid fa-circle-check mr-2"></i>
+
+                    Verificar Código
+
+                </button>
+
+
+                <p id="msg"></p>
+
+            </div>
+
+
+            <!-- DICA -->
+
+            <div class="tip">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+                <div>
+
+                    <strong>Dica:</strong>
+
+                    pense na estrutura do comando antes
+                    de clicar. A ordem dos elementos
+                    faz parte da sintaxe Java.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         BOTÃO VOLTAR
+    ======================================== -->
+
+    <div class="bottom-action">
+
+        <button
+            onclick="window.location.href='atividades.html'"
+            class="back-button"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span>
+                Voltar para Atividades
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <script>
+
+
+        /* =========================================================
+           VERIFICAR LOGIN
+        ========================================================= */
+
+        function verificarLogin() {
+
+            const idUsuario =
+                localStorage.getItem(
+                    "id_usuario"
+                );
+
+
+            if (!idUsuario) {
+
+                alert(
+                    "É necessário fazer login para realizar as atividades."
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+
+                return false;
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                alert(
+                    "Sua sessão é inválida. Faça login novamente."
+                );
+
+
+                localStorage.removeItem(
+                    "id_usuario"
+                );
+
+                localStorage.removeItem(
+                    "usuario"
+                );
+
+                localStorage.removeItem(
+                    "usuarioLogado"
+                );
+
+                localStorage.removeItem(
+                    "email"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+
+                return false;
+
+            }
+
+
+            return true;
+
         }
-    } else {
-        document.getElementById("msg").innerHTML = "❌ Ordem incorreta. Tente novamente!";
-    }
 
-    localStorage.setItem("fluentcode_user", JSON.stringify(user));
-}
 
-carregarFase();
-</script>
+        /* =========================================================
+           FASES DO JOGO
+        ========================================================= */
+
+        const fases = [
+
+            {
+                titulo:
+                    "Hello World",
+
+                codigo: [
+                    "System",
+                    ".",
+                    "out",
+                    ".",
+                    "println",
+                    "(",
+                    "'Hello World'",
+                    ")",
+                    ";"
+                ],
+
+                xp: 100
+
+            },
+
+
+            {
+                titulo:
+                    "Variável inteira",
+
+                codigo: [
+                    "int",
+                    "x",
+                    "=",
+                    "10",
+                    ";"
+                ],
+
+                xp: 120
+
+            },
+
+
+            {
+                titulo:
+                    "Variável String",
+
+                codigo: [
+                    "String",
+                    "nome",
+                    "=",
+                    "'Java'",
+                    ";"
+                ],
+
+                xp: 110
+
+            },
+
+
+            {
+                titulo:
+                    "Variável decimal",
+
+                codigo: [
+                    "double",
+                    "preco",
+                    "=",
+                    "19.99",
+                    ";"
+                ],
+
+                xp: 120
+
+            },
+
+
+            {
+                titulo:
+                    "If simples",
+
+                codigo: [
+                    "if",
+                    "(",
+                    "x",
+                    ">",
+                    "5",
+                    ")",
+                    "{",
+                    "System",
+                    ".",
+                    "out",
+                    ".",
+                    "println",
+                    "(",
+                    "'Maior'",
+                    ")",
+                    ";",
+                    "}"
+                ],
+
+                xp: 150
+
+            },
+
+
+            {
+                titulo:
+                    "Boolean",
+
+                codigo: [
+                    "boolean",
+                    "ativo",
+                    "=",
+                    "true",
+                    ";"
+                ],
+
+                xp: 130
+
+            },
+
+
+            {
+                titulo:
+                    "Laço for",
+
+                codigo: [
+                    "for",
+                    "(",
+                    "int",
+                    "i",
+                    "=",
+                    "0",
+                    ";",
+                    "i",
+                    "<",
+                    "5",
+                    ";",
+                    "i",
+                    "++",
+                    ")",
+                    "{",
+                    "}"
+                ],
+
+                xp: 170
+
+            },
+
+
+            {
+                titulo:
+                    "Laço while",
+
+                codigo: [
+                    "while",
+                    "(",
+                    "x",
+                    "<",
+                    "10",
+                    ")",
+                    "{",
+                    "x",
+                    "++",
+                    ";",
+                    "}"
+                ],
+
+                xp: 160
+
+            }
+
+        ];
+
+
+        /* =========================================================
+           CONTROLE
+        ========================================================= */
+
+        let faseAtual = 0;
+
+        let selecionado = [];
+
+        let salvandoXP = false;
+
+
+        /* =========================================================
+           CARREGAR FASE
+        ========================================================= */
+
+        function carregarFase() {
+
+
+            if (!verificarLogin()) {
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("area")
+                .innerHTML = "";
+
+
+            document
+                .getElementById("banco")
+                .innerHTML = "";
+
+
+            document
+                .getElementById("msg")
+                .innerHTML = "";
+
+
+            selecionado = [];
+
+
+            salvandoXP = false;
+
+
+            const botao =
+                document.getElementById(
+                    "btnVerificar"
+                );
+
+
+            botao.disabled = false;
+
+
+            botao.innerHTML =
+                '<i class="fa-solid fa-circle-check mr-2"></i>Verificar Código';
+
+
+            const fase =
+                fases[faseAtual];
+
+
+            document
+                .getElementById("fase")
+                .innerText =
+                "Fase " +
+                (faseAtual + 1);
+
+
+            document
+                .getElementById("progressoTexto")
+                .innerText =
+                `${faseAtual + 1} / ${fases.length}`;
+
+
+            const porcentagem =
+                ((faseAtual + 1) /
+                    fases.length) *
+                100;
+
+
+            document
+                .getElementById("barraProgresso")
+                .style.width =
+                `${porcentagem}%`;
+
+
+            /*
+             * Cria uma cópia dos blocos
+             * e embaralha.
+             */
+
+            const banco =
+                [...fase.codigo].sort(
+                    () =>
+                        Math.random() - 0.5
+                );
+
+
+            banco.forEach(
+                item => {
+
+
+                    const b =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    b.type = "button";
+
+
+                    b.innerText =
+                        item;
+
+
+                    b.className =
+                        "bloco";
+
+
+                    b.onclick =
+                        () => {
+
+
+                            if (salvandoXP) {
+
+                                return;
+
+                            }
+
+
+                            selecionado.push(
+                                item
+                            );
+
+
+                            document
+                                .getElementById(
+                                    "area"
+                                )
+                                .innerHTML +=
+                                item;
+
+                        };
+
+
+                    document
+                        .getElementById(
+                            "banco"
+                        )
+                        .appendChild(
+                            b
+                        );
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           SALVAR XP NO MYSQL
+        ========================================================= */
+
+        async function salvarXpNoBanco(
+            xpGanho
+        ) {
+
+
+            const idUsuario =
+                localStorage.getItem(
+                    "id_usuario"
+                );
+
+
+            if (!idUsuario) {
+
+                throw new Error(
+                    "Usuário não identificado. Faça login novamente."
+                );
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(
+                    idNumerico
+                ) ||
+                idNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "ID do usuário inválido. Faça login novamente."
+                );
+
+            }
+
+
+            const xpNumerico =
+                Number(xpGanho);
+
+
+            if (
+                !Number.isFinite(
+                    xpNumerico
+                ) ||
+                xpNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "Valor de XP inválido."
+                );
+
+            }
+
+
+            const resposta =
+                await fetch(
+                    "/exercicio/concluir",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                id_usuario:
+                                    idNumerico,
+
+                                xp_ganho:
+                                    xpNumerico
+
+                            })
+
+                    }
+                );
+
+
+            let dados;
+
+
+            try {
+
+                dados =
+                    await resposta.json();
+
+            }
+
+            catch (erro) {
+
+                throw new Error(
+                    "O servidor retornou uma resposta inválida."
+                );
+
+            }
+
+
+            if (
+                !resposta.ok ||
+                dados.sucesso !== true
+            ) {
+
+                throw new Error(
+                    dados.mensagem ||
+                    dados.erro ||
+                    "Não foi possível salvar o XP."
+                );
+
+            }
+
+
+            return dados;
+
+        }
+
+
+        /* =========================================================
+           VERIFICAR CÓDIGO
+        ========================================================= */
+
+        async function verificar() {
+
+
+            if (!verificarLogin()) {
+
+                return;
+
+            }
+
+
+            if (salvandoXP) {
+
+                return;
+
+            }
+
+
+            const fase =
+                fases[faseAtual];
+
+
+            const msg =
+                document.getElementById(
+                    "msg"
+                );
+
+
+            const botao =
+                document.getElementById(
+                    "btnVerificar"
+                );
+
+
+            /* ====================================
+               VERIFICA CÓDIGO
+            ==================================== */
+
+            if (
+                selecionado.join("") ===
+                fase.codigo.join("")
+            ) {
+
+
+                salvandoXP = true;
+
+
+                botao.disabled = true;
+
+
+                botao.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Salvando XP...';
+
+
+                msg.innerHTML =
+                    "⏳ Código correto! Salvando seu XP...";
+
+
+                msg.style.color =
+                    "#facc15";
+
+
+                try {
+
+
+                    const resultado =
+                        await salvarXpNoBanco(
+                            fase.xp
+                        );
+
+
+                    console.log(
+                        "XP salvo com sucesso:",
+                        resultado
+                    );
+
+
+                    msg.innerHTML =
+                        `✔ Correto! +${fase.xp} XP salvo no banco!`;
+
+
+                    msg.style.color =
+                        "#4ade80";
+
+
+                    faseAtual++;
+
+
+                    /* ====================================
+                       PRÓXIMA FASE
+                    ==================================== */
+
+                    if (
+                        faseAtual <
+                        fases.length
+                    ) {
+
+
+                        setTimeout(
+                            () => {
+
+                                carregarFase();
+
+                            },
+                            1200
+                        );
+
+                    }
+
+
+                    /* ====================================
+                       TODAS AS FASES
+                    ==================================== */
+
+                    else {
+
+
+                        document
+                            .getElementById(
+                                "fase"
+                            )
+                            .innerText =
+                            "Concluído";
+
+
+                        document
+                            .getElementById(
+                                "progressoTexto"
+                            )
+                            .innerText =
+                            `${fases.length} / ${fases.length}`;
+
+
+                        document
+                            .getElementById(
+                                "barraProgresso"
+                            )
+                            .style.width =
+                            "100%";
+
+
+                        document
+                            .getElementById(
+                                "area"
+                            )
+                            .innerHTML =
+                            `
+                                <div
+                                    style="
+                                        text-align:center;
+                                        color:#4ade80;
+                                        font-family:inherit;
+                                        font-size:15px;
+                                        font-weight:800;
+                                        padding:20px;
+                                    "
+                                >
+
+                                    <div
+                                        style="
+                                            font-size:42px;
+                                            margin-bottom:10px;
+                                        "
+                                    >
+                                        🏆
+                                    </div>
+
+                                    Todas as fases
+                                    foram concluídas!
+
+                                </div>
+                            `;
+
+
+                        document
+                            .getElementById(
+                                "banco"
+                            )
+                            .innerHTML =
+                            "";
+
+
+                        msg.innerHTML =
+                            "🎉 Parabéns! Você completou o desafio Monte o Código.";
+
+
+                        msg.style.color =
+                            "#facc15";
+
+
+                        botao.innerHTML =
+                            '<i class="fa-solid fa-trophy mr-2"></i>Fases concluídas';
+
+
+                        botao.disabled =
+                            true;
+
+
+                        salvandoXP =
+                            false;
+
+                    }
+
+                }
+
+
+                catch (erro) {
+
+
+                    console.error(
+                        "Erro ao salvar XP:",
+                        erro
+                    );
+
+
+                    salvandoXP =
+                        false;
+
+
+                    botao.disabled =
+                        false;
+
+
+                    botao.innerHTML =
+                        '<i class="fa-solid fa-circle-check mr-2"></i>Verificar Código';
+
+
+                    msg.innerHTML =
+                        "❌ " +
+                        erro.message;
+
+
+                    msg.style.color =
+                        "#f87171";
+
+                }
+
+
+            }
+
+
+            /* ====================================
+               CÓDIGO INCORRETO
+            ==================================== */
+
+            else {
+
+
+                msg.innerHTML =
+                    "❌ Ordem incorreta. Organize os blocos e tente novamente!";
+
+
+                msg.style.color =
+                    "#f87171";
+
+            }
+
+        }
+
+
+        /* =========================================================
+           INICIAR JOGO
+        ========================================================= */
+
+        if (verificarLogin()) {
+
+            carregarFase();
+
+        }
+
+    </script>
 
 </body>
+
 </html>
