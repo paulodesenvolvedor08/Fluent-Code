@@ -1,281 +1,1777 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ranking Imperial</title>
-    
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    background: #0f172a;
-    overflow-x: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-}
+    <title>FluentCode - Ranking</title>
 
-body {
-    background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
-    color: white;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-/* Card Principal */
-.card {
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 
-/* Animação e Estilo do Pódio */
-.podium-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 16px;
-    margin: 40px 0 20px 0;
-    height: 220px;
-}
+    <style>
 
-.podium-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100px;
-    position: relative;
-    animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
+        /* =====================================================
+           BASE
+        ===================================================== */
 
-.podium-base {
-    width: 100%;
-    border-radius: 12px 12px 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
-}
+        * {
+            box-sizing: border-box;
+        }
 
-/* Cores temáticas para os vencedores */
-.gold { background: linear-gradient(135deg, #fbbf24, #b45309); height: 120px; color: #fef08a; }
-.silver { background: linear-gradient(135deg, #cbd5e1, #475569); height: 90px; color: #f1f5f9; }
-.bronze { background: linear-gradient(135deg, #ca8a04, #78350f); height: 70px; color: #fef9c3; }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            width: 100%;
+        }
 
-@keyframes popUp {
-    0% { transform: translateY(50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
 
-/* Avatar flutuante no pódio */
-.podium-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 3px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-    font-size: 1.5rem;
-    background: #334155;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(79, 70, 229, 0.30),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 0% 50%,
+                    rgba(37, 99, 235, 0.10),
+                    transparent 30%
+                ),
+                #07111f;
+        }
 
-.gold .podium-avatar { border-color: #fbbf24; }
-.silver .podium-avatar { border-color: #cbd5e1; }
-.bronze .podium-avatar { border-color: #ca8a04; }
+        /* =====================================================
+           FUNDO DECORATIVO
+        ===================================================== */
 
-/* Item da Lista (Do 4º lugar em diante) */
-.item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
-    margin: 10px 0;
-    border-radius: 14px;
-    background: rgba(31, 41, 55, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: .25s;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
 
-.item:hover {
-    transform: translateX(5px);
-    background: rgba(37, 99, 235, 0.4);
-}
+            pointer-events: none;
 
-.item.me {
-    border: 2px solid #3b82f6;
-    background: rgba(30, 58, 138, 0.8);
-}
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
 
-/* Botões Inferiores */
-.action-btn {
-    background: linear-gradient(to right, #2563eb, #4f46e5);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-    transition: .2s;
-}
+            background-size: 45px 45px;
 
-.action-btn:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+        }
 
-.share-btn {
-    background: linear-gradient(to right, #10b981, #059669);
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-}
-</style>
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
+        .ranking-wrapper {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding:
+                24px
+                18px
+                120px;
+        }
+
+        /* =====================================================
+           TOPO
+        ===================================================== */
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 0 25px rgba(59,130,246,0.30);
+        }
+
+        .brand-name {
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-subtitle {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .back-dashboard {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: .25s;
+        }
+
+        .back-dashboard:hover {
+            color: #60a5fa;
+            transform: translateX(-3px);
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero-ranking {
+            text-align: center;
+
+            margin-bottom: 24px;
+
+            padding: 32px 20px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(15, 23, 42, 0.70)
+                );
+
+            border: 1px solid rgba(96,165,250,0.12);
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.35);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-ranking::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            top: -150px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background: rgba(99,102,241,0.25);
+
+            filter: blur(70px);
+
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            position: relative;
+
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 22px;
+
+            font-size: 34px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(251,191,36,0.20),
+                    rgba(245,158,11,0.05)
+                );
+
+            border: 1px solid rgba(251,191,36,0.25);
+
+            box-shadow:
+                0 0 35px rgba(251,191,36,0.12);
+        }
+
+        .hero-ranking h1 {
+            position: relative;
+
+            margin: 0;
+
+            font-size: clamp(30px, 7vw, 46px);
+
+            font-weight: 900;
+
+            letter-spacing: -1.5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fbbf24,
+                    #f59e0b,
+                    #ef4444
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-ranking p {
+            position: relative;
+
+            margin:
+                10px
+                auto
+                0;
+
+            max-width: 500px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: 18px;
+
+            padding: 7px 13px;
+
+            border-radius: 999px;
+
+            background: rgba(59,130,246,0.08);
+
+            border: 1px solid rgba(59,130,246,0.16);
+
+            color: #60a5fa;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .ranking-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,23,42,0.92),
+                    rgba(15,23,42,0.70)
+                );
+
+            border: 1px solid rgba(148,163,184,0.10);
+
+            border-radius: 24px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.30);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .section-title-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(59,130,246,0.10);
+
+            color: #60a5fa;
+
+            font-size: 14px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: #e2e8f0;
+        }
+
+        .section-count {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           PÓDIO
+        ===================================================== */
+
+        .podium-area {
+            margin-bottom: 26px;
+
+            padding:
+                18px
+                10px
+                0;
+
+            border-radius: 22px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(59,130,246,0.10),
+                    transparent 55%
+                );
+        }
+
+        .podium-container {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-end;
+
+            gap: clamp(8px, 4vw, 22px);
+
+            height: 285px;
+
+            margin: 0 auto;
+
+            max-width: 620px;
+        }
+
+        .podium-column {
+            width: clamp(78px, 22vw, 125px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            position: relative;
+
+            animation:
+                podiumUp .65s
+                cubic-bezier(.175,.885,.32,1.275)
+                both;
+        }
+
+        @keyframes podiumUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .podium-name {
+            width: 100%;
+
+            text-align: center;
+
+            margin-bottom: 8px;
+        }
+
+        .podium-name strong {
+            display: block;
+
+            width: 100%;
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+            font-size: 12px;
+        }
+
+        .podium-name span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 10px;
+        }
+
+        .podium-avatar {
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 9px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1e293b,
+                    #0f172a
+                );
+
+            border: 3px solid #475569;
+
+            color: #94a3b8;
+
+            font-size: 20px;
+
+            box-shadow:
+                0 12px 25px rgba(0,0,0,0.40);
+        }
+
+        .podium-avatar.is-me {
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 4px rgba(59,130,246,0.12),
+                0 0 30px rgba(59,130,246,0.30);
+        }
+
+        .podium-base {
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius:
+                14px
+                14px
+                4px
+                4px;
+
+            font-weight: 900;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.25),
+                0 -10px 35px rgba(0,0,0,0.15);
+        }
+
+        .podium-base span:first-child {
+            font-size: 27px;
+            margin-bottom: 2px;
+        }
+
+        .podium-base span:last-child {
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .gold {
+            height: 130px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #facc15,
+                    #d97706
+                );
+
+            color: #fff7ed;
+
+            box-shadow:
+                0 0 35px rgba(245,158,11,0.20);
+        }
+
+        .silver {
+            height: 100px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e2e8f0,
+                    #64748b
+                );
+
+            color: #f8fafc;
+        }
+
+        .bronze {
+            height: 80px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #d97706,
+                    #78350f
+                );
+
+            color: #fef3c7;
+        }
+
+        /* =====================================================
+           LISTA
+        ===================================================== */
+
+        .item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            min-height: 68px;
+
+            padding: 11px 14px;
+
+            margin-bottom: 9px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(30,41,59,0.48);
+
+            border: 1px solid rgba(148,163,184,0.07);
+
+            transition:
+                transform .25s,
+                background .25s,
+                border-color .25s,
+                box-shadow .25s;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+
+            background:
+                rgba(37,99,235,0.12);
+
+            border-color:
+                rgba(59,130,246,0.20);
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .item.me {
+            border:
+                1px solid
+                rgba(59,130,246,0.55);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(30,64,175,0.24),
+                    rgba(30,41,59,0.55)
+                );
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.10);
+        }
+
+        .rank-number {
+            width: 38px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+        .rank-avatar {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1e293b,
+                    #0f172a
+                );
+
+            border: 1px solid rgba(148,163,184,0.10);
+
+            color: #94a3b8;
+        }
+
+        .rank-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .rank-info-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .rank-name {
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #e2e8f0;
+        }
+
+        .rank-name.me-name {
+            color: #60a5fa;
+        }
+
+        .rank-xp {
+            flex-shrink: 0;
+
+            color: #818cf8;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .you-tag {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            margin-left: 7px;
+
+            padding: 3px 7px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,0.14);
+
+            color: #60a5fa;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            vertical-align: middle;
+        }
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
+
+        .bottom-actions {
+            position: fixed;
+
+            z-index: 20;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            transform: translateX(-50%);
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    860px
+                );
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(7,17,31,0.82);
+
+            border:
+                1px solid
+                rgba(148,163,184,0.10);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.40);
+        }
+
+        .action-btn {
+            border: none;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding:
+                11px
+                18px;
+
+            border-radius: 13px;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            transition:
+                transform .2s,
+                filter .2s,
+                box-shadow .2s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+
+            filter: brightness(1.08);
+        }
+
+        .back-btn {
+            background:
+                rgba(30,41,59,0.85);
+
+            border:
+                1px solid
+                rgba(148,163,184,0.12);
+
+            color: #cbd5e1;
+        }
+
+        .share-btn {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(37,99,235,0.25);
+        }
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .ranking-wrapper {
+                padding:
+                    15px
+                    12px
+                    110px;
+            }
+
+            .top-header {
+                margin-bottom: 18px;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .hero-ranking {
+                padding: 25px 15px;
+                border-radius: 22px;
+            }
+
+            .hero-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .ranking-card {
+                padding: 15px;
+                border-radius: 20px;
+            }
+
+            .podium-container {
+                gap: 7px;
+                height: 250px;
+            }
+
+            .podium-avatar {
+                width: 54px;
+                height: 54px;
+                font-size: 17px;
+            }
+
+            .gold {
+                height: 112px;
+            }
+
+            .silver {
+                height: 87px;
+            }
+
+            .bronze {
+                height: 70px;
+            }
+
+            .item {
+                padding: 10px;
+                gap: 9px;
+            }
+
+            .rank-number {
+                width: 28px;
+                font-size: 11px;
+            }
+
+            .rank-avatar {
+                width: 38px;
+                height: 38px;
+            }
+
+            .rank-xp {
+                font-size: 10px;
+            }
+
+            .bottom-actions {
+                bottom: 10px;
+            }
+
+            .action-btn {
+                flex: 1;
+                padding: 11px 12px;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-<div class="max-w-2xl mx-auto p-4 pb-24">
+<div class="ranking-wrapper">
 
-    <h1 class="text-4xl font-extrabold text-center mt-6 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent drop-shadow">🏆 Arena dos Devs</h1>
-    <p class="text-center text-indigo-200 mb-2 font-medium">Os melhores programadores da plataforma</p>
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
-    <div class="podium-container" id="podium"></div>
+    <header class="top-header">
 
-    <div class="card">
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3"><i class="fa-solid fa-list-ol mr-2"></i>Classificação Geral</h3>
-        <div id="lista"></div>
-    </div>
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-code"></i>
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    FluentCode
+                </div>
+
+                <div class="brand-subtitle">
+                    Learning • Java • English
+                </div>
+            </div>
+
+        </div>
+
+        <a href="index.html" class="back-dashboard">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero-ranking">
+
+        <div class="hero-icon">
+            🏆
+        </div>
+
+        <h1>
+            Arena dos Devs
+        </h1>
+
+        <p>
+            Compare sua evolução, conquiste XP e suba na
+            classificação do FluentCode.
+        </p>
+
+        <div class="hero-label">
+            <i class="fa-solid fa-bolt"></i>
+            Ranking global
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RANKING
+    ====================================================== -->
+
+    <section class="ranking-card">
+
+        <div class="section-title">
+
+            <div class="section-title-left">
+
+                <div class="section-icon">
+                    <i class="fa-solid fa-ranking-star"></i>
+                </div>
+
+                <h2>
+                    Classificação
+                </h2>
+
+            </div>
+
+            <span
+                class="section-count"
+                id="contador-ranking"
+            >
+                Ranking
+            </span>
+
+        </div>
+
+
+        <!-- PÓDIO -->
+
+        <div class="podium-area">
+
+            <div
+                class="podium-container"
+                id="podium"
+            >
+
+                <p class="text-gray-400 text-sm">
+                    Carregando ranking...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- LISTA -->
+
+        <div id="lista">
+
+            <p class="text-gray-400 text-center py-4">
+                Carregando...
+            </p>
+
+        </div>
+
+    </section>
 
 </div>
 
-<div class="fixed bottom-5 left-0 right-0 px-6 flex justify-between max-w-2xl mx-auto pointer-events-none">
-    <button class="action-btn pointer-events-auto" onclick="history.back()">
-        <i class="fa-solid fa-arrow-left"></i> Voltar
+
+<!-- =====================================================
+     AÇÕES
+====================================================== -->
+
+<div class="bottom-actions">
+
+    <button
+        class="action-btn back-btn"
+        onclick="history.back()"
+    >
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Voltar
+
     </button>
-    
-    <button class="action-btn share-btn pointer-events-auto" onclick="compartilharRanking()">
-        <i class="fa-solid fa-share-nodes"></i> Compartilhar
+
+
+    <button
+        class="action-btn share-btn"
+        onclick="compartilharRanking()"
+    >
+
+        <i class="fa-solid fa-share-nodes"></i>
+
+        Compartilhar
+
     </button>
+
 </div>
+
 
 <script>
-// Pega os dados do usuário ou define o padrão
-const user = JSON.parse(localStorage.getItem("fluentcode_user")) || {
-    nome: "Você",
-    xp: 650
-};
 
-// Lista de competidores aumentada para testar a rolagem/lista
-const ranking = [
-    {nome: "Lucas", xp: 1250},
-    {nome: "Maria", xp: 980},
-    {nome: "João", xp: 420},
-    {nome: "Ana Clara", xp: 810},
-    {nome: "Pedro", xp: 590},
-    {nome: user.nome || "Você", xp: user.xp}
-];
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
 
-// Organiza por pontuação do maior para o menor
-ranking.sort((a, b) => b.xp - a.xp);
-
-// --- CONSTRUÇÃO DO PÓDIO (Top 3) ---
-const podiumContainer = document.getElementById("podium");
-let podiumHTML = "";
-
-// Ordem visual clássica de pódio: [2º lugar, 1º lugar, 3º lugar]
-const ordemPodio = [1, 0, 2]; 
-
-ordemPodio.forEach((index) => {
-    const p = ranking[index];
-    if (!p) return;
-
-    let classeMedalha = index === 0 ? "gold" : index === 1 ? "silver" : "bronze";
-    let iconMedalha = index === 0 ? "👑" : index === 1 ? "🥈" : "🥉";
-    let animDelay = index === 0 ? "0.2s" : index === 1 ? "0s" : "0.4s";
-    let destaqueUser = p.nome === user.nome ? "border-blue-500 scale-105" : "";
-
-    podiumHTML += `
-    <div class="podium-column" style="animation-delay: ${animDelay}">
-        <div class="text-center mb-1 max-w-[90px]">
-            <p class="font-bold text-xs truncate ${p.nome === user.nome ? 'text-blue-400 font-extrabold' : 'text-gray-200'}">${p.nome}</p>
-            <p class="text-[11px] text-gray-400">${p.xp} XP</p>
-        </div>
-        <div class="podium-avatar ${destaqueUser}">
-            <i class="fa-solid fa-user text-gray-300"></i>
-        </div>
-        <div class="podium-base ${classeMedalha}">
-            <span class="drop-shadow-md">${iconMedalha}</span>
-            <span class="text-xs uppercase opacity-70">${index + 1}º</span>
-        </div>
-    </div>
-    `;
-});
-podiumContainer.innerHTML = podiumHTML;
+let ranking = [];
+let usuarioAtual = null;
 
 
-// --- CONSTRUÇÃO DO RESTANTE DA LISTA (4º lugar em diante) ---
-const listaContainer = document.getElementById("lista");
-let listaHTML = "";
+/* =========================================================
+   CARREGAR RANKING DO BANCO
+========================================================= */
 
-ranking.forEach((p, i) => {
-    // Pula os 3 primeiros que já estão no pódio
-    if (i < 3) return;
+async function carregarRanking() {
 
-    listaHTML += `
-    <div class="item ${p.nome === user.nome ? 'me' : ''}">
-        <div class="w-8 font-bold text-center text-gray-400">#${i + 1}</div>
+    const idUsuario =
+        localStorage.getItem("id_usuario");
 
-        <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center text-sm">
-            <i class="fa-solid fa-user"></i>
-        </div>
 
-        <div style="flex:1">
-            <div class="flex justify-between items-center">
-                <b class="${p.nome === user.nome ? 'text-blue-400' : ''}">${p.nome}</b>
-                <span class="text-sm font-medium text-indigo-300">${p.xp} XP</span>
+    if (!idUsuario) {
+
+        document.getElementById("podium").innerHTML = `
+
+            <div class="text-center text-gray-400">
+
+                <i
+                    class="fa-solid fa-lock text-3xl mb-3"
+                ></i>
+
+                <p>
+                    Faça login para visualizar seu ranking.
+                </p>
+
             </div>
-        </div>
-    </div>
-    `;
-});
 
-// Se não houver ninguém além do top 3, exibe uma mensagem amigável
-listaContainer.innerHTML = listaHTML || `<p class="text-gray-500 text-center text-sm py-4">Nenhum competidor extra no momento.</p>`;
+        `;
 
 
-// --- FUNÇÃO DE COMPARTILHAR ---
+        document.getElementById("lista").innerHTML = `
+
+            <p class="text-gray-400 text-center py-4">
+
+                Faça login para visualizar a classificação.
+
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    try {
+
+        const resposta =
+            await fetch("/ranking");
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                dados.mensagem ||
+                dados.erro ||
+                "Erro ao carregar ranking."
+            );
+
+        }
+
+
+        if (!Array.isArray(dados)) {
+
+            throw new Error(
+                "Formato de ranking inválido."
+            );
+
+        }
+
+
+        ranking = dados;
+
+
+        usuarioAtual =
+            ranking.find(
+                usuario =>
+                    Number(usuario.id_usuario) ===
+                    Number(idUsuario)
+            );
+
+
+        /* Ordenar por XP */
+
+        ranking.sort(
+            (a, b) =>
+                Number(b.xp) -
+                Number(a.xp)
+        );
+
+
+        construirPodio();
+
+        construirLista();
+
+        atualizarContador();
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar ranking:",
+            erro
+        );
+
+
+        document.getElementById("podium").innerHTML = `
+
+            <div class="text-center text-red-400">
+
+                <i
+                    class="fa-solid fa-triangle-exclamation text-3xl mb-3"
+                ></i>
+
+                <p>
+                    Não foi possível carregar o ranking.
+                </p>
+
+                <p class="text-xs text-gray-500 mt-2">
+                    Verifique se o servidor está funcionando.
+                </p>
+
+            </div>
+
+        `;
+
+
+        document.getElementById("lista").innerHTML = `
+
+            <p class="text-red-400 text-center py-4">
+
+                Erro ao consultar o ranking.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function atualizarContador() {
+
+    const contador =
+        document.getElementById(
+            "contador-ranking"
+        );
+
+
+    if (!contador) return;
+
+
+    contador.textContent =
+        `${ranking.length} dev${ranking.length === 1 ? "" : "s"}`;
+
+}
+
+
+/* =========================================================
+   CONSTRUIR PÓDIO
+========================================================= */
+
+function construirPodio() {
+
+    const podiumContainer =
+        document.getElementById("podium");
+
+
+    if (ranking.length === 0) {
+
+        podiumContainer.innerHTML = `
+
+            <div class="text-center text-gray-400">
+
+                <i
+                    class="fa-solid fa-users text-3xl mb-3"
+                ></i>
+
+                <p>
+                    Nenhum usuário no ranking.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    let podiumHTML = "";
+
+
+    /*
+       Ordem visual:
+
+       2º | 1º | 3º
+    */
+
+    const ordemPodio =
+        [1, 0, 2];
+
+
+    ordemPodio.forEach(
+        (index) => {
+
+            const p =
+                ranking[index];
+
+
+            if (!p) return;
+
+
+            const classeMedalha =
+                index === 0
+                    ? "gold"
+                    : index === 1
+                        ? "silver"
+                        : "bronze";
+
+
+            const iconMedalha =
+                index === 0
+                    ? "👑"
+                    : index === 1
+                        ? "🥈"
+                        : "🥉";
+
+
+            const animDelay =
+                index === 0
+                    ? "0.2s"
+                    : index === 1
+                        ? "0s"
+                        : "0.4s";
+
+
+            const souEu =
+                usuarioAtual &&
+                Number(p.id_usuario) ===
+                Number(usuarioAtual.id_usuario);
+
+
+            podiumHTML += `
+
+                <div
+                    class="podium-column"
+                    style="animation-delay:${animDelay}"
+                >
+
+                    <div class="podium-name">
+
+                        <strong
+                            class="${
+                                souEu
+                                    ? "text-blue-400"
+                                    : "text-gray-200"
+                            }"
+                        >
+
+                            ${escaparHTML(p.nome)}
+
+                        </strong>
+
+
+                        <span>
+                            ${Number(p.xp) || 0} XP
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="
+                            podium-avatar
+                            ${souEu ? "is-me" : ""}
+                        "
+                    >
+
+                        <i
+                            class="fa-solid fa-user"
+                        ></i>
+
+                    </div>
+
+
+                    <div
+                        class="
+                            podium-base
+                            ${classeMedalha}
+                        "
+                    >
+
+                        <span>
+                            ${iconMedalha}
+                        </span>
+
+                        <span>
+                            ${index + 1}º
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    podiumContainer.innerHTML =
+        podiumHTML;
+
+}
+
+
+/* =========================================================
+   CONSTRUIR LISTA
+========================================================= */
+
+function construirLista() {
+
+    const listaContainer =
+        document.getElementById("lista");
+
+
+    let listaHTML = "";
+
+
+    ranking.forEach(
+        (p, i) => {
+
+            /*
+               Os três primeiros
+               já estão no pódio.
+            */
+
+            if (i < 3) return;
+
+
+            const souEu =
+                usuarioAtual &&
+                Number(p.id_usuario) ===
+                Number(usuarioAtual.id_usuario);
+
+
+            listaHTML += `
+
+                <div
+                    class="
+                        item
+                        ${souEu ? "me" : ""}
+                    "
+                >
+
+                    <div class="rank-number">
+
+                        #${i + 1}
+
+                    </div>
+
+
+                    <div class="rank-avatar">
+
+                        <i
+                            class="fa-solid fa-user"
+                        ></i>
+
+                    </div>
+
+
+                    <div class="rank-info">
+
+                        <div class="rank-info-top">
+
+                            <span
+                                class="
+                                    rank-name
+                                    ${souEu ? "me-name" : ""}
+                                "
+                            >
+
+                                ${escaparHTML(p.nome)}
+
+                                ${
+                                    souEu
+                                        ? `
+                                            <span class="you-tag">
+                                                <i class="fa-solid fa-user"></i>
+                                                Você
+                                            </span>
+                                          `
+                                        : ""
+                                }
+
+                            </span>
+
+
+                            <span class="rank-xp">
+
+                                ${Number(p.xp) || 0} XP
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    if (!listaHTML) {
+
+        if (ranking.length <= 3) {
+
+            listaHTML = `
+
+                <div class="text-center py-7">
+
+                    <i
+                        class="
+                            fa-solid
+                            fa-ranking-star
+                            text-slate-600
+                            text-2xl
+                            mb-3
+                        "
+                    ></i>
+
+                    <p class="text-slate-500 text-sm">
+
+                        Os três primeiros estão no pódio.
+
+                    </p>
+
+                </div>
+
+            `;
+
+        } else {
+
+            listaHTML = `
+
+                <p
+                    class="
+                        text-gray-500
+                        text-center
+                        text-sm
+                        py-4
+                    "
+                >
+
+                    Nenhum competidor encontrado.
+
+                </p>
+
+            `;
+
+        }
+
+    }
+
+
+    listaContainer.innerHTML =
+        listaHTML;
+
+}
+
+
+/* =========================================================
+   COMPARTILHAR
+========================================================= */
+
 function compartilharRanking() {
-    // Descobre a posição atual do usuário para usar no texto
-    const minhaPosicao = ranking.findIndex(p => p.nome === user.nome) + 1;
-    const textoCompartilhar = `🏆 Olha o meu resultado no FluentCode! Estou na ${minhaPosicao}ª posição com ${user.xp} XP! Consegue me superar?`;
+
+    if (!usuarioAtual) {
+
+        alert(
+            "Faça login para compartilhar seu ranking."
+        );
+
+        return;
+    }
+
+
+    const minhaPosicao =
+        ranking.findIndex(
+            p =>
+                Number(p.id_usuario) ===
+                Number(usuarioAtual.id_usuario)
+        ) + 1;
+
+
+    const meuXP =
+        Number(usuarioAtual.xp) || 0;
+
+
+    const textoCompartilhar =
+
+        `🏆 Olha o meu resultado no FluentCode! ` +
+
+        `Estou na ${minhaPosicao}ª posição ` +
+
+        `com ${meuXP} XP! ` +
+
+        `Consegue me superar?`;
+
 
     if (navigator.share) {
+
         navigator.share({
-            title: 'Meu Ranking no FluentCode',
-            text: textoCompartilhar,
-            url: window.location.href
+
+            title:
+                "Meu Ranking no FluentCode",
+
+            text:
+                textoCompartilhar,
+
+            url:
+                window.location.href
+
         })
-        .then(() => console.log('Compartilhado com sucesso!'))
-        .catch((error) => console.log('Erro ao compartilhar:', error));
+        .then(() => {
+
+            console.log(
+                "Compartilhado com sucesso!"
+            );
+
+        })
+        .catch((error) => {
+
+            console.log(
+                "Compartilhamento cancelado:",
+                error
+            );
+
+        });
+
     } else {
-        // Caso o navegador não tenha a API de compartilhamento nativo (ex: PCs mais antigos)
-        navigator.clipboard.writeText(textoCompartilhar);
-        alert("Texto de conquista copiado para a área de transferência! Cole onde quiser compartilhar. 😉");
+
+        navigator.clipboard
+            .writeText(textoCompartilhar)
+
+            .then(() => {
+
+                alert(
+                    "Texto de conquista copiado! " +
+                    "Cole onde quiser compartilhar. 😉"
+                );
+
+            })
+
+            .catch(() => {
+
+                alert(
+                    textoCompartilhar
+                );
+
+            });
+
     }
+
 }
+
+
+/* =========================================================
+   PROTEÇÃO CONTRA HTML INJETADO
+========================================================= */
+
+function escaparHTML(texto) {
+
+    if (
+        texto === null ||
+        texto === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(texto)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    carregarRanking
+);
+
 </script>
 
 </body>
