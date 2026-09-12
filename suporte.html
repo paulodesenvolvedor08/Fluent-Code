@@ -1,106 +1,1597 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Suporte</title>
-    <!-- Tailwind CSS -->
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Suporte - FluentCode</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome para ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
-        /* Ajuste para scroll suave */
-        body { scroll-behavior: smooth; }
-        /* Esconder barra de scroll, mas permitir rolagem */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            min-height: 100dvh;
+
+            font-family: Arial, sans-serif;
+
+            overflow-x: hidden;
+
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #fff;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(37, 99, 235, .20),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(124, 58, 237, .17),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(6, 182, 212, .10),
+                    transparent 32%
+                ),
+                #07111f;
+
+            position: relative;
+
+            padding-bottom:
+                calc(
+                    100px +
+                    env(safe-area-inset-bottom)
+                );
+        }
+
+        /* ==========================================
+           GRID DE FUNDO
+        ========================================== */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 35px 35px;
+
+            pointer-events: none;
+
+            z-index: -2;
+        }
+
+        /* ==========================================
+           BRILHO
+        ========================================== */
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 420px;
+            height: 420px;
+
+            right: -180px;
+            top: -150px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(37, 99, 235, .08);
+
+            filter: blur(100px);
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+            width: 100%;
+
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            padding:
+                25px 20px
+                calc(
+                    30px +
+                    env(safe-area-inset-bottom)
+                );
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .top-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(37, 99, 235, .25);
+
+            font-size: 18px;
+        }
+
+        .brand-text {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        .brand-subtitle {
+            font-size: 10px;
+
+            color: #64748b;
+
+            text-transform: uppercase;
+
+            letter-spacing: .8px;
+        }
+
+        .support-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(15, 31, 52, .75);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            color: #60a5fa;
+        }
+
+        /* ==========================================
+           HERO
+        ========================================== */
+
+        .hero {
+            margin-bottom: 24px;
+
+            padding-left: 3px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.4px;
+
+            margin-bottom: 9px;
+        }
+
+        .hero-label span {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #3b82f6;
+
+            box-shadow:
+                0 0 12px
+                rgba(59,130,246,.9);
+        }
+
+        .hero h1 {
+            font-size:
+                clamp(
+                    28px,
+                    7vw,
+                    38px
+                );
+
+            font-weight: 900;
+
+            line-height: 1.05;
+
+            letter-spacing: -.8px;
+        }
+
+        .hero h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #818cf8,
+                    #22d3ee
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero p {
+            margin-top: 10px;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        /* ==========================================
+           INFO CARD
+        ========================================== */
+
+        .info-card {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 17px;
+
+            margin-bottom: 18px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(14, 35, 60, .65);
+
+            border:
+                1px solid
+                rgba(96,165,250,.12);
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #60a5fa;
+
+            background:
+                rgba(59,130,246,.10);
+
+            border:
+                1px solid
+                rgba(59,130,246,.12);
+        }
+
+        .info-title {
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-bottom: 3px;
+        }
+
+        .info-text {
+            color: #64748b;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+        }
+
+        /* ==========================================
+           CARD PRINCIPAL
+        ========================================== */
+
+        .card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 31, 52, .95),
+                    rgba(8, 22, 39, .90)
+                );
+
+            border:
+                1px solid
+                rgba(148,163,184,.10);
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,.25),
+
+                inset 0 1px 0
+                rgba(255,255,255,.025);
+
+            backdrop-filter: blur(16px);
+
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 22px;
+        }
+
+        .section-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #60a5fa;
+
+            background:
+                rgba(37,99,235,.11);
+
+            border:
+                1px solid
+                rgba(59,130,246,.14);
+        }
+
+        .section-title {
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .section-description {
+            color: #64748b;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+        /* ==========================================
+           FORM
+        ========================================== */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .form-label i {
+            color: #60a5fa;
+
+            font-size: 11px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+
+            left: 15px;
+
+            top: 17px;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            pointer-events: none;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            background:
+                rgba(3,12,24,.72);
+
+            border:
+                1px solid
+                rgba(148,163,184,.13);
+
+            border-radius: 14px;
+
+            color: white;
+
+            outline: none;
+
+            transition:
+                border-color .2s,
+                box-shadow .2s,
+                background .2s;
+        }
+
+        input {
+            padding:
+                14px
+                15px
+                14px
+                43px;
+
+            font-size: 13px;
+        }
+
+        textarea {
+            padding: 15px;
+
+            min-height: 155px;
+
+            resize: vertical;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #475569;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #3b82f6;
+
+            background:
+                rgba(3,12,24,.88);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(59,130,246,.10);
+        }
+
+        /* ==========================================
+           BOTÃO ENVIAR
+        ========================================== */
+
+        .send-button {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 14px;
+
+            padding: 14px 18px;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 12px 28px
+                rgba(37,99,235,.20);
+
+            transition:
+                transform .2s,
+                filter .2s,
+                opacity .2s;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+
+            filter: brightness(1.08);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
+        }
+
+        .send-button:disabled {
+            opacity: .55;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            filter: none;
+        }
+
+        /* ==========================================
+           CHAMADOS
+        ========================================== */
+
+        .recent-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 14px;
+        }
+
+        .recent-title {
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .recent-count {
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,.10);
+
+            border:
+                1px solid
+                rgba(59,130,246,.12);
+
+            color: #60a5fa;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+        #listaChamados {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .chamado {
+            padding: 16px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(15,31,52,.72);
+
+            border:
+                1px solid
+                rgba(148,163,184,.09);
+
+            transition:
+                transform .2s,
+                border-color .2s;
+        }
+
+        .chamado:hover {
+            transform: translateY(-1px);
+
+            border-color:
+                rgba(96,165,250,.18);
+        }
+
+        .chamado-top {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+        }
+
+        .chamado-icon {
+            width: 34px;
+            height: 34px;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #22d3ee;
+
+            background:
+                rgba(34,211,238,.08);
+        }
+
+        .chamado-message {
+            color: #e2e8f0;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+
+            word-break: break-word;
+        }
+
+        .chamado-date {
+            color: #475569;
+
+            font-size: 10px;
+
+            margin-top: 8px;
+
+            padding-left: 45px;
+        }
+
+        .empty-state {
+            padding: 30px 20px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            background:
+                rgba(15,31,52,.45);
+
+            border:
+                1px dashed
+                rgba(148,163,184,.12);
+
+            color: #475569;
+
+            font-size: 12px;
+        }
+
+        .empty-icon {
+            width: 45px;
+            height: 45px;
+
+            margin: 0 auto 10px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(59,130,246,.07);
+
+            color: #475569;
+        }
+
+        /* ==========================================
+           BOTÃO VOLTAR
+        ========================================== */
+
+        .back {
+            position: fixed;
+
+            left: 20px;
+
+            bottom:
+                calc(
+                    20px +
+                    env(safe-area-inset-bottom)
+                );
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 12px 17px;
+
+            border-radius: 15px;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            background:
+                rgba(15,31,52,.92);
+
+            border:
+                1px solid
+                rgba(96,165,250,.16);
+
+            backdrop-filter: blur(14px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.40);
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .back i {
+            color: #60a5fa;
+        }
+
+        .back:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(96,165,250,.35);
+        }
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 480px) {
+
+            .container {
+                padding:
+                    20px 14px
+                    calc(
+                        90px +
+                        env(safe-area-inset-bottom)
+                    );
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .card {
+                padding: 18px;
+
+                border-radius: 19px;
+            }
+
+            .info-card {
+                padding: 15px;
+            }
+
+            .back {
+                left: 14px;
+
+                bottom:
+                    calc(
+                        14px +
+                        env(safe-area-inset-bottom)
+                    );
+            }
+        }
+
     </style>
 </head>
-<body class="bg-[#0a1628] min-h-screen text-slate-100 p-4 md:p-8">
-
-    <!-- BOTÃO VOLTAR -->
-    <button onclick="history.back()"
-    class="fixed bottom-6 left-4 
-    bg-gradient-to-r from-blue-600 to-indigo-600 
-    hover:from-blue-700 hover:to-indigo-700 
-    text-white font-bold px-5 py-3 rounded-2xl 
-    shadow-lg flex items-center gap-2 z-50 transition">
-
-     <i class="fa-solid fa-arrow-left"></i>
-     Voltar
-     </button>
-
-<div class="min-h-screen p-6 flex justify-center">
-
-<div class="max-w-2xl w-full space-y-6">
 
 
-    <main class="max-w-4xl mx-auto space-y-8">
-        
-        <!-- Cabeçalho -->
-        <div class="border-l-4 border-blue-500 pl-4 mb-8">
-            <h1 class="text-3xl font-bold text-white">Suporte Técnico</h1>
-            <p class="text-slate-400">Não trave no seu código! Descreva seu problema abaixo.</p>
-        </div>
+<body>
 
-        <!-- Formulário Interativo -->
-        <div class="bg-[#112240] p-8 rounded-2xl border border-slate-700 shadow-2xl">
-            <form class="space-y-6">
-                <!-- Campo Assunto -->
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Assunto</label>
-                    <input type="text" placeholder="Ex: Erro no loop do exercício 05" class="w-full bg-[#0a1628] border border-slate-600 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+    <!-- ==========================================
+         BOTÃO VOLTAR
+    ========================================== -->
+
+    <button
+        onclick="history.back()"
+        class="back">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Voltar
+
+    </button>
+
+
+    <div class="container">
+
+        <!-- ==========================================
+             HEADER
+        ========================================== -->
+
+        <header class="top-header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+
+                    <i class="fa-solid fa-code"></i>
+
                 </div>
 
-                <!-- Campo Descrição -->
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Sua Dúvida</label>
-                    <textarea rows="6" placeholder="Cole seu código ou descreva o que está acontecendo..." class="w-full bg-[#0a1628] border border-slate-600 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-mono text-sm"></textarea>
-                </div>
+                <div class="brand-text">
 
-                <!-- Botão -->
-                <button type="button" class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-4 rounded-xl shadow-lg hover:scale-[1.01] hover:shadow-blue-500/20 transition-all duration-300">
-                    <i class="fa-solid fa-paper-plane mr-2"></i> Enviar para Mentores
-                </button>
-            </form>
-        </div>
+                    <span class="brand-name">
+                        FluentCode
+                    </span>
 
-        <!-- Área de Status -->
-        <div>
-            <h2 class="text-xl font-semibold text-white mb-4">Minhas Perguntas Recentes</h2>
-            <div class="space-y-3">
-                
-                <!-- Card 1 -->
-                <div class="flex items-center justify-between bg-[#112240] p-4 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors cursor-pointer group">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-blue-500/10 p-3 rounded-lg text-blue-400">
-                            <i class="fa-solid fa-code"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-white group-hover:text-blue-400 transition-colors">Problema com variável global</h3>
-                            <span class="text-xs text-slate-500">Enviado há 2 horas</span>
-                        </div>
-                    </div>
-                    <span class="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs border border-yellow-500/20">Aguardando</span>
-                </div>
+                    <span class="brand-subtitle">
+                        Learning • Java • English
+                    </span>
 
-                <!-- Card 2 -->
-                <div class="flex items-center justify-between bg-[#112240] p-4 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors cursor-pointer group">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-green-500/10 p-3 rounded-lg text-green-400">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-white group-hover:text-green-400 transition-colors">Dúvida sobre List Comprehension</h3>
-                            <span class="text-xs text-slate-500">Resolvido ontem</span>
-                        </div>
-                    </div>
-                    <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs border border-green-500/20">Resolvido</span>
                 </div>
 
             </div>
+
+
+            <div class="support-icon">
+
+                <i class="fa-solid fa-headset"></i>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==========================================
+             HERO
+        ========================================== -->
+
+        <section class="hero">
+
+            <div class="hero-label">
+
+                <span></span>
+
+                Central de ajuda
+
+            </div>
+
+
+            <h1>
+                Suporte <span>técnico</span>
+            </h1>
+
+
+            <p>
+                Encontrou um problema? Explique sua dúvida
+                e envie para nossa equipe de mentores.
+            </p>
+
+        </section>
+
+
+        <!-- ==========================================
+             INFO
+        ========================================== -->
+
+        <div class="info-card">
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+            </div>
+
+
+            <div>
+
+                <div class="info-title">
+                    Dica para receber ajuda mais rápido
+                </div>
+
+                <div class="info-text">
+                    Descreva o erro, informe o que você esperava
+                    acontecer e, se possível, inclua o código.
+                </div>
+
+            </div>
+
         </div>
 
-    </main>
+
+        <!-- ==========================================
+             FORMULÁRIO
+        ========================================== -->
+
+        <section class="card">
+
+            <div class="section-header">
+
+                <div class="section-icon">
+
+                    <i class="fa-solid fa-message"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="section-title">
+                        Enviar uma pergunta
+                    </div>
+
+                    <div class="section-description">
+                        Sua dúvida será enviada aos mentores
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <form id="formSuporte">
+
+
+                <!-- ASSUNTO -->
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="assunto">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                        Assunto
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-heading"></i>
+
+                        <input
+                            type="text"
+                            id="assunto"
+                            required
+                            maxlength="150"
+                            placeholder="Ex: Erro no loop do exercício 05"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- MENSAGEM -->
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="mensagem">
+
+                        <i class="fa-solid fa-code"></i>
+
+                        Descreva sua dúvida
+
+                    </label>
+
+
+                    <textarea
+                        id="mensagem"
+                        rows="6"
+                        required
+                        placeholder="Cole seu código ou descreva o que está acontecendo..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    id="btnEnviar"
+                    class="send-button">
+
+                    <i class="fa-solid fa-paper-plane mr-2"></i>
+
+                    Enviar para mentores
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==========================================
+             CHAMADOS RECENTES
+        ========================================== -->
+
+        <section>
+
+            <div class="recent-header">
+
+                <div class="recent-title">
+                    Minhas perguntas
+                </div>
+
+                <div
+                    id="contadorChamados"
+                    class="recent-count">
+
+                    Recentes
+
+                </div>
+
+            </div>
+
+
+            <div id="listaChamados">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+
+                        <i class="fa-regular fa-comments"></i>
+
+                    </div>
+
+                    Nenhum chamado pendente no momento.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // VERIFICAR LOGIN
+        // ==========================================
+
+        const idUsuarioLogado =
+            localStorage.getItem("id_usuario");
+
+
+        if (!idUsuarioLogado) {
+
+            alert(
+                "Você precisa fazer login para enviar uma mensagem ao suporte."
+            );
+
+            window.location.href =
+                "login.html";
+        }
+
+
+        // ==========================================
+        // ENVIAR SUPORTE
+        // ==========================================
+
+        document
+            .getElementById("formSuporte")
+            .addEventListener(
+                "submit",
+                async function (e) {
+
+                    e.preventDefault();
+
+
+                    // Verificar novamente o usuário
+
+                    const idUsuario =
+                        localStorage.getItem("id_usuario");
+
+
+                    if (!idUsuario) {
+
+                        alert(
+                            "Sua sessão não foi encontrada. Faça login novamente."
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                        return;
+                    }
+
+
+                    const assunto =
+                        document
+                            .getElementById("assunto")
+                            .value
+                            .trim();
+
+
+                    const mensagemInput =
+                        document
+                            .getElementById("mensagem")
+                            .value
+                            .trim();
+
+
+                    // Verificar campos
+
+                    if (!assunto || !mensagemInput) {
+
+                        alert(
+                            "Preencha o assunto e a mensagem."
+                        );
+
+                        return;
+                    }
+
+
+                    // Combinar assunto + mensagem
+
+                    const mensagemCompleta =
+                        `[${assunto}] - ${mensagemInput}`;
+
+
+                    const btnEnviar =
+                        document
+                            .getElementById("btnEnviar");
+
+
+                    try {
+
+                        // Desabilitar botão
+
+                        btnEnviar.disabled = true;
+
+                        btnEnviar.innerHTML =
+                            '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...';
+
+
+                        // Enviar para o servidor
+
+                        const resposta =
+                            await fetch(
+                                "/suporte/enviar",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+
+                                            id_usuario:
+                                                Number(idUsuario),
+
+                                            mensagem:
+                                                mensagemCompleta
+
+                                        })
+                                }
+                            );
+
+
+                        // Interpretar resposta
+
+                        const dados =
+                            await resposta.json();
+
+
+                        if (resposta.ok) {
+
+                            alert(
+                                "Chamado aberto com sucesso!"
+                            );
+
+
+                            document
+                                .getElementById(
+                                    "formSuporte"
+                                )
+                                .reset();
+
+
+                            carregarChamados();
+
+                        } else {
+
+                            alert(
+                                "Erro ao enviar chamado: " +
+                                (
+                                    dados.erro ||
+                                    dados.mensagem ||
+                                    "Erro desconhecido."
+                                )
+                            );
+
+                        }
+
+                    } catch (erro) {
+
+                        console.error(
+                            "Erro ao enviar suporte:",
+                            erro
+                        );
+
+
+                        alert(
+                            "Não foi possível conectar ao servidor. " +
+                            "Verifique se o servidor está rodando."
+                        );
+
+                    } finally {
+
+                        // Reativar botão
+
+                        btnEnviar.disabled = false;
+
+                        btnEnviar.innerHTML =
+                            '<i class="fa-solid fa-paper-plane mr-2"></i> Enviar para mentores';
+
+                    }
+
+                }
+            );
+
+
+        // ==========================================
+        // CARREGAR CHAMADOS DO USUÁRIO
+        // ==========================================
+
+        async function carregarChamados() {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                return;
+            }
+
+
+            const lista =
+                document.getElementById(
+                    "listaChamados"
+                );
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/suporte/usuario/${idUsuario}`
+                    );
+
+
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        "Não foi possível carregar os chamados."
+                    );
+
+                }
+
+
+                const chamados =
+                    await resposta.json();
+
+
+                // Atualizar contador
+
+                const contador =
+                    document.getElementById(
+                        "contadorChamados"
+                    );
+
+
+                if (
+                    Array.isArray(chamados) &&
+                    chamados.length > 0
+                ) {
+
+                    contador.innerText =
+                        `${chamados.length} ${
+                            chamados.length === 1
+                                ? "pergunta"
+                                : "perguntas"
+                        }`;
+
+                } else {
+
+                    contador.innerText =
+                        "Nenhuma";
+
+                }
+
+
+                if (
+                    !Array.isArray(chamados) ||
+                    chamados.length === 0
+                ) {
+
+                    lista.innerHTML = `
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+
+                                <i class="fa-regular fa-comments"></i>
+
+                            </div>
+
+                            Nenhum chamado pendente no momento.
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                lista.innerHTML =
+                    chamados
+                        .map(
+                            chamado => `
+
+                                <div class="chamado">
+
+                                    <div class="chamado-top">
+
+                                        <div class="chamado-icon">
+
+                                            <i class="fa-solid fa-comment-dots"></i>
+
+                                        </div>
+
+                                        <p class="chamado-message">
+
+                                            ${escaparHTML(
+                                                chamado.mensagem
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+                                    <p class="chamado-date">
+
+                                        <i class="fa-regular fa-clock mr-1"></i>
+
+                                        Enviado em:
+                                        ${formatarData(
+                                            chamado.data_envio
+                                        )}
+
+                                    </p>
+
+                                </div>
+
+                            `
+                        )
+                        .join("");
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar chamados:",
+                    erro
+                );
+
+
+                document.getElementById(
+                    "contadorChamados"
+                ).innerText = "Erro";
+
+
+                lista.innerHTML = `
+
+                    <div class="empty-state"
+                         style="color:#f87171">
+
+                        <div class="empty-icon"
+                             style="color:#f87171">
+
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        </div>
+
+                        Não foi possível carregar suas perguntas.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // ==========================================
+        // PROTEGER TEXTO HTML
+        // ==========================================
+
+        function escaparHTML(texto) {
+
+            const div =
+                document.createElement("div");
+
+
+            div.textContent =
+                texto ?? "";
+
+
+            return div.innerHTML;
+
+        }
+
+
+        // ==========================================
+        // FORMATAR DATA
+        // ==========================================
+
+        function formatarData(data) {
+
+            if (!data) {
+
+                return "Data não disponível";
+            }
+
+
+            const dataFormatada =
+                new Date(data);
+
+
+            if (
+                isNaN(
+                    dataFormatada.getTime()
+                )
+            ) {
+
+                return "Data não disponível";
+            }
+
+
+            return dataFormatada.toLocaleString(
+                "pt-BR"
+            );
+
+        }
+
+
+        // ==========================================
+        // CARREGAR CHAMADOS AO ABRIR
+        // ==========================================
+
+        carregarChamados();
+
+    </script>
+
 </body>
+
 </html>
