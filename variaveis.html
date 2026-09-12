@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>FluentCode - Variáveis</title>
 
+
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+>
+
 
 <style>
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 html {
     width: 100%;
@@ -21,155 +37,796 @@ html {
     background: #0f172a;
 }
 
+
 body {
+
     min-height: 100vh;
+
     width: 100%;
+
     overflow-x: hidden;
-    background: radial-gradient(circle at top,#1e293b,#0f172a);
+
+    background:
+        radial-gradient(
+            circle at top,
+            #1e293b,
+            #0f172a
+        );
+
     color: white;
+
     font-family: Arial, sans-serif;
 }
 
+
 /* HEADER */
+
 .header {
+
     padding: 20px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
+
 /* HERO */
+
 .hero {
+
     margin: 15px;
+
     padding: 20px;
+
     border-radius: 25px;
-    background: linear-gradient(135deg,#3b82f6,#22c55e);
-    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #22c55e
+        );
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.4);
 }
+
 
 /* CARD */
+
 .card {
+
     margin: 15px;
+
     padding: 18px;
+
     border-radius: 18px;
-    background: rgba(31,41,55,0.9);
+
+    background:
+        rgba(31,41,55,0.9);
+
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 10px 25px rgba(0,0,0,.35);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.35);
 }
 
-/* código */
+
+/* CÓDIGO */
+
 .code {
+
     background: #0b1220;
+
     padding: 12px;
+
     border-radius: 12px;
+
     margin-top: 10px;
+
     font-family: monospace;
+
     color: #22c55e;
+
     font-size: 14px;
+
     line-height: 1.5;
 }
 
-/* badge genérico */
+
+/* BADGE */
+
 .badge {
+
     display: inline-block;
+
     padding: 6px 12px;
+
     border-radius: 12px;
+
     font-size: 13px;
+
     font-weight: bold;
+
     margin-bottom: 10px;
 }
 
-/* Classes de Estado (Bloqueado vs Desbloqueado) */
+
+/* BLOQUEADO */
+
 .locked-element {
+
     opacity: 0.4;
-    pointer-events: none; /* Impede cliques */
+
+    pointer-events: none;
+
     user-select: none;
 }
+
+
+/* BOTÕES DE RESPOSTA */
+
+.opcao-btn {
+
+    cursor: pointer;
+}
+
+
+.opcao-btn:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.9;
+}
+
 </style>
+
 </head>
 
-<body class="pb-24"> <div class="header">
+
+<body class="pb-28">
+
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<div class="header">
+
     <div>
-        <b>FluentCode</b>
-        <div style="font-size:12px;color:#94a3b8">Aula: Variáveis</div>
+
+        <b>
+            FluentCode
+        </b>
+
+        <div
+            style="font-size:12px;color:#94a3b8"
+        >
+            Aula: Variáveis
+        </div>
+
     </div>
-    <i class="fa-solid fa-code text-blue-400"></i>
+
+
+    <i
+        class="fa-solid fa-code text-blue-400"
+    ></i>
+
 </div>
+
+
+
+<!-- ========================================
+     HERO
+======================================== -->
 
 <div class="hero">
-    <h1>📦 Variáveis em Java</h1>
-    <div style="font-size:13px;opacity:.9;margin-top:5px">
+
+    <h1>
+        📦 Variáveis em Java
+    </h1>
+
+    <div
+        style="font-size:13px;opacity:.9;margin-top:5px"
+    >
         Aprenda como armazenar diferentes tipos de dados
     </div>
+
 </div>
 
-<div class="card border-l-4 border-green-500">
-    <span class="badge bg-green-500 text-slate-950">🔢 Números inteiros (Desbloqueado)</span>
-    <p style="font-size:14px;color:#cbd5e1">
+
+
+<!-- ========================================
+     NÚMEROS INTEIROS
+======================================== -->
+
+<div
+    class="card border-l-4 border-green-500"
+>
+
+    <span
+        class="badge bg-green-500 text-slate-950"
+    >
+        🔢 Números inteiros (Desbloqueado)
+    </span>
+
+
+    <p
+        style="font-size:14px;color:#cbd5e1"
+    >
         Usado para armazenar números sem casas decimais.
     </p>
+
+
     <div class="code">
-int idade = 18;<br>
-int ano = 2026;<br>
-int pontos = 150;
+
+        int idade = 18;<br>
+
+        int ano = 2026;<br>
+
+        int pontos = 150;
+
     </div>
+
 </div>
 
+
+
+<!-- ========================================
+     NÚMEROS DECIMAIS
+======================================== -->
+
 <div class="card locked-element">
-    <span class="badge bg-slate-700 text-slate-400">🔒 💰 Números decimais</span>
-    <p style="font-size:14px;color:#cbd5e1">
+
+    <span
+        class="badge bg-slate-700 text-slate-400"
+    >
+        🔒 💰 Números decimais
+    </span>
+
+
+    <p
+        style="font-size:14px;color:#cbd5e1"
+    >
         Usado para valores com casas decimais.
     </p>
-    <div class="code" style="color: #64748b;">
-double salario = 2500.50;<br>
-double altura = 1.75;<br>
-double preco = 19.99;
+
+
+    <div
+        class="code"
+        style="color: #64748b;"
+    >
+
+        double salario = 2500.50;<br>
+
+        double altura = 1.75;<br>
+
+        double preco = 19.99;
+
     </div>
+
 </div>
 
+
+
+<!-- ========================================
+     TEXTO
+======================================== -->
+
 <div class="card locked-element">
-    <span class="badge bg-slate-700 text-slate-400">🔒 🔤 Texto (String)</span>
-    <p style="font-size:14px;color:#cbd5e1">
+
+    <span
+        class="badge bg-slate-700 text-slate-400"
+    >
+        🔒 🔤 Texto (String)
+    </span>
+
+
+    <p
+        style="font-size:14px;color:#cbd5e1"
+    >
         Usado para armazenar palavras ou frases.
     </p>
-    <div class="code" style="color: #64748b;">
-String nome = "Lucas";<br>
-String cidade = "Natal";<br>
-String curso = "Java";
+
+
+    <div
+        class="code"
+        style="color: #64748b;"
+    >
+
+        String nome = "Lucas";<br>
+
+        String cidade = "Natal";<br>
+
+        String curso = "Java";
+
     </div>
+
 </div>
 
-<div class="card locked-element">
-    <span class="badge bg-slate-700 text-slate-400">🔒 ✅ Boolean (verdadeiro/falso)</span>
-    <p style="font-size:14px;color:#cbd5e1">
-        Representa valores lógicos.
+
+
+<!-- ========================================
+     EXERCÍCIO
+======================================== -->
+
+<div
+    class="card border-l-4 border-blue-500"
+>
+
+    <span
+        class="badge bg-blue-500 text-white"
+    >
+        ⚡ Desafio Prático (+50 XP)
+    </span>
+
+
+    <p
+        class="text-sm text-slate-300 mb-3"
+    >
+        Qual dos tipos abaixo é utilizado para armazenar um número inteiro em Java?
     </p>
-    <div class="code" style="color: #64748b;">
-boolean ativo = true;<br>
-boolean logado = false;<br>
-boolean aprovado = true;
+
+
+
+    <div class="space-y-2">
+
+
+        <!-- RESPOSTA A -->
+
+        <button
+            onclick="verificarResposta(this, false)"
+            class="opcao-btn w-full text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-sm border border-slate-700 transition"
+        >
+
+            A) double
+
+        </button>
+
+
+
+        <!-- RESPOSTA B -->
+
+        <button
+            onclick="verificarResposta(this, true)"
+            class="opcao-btn w-full text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-sm border border-slate-700 transition"
+        >
+
+            B) int
+
+        </button>
+
+
+
+        <!-- RESPOSTA C -->
+
+        <button
+            onclick="verificarResposta(this, false)"
+            class="opcao-btn w-full text-left bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-sm border border-slate-700 transition"
+        >
+
+            C) String
+
+        </button>
+
     </div>
+
+
+
+    <!-- FEEDBACK -->
+
+    <div
+        id="mensagemFeedback"
+        class="mt-4 hidden p-3 rounded-xl text-sm text-center font-bold"
+    ></div>
+
 </div>
 
-<div class="card locked-element">
-    <span class="badge bg-slate-700 text-slate-400">🔒 🧠 Exemplo completo</span>
-    <div class="code" style="color: #64748b;">
-public class Main {<br>
-&nbsp;&nbsp;public static void main(String[] args) {<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;String nome = "Ana";<br>
-&nbsp;&nbsp;&nbsp;&nbsp;int idade = 20;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;double altura = 1.68;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;boolean estudante = true;<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(nome);<br>
-&nbsp;&nbsp;}\n}
-    </div>
+
+
+<!-- ========================================
+     BOTÃO VOLTAR
+======================================== -->
+
+<div
+    class="fixed bottom-5 left-5 right-5"
+>
+
+    <button
+        onclick="voltarParaTrilhas()"
+        class="w-full bg-slate-800 hover:bg-slate-700 text-white p-4 rounded-xl font-bold flex gap-3 justify-center items-center shadow-2xl border border-slate-700 transition cursor-pointer"
+    >
+
+        <i
+            class="fa-solid fa-arrow-left text-sm"
+        ></i>
+
+        <span>
+            Voltar para Trilhas
+        </span>
+
+    </button>
+
 </div>
 
-<div class="fixed bottom-5 left-5 right-5 locked-element bg-slate-800 text-slate-500 p-4 rounded-xl font-bold flex gap-3 justify-center items-center shadow-2xl border border-slate-700">
-    <i class="fa-solid fa-lock text-sm"></i>
-    <span>Voltar (Bloqueado)</span>
-</div>
+
+
+<script>
+
+
+// ========================================
+// CONTROLE DO EXERCÍCIO
+// ========================================
+
+let exercicioConcluido = false;
+
+
+
+// ========================================
+// VERIFICAR RESPOSTA
+// ========================================
+
+async function verificarResposta(
+    botao,
+    correto
+) {
+
+
+    const feedback =
+        document.getElementById(
+            "mensagemFeedback"
+        );
+
+
+    const botoes =
+        document.querySelectorAll(
+            ".opcao-btn"
+        );
+
+
+
+    // ========================================
+    // RESPOSTA CORRETA
+    // ========================================
+
+    if (correto) {
+
+
+        // Evita executar duas vezes
+
+        if (exercicioConcluido) {
+
+            return;
+
+        }
+
+
+        botao.classList.remove(
+            "bg-slate-800"
+        );
+
+
+        botao.classList.add(
+            "bg-green-600",
+            "text-white"
+        );
+
+
+        feedback.innerText =
+            "Resposta correta! Salvando seu XP...";
+
+
+        feedback.className =
+            "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-green-500/20 text-green-400 border border-green-500/30";
+
+
+        feedback.classList.remove(
+            "hidden"
+        );
+
+
+        // Marca o exercício como concluído
+
+        exercicioConcluido = true;
+
+
+        // Desativa todas as opções
+
+        botoes.forEach(
+            function (botaoOpcao) {
+
+                botaoOpcao.disabled = true;
+
+            }
+        );
+
+
+        // Salva 50 XP
+
+        await salvarXpNoBanco(50);
+
+    }
+
+
+    // ========================================
+    // RESPOSTA INCORRETA
+    // ========================================
+
+    else {
+
+
+        botao.classList.remove(
+            "bg-slate-800"
+        );
+
+
+        botao.classList.add(
+            "bg-red-600",
+            "text-white"
+        );
+
+
+        feedback.innerText =
+            "Resposta incorreta! Tente novamente.";
+
+
+        feedback.className =
+            "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-red-500/20 text-red-400 border border-red-500/30";
+
+
+        feedback.classList.remove(
+            "hidden"
+        );
+
+
+        // Depois de um tempo volta a opção para o estado normal
+
+        setTimeout(
+            function () {
+
+                botao.classList.remove(
+                    "bg-red-600",
+                    "text-white"
+                );
+
+
+                botao.classList.add(
+                    "bg-slate-800"
+                );
+
+            },
+            800
+        );
+
+    }
+
+}
+
+
+
+// ========================================
+// SALVAR XP NO BANCO
+// ========================================
+
+async function salvarXpNoBanco(
+    xpGanho
+) {
+
+
+    // Pega o ID do usuário que fez login
+
+    const idUsuario =
+        localStorage.getItem(
+            "id_usuario"
+        );
+
+
+
+    // ========================================
+    // VERIFICA SE EXISTE USUÁRIO
+    // ========================================
+
+    if (!idUsuario) {
+
+
+        console.error(
+            "ID do usuário não encontrado."
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "mensagemFeedback"
+            );
+
+
+        feedback.innerText =
+            "Faça login novamente para salvar seu XP.";
+
+
+        feedback.className =
+            "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30";
+
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+        // ========================================
+        // ENVIA PARA O NODE.JS
+        // ========================================
+
+        const resposta =
+            await fetch(
+                "/exercicio/concluir",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        id_usuario:
+                            Number(
+                                idUsuario
+                            ),
+
+                        xp_ganho:
+                            Number(
+                                xpGanho
+                            )
+
+                    })
+
+                }
+            );
+
+
+
+        // ========================================
+        // LÊ RESPOSTA
+        // ========================================
+
+        let dados = {};
+
+
+        try {
+
+            dados =
+                await resposta.json();
+
+        }
+
+        catch (erroJson) {
+
+            console.warn(
+                "O servidor não retornou JSON."
+            );
+
+        }
+
+
+
+        const feedback =
+            document.getElementById(
+                "mensagemFeedback"
+            );
+
+
+
+        // ========================================
+        // XP SALVO
+        // ========================================
+
+        if (resposta.ok) {
+
+
+            feedback.innerText =
+                `✨ Excelente! +${xpGanho} XP salvos no MySQL com sucesso!`;
+
+
+            feedback.className =
+                "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-green-500/20 text-green-400 border border-green-500/30";
+
+
+            console.log(
+                "XP salvo:",
+                dados
+            );
+
+        }
+
+
+        // ========================================
+        // ERRO DO SERVIDOR
+        // ========================================
+
+        else {
+
+
+            feedback.innerText =
+                "Erro ao gravar XP: " +
+                (
+                    dados.erro ||
+                    dados.mensagem ||
+                    "Falha no servidor."
+                );
+
+
+            feedback.className =
+                "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-red-500/20 text-red-400 border border-red-500/30";
+
+
+            console.error(
+                "Erro retornado pelo servidor:",
+                dados
+            );
+
+        }
+
+    }
+
+
+    catch (erro) {
+
+
+        console.error(
+            "Erro na requisição:",
+            erro
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "mensagemFeedback"
+            );
+
+
+        feedback.innerText =
+            "Erro de conexão com o servidor.";
+
+
+        feedback.className =
+            "mt-4 p-3 rounded-xl text-sm text-center font-bold bg-red-500/20 text-red-400 border border-red-500/30";
+
+    }
+
+}
+
+
+
+// ========================================
+// VOLTAR PARA TRILHAS
+// ========================================
+
+function voltarParaTrilhas() {
+
+    window.location.href =
+        "trilhas.html";
+
+}
+
+
+</script>
+
 
 </body>
+
 </html>
