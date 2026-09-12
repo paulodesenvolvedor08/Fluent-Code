@@ -2,186 +2,1263 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caça Erros Java - FluentCode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Caça Erros Java - FluentCode</title>
 
-<style>
-body {
-    background: #0d1b2a;
-    color: white;
-    font-size: 16px;
-    padding-bottom: 40px;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-/* CARD RESPONSIVO */
-.card {
-    background: #0f172a;
-    border: 1px solid #1f2937;
-    border-radius: 20px;
-    padding: 24px;
-    width: 100%;
-    max-width: 900px;
-    margin: auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,.3);
-}
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-/* CÓDIGO RESPONSIVO */
-.code {
-    background: #000;
-    padding: 20px;
-    border-radius: 12px;
-    color: #22c55e;
-    font-family: 'Courier New', Courier, monospace;
-    margin-top: 16px;
-    font-size: 17px;
-    line-height: 1.8;
-    overflow-x: auto;
-    word-break: break-all;
-}
+    <style>
 
-/* BOTÕES DE RESPOSTA */
-.btn {
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: bold;
-    width: 100%;
-    transition: .2s;
-    font-size: 16px;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.btn:active {
-    transform: scale(0.98);
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.13), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(37, 99, 235, 0.15), transparent 32%),
+                #07111f;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+        }
 
-/* BOTÃO VOLTAR */
-.btn-back {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: bold;
-    background: #2563eb; /* Azul */
-    transition: .2s;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.18;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 32px 32px;
+            z-index: -1;
+        }
 
-.btn-back:hover {
-    background: #1d4ed8;
-}
+        .glass {
+            background: rgba(10, 22, 40, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+            backdrop-filter: blur(18px);
+        }
 
-/* MOBILE AJUSTES */
-@media (max-width: 640px) {
-    body {
-        padding: 15px;
-    }
+        .logo-gradient {
+            background: linear-gradient(
+                90deg,
+                #60a5fa,
+                #818cf8,
+                #c084fc
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    h1 {
-        font-size: 22px;
-    }
+        .progress-track {
+            height: 8px;
+            background: #172338;
+            border-radius: 999px;
+            overflow: hidden;
+        }
 
-    .card {
-        padding: 20px;
-    }
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #ef4444,
+                #f97316,
+                #eab308
+            );
+            transition: width 0.5s ease;
+        }
 
-    .code {
-        font-size: 15px;
-    }
-}
-</style>
+        .code-box {
+            position: relative;
+            background:
+                linear-gradient(
+                    135deg,
+                    #020617,
+                    #07111f
+                );
+            border: 1px solid rgba(34, 197, 94, 0.14);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .code-content {
+            padding: 20px;
+            color: #86efac;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 15px;
+            line-height: 1.85;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-x: auto;
+        }
+
+        .answer-button {
+            width: 100%;
+            min-height: 64px;
+            padding: 16px 18px;
+            border-radius: 15px;
+            font-weight: 900;
+            font-size: 15px;
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .answer-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .answer-button:active {
+            transform: scale(0.98);
+        }
+
+        .answer-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-button {
+            background: rgba(239, 68, 68, 0.10);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+        }
+
+        .error-button:hover {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: rgba(239, 68, 68, 0.50);
+            box-shadow: 0 12px 25px rgba(239, 68, 68, 0.10);
+        }
+
+        .correct-button {
+            background: rgba(34, 197, 94, 0.10);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #86efac;
+        }
+
+        .correct-button:hover {
+            background: rgba(34, 197, 94, 0.18);
+            border-color: rgba(34, 197, 94, 0.50);
+            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.10);
+        }
+
+        .xp-badge {
+            background: rgba(234, 179, 8, 0.10);
+            border: 1px solid rgba(234, 179, 8, 0.22);
+            color: #facc15;
+        }
+
+        .easy {
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.10);
+            border-color: rgba(34, 197, 94, 0.20);
+        }
+
+        .medium {
+            color: #facc15;
+            background: rgba(234, 179, 8, 0.10);
+            border-color: rgba(234, 179, 8, 0.20);
+        }
+
+        .hard {
+            color: #fb7185;
+            background: rgba(244, 63, 94, 0.10);
+            border-color: rgba(244, 63, 94, 0.20);
+        }
+
+        .very-hard {
+            color: #c084fc;
+            background: rgba(168, 85, 247, 0.10);
+            border-color: rgba(168, 85, 247, 0.20);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .appear {
+            animation: appear 0.35s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @media (max-width: 640px) {
+
+            .code-content {
+                font-size: 13px;
+                padding: 16px;
+            }
+
+            .answer-button {
+                min-height: 58px;
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
 </head>
 
-<body class="p-4">
 
-<!-- TOPO -->
-<div class="text-center mb-8">
-    <h1 class="text-2xl font-bold">🐞 Caça Erros Java</h1>
-    <span id="fase" class="inline-block mt-2 bg-red-600 px-4 py-1 rounded-full text-sm font-bold">
-        Fase 1
-    </span>
-</div>
-
-<!-- CARD CENTRAL -->
-<div class="card">
-
-<p class="text-gray-300 text-center mb-4">
-Encontre o erro no código:
-</p>
-
-<div id="codigo" class="code"></div>
-
-<!-- BOTÕES DE RESPOSTA -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-
-<button onclick="responder(false)"
-class="btn bg-red-600 hover:bg-red-500">
-Não está correto
-</button>
-
-<button onclick="responder(true)"
-class="btn bg-green-600 hover:bg-green-500">
-Está correto
-</button>
-
-</div>
-
-<p id="msg" class="mt-6 font-bold text-center text-lg min-h-[30px]"></p>
-
-    <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-200 z-50">
-  <i class="fa-solid fa-arrow-left"></i>
-  <span class="font-bold">Voltar</span>
-   </button>
-
-</div>
+<body class="min-h-screen pb-28">
 
 
-<script>
-/* 🔥 FASES */
-const fases = [
-    { codigo: "System.out.printn(\"Hello World\");", erro: "println", xp: 100 },
-    { codigo: "int x = \"10\";", erro: "tipo errado (String em int)", xp: 120 },
-    { codigo: "if x > 5 { System.out.println('OK'); }", erro: "faltam parênteses ()", xp: 150 },
-    { codigo: "public static void main(String args) { }", erro: "String[] args", xp: 180 }
-];
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-let faseAtual = 0;
+    <header
+        class="w-full border-b border-slate-800/70 bg-[#07111f]/90 backdrop-blur-xl">
 
-/* 🔁 CARREGAR */
-function carregar(){
-    let f = fases[faseAtual];
-    document.getElementById("fase").innerText = "Fase " + (faseAtual + 1);
-    document.getElementById("codigo").innerText = f.codigo;
-    document.getElementById("msg").innerText = "";
-}
+        <div
+            class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
 
-carregar();
+            <div class="flex items-center gap-3">
 
-/* 🎮 RESPOSTA */
-function responder(correto){
-    let f = fases[faseAtual];
-    let user = JSON.parse(localStorage.getItem("fluentcode_user")) || {xp:0,nivel:0};
-    
-    // Logica: se o usuario clicar em "Não está correto", ele acertou o desafio
-    let acertou = (correto === false);
+                <div
+                    class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-400/20 flex items-center justify-center floating">
 
-    if(acertou){
-        user.xp += f.xp;
-        document.getElementById("msg").innerHTML = "✔ Correto! +" + f.xp + " XP";
-        faseAtual++;
-        
-        if(faseAtual < fases.length){
-            setTimeout(() => carregar(), 1200);
-        } else {
-            document.getElementById("msg").innerHTML = "🏆 Você completou todos os níveis!";
+                    <i class="fa-solid fa-bug text-red-400 text-lg"></i>
+
+                </div>
+
+                <div>
+
+                    <div class="text-xl font-black logo-gradient">
+                        FluentCode
+                    </div>
+
+                    <div
+                        class="text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                        Learning • Java • English
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-400/20">
+
+                <i class="fa-solid fa-bug text-red-400"></i>
+
+                <span class="text-sm font-bold text-red-300">
+                    Caça Erros
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="w-full max-w-4xl mx-auto px-4 pt-7">
+
+
+        <!-- HERO -->
+
+        <section class="mb-6">
+
+            <div class="flex items-center gap-3 mb-3">
+
+                <div
+                    class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-400/20 flex items-center justify-center">
+
+                    <i class="fa-solid fa-bug text-red-400 text-xl"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight">
+                        Caça Erros Java
+                    </h1>
+
+                    <p class="text-sm text-slate-400 mt-1">
+                        Encontre problemas no código antes que eles encontrem você.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             PROGRESSO
+        ========================================== -->
+
+        <section class="glass rounded-2xl p-5 mb-5">
+
+            <div
+                class="flex items-center justify-between gap-4 mb-3">
+
+                <div>
+
+                    <p
+                        class="text-xs uppercase tracking-widest text-slate-500 font-bold">
+                        Progresso
+                    </p>
+
+                    <p
+                        id="fase"
+                        class="text-lg font-black text-slate-100 mt-1">
+                        Fase 1 de 10
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="xpBadge"
+                    class="xp-badge rounded-xl px-3 py-2 text-sm font-black whitespace-nowrap">
+                    +100 XP
+                </div>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    id="barraProgresso"
+                    class="progress-fill"
+                    style="width: 10%;">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CARD
+        ========================================== -->
+
+        <section class="glass rounded-3xl p-5 sm:p-7">
+
+
+            <!-- META -->
+
+            <div
+                class="flex flex-wrap items-center gap-2 mb-5">
+
+                <span
+                    id="dificuldade"
+                    class="easy border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider">
+                    Fácil
+                </span>
+
+
+                <span
+                    class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-400">
+
+                    <i class="fa-solid fa-code mr-1"></i>
+                    Java
+
+                </span>
+
+
+                <span
+                    class="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-xs font-bold text-red-300">
+
+                    <i class="fa-solid fa-bug mr-1"></i>
+                    Debug
+
+                </span>
+
+            </div>
+
+
+            <!-- INSTRUÇÃO -->
+
+            <div class="mb-5">
+
+                <p
+                    class="text-sm font-bold text-slate-300 flex items-center gap-2">
+
+                    <i class="fa-solid fa-magnifying-glass text-red-400"></i>
+
+                    Analise o código abaixo.
+
+                </p>
+
+                <p class="text-xs text-slate-500 mt-1">
+                    Existe um erro neste código. Você precisa identificá-lo.
+                </p>
+
+            </div>
+
+
+            <!-- CÓDIGO -->
+
+            <div class="code-box mb-6">
+
+                <div class="code-header">
+
+                    <span class="dot bg-red-500"></span>
+                    <span class="dot bg-yellow-500"></span>
+                    <span class="dot bg-green-500"></span>
+
+                    <span class="ml-2 text-xs text-slate-500 font-bold">
+                        Main.java
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="codigo"
+                    class="code-content">
+                </div>
+
+            </div>
+
+
+            <!-- RESPOSTAS -->
+
+            <div>
+
+                <div
+                    class="flex items-center gap-2 mb-4">
+
+                    <i class="fa-solid fa-circle-question text-indigo-400"></i>
+
+                    <h2
+                        class="text-sm uppercase tracking-widest font-black text-slate-400">
+                        O código está correto?
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                    <button
+                        id="btnNao"
+                        onclick="responder(false)"
+                        class="answer-button error-button flex items-center justify-center gap-3">
+
+                        <i class="fa-solid fa-bug"></i>
+
+                        <span>
+                            Não está correto
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="btnSim"
+                        onclick="responder(true)"
+                        class="answer-button correct-button flex items-center justify-center gap-3">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+                            Está correto
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- MENSAGEM -->
+
+            <div
+                id="msg"
+                class="mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide">
+            </div>
+
+
+            <!-- DICA -->
+
+            <div
+                class="mt-5 pt-5 border-t border-slate-800/70 flex items-start gap-3 text-xs text-slate-500">
+
+                <i class="fa-solid fa-lightbulb text-yellow-400 mt-0.5"></i>
+
+                <span>
+                    Dica: observe principalmente tipos de dados,
+                    métodos, operadores, índices e estruturas de controle.
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         BOTÃO VOLTAR
+    ========================================== -->
+
+    <button
+        onclick="window.location.href='atividades.html'"
+        class="fixed bottom-5 left-4 right-4 sm:left-5 sm:right-auto flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-2xl shadow-2xl shadow-blue-900/30 transition-all duration-200 z-50">
+
+        <i class="fa-solid fa-arrow-left text-lg"></i>
+
+        <span class="font-black text-sm tracking-wide">
+            Voltar para Atividades
+        </span>
+
+    </button>
+
+
+    <script>
+
+        /* =========================================================
+           VERIFICAR LOGIN
+        ========================================================= */
+
+        function verificarLogin() {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                alert(
+                    "É necessário fazer login para realizar as atividades."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                alert(
+                    "Sua sessão é inválida. Faça login novamente."
+                );
+
+
+                localStorage.removeItem("id_usuario");
+                localStorage.removeItem("usuario");
+                localStorage.removeItem("usuarioLogado");
+                localStorage.removeItem("email");
+
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            return true;
+
         }
-    } else {
-        document.getElementById("msg").innerHTML = "❌ Errado! O erro era: " + f.erro;
-    }
 
-    localStorage.setItem("fluentcode_user", JSON.stringify(user));
+
+        /* =========================================================
+           FASES
+
+           Todas as fases possuem um erro.
+           A resposta correta é:
+           "Não está correto".
+        ========================================================= */
+
+        const fases = [
+
+            {
+                codigo: `System.out.printn("Hello World");`,
+                erro: "O método correto é println ou print. printn não existe.",
+                xp: 100,
+                dificuldade: "Fácil"
+            },
+
+
+            {
+                codigo: `int x = "10";`,
+                erro: "A variável é int, mas o valor \"10\" é uma String.",
+                xp: 120,
+                dificuldade: "Fácil"
+            },
+
+
+            {
+                codigo: `if x > 5 {
+    System.out.println("OK");
+}`,
+                erro: "A condição do if precisa estar entre parênteses.",
+                xp: 140,
+                dificuldade: "Fácil"
+            },
+
+
+            {
+                codigo: `public static void main(String args) {
+}`,
+                erro: "O parâmetro tradicional do método main é String[] args.",
+                xp: 160,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                codigo: `double preco = 10;
+int quantidade = 2;
+
+int total = preco * quantidade;`,
+                erro: "O resultado de uma multiplicação envolvendo double não pode ser armazenado diretamente em int.",
+                xp: 180,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                codigo: `int[] numeros = {10, 20, 30};
+
+System.out.println(numeros[3]);`,
+                erro: "O último índice do array é 2. O índice 3 está fora dos limites.",
+                xp: 200,
+                dificuldade: "Médio"
+            },
+
+
+            {
+                codigo: `int x = 10;
+
+if (x = 5) {
+    System.out.println("OK");
+}`,
+                erro: "O operador = faz atribuição. Para comparação deve ser usado ==.",
+                xp: 220,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                codigo: `for (int i = 0; i < 5; i++) {
+    System.out.println(i);
 }
-</script>
+
+System.out.println(i);`,
+                erro: "A variável i foi declarada dentro do for e não existe fora desse bloco.",
+                xp: 240,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                codigo: `String nome = "Java";
+
+if (nome == "Java") {
+    System.out.println("Correto");
+}`,
+                erro: "Para comparar o conteúdo de Strings, normalmente deve ser usado equals().",
+                xp: 280,
+                dificuldade: "Difícil"
+            },
+
+
+            {
+                codigo: `int x = 10;
+int y = 0;
+
+System.out.println(x / y);`,
+                erro: "A divisão de um inteiro por zero provoca ArithmeticException.",
+                xp: 320,
+                dificuldade: "Muito difícil"
+            }
+
+        ];
+
+
+        /* =========================================================
+           CONTROLE
+        ========================================================= */
+
+        let faseAtual = 0;
+
+        let salvando = false;
+
+
+        /* =========================================================
+           ELEMENTOS
+        ========================================================= */
+
+        const faseElement =
+            document.getElementById("fase");
+
+        const codigoElement =
+            document.getElementById("codigo");
+
+        const msgElement =
+            document.getElementById("msg");
+
+        const btnNao =
+            document.getElementById("btnNao");
+
+        const btnSim =
+            document.getElementById("btnSim");
+
+        const xpBadge =
+            document.getElementById("xpBadge");
+
+        const barraProgresso =
+            document.getElementById("barraProgresso");
+
+        const dificuldadeElement =
+            document.getElementById("dificuldade");
+
+
+        /* =========================================================
+           CARREGAR FASE
+        ========================================================= */
+
+        function carregar() {
+
+            if (!verificarLogin()) {
+                return;
+            }
+
+
+            const f =
+                fases[faseAtual];
+
+
+            faseElement.innerText =
+                `Fase ${faseAtual + 1} de ${fases.length}`;
+
+
+            codigoElement.innerText =
+                f.codigo;
+
+
+            msgElement.innerText =
+                "";
+
+
+            msgElement.className =
+                "mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide";
+
+
+            btnNao.disabled =
+                false;
+
+            btnSim.disabled =
+                false;
+
+
+            salvando =
+                false;
+
+
+            /* =============================================
+               XP
+            ============================================== */
+
+            xpBadge.innerText =
+                `+${f.xp} XP`;
+
+
+            /* =============================================
+               PROGRESSO
+            ============================================== */
+
+            const progresso =
+                ((faseAtual + 1) / fases.length) * 100;
+
+
+            barraProgresso.style.width =
+                `${progresso}%`;
+
+
+            /* =============================================
+               DIFICULDADE
+            ============================================== */
+
+            dificuldadeElement.innerText =
+                f.dificuldade;
+
+
+            dificuldadeElement.className =
+                "border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider";
+
+
+            if (f.dificuldade === "Fácil") {
+
+                dificuldadeElement.classList.add(
+                    "easy"
+                );
+
+            } else if (f.dificuldade === "Médio") {
+
+                dificuldadeElement.classList.add(
+                    "medium"
+                );
+
+            } else if (f.dificuldade === "Difícil") {
+
+                dificuldadeElement.classList.add(
+                    "hard"
+                );
+
+            } else {
+
+                dificuldadeElement.classList.add(
+                    "very-hard"
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SALVAR XP NO MYSQL
+        ========================================================= */
+
+        async function salvarXpNoBanco(xpGanho) {
+
+            const idUsuario =
+                localStorage.getItem("id_usuario");
+
+
+            if (!idUsuario) {
+
+                throw new Error(
+                    "Usuário não identificado. Faça login novamente."
+                );
+
+            }
+
+
+            const idNumerico =
+                Number(idUsuario);
+
+
+            if (
+                !Number.isInteger(idNumerico) ||
+                idNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "ID do usuário inválido. Faça login novamente."
+                );
+
+            }
+
+
+            const xpNumerico =
+                Number(xpGanho);
+
+
+            if (
+                !Number.isFinite(xpNumerico) ||
+                xpNumerico <= 0
+            ) {
+
+                throw new Error(
+                    "Valor de XP inválido."
+                );
+
+            }
+
+
+            const resposta =
+                await fetch(
+                    "/exercicio/concluir",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            id_usuario:
+                                idNumerico,
+
+                            xp_ganho:
+                                xpNumerico
+
+                        })
+                    }
+                );
+
+
+            let dados;
+
+
+            try {
+
+                dados =
+                    await resposta.json();
+
+            } catch (erro) {
+
+                throw new Error(
+                    "O servidor retornou uma resposta inválida."
+                );
+
+            }
+
+
+            if (
+                !resposta.ok ||
+                dados.sucesso !== true
+            ) {
+
+                throw new Error(
+                    dados.mensagem ||
+                    dados.erro ||
+                    "Não foi possível salvar o XP."
+                );
+
+            }
+
+
+            return dados;
+
+        }
+
+
+        /* =========================================================
+           RESPONDER
+        ========================================================= */
+
+        async function responder(correto) {
+
+            if (!verificarLogin()) {
+                return;
+            }
+
+
+            if (salvando) {
+                return;
+            }
+
+
+            const f =
+                fases[faseAtual];
+
+
+            /*
+             * Todas as fases desta atividade
+             * possuem erro.
+             *
+             * Portanto:
+             *
+             * false = "Não está correto" = acertou
+             * true  = "Está correto" = errou
+             */
+
+            const acertou =
+                correto === false;
+
+
+            /* =============================================
+               RESPOSTA ERRADA
+            ============================================== */
+
+            if (!acertou) {
+
+                msgElement.className =
+                    "mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide text-red-400";
+
+
+                msgElement.innerHTML =
+                    `<div>
+                        <i class="fa-solid fa-circle-xmark mr-2"></i>
+                        Errado! Ainda existe um problema no código.
+                     </div>`;
+
+
+                return;
+
+            }
+
+
+            /* =============================================
+               INICIAR SALVAMENTO
+            ============================================== */
+
+            salvando =
+                true;
+
+
+            btnNao.disabled =
+                true;
+
+            btnSim.disabled =
+                true;
+
+
+            msgElement.className =
+                "mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide text-yellow-400";
+
+
+            msgElement.innerHTML =
+                `<i class="fa-solid fa-cloud-arrow-up mr-2"></i>
+                 Salvando +${f.xp} XP...`;
+
+
+            try {
+
+                /*
+                 * Primeiro salva no banco.
+                 */
+
+                await salvarXpNoBanco(
+                    f.xp
+                );
+
+
+                /*
+                 * Só chega aqui se o servidor
+                 * confirmar o XP.
+                 */
+
+                msgElement.className =
+                    "appear mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide text-green-400";
+
+
+                msgElement.innerHTML =
+                    `<i class="fa-solid fa-circle-check mr-2"></i>
+                     Correto! +${f.xp} XP`;
+
+
+                faseAtual++;
+
+
+                /* =========================================
+                   PRÓXIMA FASE
+                ========================================== */
+
+                if (faseAtual < fases.length) {
+
+                    setTimeout(() => {
+
+                        carregar();
+
+                    }, 1200);
+
+
+                } else {
+
+                    setTimeout(() => {
+
+                        mostrarConclusao();
+
+                    }, 1000);
+
+                }
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao salvar XP:",
+                    erro
+                );
+
+
+                salvando =
+                    false;
+
+
+                btnNao.disabled =
+                    false;
+
+                btnSim.disabled =
+                    false;
+
+
+                msgElement.className =
+                    "mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-sm tracking-wide text-red-400";
+
+
+                msgElement.innerHTML =
+                    `<div>
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i>
+                        Não foi possível salvar o XP.
+                        <br>
+                        <span class="text-xs text-slate-500">
+                            ${erro.message}
+                        </span>
+                     </div>`;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           CONCLUSÃO
+        ========================================================= */
+
+        function mostrarConclusao() {
+
+            const xpTotal =
+                fases.reduce(
+                    (total, fase) =>
+                        total + fase.xp,
+                    0
+                );
+
+
+            faseElement.innerText =
+                "Desafio concluído";
+
+
+            barraProgresso.style.width =
+                "100%";
+
+
+            xpBadge.innerText =
+                `+${xpTotal} XP`;
+
+
+            dificuldadeElement.innerText =
+                "Concluído";
+
+
+            dificuldadeElement.className =
+                "very-hard border rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider";
+
+
+            codigoElement.innerText =
+                `// Parabéns!
+
+// Você encontrou todos os erros.
+
+// ${fases.length} fases concluídas
+// ${xpTotal} XP conquistados`;
+
+
+            msgElement.className =
+                "appear mt-6 min-h-[50px] flex items-center justify-center text-center font-black text-base tracking-wide text-green-400";
+
+
+            msgElement.innerHTML =
+                `<div>
+                    <i class="fa-solid fa-trophy text-yellow-400 mr-2"></i>
+                    Você completou o Caça Erros Java!
+                 </div>`;
+
+
+            document.querySelector(
+                ".answer-button"
+            );
+
+
+            btnNao.disabled =
+                true;
+
+            btnSim.disabled =
+                true;
+
+
+            document.querySelector(
+                ".question-box"
+            );
+
+
+            salvando =
+                false;
+
+        }
+
+
+        /* =========================================================
+           INICIAR
+        ========================================================= */
+
+        if (verificarLogin()) {
+
+            carregar();
+
+        }
+
+    </script>
 
 </body>
+
 </html>
