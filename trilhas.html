@@ -1,288 +1,2313 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>FluentCode - Trilhas</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    width: 100%;
-    background-color: #111827; 
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-}
+    <title>FluentCode - Trilhas</title>
 
-/* CONTAINER DO CAMINHO */
-.duo-path {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    padding: 40px 0 140px 0;
-    max-width: 480px;
-    margin: 0 auto;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-/* GRUPO DO MÓDULO + TEXTO */
-.level-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 25px 0;
-    position: relative;
-    z-index: 10;
-}
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 
-/* BOTÃO DE NÍVEL (MÓDULO CIRCULAR) */
-.duo-level {
-    position: relative;
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: transform 0.1s ease, filter 0.2s;
-}
+    <style>
 
-/* Efeito 3D */
-.duo-level::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    z-index: -1;
-    transform: translateY(6px);
-}
+        /* =====================================================
+           BASE
+        ===================================================== */
 
-.duo-level:active {
-    transform: translateY(6px) scale(0.95);
-}
-.duo-level:active::after {
-    transform: translateY(0);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* CORES DOS MÓDULOS */
-.lvl-done {
-    background: #22c55e;
-    border: 2px solid #4ade80;
-}
-.lvl-done::after { background: #166534; }
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
 
-.lvl-active {
-    background: #3b82f6;
-    border: 2px solid #60a5fa;
-    animation: pulseGlow 2s infinite alternate;
-}
-.lvl-active::after { background: #1d4ed8; }
+        body {
 
-.lvl-locked {
-    background: #4b5563;
-    border: 2px solid #9ca3af;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-.lvl-locked::after { background: #1f2937; }
+            min-height: 100vh;
+            min-height: 100dvh;
 
-/* LINHAS CONECTIVAS NO FUNDO */
-.svg-connector {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
+            color: white;
 
-/* TEXTO DOS MÓDULOS */
-.level-title {
-    font-size: 0.875rem;
-    font-weight: bold;
-    margin-top: 12px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    text-align: center;
-}
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-.title-done { color: #4ade80; }
-.title-active { color: #60a5fa; }
-.title-locked { color: #9ca3af; }
+            overflow-x: hidden;
 
-/* TOOLTIP */
-.duo-tooltip {
-    position: absolute;
-    bottom: 100px;
-    background: #1f2937;
-    border: 2px solid #374151;
-    border-radius: 16px;
-    padding: 10px 16px;
-    text-align: center;
-    white-space: nowrap;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    z-index: 20;
-}
-.duo-tooltip::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 14px;
-    height: 14px;
-    background: #1f2937;
-    border-right: 2px solid #374151;
-    border-bottom: 2px solid #374151;
-}
+            background:
 
-@keyframes pulseGlow {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
-    100% { transform: scale(1.04); box-shadow: 0 0 15px 4px rgba(59, 130, 246, 0.3); }
-}
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(37, 99, 235, 0.25),
+                    transparent 38%
+                ),
 
-/* POSICIONAMENTO EM ZIGUE-ZAGUE */
-.pos-center { transform: translateX(0); }
-.pos-left   { transform: translateX(-45px); }
-.pos-right  { transform: translateX(45px); }
+                radial-gradient(
+                    circle at 0% 45%,
+                    rgba(124, 58, 237, 0.10),
+                    transparent 30%
+                ),
 
-/* BOTÃO VOLTAR FIXADO NA LATERAL ESQUERDA INFERIOR */
-.back-fixed {
-    position: fixed;
-    bottom: calc(20px + env(safe-area-inset-bottom));
-    left: 20px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    padding: 12px 20px;
-    border-radius: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    z-index: 100;
-    transition: 0.2s;
-}
-.back-fixed:active {
-    transform: scale(0.95);
-}
-</style>
+                #07111f;
+
+        }
+
+
+        /* =====================================================
+           GRID DO FUNDO
+        ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,0.022) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.022) 1px,
+                    transparent 1px
+                );
+
+            background-size: 42px 42px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .top-header {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            width: 100%;
+
+            padding:
+                14px
+                18px;
+
+            background:
+                rgba(7, 17, 31, 0.86);
+
+            border-bottom:
+                1px solid
+                rgba(148, 163, 184, 0.10);
+
+            backdrop-filter: blur(18px);
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 0 28px
+                rgba(59,130,246,0.28);
+
+            font-size: 18px;
+
+        }
+
+
+        .brand-name {
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #a78bfa
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 2px;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+        }
+
+
+        .streak {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px
+                12px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(30,41,59,0.75);
+
+            border:
+                1px solid
+                rgba(148,163,184,0.10);
+
+        }
+
+
+        .streak i {
+
+            color: #fb923c;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(251,146,60,0.5)
+                );
+
+        }
+
+
+        .streak span {
+
+            color: #fdba74;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding:
+                22px
+                18px
+                130px;
+
+        }
+
+
+        /* =====================================================
+           HERO DA TRILHA
+        ===================================================== */
+
+        .trail-hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                25px
+                22px;
+
+            margin-bottom: 20px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,23,42,0.96),
+                    rgba(15,23,42,0.68)
+                );
+
+            border:
+                1px solid
+                rgba(96,165,250,0.13);
+
+            box-shadow:
+                0 20px 55px
+                rgba(0,0,0,0.28);
+
+        }
+
+
+        .trail-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            right: -90px;
+            top: -120px;
+
+            background:
+                rgba(59,130,246,0.18);
+
+            filter:
+                blur(70px);
+
+            pointer-events: none;
+
+        }
+
+
+        .trail-kicker {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                6px
+                10px;
+
+            margin-bottom: 11px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,0.09);
+
+            border:
+                1px solid
+                rgba(59,130,246,0.16);
+
+            color: #60a5fa;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .trail-hero h1 {
+
+            position: relative;
+
+            font-size:
+                clamp(
+                    25px,
+                    6vw,
+                    36px
+                );
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            color: #f8fafc;
+
+        }
+
+
+        .trail-hero h1 span {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #22c55e,
+                    #3b82f6
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+
+        }
+
+
+        .trail-hero p {
+
+            position: relative;
+
+            margin-top: 7px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            max-width: 600px;
+
+        }
+
+
+        /* =====================================================
+           PROGRESSO
+        ===================================================== */
+
+        .progress-box {
+
+            margin-top: 20px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid
+                rgba(148,163,184,0.08);
+
+        }
+
+
+        .progress-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .progress-label {
+
+            color: #94a3b8;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .7px;
+
+        }
+
+
+        .progress-value {
+
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+        }
+
+
+        .progress-track {
+
+            width: 100%;
+
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background:
+                #172235;
+
+        }
+
+
+        .progress-fill {
+
+            width: 20%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #22c55e,
+                    #3b82f6
+                );
+
+            box-shadow:
+                0 0 14px
+                rgba(59,130,246,0.35);
+
+        }
+
+
+        /* =====================================================
+           MAPA
+        ===================================================== */
+
+        .map-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,23,42,0.91),
+                    rgba(15,23,42,0.65)
+                );
+
+            border:
+                1px solid
+                rgba(148,163,184,0.09);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.30);
+
+        }
+
+
+        .map-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding:
+                18px
+                20px;
+
+            border-bottom:
+                1px solid
+                rgba(148,163,184,0.08);
+
+        }
+
+
+        .map-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            color: #e2e8f0;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: .8px;
+
+        }
+
+
+        .map-title i {
+
+            color: #60a5fa;
+
+        }
+
+
+        .map-status {
+
+            color: #64748b;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           CAMINHO
+        ===================================================== */
+
+        .duo-path {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            max-width: 480px;
+
+            min-height: 700px;
+
+            margin: 0 auto;
+
+            padding:
+                42px
+                0
+                100px;
+
+        }
+
+
+        /* =====================================================
+           LINHAS
+        ===================================================== */
+
+        .svg-connector {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+        }
+
+
+        .svg-connector path:first-child {
+
+            filter:
+                drop-shadow(
+                    0 0 5px
+                    rgba(59,130,246,0.08)
+                );
+
+        }
+
+
+        /* =====================================================
+           GRUPOS
+        ===================================================== */
+
+        .level-group {
+
+            position: relative;
+
+            z-index: 10;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            margin:
+                29px
+                0;
+
+        }
+
+
+        /* =====================================================
+           POSIÇÕES
+        ===================================================== */
+
+        .pos-center {
+
+            transform:
+                translateX(0);
+
+        }
+
+
+        .pos-left {
+
+            transform:
+                translateX(-48px);
+
+        }
+
+
+        .pos-right {
+
+            transform:
+                translateX(48px);
+
+        }
+
+
+        /* =====================================================
+           NÓ DA TRILHA
+        ===================================================== */
+
+        .duo-level {
+
+            position: relative;
+
+            width: 82px;
+            height: 82px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 25px;
+
+            transition:
+                transform .18s ease,
+                filter .25s ease,
+                box-shadow .25s ease;
+
+        }
+
+
+        .duo-level::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -6px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.05);
+
+            pointer-events: none;
+
+        }
+
+
+        .duo-level::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 50%;
+
+            z-index: -1;
+
+            transform:
+                translateY(7px);
+
+        }
+
+
+        .duo-level:active {
+
+            transform:
+                translateY(5px)
+                scale(.95);
+
+        }
+
+
+        .duo-level:active::after {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           CONCLUÍDO
+        ===================================================== */
+
+        .lvl-done {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #22c55e,
+                    #16a34a
+                );
+
+            border:
+                2px solid
+                #4ade80;
+
+            box-shadow:
+                0 0 28px
+                rgba(34,197,94,0.20);
+
+        }
+
+
+        .lvl-done::after {
+
+            background:
+                #166534;
+
+        }
+
+
+        /* =====================================================
+           ATIVO
+        ===================================================== */
+
+        .lvl-active {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #3b82f6,
+                    #4f46e5
+                );
+
+            border:
+                2px solid
+                #93c5fd;
+
+            box-shadow:
+                0 0 0 6px
+                rgba(59,130,246,0.08),
+
+                0 0 32px
+                rgba(59,130,246,0.28);
+
+            animation:
+                activePulse
+                2.2s
+                infinite
+                alternate;
+
+        }
+
+
+        .lvl-active::after {
+
+            background:
+                #1e40af;
+
+        }
+
+
+        @keyframes activePulse {
+
+            from {
+
+                transform:
+                    scale(1);
+
+                box-shadow:
+                    0 0 0 5px
+                    rgba(59,130,246,0.07),
+
+                    0 0 22px
+                    rgba(59,130,246,0.20);
+
+            }
+
+            to {
+
+                transform:
+                    scale(1.045);
+
+                box-shadow:
+                    0 0 0 8px
+                    rgba(59,130,246,0.06),
+
+                    0 0 35px
+                    rgba(59,130,246,0.32);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BLOQUEADO
+        ===================================================== */
+
+        .lvl-locked {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #263244,
+                    #111827
+                );
+
+            border:
+                2px solid
+                #475569;
+
+            color: #64748b;
+
+            cursor:
+                not-allowed;
+
+            pointer-events:
+                none;
+
+            opacity: .88;
+
+        }
+
+
+        .lvl-locked::after {
+
+            background:
+                #0f172a;
+
+        }
+
+
+        /* =====================================================
+           TÍTULOS
+        ===================================================== */
+
+        .level-title {
+
+            margin-top: 12px;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            text-align: center;
+
+            text-shadow:
+                0 2px 7px
+                rgba(0,0,0,0.8);
+
+        }
+
+
+        .title-done {
+
+            color: #4ade80;
+
+        }
+
+
+        .title-active {
+
+            color: #60a5fa;
+
+        }
+
+
+        .title-locked {
+
+            color: #64748b;
+
+        }
+
+
+        /* =====================================================
+           BADGE DO MUNDO
+        ===================================================== */
+
+        .world-label {
+
+            position: absolute;
+
+            top: -29px;
+
+            padding:
+                5px
+                10px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(22,101,52,0.85);
+
+            border:
+                1px solid
+                rgba(74,222,128,0.25);
+
+            color: #86efac;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =====================================================
+           TOOLTIP
+        ===================================================== */
+
+        .duo-tooltip {
+
+            position: absolute;
+
+            bottom: 101px;
+
+            min-width: 160px;
+
+            padding:
+                10px
+                14px;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(15,23,42,0.97);
+
+            border:
+                1px solid
+                rgba(59,130,246,0.30);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.40),
+
+                0 0 25px
+                rgba(59,130,246,0.08);
+
+            z-index: 20;
+
+        }
+
+
+        .duo-tooltip::after {
+
+            content: "";
+
+            position: absolute;
+
+            bottom: -7px;
+
+            left: 50%;
+
+            width: 13px;
+            height: 13px;
+
+            transform:
+                translateX(-50%)
+                rotate(45deg);
+
+            background:
+                #0f172a;
+
+            border-right:
+                1px solid
+                rgba(59,130,246,0.30);
+
+            border-bottom:
+                1px solid
+                rgba(59,130,246,0.30);
+
+        }
+
+
+        .tooltip-top {
+
+            color: #60a5fa;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .tooltip-title {
+
+            margin-top: 3px;
+
+            color: #f8fafc;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           LEGENDA
+        ===================================================== */
+
+        .legend {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            padding:
+                16px
+                20px;
+
+            border-top:
+                1px solid
+                rgba(148,163,184,0.08);
+
+        }
+
+
+        .legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #64748b;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+        }
+
+
+        .legend-dot {
+
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+        }
+
+
+        .dot-done {
+
+            background: #22c55e;
+
+        }
+
+
+        .dot-active {
+
+            background: #3b82f6;
+
+        }
+
+
+        .dot-locked {
+
+            background: #475569;
+
+        }
+
+
+        /* =====================================================
+           BOTÃO VOLTAR
+        ===================================================== */
+
+        .back-fixed {
+
+            position: fixed;
+
+            z-index: 200;
+
+            left: 50%;
+
+            bottom:
+                calc(
+                    15px +
+                    env(safe-area-inset-bottom)
+                );
+
+            transform:
+                translateX(-50%);
+
+            width:
+                min(
+                    calc(100% - 30px),
+                    400px
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            padding:
+                13px
+                20px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(15,23,42,0.92);
+
+            border:
+                1px solid
+                rgba(96,165,250,0.18);
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.45);
+
+            backdrop-filter:
+                blur(18px);
+
+            cursor: pointer;
+
+            transition:
+                transform .2s,
+                background .2s,
+                color .2s;
+
+        }
+
+
+        .back-fixed:hover {
+
+            color: white;
+
+            background:
+                rgba(30,64,175,0.75);
+
+        }
+
+
+        .back-fixed:active {
+
+            transform:
+                translateX(-50%)
+                scale(.96);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .page {
+
+                padding:
+                    15px
+                    11px
+                    115px;
+
+            }
+
+
+            .top-header {
+
+                padding:
+                    12px
+                    14px;
+
+            }
+
+
+            .brand-subtitle {
+
+                display: none;
+
+            }
+
+
+            .trail-hero {
+
+                padding:
+                    21px
+                    18px;
+
+                border-radius:
+                    21px;
+
+            }
+
+
+            .map-card {
+
+                border-radius:
+                    22px;
+
+            }
+
+
+            .duo-path {
+
+                min-height:
+                    660px;
+
+            }
+
+
+            .pos-left {
+
+                transform:
+                    translateX(-38px);
+
+            }
+
+
+            .pos-right {
+
+                transform:
+                    translateX(38px);
+
+            }
+
+
+            .duo-level {
+
+                width:
+                    74px;
+
+                height:
+                    74px;
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .gold {
+
+                width: 74px;
+
+            }
+
+
+            .duo-tooltip {
+
+                bottom:
+                    92px;
+
+            }
+
+        }
+
+
+        @media (max-width: 380px) {
+
+            .pos-left {
+
+                transform:
+                    translateX(-28px);
+
+            }
+
+
+            .pos-right {
+
+                transform:
+                    translateX(28px);
+
+            }
+
+
+            .duo-level {
+
+                width:
+                    68px;
+
+                height:
+                    68px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-<div class="sticky top-0 bg-gray-900/90 backdrop-blur-md border-b border-gray-800 px-6 py-4 flex justify-between items-center z-50">
-    <div class="flex items-center gap-3">
-        <span class="text-2xl">⚡</span>
-        <div>
-            <h1 class="font-black text-lg tracking-wide bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">FLUENTCODE</h1>
-            <p class="text-xs text-gray-400">Trilha Fundamentos</p>
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-code"></i>
+
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    FLUENTCODE
+                </div>
+
+                <div class="brand-subtitle">
+                    Learning • Java • English
+                </div>
+
+            </div>
+
         </div>
+
+
+        <div class="streak">
+
+            <i class="fa-solid fa-fire"></i>
+
+            <span id="sequencia-trilha">
+                5 Dias
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PÁGINA
+    ====================================================== -->
+
+    <main class="page">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="trail-hero">
+
+            <div class="trail-kicker">
+
+                <i class="fa-solid fa-route"></i>
+
+                Sua jornada
+
+            </div>
+
+
+            <h1>
+
+                Trilha de
+                <span>Fundamentos</span>
+
+            </h1>
+
+
+            <p>
+
+                Construa sua base em Java passo a passo.
+                Complete cada missão para desbloquear
+                o próximo estágio da sua jornada.
+
+            </p>
+
+
+            <div class="progress-box">
+
+                <div class="progress-top">
+
+                    <span class="progress-label">
+                        Progresso da trilha
+                    </span>
+
+                    <span
+                        class="progress-value"
+                        id="progresso-trilha"
+                    >
+                        1 / 5
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        id="barra-trilha"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAPA
+        ================================================== -->
+
+        <section class="map-card">
+
+
+            <div class="map-header">
+
+                <div class="map-title">
+
+                    <i class="fa-solid fa-map"></i>
+
+                    Mapa de aprendizado
+
+                </div>
+
+
+                <span class="map-status">
+                    Fundamentos Java
+                </span>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 CAMINHO
+            ============================================== -->
+
+            <div class="relative">
+
+
+                <svg
+                    class="svg-connector"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <path
+                        d=""
+                        fill="none"
+                        stroke="rgba(59,130,246,0.20)"
+                        stroke-width="10"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d=""
+                        fill="none"
+                        stroke="#1e293b"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+
+
+                <div class="duo-path">
+
+
+                    <!-- =====================================
+                         MUNDO 1
+                    ====================================== -->
+
+                    <div class="level-group pos-center">
+
+
+                        <div
+                            class="duo-level lvl-done"
+                            onclick="moduloConcluido()"
+                        >
+
+                            <i
+                                class="fa-solid fa-check text-white"
+                            ></i>
+
+
+                            <div class="world-label">
+                                Mundo 1
+                            </div>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                level-title
+                                title-done
+                            "
+                        >
+                            Olá Mundo
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         VARIÁVEIS
+                    ====================================== -->
+
+                    <div class="level-group pos-left">
+
+
+                        <div class="duo-tooltip">
+
+                            <p class="tooltip-top">
+
+                                Próxima missão
+
+                            </p>
+
+
+                            <p class="tooltip-title">
+
+                                Variáveis e Tipos
+
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="duo-level lvl-active"
+                            onclick="abrirVariaveis(1)"
+                        >
+
+                            <i
+                                class="fa-solid fa-star text-white"
+                            ></i>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                level-title
+                                title-active
+                            "
+                        >
+                            Variáveis
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         CONDICIONAIS
+                    ====================================== -->
+
+                    <div class="level-group pos-right">
+
+
+                        <div class="duo-level lvl-locked">
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-lock
+                                    text-slate-500
+                                    text-lg
+                                "
+                            ></i>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                level-title
+                                title-locked
+                            "
+                        >
+                            Condicionais
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         LOOPS
+                    ====================================== -->
+
+                    <div class="level-group pos-center">
+
+
+                        <div class="duo-level lvl-locked">
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-lock
+                                    text-slate-500
+                                    text-lg
+                                "
+                            ></i>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                level-title
+                                title-locked
+                            "
+                        >
+                            Loops
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =====================================
+                         DESAFIO FINAL
+                    ====================================== -->
+
+                    <div class="level-group pos-left">
+
+
+                        <div class="duo-level lvl-locked">
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-trophy
+                                    text-slate-600
+                                    text-lg
+                                "
+                            ></i>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                level-title
+                                title-locked
+                            "
+                        >
+                            Desafio Final
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LEGENDA
+            ============================================== -->
+
+            <div class="legend">
+
+                <div class="legend-item">
+
+                    <span
+                        class="
+                            legend-dot
+                            dot-done
+                        "
+                    ></span>
+
+                    Concluído
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="
+                            legend-dot
+                            dot-active
+                        "
+                    ></span>
+
+                    Disponível
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span
+                        class="
+                            legend-dot
+                            dot-locked
+                        "
+                    ></span>
+
+                    Bloqueado
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         VOLTAR
+    ====================================================== -->
+
+    <div
+        class="back-fixed"
+        onclick="voltarParaInicio()"
+    >
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Voltar para o início
+
     </div>
-    <div class="flex items-center gap-2 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
-        <i class="fa-solid fa-fire text-orange-500"></i>
-        <span class="text-xs font-bold text-orange-400">5 Dias</span>
-    </div>
-</div>
 
-<main class="relative min-h-screen">
-    
-    <svg class="svg-connector" xmlns="http://www.w3.org/2000/svg">
-        <path d="" fill="none" stroke="#374151" stroke-width="10" stroke-linecap="round"/>
-        <path d="" fill="none" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-    </svg>
 
-    <div class="duo-path">
 
-        <div class="level-group pos-center">
-            <div class="duo-level lvl-done" onclick="alert('Módulo revisado!')">
-                <i class="fa-solid fa-check text-white"></i>
-                <div class="absolute top-[-30px] bg-green-600 text-[10px] font-black uppercase px-2 py-0.5 rounded-md tracking-wider">Mundo 1</div>
-            </div>
-            <p class="level-title title-done">Olá Mundo</p>
-        </div>
+    <script>
 
-        <div class="level-group pos-left">
-            <div class="duo-tooltip">
-                <p class="text-xs font-black uppercase text-blue-400 tracking-wider">Próxima Lição!</p>
-                <p class="text-sm font-bold text-white">Variáveis e Tipos</p>
-            </div>
-            <div class="duo-level lvl-active" onclick="abrirVariaveis()">
-                <i class="fa-solid fa-star text-white"></i>
-            </div>
-            <p class="level-title title-active">Variáveis</p>
-        </div>
 
-        <div class="level-group pos-right">
-            <div class="duo-level lvl-locked">
-                <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
-            </div>
-            <p class="level-title title-locked">Condicionais</p>
-        </div>
+        // ========================================
+        // VOLTAR PARA A PÁGINA INICIAL
+        // ========================================
 
-        <div class="level-group pos-center">
-            <div class="duo-level lvl-locked">
-                <i class="fa-solid fa-lock text-gray-400 text-lg"></i>
-            </div>
-            <p class="level-title title-locked">Loops</p>
-        </div>
+        function voltarParaInicio() {
 
-        <div class="level-group pos-left">
-            <div class="duo-level lvl-locked">
-                <i class="fa-solid fa-trophy text-gray-500 text-lg"></i>
-            </div>
-            <p class="level-title title-locked">Desafio Final</p>
-        </div>
+            window.location.href =
+                "index.html";
 
-    </div>
-</main>
+        }
 
-<div class="back-fixed" onclick="history.back()">
-    <i class="fa-solid fa-arrow-left"></i> Voltar
-</div>
 
-<script>
-function abrirVariaveis(){
-    window.location.href = "variaveis.html";
-}
 
-window.addEventListener('resize', ajustarLinhaTrilha);
-function ajustarLinhaTrilha() {
-    const svg = document.querySelector('.svg-connector');
-    const grupos = document.querySelectorAll('.level-group');
-    const niveis = document.querySelectorAll('.duo-level');
-    if(niveis.length < 2) return;
-    
-    let d = `M ${grupos[0].offsetLeft + niveis[0].offsetLeft + 42},${grupos[0].offsetTop + niveis[0].offsetTop + 42}`;
-    
-    for(let i=1; i<niveis.length; i++) {
-        let xAnterior = grupos[i-1].offsetLeft + niveis[i-1].offsetLeft + 42;
-        let yAnterior = grupos[i-1].offsetTop + niveis[i-1].offsetTop + 42;
-        let xAtual = grupos[i].offsetLeft + niveis[i].offsetLeft + 42;
-        let yAtual = grupos[i].offsetTop + niveis[i].offsetTop + 42;
-        
-        let cpY = (yAnterior + yAtual) / 2;
-        d += ` C ${xAnterior},${cpY} ${xAtual},${cpY} ${xAtual},${yAtual}`;
-    }
-    
-    svg.querySelectorAll('path')[0].setAttribute('d', d);
-    svg.querySelectorAll('path')[1].setAttribute('d', d);
-}
-setTimeout(ajustarLinhaTrilha, 100);
-</script>
+        // ========================================
+        // MÓDULO CONCLUÍDO
+        // ========================================
+
+        function moduloConcluido() {
+
+            alert(
+                "Módulo revisado!"
+            );
+
+        }
+
+
+
+        // ========================================
+        // ABRIR VARIÁVEIS
+        // ========================================
+
+        async function abrirVariaveis(
+            idTrilha = 1
+        ) {
+
+
+            // ========================================
+            // PEGAR USUÁRIO LOGADO
+            // ========================================
+
+            const idUsuarioLogado =
+                localStorage.getItem(
+                    "id_usuario"
+                );
+
+
+            // ========================================
+            // VERIFICAR LOGIN
+            // ========================================
+
+            if (!idUsuarioLogado) {
+
+                alert(
+                    "Faça login para iniciar uma trilha."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            // ========================================
+            // VALIDAR ID DO USUÁRIO
+            // ========================================
+
+            const idUsuario =
+                Number(
+                    idUsuarioLogado
+                );
+
+
+            if (
+                !Number.isInteger(idUsuario) ||
+                idUsuario <= 0
+            ) {
+
+                alert(
+                    "Usuário inválido. Faça login novamente."
+                );
+
+
+                localStorage.removeItem(
+                    "id_usuario"
+                );
+
+                localStorage.removeItem(
+                    "usuario"
+                );
+
+                localStorage.removeItem(
+                    "usuarioLogado"
+                );
+
+                localStorage.removeItem(
+                    "email"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            // ========================================
+            // VALIDAR ID DA TRILHA
+            // ========================================
+
+            const trilha =
+                Number(idTrilha);
+
+
+            if (
+                !Number.isInteger(trilha) ||
+                trilha <= 0
+            ) {
+
+                alert(
+                    "Trilha inválida."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+
+                // ========================================
+                // ENVIAR PARA NODE.JS
+                // ========================================
+
+                const resposta =
+                    await fetch(
+                        "/trilhas/iniciar",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    id_usuario:
+                                        idUsuario,
+
+                                    id_trilha:
+                                        trilha
+
+                                })
+
+                        }
+                    );
+
+
+                // ========================================
+                // LER RESPOSTA
+                // ========================================
+
+                let dados = {};
+
+
+                try {
+
+                    dados =
+                        await resposta.json();
+
+                }
+
+                catch (erroJson) {
+
+                    console.error(
+                        "Erro ao interpretar resposta do servidor:",
+                        erroJson
+                    );
+
+                }
+
+
+                // ========================================
+                // VERIFICAR ERRO
+                // ========================================
+
+                if (
+                    !resposta.ok ||
+                    !dados.sucesso
+                ) {
+
+                    console.error(
+                        "Erro ao iniciar trilha:",
+                        dados
+                    );
+
+
+                    alert(
+                        dados.mensagem ||
+                        "Não foi possível registrar o início da trilha."
+                    );
+
+
+                    return;
+
+                }
+
+
+                // ========================================
+                // SUCESSO
+                // ========================================
+
+                console.log(
+                    "Trilha registrada com sucesso:",
+                    dados
+                );
+
+
+                // ========================================
+                // ABRIR ATIVIDADE
+                // ========================================
+
+                window.location.href =
+                    "variaveis.html";
+
+
+            }
+
+            catch (erro) {
+
+                console.error(
+                    "Erro ao registrar início da trilha:",
+                    erro
+                );
+
+
+                alert(
+                    "Não foi possível conectar ao servidor."
+                );
+
+            }
+
+        }
+
+
+
+        // ========================================
+        // AJUSTAR LINHA DA TRILHA
+        // ========================================
+
+        window.addEventListener(
+            "resize",
+            ajustarLinhaTrilha
+        );
+
+
+        function ajustarLinhaTrilha() {
+
+
+            const svg =
+                document.querySelector(
+                    ".svg-connector"
+                );
+
+
+            const grupos =
+                document.querySelectorAll(
+                    ".level-group"
+                );
+
+
+            const niveis =
+                document.querySelectorAll(
+                    ".duo-level"
+                );
+
+
+            if (
+                niveis.length < 2
+            ) {
+
+                return;
+
+            }
+
+
+            let d =
+
+                `M ${
+                    grupos[0].offsetLeft +
+                    niveis[0].offsetLeft +
+                    42
+                },${
+                    grupos[0].offsetTop +
+                    niveis[0].offsetTop +
+                    42
+                }`;
+
+
+            for (
+                let i = 1;
+                i < niveis.length;
+                i++
+            ) {
+
+
+                let xAnterior =
+
+                    grupos[i - 1].offsetLeft +
+                    niveis[i - 1].offsetLeft +
+                    42;
+
+
+                let yAnterior =
+
+                    grupos[i - 1].offsetTop +
+                    niveis[i - 1].offsetTop +
+                    42;
+
+
+                let xAtual =
+
+                    grupos[i].offsetLeft +
+                    niveis[i].offsetLeft +
+                    42;
+
+
+                let yAtual =
+
+                    grupos[i].offsetTop +
+                    niveis[i].offsetTop +
+                    42;
+
+
+                let cpY =
+
+                    (
+                        yAnterior +
+                        yAtual
+                    ) / 2;
+
+
+                d +=
+
+                    ` C ${
+                        xAnterior
+                    },${
+                        cpY
+                    } ${
+                        xAtual
+                    },${
+                        cpY
+                    } ${
+                        xAtual
+                    },${
+                        yAtual
+                    }`;
+
+            }
+
+
+            const caminhos =
+                svg.querySelectorAll(
+                    "path"
+                );
+
+
+            if (
+                caminhos.length >= 2
+            ) {
+
+
+                caminhos[0].setAttribute(
+                    "d",
+                    d
+                );
+
+
+                caminhos[1].setAttribute(
+                    "d",
+                    d
+                );
+
+            }
+
+        }
+
+
+
+        // ========================================
+        // DESENHAR LINHA AO CARREGAR
+        // ========================================
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                setTimeout(
+                    ajustarLinhaTrilha,
+                    100
+                );
+
+            }
+        );
+
+
+    </script>
 
 </body>
+
 </html>
