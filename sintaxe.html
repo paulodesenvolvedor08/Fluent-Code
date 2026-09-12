@@ -1,157 +1,2023 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    
+
 <head>
-<meta charset="UTF-8">
-<title>Sintaxe Java - FluentCode</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
 
-<style>
-body{
-    background:#0d1b2a;
-    color:white;
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-.card{
-    background:#0f172a;
-    border:1px solid #1f2937;
-    border-radius:18px;
+    <title>FluentCode - Sintaxe Java</title>
 
-    padding:20px;
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    width:100%;
-}
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 
-.btn{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    font-weight:bold;
-}
-</style>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            min-height: 100%;
+            background: #07111f;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+            color: white;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 0%,
+                    rgba(37, 99, 235, 0.18),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(124, 58, 237, 0.16),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07111f 0%,
+                    #0b1728 45%,
+                    #07111f 100%
+                );
+        }
+
+
+        /* GRID DE FUNDO */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.18;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 32px 32px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+        }
+
+
+        /* CONTAINER */
+
+        .page-container {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: min(
+                900px,
+                calc(100% - 28px)
+            );
+
+            margin: 0 auto;
+
+            padding-bottom: 110px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 22px 0 18px;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+
+        .brand-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.25);
+
+            font-size: 18px;
+        }
+
+
+        .brand-name {
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 2px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .header-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid rgba(
+                148,
+                163,
+                184,
+                0.12
+            );
+
+            border-radius: 13px;
+
+            background:
+                rgba(15, 23, 42, 0.55);
+
+            color: #60a5fa;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.2);
+        }
+
+
+        /* HERO */
+
+        .hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-top: 8px;
+
+            margin-bottom: 22px;
+
+            padding: 28px;
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.08
+            );
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.94),
+                    rgba(79, 70, 229, 0.88),
+                    rgba(124, 58, 237, 0.9)
+                );
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35),
+                inset 0 1px rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+        }
+
+
+        .hero::after {
+
+            content: "</>";
+
+            position: absolute;
+
+            right: 25px;
+
+            bottom: -20px;
+
+            color:
+                rgba(255,255,255,0.08);
+
+            font-family: monospace;
+
+            font-size: 90px;
+
+            font-weight: 900;
+        }
+
+
+        .hero-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.15
+            );
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,0.1);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .hero h1 {
+
+            position: relative;
+
+            z-index: 1;
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(27px, 5vw, 38px);
+
+            font-weight: 900;
+
+            letter-spacing: -1.5px;
+        }
+
+
+        .hero p {
+
+            position: relative;
+
+            z-index: 1;
+
+            max-width: 600px;
+
+            margin-top: 7px;
+
+            color:
+                rgba(255,255,255,0.82);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* TÍTULO DA SEÇÃO */
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin:
+                25px 4px 12px;
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+
+        .section-title i {
+
+            color: #60a5fa;
+        }
+
+
+        /* CARD */
+
+        .card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 24px;
+
+            border: 1px solid rgba(
+                148,
+                163,
+                184,
+                0.11
+            );
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,29,49,0.95),
+                    rgba(8,20,35,0.94)
+                );
+
+            backdrop-filter: blur(14px);
+
+            box-shadow:
+                0 18px 40px rgba(0,0,0,0.28),
+                inset 0 1px rgba(
+                    255,
+                    255,
+                    255,
+                    0.025
+                );
+        }
+
+
+        /* CABEÇALHO DO EXERCÍCIO */
+
+        .exercise-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .exercise-title-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        .exercise-icon {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(59,130,246,0.18),
+                    rgba(124,58,237,0.18)
+                );
+
+            border: 1px solid rgba(
+                96,
+                165,
+                250,
+                0.16
+            );
+
+            color: #60a5fa;
+
+            font-size: 18px;
+        }
+
+
+        .exercise-label {
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        .exercise-name {
+
+            margin-top: 3px;
+
+            color: #f8fafc;
+
+            font-size: 17px;
+
+            font-weight: 900;
+        }
+
+
+        .progress-badge {
+
+            padding: 7px 10px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,0.1);
+
+            border: 1px solid rgba(
+                59,
+                130,
+                246,
+                0.16
+            );
+
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* PROGRESSO */
+
+        .progress-area {
+
+            margin-bottom: 22px;
+        }
+
+
+        .progress-line {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .progress-track {
+
+            width: 100%;
+
+            height: 5px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background:
+                rgba(30,41,59,0.9);
+        }
+
+
+        .progress-fill {
+
+            width: 25%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3b82f6,
+                    #8b5cf6
+                );
+
+            transition:
+                width 0.3s ease;
+        }
+
+
+        /* PERGUNTA */
+
+        #pergunta {
+
+            min-height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 8px 4px;
+
+            color: #f1f5f9;
+
+            font-size: clamp(
+                17px,
+                3vw,
+                21px
+            );
+
+            font-weight: 800;
+
+            line-height: 1.5;
+        }
+
+
+        /* OPÇÕES */
+
+        #opcoes {
+
+            display: grid;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+
+        .btn {
+
+            width: 100%;
+
+            min-height: 54px;
+
+            padding: 14px 16px;
+
+            border: 1px solid rgba(
+                71,
+                85,
+                105,
+                0.7
+            );
+
+            border-radius: 14px;
+
+            background:
+                rgba(15,23,42,0.76);
+
+            color: #cbd5e1;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+
+        .btn:hover {
+
+            transform: translateX(3px);
+
+            border-color:
+                rgba(96,165,250,0.45);
+
+            background:
+                rgba(30,41,59,0.95);
+
+            color: white;
+        }
+
+
+        .btn:disabled {
+
+            cursor: not-allowed;
+
+            opacity: 0.85;
+        }
+
+
+        /* MENSAGEM */
+
+        #msg {
+
+            min-height: 24px;
+
+            margin-top: 17px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* DICA */
+
+        .tip {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border: 1px solid rgba(
+                96,
+                165,
+                250,
+                0.1
+            );
+
+            border-radius: 14px;
+
+            background:
+                rgba(30,41,59,0.35);
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        .tip i {
+
+            margin-top: 2px;
+
+            color: #60a5fa;
+        }
+
+
+        .tip strong {
+
+            color: #cbd5e1;
+        }
+
+
+        /* BOTÃO VOLTAR */
+
+        .bottom-action {
+
+            position: fixed;
+
+            z-index: 50;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            width: min(
+                900px,
+                calc(100% - 28px)
+            );
+
+            transform:
+                translateX(-50%);
+        }
+
+
+        .back-button {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 15px;
+
+            border: 1px solid rgba(
+                148,
+                163,
+                184,
+                0.14
+            );
+
+            border-radius: 16px;
+
+            background:
+                rgba(10,22,40,0.92);
+
+            backdrop-filter: blur(16px);
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.45);
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(18,35,57,0.96);
+
+            border-color:
+                rgba(96,165,250,0.25);
+        }
+
+
+        .back-button i {
+
+            color: #60a5fa;
+        }
+
+
+        /* CONCLUSÃO */
+
+        .completion {
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            border: 1px solid rgba(
+                34,
+                197,
+                94,
+                0.2
+            );
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(34,197,94,0.08),
+                    rgba(16,185,129,0.025)
+                );
+        }
+
+
+        .completion-icon {
+
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(34,197,94,0.12);
+
+            color: #4ade80;
+
+            font-size: 27px;
+
+            box-shadow:
+                0 10px 30px rgba(
+                    34,
+                    197,
+                    94,
+                    0.12
+                );
+        }
+
+
+        .completion h2 {
+
+            color: #4ade80;
+
+            font-size: 20px;
+
+            font-weight: 900;
+        }
+
+
+        .completion p {
+
+            margin-top: 7px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .page-container {
+
+                width:
+                    calc(100% - 20px);
+            }
+
+
+            .header {
+
+                padding-top: 16px;
+            }
+
+
+            .brand-icon,
+            .header-icon {
+
+                width: 39px;
+                height: 39px;
+            }
+
+
+            .hero {
+
+                padding: 23px 20px;
+
+                border-radius: 21px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 28px;
+            }
+
+
+            .hero::after {
+
+                right: 5px;
+
+                font-size: 70px;
+            }
+
+
+            .card {
+
+                padding: 18px;
+
+                border-radius: 18px;
+            }
+
+
+            .exercise-top {
+
+                align-items: flex-start;
+            }
+
+
+            .progress-badge {
+
+                font-size: 10px;
+            }
+
+
+            #pergunta {
+
+                min-height: 80px;
+
+                font-size: 17px;
+            }
+
+
+            .btn {
+
+                min-height: 52px;
+
+                padding: 13px;
+            }
+
+
+            .bottom-action {
+
+                width:
+                    calc(100% - 20px);
+
+                bottom: 10px;
+            }
+
+
+            .back-button {
+
+                padding: 14px;
+            }
+        }
+
+    </style>
+
 </head>
 
-<body class="p-4 sm:p-6">
 
-<div class="card">
+<body>
 
-<h1 class="text-xl font-bold text-center mb-4">
-🔤 Sintaxe Java
-</h1>
 
-<p id="pergunta" class="text-center text-lg mb-4">
-...
-</p>
+    <main class="page-container">
 
-<div id="opcoes" class="grid gap-3"></div>
 
-<p id="msg" class="text-center mt-4 font-bold"></p>
-    
-  <button onclick="window.location.href='atividades.html'" class="fixed bottom-4 left-4 flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all duration-200 z-50">
-  <i class="fa-solid fa-arrow-left"></i>
-  <span class="font-bold">Voltar</span>
-</button>
-</div>
+        <!-- HEADER -->
 
-<script>
+        <header class="header">
 
-/* 🔥 QUESTÕES DE SINTAXE */
-const fases = [
-{
-p:"Como declara uma variável inteira?",
-o:[
-{t:"int x = 10;",ok:true},
-{t:"x int = 10;",ok:false},
-{t:"integer x = 10;",ok:false},
-{t:"var int x = 10;",ok:false}
-],
-xp:110
-},
-{
-p:"Como começa um método principal?",
-o:[
-{t:"public static void main(String[] args)",ok:true},
-{t:"main public void static()",ok:false},
-{t:"void main static public()",ok:false},
-{t:"start main()",ok:false}
-],
-xp:120
-},
-{
-p:"Qual símbolo finaliza uma instrução Java?",
-o:[
-{t:";",ok:true},
-{t:".",ok:false},
-{t:":",ok:false},
-{t:"/",ok:false}
-],
-xp:90
-},
-{
-p:"Como se imprime no console?",
-o:[
-{t:"System.out.println()",ok:true},
-{t:"print()",ok:false},
-{t:"console.log()",ok:false},
-{t:"echo()",ok:false}
-],
-xp:100
-}
-];
+            <div class="brand">
 
-let i=0;
+                <div class="brand-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
 
-/* 🔁 CARREGAR */
-function load(){
+                <div>
 
-let f=fases[i];
+                    <div class="brand-name">
+                        FluentCode
+                    </div>
 
-document.getElementById("pergunta").innerText=f.p;
+                    <div class="brand-subtitle">
+                        Learning • Java • English
+                    </div>
 
-let op=document.getElementById("opcoes");
-op.innerHTML="";
+                </div>
 
-f.o.forEach(x=>{
-let b=document.createElement("button");
+            </div>
 
-b.innerText=x.t;
-b.className="btn bg-slate-800 hover:bg-slate-700";
 
-b.onclick=()=>check(x.ok);
+            <div class="header-icon">
 
-op.appendChild(b);
-});
+                <i class="fa-solid fa-terminal"></i>
 
-}
+            </div>
 
-/* 🎮 VERIFICAR */
-function check(ok){
+        </header>
 
-let user=JSON.parse(localStorage.getItem("fluentcode_user"))||{xp:0};
 
-if(ok){
-user.xp+=fases[i].xp;
+        <!-- HERO -->
 
-document.getElementById("msg").innerText="✔ Correto!";
-i++;
+        <section class="hero">
 
-if(i<fases.length){
-setTimeout(load,1000);
-}else{
-document.getElementById("msg").innerText="🏆 Concluído!";
-}
+            <div class="hero-label">
 
-}else{
-document.getElementById("msg").innerText="❌ Errado!";
-}
+                <i class="fa-solid fa-code"></i>
 
-localStorage.setItem("fluentcode_user",JSON.stringify(user));
-}
+                Atividade prática
 
-load();
+            </div>
 
-</script>
+
+            <h1>
+                🔤 Sintaxe Java
+            </h1>
+
+
+            <p>
+                Teste seus conhecimentos sobre a estrutura
+                e as regras básicas da linguagem Java.
+            </p>
+
+        </section>
+
+
+        <!-- TÍTULO -->
+
+        <div class="section-title">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <span>
+                Desafio de sintaxe
+            </span>
+
+        </div>
+
+
+        <!-- CARD PRINCIPAL -->
+
+        <section class="card">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="exercise-top">
+
+
+                <div class="exercise-title-area">
+
+
+                    <div class="exercise-icon">
+
+                        <i class="fa-solid fa-terminal"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="exercise-label">
+                            Exercício
+                        </div>
+
+                        <div class="exercise-name">
+                            Java Fundamentals
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="contador"
+                    class="progress-badge"
+                >
+                    1 / 4
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESSO -->
+
+            <div class="progress-area">
+
+                <div class="progress-line">
+
+                    <span>
+                        Progresso
+                    </span>
+
+                    <span id="porcentagem">
+                        25%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="barraProgresso"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERGUNTA -->
+
+            <p id="pergunta">
+                ...
+            </p>
+
+
+            <!-- OPÇÕES -->
+
+            <div id="opcoes"></div>
+
+
+            <!-- MENSAGEM -->
+
+            <p id="msg"></p>
+
+
+            <!-- DICA -->
+
+            <div class="tip">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+                <div>
+
+                    <strong>Dica:</strong>
+
+                    leia cada alternativa com atenção.
+                    Algumas opções parecem Java, mas não
+                    seguem a sintaxe correta da linguagem.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- BOTÃO VOLTAR -->
+
+    <div class="bottom-action">
+
+        <button
+            onclick="voltarAtividades()"
+            class="back-button"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span>
+                Voltar para Atividades
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <script>
+
+
+        /* ========================================
+           QUESTÕES DE SINTAXE
+        ======================================== */
+
+        const fases = [
+
+            {
+                p:
+                    "Como declara uma variável inteira?",
+
+                o: [
+
+                    {
+                        t: "int x = 10;",
+                        ok: true
+                    },
+
+                    {
+                        t: "x int = 10;",
+                        ok: false
+                    },
+
+                    {
+                        t: "integer x = 10;",
+                        ok: false
+                    },
+
+                    {
+                        t: "var int x = 10;",
+                        ok: false
+                    }
+
+                ],
+
+                xp: 110
+
+            },
+
+
+            {
+
+                p:
+                    "Como começa um método principal?",
+
+                o: [
+
+                    {
+                        t:
+                            "public static void main(String[] args)",
+                        ok: true
+                    },
+
+                    {
+                        t:
+                            "main public void static()",
+                        ok: false
+                    },
+
+                    {
+                        t:
+                            "void main static public()",
+                        ok: false
+                    },
+
+                    {
+                        t:
+                            "start main()",
+                        ok: false
+                    }
+
+                ],
+
+                xp: 120
+
+            },
+
+
+            {
+
+                p:
+                    "Qual símbolo finaliza uma instrução Java?",
+
+                o: [
+
+                    {
+                        t: ";",
+                        ok: true
+                    },
+
+                    {
+                        t: ".",
+                        ok: false
+                    },
+
+                    {
+                        t: ":",
+                        ok: false
+                    },
+
+                    {
+                        t: "/",
+                        ok: false
+                    }
+
+                ],
+
+                xp: 90
+
+            },
+
+
+            {
+
+                p:
+                    "Como se imprime no console?",
+
+                o: [
+
+                    {
+                        t:
+                            "System.out.println()",
+                        ok: true
+                    },
+
+                    {
+                        t:
+                            "print()",
+                        ok: false
+                    },
+
+                    {
+                        t:
+                            "console.log()",
+                        ok: false
+                    },
+
+                    {
+                        t:
+                            "echo()",
+                        ok: false
+                    }
+
+                ],
+
+                xp: 100
+
+            }
+
+        ];
+
+
+        /* ========================================
+           CONTROLE
+        ======================================== */
+
+        let i = 0;
+
+        let respondendo = false;
+
+        let atividadeConcluida = false;
+
+
+        /* ========================================
+           ATUALIZA PROGRESSO VISUAL
+        ======================================== */
+
+        function atualizarProgresso() {
+
+            const numeroAtual =
+                Math.min(
+                    i + 1,
+                    fases.length
+                );
+
+
+            const porcentagem =
+                Math.round(
+                    (numeroAtual / fases.length) * 100
+                );
+
+
+            document
+                .getElementById("contador")
+                .innerText =
+                `${numeroAtual} / ${fases.length}`;
+
+
+            document
+                .getElementById("porcentagem")
+                .innerText =
+                `${porcentagem}%`;
+
+
+            document
+                .getElementById("barraProgresso")
+                .style.width =
+                `${porcentagem}%`;
+
+        }
+
+
+        /* ========================================
+           CARREGAR QUESTÃO
+        ======================================== */
+
+        function load() {
+
+
+            if (i >= fases.length) {
+
+                finalizarAtividade();
+
+                return;
+
+            }
+
+
+            const f =
+                fases[i];
+
+
+            document
+                .getElementById("pergunta")
+                .innerText =
+                f.p;
+
+
+            atualizarProgresso();
+
+
+            const op =
+                document.getElementById(
+                    "opcoes"
+                );
+
+
+            op.innerHTML = "";
+
+
+            document
+                .getElementById("msg")
+                .innerText = "";
+
+
+            f.o.forEach(
+                function(x) {
+
+
+                    const b =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    b.innerText =
+                        x.t;
+
+
+                    b.className =
+                        "btn";
+
+
+                    b.onclick =
+                        function() {
+
+                            check(
+                                x.ok,
+                                b
+                            );
+
+                        };
+
+
+                    op.appendChild(b);
+
+                }
+            );
+
+        }
+
+
+        /* ========================================
+           VERIFICAR RESPOSTA
+        ======================================== */
+
+        async function check(
+            ok,
+            botao
+        ) {
+
+
+            // Evita múltiplos cliques
+
+            if (respondendo) {
+
+                return;
+
+            }
+
+
+            const botoes =
+                document.querySelectorAll(
+                    ".btn"
+                );
+
+
+            /* ====================================
+               RESPOSTA ERRADA
+            ==================================== */
+
+            if (!ok) {
+
+
+                botao.classList.remove(
+                    "bg-slate-800"
+                );
+
+
+                botao.classList.add(
+                    "bg-red-600",
+                    "text-white"
+                );
+
+
+                botao.style.borderColor =
+                    "rgba(248,113,113,0.7)";
+
+
+                document
+                    .getElementById("msg")
+                    .innerText =
+                    "❌ Errado! Tente novamente.";
+
+
+                document
+                    .getElementById("msg")
+                    .style.color =
+                    "#f87171";
+
+
+                setTimeout(
+                    function() {
+
+
+                        botao.classList.remove(
+                            "bg-red-600",
+                            "text-white"
+                        );
+
+
+                        botao.style.background =
+                            "";
+
+
+                        botao.style.borderColor =
+                            "";
+
+
+                    },
+                    800
+                );
+
+
+                return;
+
+            }
+
+
+            /* ====================================
+               RESPOSTA CORRETA
+            ==================================== */
+
+            respondendo = true;
+
+
+            botao.classList.add(
+                "bg-green-600",
+                "text-white"
+            );
+
+
+            botao.style.borderColor =
+                "rgba(74,222,128,0.7)";
+
+
+            botoes.forEach(
+                function(b) {
+
+                    b.disabled = true;
+
+                }
+            );
+
+
+            const xp =
+                fases[i].xp;
+
+
+            document
+                .getElementById("msg")
+                .innerText =
+                `✔ Correto! Salvando +${xp} XP...`;
+
+
+            document
+                .getElementById("msg")
+                .style.color =
+                "#4ade80";
+
+
+            /* ====================================
+               SALVA XP NO MYSQL
+            ==================================== */
+
+            const salvo =
+                await salvarXpNoBanco(
+                    xp
+                );
+
+
+            if (!salvo) {
+
+
+                respondendo = false;
+
+
+                botoes.forEach(
+                    function(b) {
+
+                        b.disabled = false;
+
+                    }
+                );
+
+
+                return;
+
+            }
+
+
+            /* ====================================
+               PRÓXIMA QUESTÃO
+            ==================================== */
+
+            i++;
+
+
+            respondendo = false;
+
+
+            if (i < fases.length) {
+
+
+                setTimeout(
+                    load,
+                    1000
+                );
+
+
+            }
+
+            else {
+
+
+                finalizarAtividade();
+
+            }
+
+        }
+
+
+        /* ========================================
+           SALVAR XP NO MYSQL
+        ======================================== */
+
+        async function salvarXpNoBanco(
+            xpGanho
+        ) {
+
+
+            const idUsuario =
+                localStorage.getItem(
+                    "id_usuario"
+                );
+
+
+            /* ====================================
+               VERIFICA LOGIN
+            ==================================== */
+
+            if (!idUsuario) {
+
+
+                document
+                    .getElementById("msg")
+                    .innerText =
+                    "⚠️ Usuário não identificado. Faça login novamente.";
+
+
+                document
+                    .getElementById("msg")
+                    .style.color =
+                    "#facc15";
+
+
+                console.error(
+                    "id_usuario não encontrado no localStorage."
+                );
+
+
+                return false;
+
+            }
+
+
+            try {
+
+
+                const resposta =
+                    await fetch(
+                        "/exercicio/concluir",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                id_usuario:
+                                    Number(
+                                        idUsuario
+                                    ),
+
+                                xp_ganho:
+                                    Number(
+                                        xpGanho
+                                    )
+
+                            })
+
+                        }
+                    );
+
+
+                let dados = {};
+
+
+                try {
+
+                    dados =
+                        await resposta.json();
+
+                }
+
+                catch (erro) {
+
+                    console.warn(
+                        "Resposta do servidor não é JSON."
+                    );
+
+                }
+
+
+                /* ====================================
+                   SALVOU
+                ==================================== */
+
+                if (resposta.ok) {
+
+
+                    document
+                        .getElementById("msg")
+                        .innerText =
+                        `✔ Correto! +${xpGanho} XP salvo no banco!`;
+
+
+                    document
+                        .getElementById("msg")
+                        .style.color =
+                        "#4ade80";
+
+
+                    console.log(
+                        "XP salvo com sucesso:",
+                        dados
+                    );
+
+
+                    return true;
+
+                }
+
+
+                /* ====================================
+                   ERRO
+                ==================================== */
+
+                document
+                    .getElementById("msg")
+                    .innerText =
+                    "❌ Erro ao salvar XP: " +
+                    (
+                        dados.mensagem ||
+                        dados.erro ||
+                        "Erro no servidor."
+                    );
+
+
+                document
+                    .getElementById("msg")
+                    .style.color =
+                    "#f87171";
+
+
+                console.error(
+                    "Erro ao salvar XP:",
+                    dados
+                );
+
+
+                return false;
+
+            }
+
+
+            catch (erro) {
+
+
+                console.error(
+                    "Erro de conexão:",
+                    erro
+                );
+
+
+                document
+                    .getElementById("msg")
+                    .innerText =
+                    "❌ Não foi possível conectar ao servidor.";
+
+
+                document
+                    .getElementById("msg")
+                    .style.color =
+                    "#f87171";
+
+
+                return false;
+
+            }
+
+        }
+
+
+        /* ========================================
+           FINALIZAR ATIVIDADE
+        ======================================== */
+
+        function finalizarAtividade() {
+
+
+            if (atividadeConcluida) {
+
+                return;
+
+            }
+
+
+            atividadeConcluida = true;
+
+
+            document
+                .getElementById("pergunta")
+                .innerText =
+                "🏆 Atividade concluída!";
+
+
+            document
+                .getElementById("opcoes")
+                .innerHTML =
+                `
+                    <div class="completion">
+
+                        <div class="completion-icon">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+
+                        <h2>
+                            Parabéns!
+                        </h2>
+
+                        <p>
+                            Você concluiu todas as questões
+                            de Sintaxe Java.
+                        </p>
+
+                        <p
+                            style="
+                                color:#4ade80;
+                                font-weight:800;
+                                margin-top:10px;
+                            "
+                        >
+                            🎯 Todas as etapas foram concluídas.
+                        </p>
+
+                    </div>
+                `;
+
+
+            document
+                .getElementById("msg")
+                .innerText =
+                "🏆 Atividade concluída com sucesso!";
+
+
+            document
+                .getElementById("msg")
+                .style.color =
+                "#4ade80";
+
+
+            document
+                .getElementById("contador")
+                .innerText =
+                "Concluído";
+
+
+            document
+                .getElementById("porcentagem")
+                .innerText =
+                "100%";
+
+
+            document
+                .getElementById("barraProgresso")
+                .style.width =
+                "100%";
+
+        }
+
+
+        /* ========================================
+           VOLTAR
+        ======================================== */
+
+        function voltarAtividades() {
+
+            window.location.href =
+                "atividades.html";
+
+        }
+
+
+        /* ========================================
+           INICIA A ATIVIDADE
+        ======================================== */
+
+        load();
+
+    </script>
 
 </body>
+
 </html>
